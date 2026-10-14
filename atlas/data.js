@@ -47,6 +47,8 @@ const ATLAS = {
     { name: "Tanzania",       code: "TZA", status: "visited", note: "" },
     { name: "Kenya",          code: "KEN", status: "visited", note: "" },
     { name: "Botswana",       code: "BWA", status: "visited", note: "" },
+    { name: "Zambia",         code: "ZMB", status: "visited", note: "" },
+    { name: "Ireland",        code: "IRL", status: "visited", note: "" },
 
     // ---- Want to visit ----
     { name: "Japan",          code: "JPN", status: "next",    note: "" },
