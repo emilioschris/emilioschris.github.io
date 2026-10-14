@@ -126,10 +126,12 @@ const PROJECTS = [
   {
     title: "Spanish Trainer",
     section: "language-routes",
-    status: "planned",
+    status: "ongoing",
+    link: "spanish/index.html",
     description: "Mexican Spanish practice: vocabulary, spaced repetition and small games.",
     coords: "19.43°N 99.13°W",
     date: "2026-10",
+    tended: "2026-10-14",
     elevation: "ELEV 2,240 m",
     shape: 4,
     image: {
