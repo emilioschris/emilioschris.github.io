@@ -68,10 +68,16 @@
     const pebble = el("div", "pebble");
     pebble.dataset.shape = project.shape || (index % 4) + 1;
     if (project.image && typeof project.image === "object") {
+      // A photo, tinted in the palette (see .pebble--photo in field-notes.css)
+      pebble.classList.add("pebble--photo");
+      pebble.dataset.tone = project.image.tone || "terracotta";
       const img = el("img");
       img.src = project.image.src;
       img.alt = project.image.alt || "";
       img.loading = "lazy";
+      img.decoding = "async";
+      img.width = 1000;
+      img.height = 800;
       pebble.append(img);
     } else if (project.image === "atlas-map") {
       pebble.classList.add("pebble--atlas");

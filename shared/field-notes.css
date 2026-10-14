@@ -616,6 +616,49 @@ a { color: var(--link); }
 .card:focus-within .pebble { border-radius: var(--shape-b); }
 .pebble img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
+/* Photo: a duotone in the palette (Ink shadows, Terracotta or Olive
+   highlights) with the faint contour rings on top. On hover it eases
+   back toward the photo's own colours.
+   How it works: the photo goes grey and is multiplied onto the highlight
+   colour, then an Ink layer lifts the darkest shadows to Ink. */
+.pebble--photo {
+  --duo-hi: color-mix(in srgb, var(--terracotta) 72%, var(--limestone));
+  --duo-lo: var(--ink);
+  position: relative;
+  isolation: isolate;
+  background-color: var(--duo-hi);
+  transition: border-radius 1.8s cubic-bezier(0.45, 0, 0.2, 1), background-color 0.9s var(--ease-soft);
+}
+.pebble--photo[data-tone="olive"] { --duo-hi: color-mix(in srgb, var(--olive) 62%, var(--limestone)); }
+.pebble--photo img {
+  filter: grayscale(1) contrast(1.1);
+  mix-blend-mode: multiply;
+  transition: filter 0.9s var(--ease-soft);
+}
+.pebble--photo::before,
+.pebble--photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.pebble--photo::before {
+  background: var(--duo-lo);
+  mix-blend-mode: lighten;
+  transition: opacity 0.9s var(--ease-soft);
+}
+.pebble--photo::after {
+  background: repeating-radial-gradient(circle at 32% 64%,
+    transparent 0 17px,
+    color-mix(in srgb, var(--limestone) 22%, transparent) 17px 18px);
+}
+.card:hover .pebble--photo,
+.card:focus-within .pebble--photo { background-color: #fff; }
+.card:hover .pebble--photo img,
+.card:focus-within .pebble--photo img { filter: grayscale(0) contrast(1); }
+.card:hover .pebble--photo::before,
+.card:focus-within .pebble--photo::before { opacity: 0; }
+
 /* Placeholder: a tinted pebble with faint contour rings */
 .pebble--placeholder {
   background:
@@ -854,5 +897,12 @@ a { color: var(--link); }
     transition-duration: 0.01ms !important;
   }
   html { scroll-behavior: auto; }
+  /* Card photos keep their tint instead of changing colour on hover */
+  .card:hover .pebble--photo,
+  .card:focus-within .pebble--photo { background-color: var(--duo-hi); }
+  .card:hover .pebble--photo img,
+  .card:focus-within .pebble--photo img { filter: grayscale(1) contrast(1.1); }
+  .card:hover .pebble--photo::before,
+  .card:focus-within .pebble--photo::before { opacity: 1; }
   .js .reveal { opacity: 1; transform: none; }
 }
