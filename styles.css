@@ -1,231 +1,38 @@
 /* =========================================================
-   FIELD NOTES · styles
+   FIELD NOTES · homepage styles
    ---------------------------------------------------------
-   1. Colour tokens (Day + Dusk)
-   2. Base
-   3. Top bar
-   4. Hero map
-   5. Sections, cards, About, footer
+   Colours, fonts, the top bar, cards, stamps and the rest of
+   the design system come from shared/field-notes.css.
+   This file only holds what's unique to the homepage.
+
+   1. Map colours (hero)
+   2. Section links + compass + phone menu
+   3. Hero map
+   4. Sections on the grid
+   5. About + footer
    6. Small screens
-   7. Reduced motion
    ========================================================= */
 
-/* ---------- 1. COLOUR TOKENS ----------
-   Every colour on the site comes from these variables.
-   "Day" is the default; "Dusk" redefines the same names. */
+/* ---------- 1. MAP COLOURS (read by script.js) ---------- */
 :root {
-  /* The palette */
-  --limestone: #F2EBDD;
-  --ink: #2B2A26;
-  --terracotta: #B5583A;
-  --olive: #6B6A3A;
-  --aegean: #1F4E5F;
-  --ochre: #C9973F;
-
-  /* What each colour is used for */
-  --bg: var(--limestone);
-  --bg-raised: #F8F3E8;
-  --text: var(--ink);
-  --muted: #5E5B52;
-  --rule: rgba(43, 42, 38, 0.14);
-  --accent: var(--terracotta);
-  --accent-text: #9A4529;   /* deeper terracotta so small text stays readable */
-  --secondary: var(--olive);
-  --link: var(--aegean);
-  --stamp: var(--ochre);
-  --stamp-text: #8A6420;    /* deeper ochre for stamp wording */
-
-  /* The map reads these too (see script.js) */
   --map-line: var(--aegean);
   --map-alpha: 0.34;
   --map-index-alpha: 0.7;
-
-  /* The hawk: natural red-tailed hawk colours */
-  --hawk-body: #7B5235;     /* warm brown back */
-  --hawk-far: #66432C;      /* far wing, a shade darker */
-  --hawk-shade: #3A2618;    /* dark chocolate shading */
-  --hawk-line: #2B2A26;     /* ink outline */
-  --hawk-tail: #B5583A;     /* brick-red tail = terracotta */
-  --hawk-band: #3A2618;
-  --hawk-beak: #D9A441;     /* yellow cere */
-  --hawk-ring: #E8CB86;
-  --hawk-iris: #5A3520;     /* dark brown eye */
-  --hawk-dark: #2B2A26;
-  --hawk-light: #F2EBDD;
-  --hawk-branch: #5B5048;
-
-  /* Type */
-  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
-  --font-body: "Instrument Sans", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
-  --font-hand: "Caveat", "Bradley Hand", cursive;
-
-  /* Layout */
-  --gutter: clamp(16px, 4vw, 48px);
-  --max: 1320px;
-  --bar-h: 64px;
-
-  color-scheme: light;
 }
-
-/* Dusk: deep warm darks, never pure black */
 :root[data-theme="dusk"] {
-  --bg: #1B1813;
-  --bg-raised: #24201A;
-  --text: #ECE3D2;
-  --muted: #A99F8C;
-  --rule: rgba(236, 227, 210, 0.14);
-  --accent: #D9774F;
-  --accent-text: #E58E68;
-  --secondary: #A9A66A;
-  --link: #86B9C8;
-  --stamp: #D9A94F;
-  --stamp-text: #E3B868;
   --map-line: #7FB0BF;
   --map-alpha: 0.30;
   --map-index-alpha: 0.62;
-  --hawk-body: #94653F;
-  --hawk-far: #7D5536;
-  --hawk-shade: #452E1E;
-  --hawk-line: #D8CDB8;
-  --hawk-tail: #D9774F;
-  --hawk-beak: #E0B052;
-  --hawk-ring: #EBD394;
-  --hawk-branch: #5E5249;
-  color-scheme: dark;
 }
-
-/* No choice saved yet? Follow the device's own light/dark setting. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="day"]) {
-    --bg: #1B1813;
-    --bg-raised: #24201A;
-    --text: #ECE3D2;
-    --muted: #A99F8C;
-    --rule: rgba(236, 227, 210, 0.14);
-    --accent: #D9774F;
-    --accent-text: #E58E68;
-    --secondary: #A9A66A;
-    --link: #86B9C8;
-    --stamp: #D9A94F;
-    --stamp-text: #E3B868;
     --map-line: #7FB0BF;
     --map-alpha: 0.30;
     --map-index-alpha: 0.62;
-    --hawk-body: #94653F;
-    --hawk-far: #7D5536;
-    --hawk-shade: #452E1E;
-    --hawk-line: #D8CDB8;
-    --hawk-tail: #D9774F;
-    --hawk-beak: #E0B052;
-    --hawk-ring: #EBD394;
-    --hawk-branch: #5E5249;
-    color-scheme: dark;
   }
 }
 
-/* ---------- 2. BASE ---------- */
-*, *::before, *::after { box-sizing: border-box; }
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: calc(var(--bar-h) + 16px);
-  -webkit-text-size-adjust: 100%;
-}
-
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-body);
-  font-size: 17px;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  transition: background-color 0.5s ease, color 0.5s ease;
-}
-
-h1, h2, h3 { font-family: var(--font-display); font-weight: 400; margin: 0; }
-p { margin: 0; }
-a { color: var(--link); }
-
-:focus-visible {
-  outline: 2px solid var(--link);
-  outline-offset: 3px;
-  border-radius: 4px;
-}
-
-.visually-hidden {
-  position: absolute !important;
-  width: 1px; height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-}
-
-.skip-link {
-  position: absolute;
-  left: 16px; top: -48px;
-  z-index: 100;
-  padding: 8px 14px;
-  background: var(--text);
-  color: var(--bg);
-  font-family: var(--font-mono);
-  font-size: 13px;
-  border-radius: 6px;
-  text-decoration: none;
-}
-.skip-link:focus { top: 12px; }
-
-/* ---------- 3. TOP BAR ---------- */
-.bar {
-  position: fixed;
-  inset: 0 0 auto 0;
-  z-index: 50;
-  height: var(--bar-h);
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  padding: 0 var(--gutter);
-  border-bottom: 1px solid transparent;
-  transition: background-color 0.4s, border-color 0.4s;
-}
-/* Once you scroll, the bar gets a soft paper background */
-.bar.is-scrolled {
-  background: color-mix(in srgb, var(--bg) 86%, transparent);
-  -webkit-backdrop-filter: blur(12px) saturate(1.1);
-  backdrop-filter: blur(12px) saturate(1.1);
-  border-bottom-color: var(--rule);
-}
-
-/* "Field Notes" with the owner's name underneath, like a notebook label */
-.wordmark {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--text);
-  text-decoration: none;
-}
-.wordmark-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.05;
-}
-.wordmark-title {
-  font-family: var(--font-display);
-  font-size: 19px;
-  font-weight: 500;
-  font-variation-settings: "opsz" 24, "SOFT" 60;
-  letter-spacing: -0.01em;
-}
-.wordmark-owner {
-  margin-top: 3px;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
+/* ---------- 2. SECTION LINKS + COMPASS + PHONE MENU ---------- */
 .nav { margin-left: auto; }
 .nav ul {
   display: flex;
@@ -247,13 +54,7 @@ a { color: var(--link); }
 .nav a:hover { color: var(--text); background: var(--rule); }
 .nav a[aria-current="true"] { color: var(--text); }
 
-.bar-tools {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-
-/* Compass rose */
+/* Compass rose: the needle turns toward the section on screen */
 .compass {
   display: flex;
   align-items: center;
@@ -279,38 +80,6 @@ a { color: var(--link); }
   font-variant-numeric: tabular-nums;
 }
 
-/* Day / Dusk switch */
-.theme-switch {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 4px;
-  border: 0;
-  background: none;
-  color: var(--muted);
-  font: 500 11px/1 var(--font-mono);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-.theme-track {
-  position: relative;
-  width: 34px; height: 18px;
-  border: 1px solid currentColor;
-  border-radius: 999px;
-}
-.theme-dot {
-  position: absolute;
-  top: 2px; left: 2px;
-  width: 12px; height: 12px;
-  border-radius: 50%;
-  background: var(--accent);
-  transition: transform 0.45s cubic-bezier(0.5, 0, 0.2, 1);
-}
-.theme-switch[aria-checked="true"] .theme-dot { transform: translateX(16px); }
-.theme-switch[aria-checked="false"] .theme-label:first-child,
-.theme-switch[aria-checked="true"] .theme-label:last-child { color: var(--text); }
-
 /* Menu button: only shown on small screens */
 .menu-toggle {
   display: none;
@@ -334,46 +103,7 @@ a { color: var(--link); }
 .menu-toggle[aria-expanded="true"] .menu-icon { transform: rotate(45deg); }
 .menu-toggle[aria-expanded="true"] .menu-icon::before { transform: rotate(-90deg); }
 
-/* ---------- THE HAWK ---------- */
-.hk-body   { fill: var(--hawk-body); }
-.hk-far    { fill: var(--hawk-far); }
-.hk-shade  { fill: var(--hawk-shade); }
-.hk-tail   { fill: var(--hawk-tail); }
-.hk-beak   { fill: var(--hawk-beak); }
-.hk-ring   { fill: var(--hawk-ring); }
-.hk-iris   { fill: var(--hawk-iris); }
-.hk-dark   { fill: var(--hawk-dark); }
-.hk-light  { fill: var(--hawk-light); }
-.hk-branch { fill: var(--hawk-branch); }
-.hk-line   { stroke: var(--hawk-line); stroke-linejoin: round; stroke-linecap: round; }
-.hk-band   { fill: none; stroke: var(--hawk-band); stroke-linecap: round; }
-
-.hawk { display: block; width: auto; overflow: visible; }
-.hawk-bar { height: 40px; margin: -2px 0 -4px; }
-/* Perched to the left of the title, sized to match it */
-.hawk-title {
-  flex-shrink: 0;
-  height: 1.08em;
-  margin: 0 0.06em -0.12em -0.04em;
-}
-
-/* The blink. "--lid" goes 0 (open) → 1 (closed) → 0.
-   Registering it lets the browser animate it smoothly. */
-@property --lid {
-  syntax: "<number>";
-  inherits: true;
-  initial-value: 0;
-}
-.hk-lid {
-  fill: var(--hawk-body);
-  transform: scaleY(var(--lid));
-  transform-box: fill-box;
-  transform-origin: 50% 0;
-}
-.hawk.is-blinking { animation: blink 0.26s ease-in-out; }
-@keyframes blink { 50% { --lid: 1; } }
-
-/* ---------- 4. HERO MAP ---------- */
+/* ---------- 3. HERO MAP ---------- */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -494,6 +224,12 @@ a { color: var(--link); }
   font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   color: var(--accent);
 }
+/* The hawk perched to the left of the title, sized to match it */
+.hawk-title {
+  flex-shrink: 0;
+  height: 1.08em;
+  margin: 0 0.06em -0.12em -0.04em;
+}
 
 .hero-lede {
   max-width: 36ch;
@@ -552,7 +288,7 @@ a { color: var(--link); }
   white-space: nowrap;
 }
 
-/* ---------- 5. SECTIONS ("legs" of the route) ---------- */
+/* ---------- 4. SECTIONS ON THE GRID ("legs" of the route) ---------- */
 .leg {
   position: relative;
   max-width: var(--max);
@@ -577,158 +313,15 @@ a { color: var(--link); }
   width: 1px; height: 9px;
   background: var(--muted);
 }
-
 .leg-head {
   grid-column: 1 / span 4;
   align-self: start;
   position: sticky;
   top: calc(var(--bar-h) + 40px);
 }
-.leg-bearing {
-  display: flex;
-  gap: 14px;
-  margin-bottom: 18px;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  color: var(--muted);
-}
-.leg-bearing span { color: var(--accent-text); }
-.leg-title {
-  font-size: clamp(2.5rem, 4.6vw, 4rem);
-  font-weight: 360;
-  font-variation-settings: "opsz" 144, "SOFT" 50;
-  line-height: 0.95;
-  letter-spacing: -0.03em;
-}
-.leg-kicker {
-  margin-top: 10px;
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.25rem;
-  font-variation-settings: "opsz" 24, "SOFT" 100, "WONK" 1;
-  color: var(--secondary);
-}
-.in-progress {
-  font-family: var(--font-mono);
-  font-style: normal;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--stamp-text);
-  border: 1px dashed var(--stamp);
-  border-radius: 999px;
-  padding: 2px 8px;
-  vertical-align: 3px;
-}
-.leg-desc {
-  max-width: 32ch;
-  margin-top: 18px;
-  color: var(--muted);
-}
+.leg .cards { grid-column: 6 / span 7; }
 
-/* Handwritten margin notes (only three on the page) */
-.margin-note {
-  position: relative;
-  display: inline-block;
-  margin-top: 28px;
-  padding-left: 30px;
-  font-family: var(--font-hand);
-  font-size: 1.45rem;
-  line-height: 1.1;
-  color: var(--accent-text);
-  transform: rotate(-3deg);
-}
-.margin-note::before {   /* a little hand-drawn arrow */
-  content: "";
-  position: absolute;
-  left: 0; top: 0.35em;
-  width: 22px; height: 14px;
-  background: currentColor;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 14'%3E%3Cpath d='M1 3c6 1 12 4 18 8m0 0-6 1m6-1-2-6' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / contain;
-          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 14'%3E%3Cpath d='M1 3c6 1 12 4 18 8m0 0-6 1m6-1-2-6' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / contain;
-}
-
-/* ---------- CARDS ---------- */
-.cards {
-  grid-column: 6 / span 7;
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: clamp(32px, 4vw, 56px);
-  row-gap: 64px;
-  align-items: start;
-}
-.card:nth-of-type(even) { margin-top: 112px; }   /* staggered, like stops on a trail */
-
-/* The dotted trail between cards (drawn by script.js) */
-.trail {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  pointer-events: none;
-}
-.trail path {
-  fill: none;
-  stroke: var(--link);
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-dasharray: 0 9;
-  opacity: 0.55;
-}
-
-.card {
-  position: relative;
-  z-index: 1;
-}
-.card-pin {
-  position: absolute;
-  left: -5px; top: -22px;
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  background: var(--bg);
-  border: 1.5px solid var(--link);
-}
-.card-meta {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 14px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.04em;
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
-}
-
-.card-media { position: relative; }
-
-/* Biomorphic "pebble" image areas. Each shape slowly melts into
-   a second shape on hover (border-radius can do 8 separate curves). */
-.pebble {
-  aspect-ratio: 5 / 4;
-  overflow: hidden;
-  border-radius: var(--shape-a);
-  transition: border-radius 1.8s cubic-bezier(0.45, 0, 0.2, 1);
-}
-.pebble[data-shape="1"] { --shape-a: 62% 38% 55% 45% / 48% 58% 42% 52%; --shape-b: 46% 54% 40% 60% / 58% 42% 58% 42%; }
-.pebble[data-shape="2"] { --shape-a: 42% 58% 38% 62% / 56% 40% 60% 44%; --shape-b: 58% 42% 60% 40% / 42% 56% 44% 58%; }
-.pebble[data-shape="3"] { --shape-a: 70% 30% 48% 52% / 42% 52% 48% 58%; --shape-b: 52% 48% 64% 36% / 54% 40% 60% 46%; }
-.pebble[data-shape="4"] { --shape-a: 50% 50% 34% 66% / 62% 46% 54% 38%; --shape-b: 38% 62% 52% 48% / 48% 60% 40% 52%; }
-.card:hover .pebble,
-.card:focus-within .pebble { border-radius: var(--shape-b); }
-.pebble img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-/* Placeholder: a tinted pebble with faint contour rings */
-.pebble--placeholder {
-  background:
-    repeating-radial-gradient(circle at 32% 64%,
-      transparent 0 17px,
-      color-mix(in srgb, var(--tint) 18%, transparent) 17px 18px),
-    color-mix(in srgb, var(--tint) 14%, var(--bg));
-}
+/* The Atlas card's little world map */
 .pebble--atlas {
   display: grid;
   place-items: center;
@@ -740,63 +333,7 @@ a { color: var(--link); }
 .atlas-route { fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-linecap: round; stroke-dasharray: 0 5; }
 .atlas-cross path { stroke: var(--text); stroke-width: 1.2; }
 
-/* The "EXPEDITION ONGOING" stamp */
-.stamp {
-  position: absolute;
-  top: 8%;
-  right: -6px;
-  padding: 6px 10px 5px;
-  border: 2px solid var(--stamp);
-  outline: 1px solid var(--stamp);
-  outline-offset: 2px;
-  border-radius: 3px;
-  background: color-mix(in srgb, var(--bg) 75%, transparent);
-  color: var(--stamp-text);
-  font: 500 10px/1.2 var(--font-mono);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  transform: rotate(-7deg);
-}
-
-.card-elev {
-  margin-top: 18px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  color: var(--secondary);
-}
-.card-title {
-  margin-top: 6px;
-  font-size: clamp(1.45rem, 2vw, 1.75rem);
-  font-weight: 420;
-  font-variation-settings: "opsz" 48, "SOFT" 40;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-}
-.card-title a {
-  color: inherit;
-  text-decoration: none;
-  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
-  transition: background-size 0.5s ease;
-}
-.card-title a::after {        /* makes the whole card clickable */
-  content: "";
-  position: absolute;
-  inset: -12px;
-  z-index: 2;
-}
-.card:hover .card-title a { background-size: 100% 1px; }
-.card-title a:focus-visible { outline: none; }
-.card:has(a:focus-visible) { outline: 2px solid var(--link); outline-offset: 14px; border-radius: 12px; }
-.card-desc {
-  margin-top: 8px;
-  max-width: 34ch;
-  font-size: 0.97rem;
-  color: var(--muted);
-}
-
-/* ---------- ABOUT ---------- */
+/* ---------- 5. ABOUT + FOOTER ---------- */
 .about {
   max-width: var(--max);
   margin: 0 auto;
@@ -833,7 +370,6 @@ a { color: var(--link); }
   line-height: 1.45;
 }
 
-/* ---------- FOOTER ---------- */
 .colophon {
   max-width: var(--max);
   margin: 0 auto;
@@ -866,18 +402,8 @@ a { color: var(--link); }
 .colophon-meta a { color: var(--link); text-decoration: none; }
 .colophon-meta a:hover { text-decoration: underline; }
 
-/* ---------- Gentle reveal on scroll (only when JavaScript is running) ---------- */
-.js .reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 1s ease, transform 1.2s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-.js .reveal.is-visible { opacity: 1; transform: none; }
-
 /* ---------- 6. SMALL SCREENS ---------- */
 @media (max-width: 1020px) {
-  .bar { gap: 16px; }
-
   .menu-toggle { display: block; }
 
   /* The section links become a drop-down panel */
@@ -911,49 +437,25 @@ a { color: var(--link); }
   }
   .nav a:hover { background: none; color: var(--accent); }
   .nav li:last-child a { border-bottom: 0; }
-
-  .bar-tools { margin-left: auto; gap: 12px; }
 }
 
 @media (max-width: 900px) {
   .leg, .about { row-gap: 40px; }
   .leg-head { grid-column: 1 / -1; position: static; }
-  .cards { grid-column: 1 / -1; }
+  .leg .cards { grid-column: 1 / -1; }
   .about-title, .about-body { grid-column: 1 / -1; }
 }
 
 @media (max-width: 640px) {
-  :root { --bar-h: 58px; }
-
-  .cards { grid-template-columns: 1fr; row-gap: 72px; padding-left: 18px; }
-  .card:nth-of-type(even) { margin-top: 0; }
-  .card-pin { left: -19px; top: 2px; }
-  .stamp { right: 4px; }
-
   .compass-bearing { display: none; }
-  .theme-label { display: none; }
-  .theme-switch { padding: 10px 4px; }
 
   .hero { min-height: 92svh; }
   .hero-copy::before { left: -30%; width: 160%; }
   .hero-title { font-size: 18vw; }
   .origin-label { font-size: 10px; }
-  .hawk-bar { height: 34px; }
-
 
   .hero-foot { grid-template-columns: 1fr auto; }
   .set-out { display: none; }
   .scale-ticks { width: 80px; }
   .survey { font-size: 10px; }
-}
-
-/* ---------- 7. REDUCED MOTION ----------
-   If a device asks for less motion, everything holds still. */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation: none !important;
-    transition-duration: 0.01ms !important;
-  }
-  html { scroll-behavior: auto; }
-  .js .reveal { opacity: 1; transform: none; }
 }

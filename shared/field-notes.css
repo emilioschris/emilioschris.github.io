@@ -1,0 +1,847 @@
+/* =========================================================
+   FIELD NOTES · shared design system
+   ---------------------------------------------------------
+   Every page links this file first, then its own styles.css.
+   See it all in one place: shared/styleguide.html
+
+   1. Tokens (colours, type, spacing, Day + Dusk)
+   2. Base
+   3. Top bar, back link, Day/Dusk switch
+   4. The hawk
+   5. Buttons
+   6. Field stamps
+   7. Section header + margin note
+   8. Project cards + trails
+   9. Slide-in panel
+   10. Small helpers (crosshair, reveal)
+   11. Small screens
+   12. Reduced motion
+   ========================================================= */
+
+/* ---------- 1. TOKENS ----------
+   Every colour on the site comes from these variables.
+   "Day" is the default; "Dusk" redefines the same names. */
+:root {
+  /* The palette */
+  --limestone: #F2EBDD;
+  --ink: #2B2A26;
+  --terracotta: #B5583A;
+  --olive: #6B6A3A;
+  --aegean: #1F4E5F;
+  --ochre: #C9973F;
+
+  /* What each colour is used for */
+  --bg: var(--limestone);
+  --bg-raised: #F8F3E8;
+  --text: var(--ink);
+  --muted: #5E5B52;
+  --rule: rgba(43, 42, 38, 0.14);
+  --accent: var(--terracotta);
+  --accent-text: #9A4529;   /* deeper terracotta so small text stays readable */
+  --secondary: var(--olive);
+  --link: var(--aegean);
+  --stamp: var(--ochre);
+  --stamp-text: #8A6420;    /* deeper ochre for stamp wording */
+
+  /* The hawk: natural red-tailed hawk colours */
+  --hawk-body: #7B5235;     /* warm brown back */
+  --hawk-far: #66432C;      /* far wing, a shade darker */
+  --hawk-shade: #3A2618;    /* dark chocolate shading */
+  --hawk-line: #2B2A26;     /* ink outline */
+  --hawk-tail: #B5583A;     /* brick-red tail = terracotta */
+  --hawk-band: #3A2618;
+  --hawk-beak: #D9A441;     /* yellow cere */
+  --hawk-ring: #E8CB86;
+  --hawk-iris: #5A3520;     /* dark brown eye */
+  --hawk-dark: #2B2A26;
+  --hawk-light: #F2EBDD;
+  --hawk-branch: #5B5048;
+
+  /* Type */
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --font-body: "Instrument Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --font-hand: "Caveat", "Bradley Hand", cursive;
+
+  /* Spacing scale (use these for new components) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  /* Corners */
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+
+  /* Motion: alive but calm */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-soft: cubic-bezier(0.45, 0, 0.2, 1);
+
+  /* Layout */
+  --gutter: clamp(16px, 4vw, 48px);
+  --max: 1320px;
+  --bar-h: 64px;
+  --panel-w: min(460px, 100vw);
+
+  color-scheme: light;
+}
+
+/* Dusk: deep warm darks, never pure black */
+:root[data-theme="dusk"] {
+  --bg: #1B1813;
+  --bg-raised: #24201A;
+  --text: #ECE3D2;
+  --muted: #A99F8C;
+  --rule: rgba(236, 227, 210, 0.14);
+  --accent: #D9774F;
+  --accent-text: #E58E68;
+  --secondary: #A9A66A;
+  --link: #86B9C8;
+  --stamp: #D9A94F;
+  --stamp-text: #E3B868;
+  --hawk-body: #94653F;
+  --hawk-far: #7D5536;
+  --hawk-shade: #452E1E;
+  --hawk-line: #D8CDB8;
+  --hawk-tail: #D9774F;
+  --hawk-beak: #E0B052;
+  --hawk-ring: #EBD394;
+  --hawk-branch: #5E5249;
+  color-scheme: dark;
+}
+
+/* No choice saved yet? Follow the device's own light/dark setting. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="day"]) {
+    --bg: #1B1813;
+    --bg-raised: #24201A;
+    --text: #ECE3D2;
+    --muted: #A99F8C;
+    --rule: rgba(236, 227, 210, 0.14);
+    --accent: #D9774F;
+    --accent-text: #E58E68;
+    --secondary: #A9A66A;
+    --link: #86B9C8;
+    --stamp: #D9A94F;
+    --stamp-text: #E3B868;
+    --hawk-body: #94653F;
+    --hawk-far: #7D5536;
+    --hawk-shade: #452E1E;
+    --hawk-line: #D8CDB8;
+    --hawk-tail: #D9774F;
+    --hawk-beak: #E0B052;
+    --hawk-ring: #EBD394;
+    --hawk-branch: #5E5249;
+    color-scheme: dark;
+  }
+}
+
+/* ---------- 2. BASE ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--bar-h) + 16px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; margin: 0; }
+p { margin: 0; }
+a { color: var(--link); }
+
+:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Hidden on screen, still read aloud by screen readers */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* "Skip to content": appears when you press Tab */
+.skip-link {
+  position: absolute;
+  left: 16px; top: -48px;
+  z-index: 100;
+  padding: 8px 14px;
+  background: var(--text);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  border-radius: 6px;
+  text-decoration: none;
+}
+.skip-link:focus { top: 12px; }
+
+/* ---------- 3. TOP BAR, BACK LINK, DAY/DUSK SWITCH ----------
+   <header class="bar">
+     <a class="wordmark" href="…">
+       <svg class="hawk hawk-bar" …><use href="#hawk"/></svg>
+       <span class="wordmark-text">
+         <span class="wordmark-title">Field Notes</span>
+         <span class="wordmark-owner">Emilios Christodoulou</span>
+       </span>
+     </a>
+     <div class="bar-tools"> …theme switch… </div>
+   </header>
+   Add "is-scrolled" to give it a paper background. */
+.bar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  height: var(--bar-h);
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 0 var(--gutter);
+  border-bottom: 1px solid transparent;
+  transition: background-color 0.4s, border-color 0.4s;
+}
+.bar.is-scrolled {
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  -webkit-backdrop-filter: blur(12px) saturate(1.1);
+  backdrop-filter: blur(12px) saturate(1.1);
+  border-bottom-color: var(--rule);
+}
+
+/* "Field Notes" with the owner's name underneath, like a notebook label */
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  text-decoration: none;
+}
+.wordmark-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+.wordmark-title {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 500;
+  font-variation-settings: "opsz" 24, "SOFT" 60;
+  letter-spacing: -0.01em;
+}
+.wordmark-owner {
+  margin-top: 3px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.bar-tools {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* Back-to-home link: every project page has one, top left.
+   <a class="wordmark back-link" href="../index.html">
+     <img class="back-hawk" src="../favicon.svg" alt="" width="30" height="30">
+     <span class="wordmark-text">
+       <span class="wordmark-title"><span aria-hidden="true">← </span>Field Notes</span>
+       <span class="wordmark-owner">Back to the homepage</span>
+     </span>
+   </a> */
+.back-hawk { width: 30px; height: 30px; }
+.back-link .wordmark-title { font-size: 17px; }
+.back-link ~ .bar-tools { margin-left: auto; }
+
+/* Day / Dusk switch (needs id="theme-toggle"; field-notes.js does the rest)
+   <button class="theme-switch" id="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Dusk mode">
+     <span class="theme-label" aria-hidden="true">Day</span>
+     <span class="theme-track" aria-hidden="true"><span class="theme-dot"></span></span>
+     <span class="theme-label" aria-hidden="true">Dusk</span>
+   </button> */
+.theme-switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 4px;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: 500 11px/1 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.theme-track {
+  position: relative;
+  width: 34px; height: 18px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+}
+.theme-dot {
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  transition: transform 0.45s cubic-bezier(0.5, 0, 0.2, 1);
+}
+.theme-switch[aria-checked="true"] .theme-dot { transform: translateX(16px); }
+.theme-switch[aria-checked="false"] .theme-label:first-child,
+.theme-switch[aria-checked="true"] .theme-label:last-child { color: var(--text); }
+
+/* ---------- 4. THE HAWK ----------
+   The drawing lives once per page as <symbol id="hawk">; use it with
+   <svg class="hawk" viewBox="0 0 405 760" aria-hidden="true"><use href="#hawk"/></svg>
+   Hawks with an eyelid blink now and then (field-notes.js). */
+.hk-body   { fill: var(--hawk-body); }
+.hk-far    { fill: var(--hawk-far); }
+.hk-shade  { fill: var(--hawk-shade); }
+.hk-tail   { fill: var(--hawk-tail); }
+.hk-beak   { fill: var(--hawk-beak); }
+.hk-ring   { fill: var(--hawk-ring); }
+.hk-iris   { fill: var(--hawk-iris); }
+.hk-dark   { fill: var(--hawk-dark); }
+.hk-light  { fill: var(--hawk-light); }
+.hk-branch { fill: var(--hawk-branch); }
+.hk-line   { stroke: var(--hawk-line); stroke-linejoin: round; stroke-linecap: round; }
+.hk-band   { fill: none; stroke: var(--hawk-band); stroke-linecap: round; }
+
+.hawk { display: block; width: auto; overflow: visible; }
+.hawk-bar { height: 40px; margin: -2px 0 -4px; }
+
+/* The blink. "--lid" goes 0 (open) → 1 (closed) → 0.
+   Registering it lets the browser animate it smoothly. */
+@property --lid {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+.hk-lid {
+  fill: var(--hawk-body);
+  transform: scaleY(var(--lid));
+  transform-box: fill-box;
+  transform-origin: 50% 0;
+}
+.hawk.is-blinking { animation: blink 0.26s ease-in-out; }
+@keyframes blink { 50% { --lid: 1; } }
+
+/* ---------- 5. BUTTONS ----------
+   <button class="btn">Close</button>             outline pill
+   <button class="btn btn--solid">Set out</button> filled
+   <div class="pill-group" role="group">          one-of-several choice
+     <button aria-pressed="true">All</button> <button aria-pressed="false">Visited</button>
+   </div>
+   <div class="icon-stack"><button aria-label="Zoom in">+</button>…</div> */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--bg-raised);
+  color: var(--text);
+  font: 500 11px/1 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn:hover { border-color: var(--text); }
+.btn--solid { background: var(--text); color: var(--bg); border-color: var(--text); }
+.btn--solid:hover { background: var(--accent); border-color: var(--accent); }
+
+.pill-group {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+}
+.pill-group button {
+  padding: 7px 16px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--muted);
+  font: 500 12px/1 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.25s, color 0.25s;
+}
+.pill-group button:hover { color: var(--text); }
+.pill-group button[aria-pressed="true"] { background: var(--text); color: var(--bg); }
+
+.icon-stack {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.icon-stack button {
+  width: 40px; height: 40px;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font: 400 18px/1 var(--font-body);
+  cursor: pointer;
+}
+.icon-stack button + button { border-top: 1px solid var(--rule); }
+.icon-stack button:hover { background: var(--rule); }
+
+/* ---------- 6. FIELD STAMPS ----------
+   <span class="stamp">Expedition ongoing</span>
+   Variants: stamp--visited, stamp--next, stamp--sent, stamp--projecting
+   ("On the list" and "Expedition ongoing" use the plain ochre stamp).
+   Size: stamp--large (used in panels). Inside a card it sits on the image. */
+.stamp {
+  display: inline-block;
+  padding: 6px 10px 5px;
+  border: 2px solid var(--stamp);
+  outline: 1px solid var(--stamp);
+  outline-offset: 2px;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--bg) 75%, transparent);
+  color: var(--stamp-text);
+  font: 500 10px/1.2 var(--font-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transform: rotate(-7deg);
+}
+.stamp--large {
+  padding: 6px 12px 5px;
+  background: none;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  transform: rotate(-4deg);
+}
+.stamp--visited { border-color: var(--accent); outline-color: var(--accent); color: var(--accent-text); }
+.stamp--next { background: color-mix(in srgb, var(--ochre) 14%, transparent); }
+.stamp--sent { border-color: var(--secondary); outline-color: var(--secondary); color: var(--secondary); }
+.stamp--projecting { border-style: dashed; border-color: var(--link); outline-color: var(--link); color: var(--link); }
+
+/* A small dashed "in progress" tag that sits inline with text */
+.in-progress {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--stamp-text);
+  border: 1px dashed var(--stamp);
+  border-radius: 999px;
+  padding: 2px 8px;
+  vertical-align: 3px;
+}
+
+/* ---------- 7. SECTION HEADER + MARGIN NOTE ----------
+   <p class="leg-bearing"><span>01</span> N 012°</p>
+   <h2 class="leg-title">Base Camp</h2>
+   <p class="leg-kicker">History</p>
+   <p class="leg-desc">One or two sentences.</p>
+   <p class="margin-note" aria-hidden="true">a short handwritten aside</p> */
+.leg-bearing {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 18px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+.leg-bearing span { color: var(--accent-text); }
+.leg-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 4.6vw, 4rem);
+  font-weight: 360;
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+.leg-kicker {
+  margin-top: 10px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.25rem;
+  font-variation-settings: "opsz" 24, "SOFT" 100, "WONK" 1;
+  color: var(--secondary);
+}
+.leg-desc {
+  max-width: 32ch;
+  margin-top: 18px;
+  color: var(--muted);
+}
+
+/* Handwritten margin notes: use sparingly (three per page at most) */
+.margin-note {
+  position: relative;
+  display: inline-block;
+  margin-top: 28px;
+  padding-left: 30px;
+  font-family: var(--font-hand);
+  font-size: 1.45rem;
+  line-height: 1.1;
+  color: var(--accent-text);
+  transform: rotate(-3deg);
+}
+.margin-note::before {   /* a little hand-drawn arrow */
+  content: "";
+  position: absolute;
+  left: 0; top: 0.35em;
+  width: 22px; height: 14px;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 14'%3E%3Cpath d='M1 3c6 1 12 4 18 8m0 0-6 1m6-1-2-6' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / contain;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 14'%3E%3Cpath d='M1 3c6 1 12 4 18 8m0 0-6 1m6-1-2-6' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+/* ---------- 8. PROJECT CARDS + TRAILS ----------
+   <div class="cards">                              a trail of cards
+     <svg class="trail" aria-hidden="true"><path /></svg>   field-notes.js draws it
+     <article class="card">
+       <span class="card-pin" aria-hidden="true"></span>
+       <p class="card-meta"><span>34.67°N 32.88°E</span><time datetime="2026-10">2026·10</time></p>
+       <div class="card-media">
+         <div class="pebble pebble--placeholder" data-shape="1" role="img" aria-label="…"></div>
+         <span class="stamp">Expedition ongoing</span>
+       </div>
+       <p class="card-elev">ELEV 120 m</p>
+       <h3 class="card-title"><a href="…">Title</a></h3>
+       <p class="card-desc">One line.</p>
+     </article>
+   </div>
+   Placeholders take their colour from --tint (e.g. style="--tint: var(--olive)"). */
+.cards {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(32px, 4vw, 56px);
+  row-gap: 64px;
+  align-items: start;
+}
+.card:nth-of-type(even) { margin-top: 112px; }   /* staggered, like stops on a trail */
+
+/* The dotted trail between cards */
+.trail {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.trail path {
+  fill: none;
+  stroke: var(--link);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 0 9;
+  opacity: 0.55;
+}
+
+.card {
+  position: relative;
+  z-index: 1;
+}
+.card-pin {
+  position: absolute;
+  left: -5px; top: -22px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1.5px solid var(--link);
+}
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.card-media { position: relative; }
+.card-media .stamp {
+  position: absolute;
+  top: 8%;
+  right: -6px;
+}
+
+/* Biomorphic "pebble" image areas. Each shape slowly melts into
+   a second shape on hover (border-radius can do 8 separate curves). */
+.pebble {
+  aspect-ratio: 5 / 4;
+  overflow: hidden;
+  border-radius: var(--shape-a);
+  transition: border-radius 1.8s cubic-bezier(0.45, 0, 0.2, 1);
+}
+.pebble[data-shape="1"] { --shape-a: 62% 38% 55% 45% / 48% 58% 42% 52%; --shape-b: 46% 54% 40% 60% / 58% 42% 58% 42%; }
+.pebble[data-shape="2"] { --shape-a: 42% 58% 38% 62% / 56% 40% 60% 44%; --shape-b: 58% 42% 60% 40% / 42% 56% 44% 58%; }
+.pebble[data-shape="3"] { --shape-a: 70% 30% 48% 52% / 42% 52% 48% 58%; --shape-b: 52% 48% 64% 36% / 54% 40% 60% 46%; }
+.pebble[data-shape="4"] { --shape-a: 50% 50% 34% 66% / 62% 46% 54% 38%; --shape-b: 38% 62% 52% 48% / 48% 60% 40% 52%; }
+.card:hover .pebble,
+.card:focus-within .pebble { border-radius: var(--shape-b); }
+.pebble img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Placeholder: a tinted pebble with faint contour rings */
+.pebble--placeholder {
+  background:
+    repeating-radial-gradient(circle at 32% 64%,
+      transparent 0 17px,
+      color-mix(in srgb, var(--tint) 18%, transparent) 17px 18px),
+    color-mix(in srgb, var(--tint) 14%, var(--bg));
+}
+
+.card-elev {
+  margin-top: 18px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--secondary);
+}
+.card-title {
+  font-family: var(--font-display);
+  margin-top: 6px;
+  font-size: clamp(1.45rem, 2vw, 1.75rem);
+  font-weight: 420;
+  font-variation-settings: "opsz" 48, "SOFT" 40;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.card-title a {
+  color: inherit;
+  text-decoration: none;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: background-size 0.5s ease;
+}
+.card-title a::after {        /* makes the whole card clickable */
+  content: "";
+  position: absolute;
+  inset: -12px;
+  z-index: 2;
+}
+.card:hover .card-title a { background-size: 100% 1px; }
+.card-title a:focus-visible { outline: none; }
+.card:has(a:focus-visible) { outline: 2px solid var(--link); outline-offset: 14px; border-radius: 12px; }
+.card-desc {
+  margin-top: 8px;
+  max-width: 34ch;
+  font-size: 0.97rem;
+  color: var(--muted);
+}
+
+/* ---------- 9. SLIDE-IN PANEL ----------
+   A journal page that slides in from the right (from the bottom on phones).
+   <aside class="panel" id="…" role="dialog" aria-labelledby="…" aria-hidden="true" hidden>
+     <div class="panel-scroll">
+       <button class="btn panel-close" type="button">Close <span aria-hidden="true">✕</span></button>
+       <p class="p-coords">…</p>
+       <h2 class="p-title">…</h2>
+       <section class="p-section"><p class="p-label">Basics</p> … </section>
+     </div>
+   </aside>
+   Open and close it with FieldNotes.panel(element) from field-notes.js. */
+.panel {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  z-index: 60;
+  width: var(--panel-w);
+  background: var(--bg-raised);
+  border-left: 1px solid var(--rule);
+  box-shadow: -24px 0 60px -30px rgba(20, 14, 8, 0.45);
+  transform: translateX(104%);
+  transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.panel.is-open { transform: none; }
+/* Faint ruled lines, like a notebook page */
+.panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(to bottom, transparent 0 31px, color-mix(in srgb, var(--link) 9%, transparent) 31px 32px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 220px);
+          mask-image: linear-gradient(to bottom, transparent 0, #000 220px);
+}
+.panel-scroll {
+  position: relative;
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 24px clamp(20px, 4vw, 36px) 48px;
+}
+.panel-close {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  float: right;
+}
+
+/* Parts of a panel page */
+.p-coords {
+  padding-top: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+.p-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 6vw, 3rem);
+  font-weight: 360;
+  font-variation-settings: "opsz" 144, "SOFT" 40;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+.p-section { margin-top: 36px; }
+.p-label {
+  margin-bottom: 12px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+.p-note {   /* a handwritten field note */
+  font-family: var(--font-hand);
+  font-size: 1.7rem;
+  line-height: 1.2;
+  color: var(--accent-text);
+  transform: rotate(-1.5deg);
+  transform-origin: left;
+}
+.p-error {  /* friendly message when something couldn't load */
+  padding: 12px 14px;
+  border: 1px dashed var(--rule);
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.p-sources {
+  margin-top: 40px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+.p-sources a { color: inherit; }
+
+/* Loading placeholder: a soft shimmering line */
+.skeleton {
+  display: block;
+  height: 0.9em;
+  margin: 0.45em 0;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--rule) 0%, color-mix(in srgb, var(--rule) 40%, transparent) 50%, var(--rule) 100%) 0 0 / 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+@keyframes shimmer { to { background-position: -200% 0; } }
+
+/* ---------- 10. SMALL HELPERS ---------- */
+
+/* Crosshair with coordinates (origin points, map markers)
+   <span class="crosshair" aria-hidden="true"></span> <span class="coords">35.1°N 33.4°E</span> */
+.crosshair {
+  position: relative;
+  display: inline-block;
+  width: 20px; height: 20px;
+  vertical-align: middle;
+}
+.crosshair::before,
+.crosshair::after {
+  content: "";
+  position: absolute;
+  background: var(--text);
+}
+.crosshair::before { left: 9.5px; top: 0; width: 1px; height: 20px; }
+.crosshair::after  { top: 9.5px; left: 0; height: 1px; width: 20px; }
+.coords {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Gentle reveal on scroll (only when JavaScript is running):
+   add class="reveal" and field-notes.js fades it up once. */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 1s ease, transform 1.2s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.js .reveal.is-visible { opacity: 1; transform: none; }
+
+/* ---------- 11. SMALL SCREENS ---------- */
+@media (max-width: 1020px) {
+  .bar { gap: 16px; }
+  .bar-tools { margin-left: auto; gap: 12px; }
+}
+
+@media (max-width: 640px) {
+  :root { --bar-h: 58px; }
+
+  .theme-label { display: none; }
+  .theme-switch { padding: 10px 4px; }
+  .hawk-bar { height: 34px; }
+
+  .cards { grid-template-columns: 1fr; row-gap: 72px; padding-left: 18px; }
+  .card:nth-of-type(even) { margin-top: 0; }
+  .card-pin { left: -19px; top: 2px; }
+  .card-media .stamp { right: 4px; }
+
+  /* The panel rises from the bottom like a sheet */
+  .panel {
+    top: auto;
+    left: 0;
+    width: 100%;
+    height: 86svh;
+    border-left: 0;
+    border-top: 1px solid var(--rule);
+    border-radius: 22px 22px 0 0;
+    transform: translateY(104%);
+  }
+  .panel.is-open { transform: none; }
+}
+
+/* ---------- 12. REDUCED MOTION ----------
+   If a device asks for less motion, everything holds still. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+  .js .reveal { opacity: 1; transform: none; }
+}

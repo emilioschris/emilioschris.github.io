@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Style Guide · Field Notes</title>
+  <meta name="description" content="Every colour, font and component in the Field Notes design system.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#F2EBDD">
+  <script src="theme-init.js"></script>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..600&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Instrument+Sans:wght@400..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="field-notes.css">
+  <style>
+    /* Layout for this page only */
+    .sg { max-width: var(--max); margin: 0 auto; padding: calc(var(--bar-h) + 48px) var(--gutter) 120px; }
+    .sg-intro h1 { font-size: clamp(3rem, 8vw, 6rem); font-weight: 340; line-height: .9; letter-spacing: -.04em; font-variation-settings: "opsz" 144, "SOFT" 30; }
+    .sg-intro h1 em { font-style: italic; font-weight: 300; color: var(--accent); font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+    .sg-intro p { max-width: 58ch; margin-top: 18px; color: var(--muted); }
+    code { font-family: var(--font-mono); font-size: .85em; font-variant-ligatures: none; }
+    .sg-toc { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 28px; font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em; }
+    .sg-toc a { text-decoration: none; }
+    .sg-toc a:hover { text-decoration: underline; }
+    .sg-block { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--rule); }
+    .sg-block > h2 { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 360; letter-spacing: -.02em; }
+    .sg-block > h2 span { margin-right: 14px; font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; color: var(--accent-text); vertical-align: middle; }
+    .sg-block > p code { font-size: .8em; }
+    .sg-block > p { max-width: 62ch; margin-top: 10px; color: var(--muted); }
+    .sg-row { display: flex; flex-wrap: wrap; align-items: center; gap: 28px 32px; margin-top: 32px; }
+    .sg-item { display: grid; gap: 12px; justify-items: start; }
+    .sg-label { font-variant-ligatures: none; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .06em; color: var(--muted); }
+    .sg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 16px; margin-top: 28px; }
+    .swatch { border: 1px solid var(--rule); border-radius: 14px; overflow: hidden; background: var(--bg-raised); }
+    .swatch i { display: block; height: 84px; }
+    .swatch div { padding: 10px 12px 12px; display: grid; gap: 2px; }
+    .swatch b { font: 500 13px/1.3 var(--font-body); }
+    .swatch span { font: 400 10.5px/1.4 var(--font-mono); color: var(--muted); }
+    .swatch .ratio { color: var(--text); }
+    .type-row { display: grid; grid-template-columns: 180px 1fr; gap: 8px 24px; align-items: baseline; margin-top: 26px; }
+    .space-bar { height: 12px; background: var(--accent); border-radius: 2px; }
+    .radius-box { width: 72px; height: 56px; border: 1.5px solid var(--text); background: var(--bg-raised); }
+    .demo-bar { position: relative; inset: auto; z-index: auto; margin-top: 28px; border: 1px solid var(--rule); border-radius: 14px; }
+    .sg-cards { margin-top: 64px; max-width: 760px; }
+    .sg-head { max-width: 420px; margin-top: 28px; }
+    .sg-hawks { display: flex; align-items: flex-end; gap: 40px; margin-top: 28px; }
+    @media (max-width: 640px) { .type-row { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="hawk" viewBox="250 140 405 760">
+      <!-- branch -->
+      <g class="hk-line" stroke-width="3.5">
+        <path class="hk-branch" d="M252,714 C380,672 520,624 648,574 L648,622 C520,668 380,716 252,766 Z"/>
+        <path class="hk-branch" d="M606,586 L626,534 L638,522 L635,542 L624,580 Z"/>
+        <!-- far wing and tail -->
+        <path class="hk-far" d="M376,280 C350,300 318,330 300,375 C286,420 286,480 290,540 C296,630 312,720 328,797 C340,740 352,680 358,620 C362,520 364,420 376,280 Z"/>
+        <path class="hk-tail" d="M360,650 L406,676 L404,858 C401,882 386,890 373,885 C360,878 357,862 359,832 Z"/>
+        <path class="hk-tail" d="M394,686 L470,686 C474,750 478,820 475,858 C472,882 453,890 434,886 C414,882 405,870 403,850 Z"/>
+      </g>
+      <!-- tail bands -->
+      <g class="hk-band" stroke-width="5">
+        <path d="M396,800 Q432,790 471,796"/><path d="M399,822 Q436,812 473,818"/><path d="M401,845 Q436,836 475,842"/>
+        <path d="M362,808 Q382,800 404,806"/><path d="M361,830 Q382,823 404,828"/><path d="M361,852 Q382,846 404,850"/>
+      </g>
+      <!-- body, wings, head -->
+      <g class="hk-line" stroke-width="3.5">
+        <path class="hk-body" d="M468,153 C505,152 532,166 540,190 L535,228 C552,250 590,300 608,350 C622,410 615,480 585,550 C555,610 505,660 470,690 L392,690 C372,600 362,500 362,430 C364,360 372,300 380,250 C384,205 420,158 468,153 Z"/>
+        <path class="hk-shade" d="M455,282 C420,292 360,318 336,336 C348,372 356,410 362,440 C364,380 395,320 455,282 Z"/>
+        <path class="hk-shade" d="M608,350 C622,410 615,480 585,550 C555,610 505,660 470,690 C440,720 396,770 366,808 C392,730 432,630 488,540 C530,470 560,400 566,300 C580,312 598,328 608,350 Z"/>
+        <path class="hk-body" d="M455,282 C418,300 384,342 368,404 C356,470 358,620 366,808 C392,730 432,630 488,540 C530,470 560,400 566,300 C540,288 495,280 455,282 Z"/>
+        <path class="hk-shade" d="M484,264 L528,230 L538,248 C520,254 500,259 484,264 Z"/>
+        <path class="hk-beak" d="M520,196 C536,191 549,200 549,216 C549,228 546,236 538,243 C538,232 534,224 526,222 L478,216 C490,206 505,198 520,196 Z"/>
+        <path class="hk-dark" d="M537,203 C548,210 549,228 538,243 C540,229 538,216 531,208 Z"/>
+        <path d="M478,216 L528,219" fill="none"/>
+        <ellipse class="hk-ring" cx="472" cy="190" rx="17" ry="12"/>
+      </g>
+      <!-- eye -->
+      <circle class="hk-iris" cx="474" cy="190" r="7"/>
+      <circle class="hk-dark" cx="474.5" cy="190" r="3.6"/>
+      <circle class="hk-light" cx="476.5" cy="187.5" r="1.8"/>
+      <!-- eyelid: hidden until the hawk blinks -->
+      <ellipse class="hk-lid" cx="472" cy="190" rx="19" ry="14"/>
+      <!-- brow lashes -->
+      <g class="hk-band" stroke-width="2">
+        <path d="M500,178 l9,-7"/><path d="M510,180 l9,-8"/><path d="M520,182 l9,-7"/><path d="M529,186 l8,-6"/>
+      </g>
+    </symbol>
+  </svg>
+
+  <!-- Top bar with the back link and Day/Dusk switch, like every project page -->
+  <header class="bar is-scrolled">
+    <a class="wordmark back-link" href="../index.html">
+      <img class="back-hawk" src="../favicon.svg" alt="" width="30" height="30">
+      <span class="wordmark-text">
+        <span class="wordmark-title"><span aria-hidden="true">← </span>Field Notes</span>
+        <span class="wordmark-owner">Back to the homepage</span>
+      </span>
+    </a>
+    <div class="bar-tools">
+      <button class="theme-switch" id="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Dusk mode">
+        <span class="theme-label" aria-hidden="true">Day</span>
+        <span class="theme-track" aria-hidden="true"><span class="theme-dot"></span></span>
+        <span class="theme-label" aria-hidden="true">Dusk</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main" class="sg">
+    <header class="sg-intro">
+      <p class="leg-bearing"><span>00</span> Design system</p>
+      <h1>Style <em>guide</em></h1>
+      <p>Every colour, font and component that Field Notes is built from. They all live in <code>shared/field-notes.css</code> and <code>shared/field-notes.js</code>, so every project looks like it belongs. Flip the Day/Dusk switch at the top to see both modes.</p>
+      <nav class="sg-toc" aria-label="On this page">
+        <a href="#colours">Colours</a><a href="#type">Type</a><a href="#space">Spacing</a><a href="#buttons">Buttons</a>
+        <a href="#bar">Top bar</a><a href="#stamps">Stamps</a><a href="#headers">Section header</a>
+        <a href="#cards">Cards</a><a href="#panel">Panel</a><a href="#hawk">Hawk + markers</a>
+      </nav>
+    </header>
+
+    <!-- 01 COLOURS -->
+    <section class="sg-block" id="colours" aria-labelledby="colours-title">
+      <h2 id="colours-title"><span>01</span>Colours</h2>
+      <p>The six palette colours, then the job each one does. Dusk swaps in deep warm darks and slightly lighter accents. The ratio shows how readable each colour is as text on the page background (4.5 or more is good for small text, 3 or more for large headings).</p>
+      <div class="sg-grid" id="palette"></div>
+      <div class="sg-grid" id="roles"></div>
+    </section>
+
+    <!-- 02 TYPE -->
+    <section class="sg-block" id="type" aria-labelledby="type-title">
+      <h2 id="type-title"><span>02</span>Type</h2>
+      <div class="type-row"><span class="sg-label">FRAUNCES · display</span><span style="font-family:var(--font-display);font-size:clamp(2.6rem,6vw,4.5rem);font-weight:340;line-height:1;letter-spacing:-.04em;font-variation-settings:'opsz' 144,'SOFT' 30">Field <em style="font-weight:300;color:var(--accent);font-variation-settings:'opsz' 144,'SOFT' 100,'WONK' 1">Notes</em></span></div>
+      <div class="type-row"><span class="sg-label">FRAUNCES · heading</span><span class="leg-title" style="font-size:2.4rem">The Library</span></div>
+      <div class="type-row"><span class="sg-label">FRAUNCES · italic kicker</span><span class="leg-kicker" style="margin:0">Outdoors &amp; conservation</span></div>
+      <div class="type-row"><span class="sg-label">INSTRUMENT SANS · body</span><span style="max-width:52ch">A field journal of things built with AI: history, knowledge, games, language and the natural world. Body text is 17px with relaxed line spacing.</span></div>
+      <div class="type-row"><span class="sg-label">JETBRAINS MONO · labels</span><span class="card-meta" style="margin:0;justify-content:flex-start;gap:24px"><span>35.1°N 33.4°E</span><span>2026·10</span><span>ELEV 120 m</span><span>N 012°</span></span></div>
+      <div class="type-row"><span class="sg-label">CAVEAT · margin notes only</span><span style="font-family:var(--font-hand);font-size:1.6rem;color:var(--accent-text)">the best map is still a walk</span></div>
+    </section>
+
+    <!-- 03 SPACING -->
+    <section class="sg-block" id="space" aria-labelledby="space-title">
+      <h2 id="space-title"><span>03</span>Spacing &amp; corners</h2>
+      <p>A spacing scale for new components, from <code>--space-1</code> (4px) to <code>--space-9</code> (96px), and four corner sizes.</p>
+      <div class="sg-row" id="spaces" style="align-items:flex-end"></div>
+      <div class="sg-row">
+        <div class="sg-item"><div class="radius-box" style="border-radius:var(--radius-sm)"></div><span class="sg-label">--radius-sm · 6px</span></div>
+        <div class="sg-item"><div class="radius-box" style="border-radius:var(--radius-md)"></div><span class="sg-label">--radius-md · 14px</span></div>
+        <div class="sg-item"><div class="radius-box" style="border-radius:var(--radius-lg)"></div><span class="sg-label">--radius-lg · 28px</span></div>
+        <div class="sg-item"><div class="radius-box" style="border-radius:var(--radius-pill)"></div><span class="sg-label">--radius-pill</span></div>
+      </div>
+    </section>
+
+    <!-- 04 BUTTONS -->
+    <section class="sg-block" id="buttons" aria-labelledby="buttons-title">
+      <h2 id="buttons-title"><span>04</span>Buttons</h2>
+      <div class="sg-row">
+        <div class="sg-item"><button class="btn" type="button">Close <span aria-hidden="true">✕</span></button><span class="sg-label">.btn</span></div>
+        <div class="sg-item"><button class="btn btn--solid" type="button">Set out</button><span class="sg-label">.btn.btn--solid</span></div>
+        <div class="sg-item">
+          <div class="pill-group" role="group" aria-label="Example filter" id="demo-pills">
+            <button type="button" aria-pressed="true">All</button>
+            <button type="button" aria-pressed="false">Visited</button>
+            <button type="button" aria-pressed="false">Want to go</button>
+          </div>
+          <span class="sg-label">.pill-group (pick one)</span>
+        </div>
+        <div class="sg-item">
+          <div class="icon-stack" role="group" aria-label="Example zoom buttons">
+            <button type="button" aria-label="Zoom in">+</button>
+            <button type="button" aria-label="Zoom out">−</button>
+          </div>
+          <span class="sg-label">.icon-stack</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 TOP BAR -->
+    <section class="sg-block" id="bar" aria-labelledby="bar-title">
+      <h2 id="bar-title"><span>05</span>Top bar, back link &amp; Day/Dusk switch</h2>
+      <p>The homepage bar has the hawk and owner's name. Project pages swap that for the back link (as on this page). The real Day/Dusk switch is in the bar at the top.</p>
+      <div class="bar is-scrolled demo-bar" aria-label="Example top bar">
+        <span class="wordmark">
+          <svg class="hawk hawk-bar" viewBox="0 0 405 760" aria-hidden="true" focusable="false"><use href="#hawk"/></svg>
+          <span class="wordmark-text"><span class="wordmark-title">Field Notes</span><span class="wordmark-owner">Emilios Christodoulou</span></span>
+        </span>
+      </div>
+      <div class="bar is-scrolled demo-bar" aria-label="Example project top bar">
+        <span class="wordmark back-link">
+          <img class="back-hawk" src="../favicon.svg" alt="" width="30" height="30">
+          <span class="wordmark-text"><span class="wordmark-title"><span aria-hidden="true">← </span>Field Notes</span><span class="wordmark-owner">Back to the homepage</span></span>
+        </span>
+      </div>
+    </section>
+
+    <!-- 06 STAMPS -->
+    <section class="sg-block" id="stamps" aria-labelledby="stamps-title">
+      <h2 id="stamps-title"><span>06</span>Field stamps</h2>
+      <p>Status, stamped like ink. The small size sits on card images; the large size is for panels.</p>
+      <div class="sg-row">
+        <div class="sg-item"><span class="stamp">Expedition ongoing</span><span class="sg-label">.stamp</span></div>
+        <div class="sg-item"><span class="stamp stamp--visited">Visited</span><span class="sg-label">.stamp--visited</span></div>
+        <div class="sg-item"><span class="stamp">On the list</span><span class="sg-label">.stamp</span></div>
+        <div class="sg-item"><span class="stamp stamp--next">Next expedition</span><span class="sg-label">.stamp--next</span></div>
+        <div class="sg-item"><span class="stamp stamp--sent">Sent</span><span class="sg-label">.stamp--sent</span></div>
+        <div class="sg-item"><span class="stamp stamp--projecting">Projecting</span><span class="sg-label">.stamp--projecting</span></div>
+      </div>
+      <div class="sg-row">
+        <div class="sg-item"><span class="stamp stamp--large stamp--visited">Visited</span><span class="sg-label">.stamp--large</span></div>
+        <div class="sg-item"><span class="stamp stamp--large stamp--next">Next expedition</span><span class="sg-label">.stamp--large.stamp--next</span></div>
+        <div class="sg-item"><span><span class="in-progress">In progress</span></span><span class="sg-label">.in-progress (inline tag)</span></div>
+      </div>
+    </section>
+
+    <!-- 07 SECTION HEADER -->
+    <section class="sg-block" id="headers" aria-labelledby="headers-title">
+      <h2 id="headers-title"><span>07</span>Section header &amp; margin note</h2>
+      <div class="sg-head">
+        <p class="leg-bearing"><span>05</span> N 297°</p>
+        <p class="leg-title">The Wild</p>
+        <p class="leg-kicker">Outdoors &amp; conservation</p>
+        <p class="leg-desc">The natural world, and how technology can help protect it.</p>
+        <p class="margin-note">the best map is still a walk</p>
+      </div>
+    </section>
+
+    <!-- 08 CARDS -->
+    <section class="sg-block" id="cards" aria-labelledby="cards-title" style="--tint: var(--olive)">
+      <h2 id="cards-title"><span>08</span>Project cards &amp; trail</h2>
+      <p>Coordinates and date, a pebble image that slowly changes shape on hover, an elevation, title and one line. A dotted trail joins the cards and carries on past the last one.</p>
+      <div class="cards sg-cards">
+        <svg class="trail" aria-hidden="true"><path /></svg>
+        <article class="card">
+          <span class="card-pin" aria-hidden="true"></span>
+          <p class="card-meta"><span>42.47°N 71.10°W</span><time datetime="2026-10">2026·10</time></p>
+          <div class="card-media">
+            <div class="pebble pebble--placeholder" data-shape="2" role="img" aria-label="Placeholder image"></div>
+            <span class="stamp stamp--projecting">Projecting</span>
+          </div>
+          <p class="card-elev">ELEV 60 m</p>
+          <h3 class="card-title"><a href="#cards">A card with a link</a></h3>
+          <p class="card-desc">The whole card is clickable, and the pebble changes shape on hover.</p>
+        </article>
+        <article class="card" style="--tint: var(--terracotta)">
+          <span class="card-pin" aria-hidden="true"></span>
+          <p class="card-meta"><span>35.10°N 33.40°E</span><time datetime="2026-11">2026·11</time></p>
+          <div class="card-media">
+            <div class="pebble pebble--placeholder" data-shape="3" role="img" aria-label="Placeholder image"></div>
+          </div>
+          <p class="card-elev">ELEV 300 m</p>
+          <h3 class="card-title">A card without a stamp</h3>
+          <p class="card-desc">Leave the stamp out once a project is finished.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 09 PANEL -->
+    <section class="sg-block" id="panel-demo" aria-labelledby="panel-title-sg">
+      <h2 id="panel-title-sg"><span>09</span>Slide-in panel</h2>
+      <p>A journal page that slides in from the right, or up from the bottom on phones. Esc or the Close button puts it away.</p>
+      <div class="sg-row"><button class="btn btn--solid" type="button" id="open-panel">Open the panel</button></div>
+    </section>
+
+    <!-- 10 HAWK + MARKERS -->
+    <section class="sg-block" id="hawk" aria-labelledby="hawk-title">
+      <h2 id="hawk-title"><span>10</span>Hawk &amp; markers</h2>
+      <p>The hawk, traced from my own drawing. It blinks now and then. Origin points are only ever a crosshair and coordinates.</p>
+      <div class="sg-hawks">
+        <div class="sg-item"><svg class="hawk" style="height:220px" viewBox="0 0 405 760" aria-hidden="true" focusable="false"><use href="#hawk"/></svg><span class="sg-label">.hawk</span></div>
+        <div class="sg-item"><svg class="hawk hawk-bar" viewBox="0 0 405 760" aria-hidden="true" focusable="false"><use href="#hawk"/></svg><span class="sg-label">.hawk-bar</span></div>
+        <div class="sg-item"><span><span class="crosshair" aria-hidden="true"></span> <span class="coords">35.1°N 33.4°E</span></span><span class="sg-label">.crosshair + .coords</span></div>
+        <div class="sg-item"><span><span class="crosshair" aria-hidden="true"></span> <span class="coords">40.4°N 80.0°W</span></span><span class="sg-label">.crosshair + .coords</span></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- The demo panel -->
+  <aside class="panel" id="panel" role="dialog" aria-labelledby="demo-panel-title" aria-hidden="true" hidden>
+    <div class="panel-scroll">
+      <button class="btn panel-close" type="button">Close <span aria-hidden="true">✕</span></button>
+      <p class="p-coords">35.17°N 33.36°E</p>
+      <h2 class="p-title" id="demo-panel-title" style="clear:both;margin-top:28px">A journal page</h2>
+      <p class="stamp stamp--large stamp--visited" style="margin-top:18px">Visited</p>
+      <section class="p-section"><p class="p-label">Loading</p><span class="skeleton"></span><span class="skeleton"></span><span class="skeleton" style="width:60%"></span></section>
+      <section class="p-section"><p class="p-label">Field note</p><p class="p-note">A handwritten note from data.js.</p></section>
+      <section class="p-section"><p class="p-label">When something fails</p><p class="p-error">This couldn't be loaded right now. Check your connection and try again.</p></section>
+      <p class="p-sources">Sources are credited here in small type.</p>
+    </div>
+  </aside>
+
+  <script src="field-notes.js"></script>
+  <script>
+    // Colour swatches, with live contrast ratios against the page background
+    (() => {
+      const css = () => getComputedStyle(document.documentElement);
+      const palette = [["Limestone", "--limestone", "background"], ["Ink", "--ink", "text"], ["Terracotta", "--terracotta", "primary accent"],
+        ["Olive", "--olive", "secondary"], ["Aegean", "--aegean", "maps and links"], ["Ochre", "--ochre", "stamps, highlights"]];
+      const roles = [["Background", "--bg"], ["Raised", "--bg-raised"], ["Text", "--text"], ["Muted text", "--muted"], ["Accent", "--accent"],
+        ["Accent text", "--accent-text"], ["Secondary", "--secondary"], ["Link", "--link"], ["Stamp", "--stamp"], ["Stamp text", "--stamp-text"]];
+      const probe = document.createElement("i"); probe.style.transition = "none"; probe.hidden = true; document.body.append(probe);
+      const rgb = (v) => { probe.style.color = v; return getComputedStyle(probe).color.match(/[\d.]+/g).slice(0, 3).map(Number); };
+      const lum = ([r, g, b]) => { const f = (c) => { c /= 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; }; return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b); };
+      const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m); return (x + 0.05) / (y + 0.05); };
+      function render() {
+        const c = css(), bg = rgb(c.getPropertyValue("--bg").trim());
+        const card = (name, token, note) => {
+          const val = c.getPropertyValue(token).trim();
+          const r = ratio(rgb(val), bg);
+          return `<div class="swatch"><i style="background:var(${token})"></i><div><b>${name}</b><span>${token} · ${val}</span>` +
+            (note ? `<span>${note}</span>` : "") + `<span class="ratio">${r.toFixed(1)} : 1 on background</span></div></div>`;
+        };
+        document.getElementById("palette").innerHTML = palette.map(([n, t, note]) => card(n, t, note)).join("");
+        document.getElementById("roles").innerHTML = roles.map(([n, t]) => card(n, t)).join("");
+      }
+      render();
+      document.addEventListener("fieldnotes:themechange", render);
+
+      // Spacing scale
+      document.getElementById("spaces").innerHTML = [1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) =>
+        `<div class="sg-item"><div class="space-bar" style="width:var(--space-${n})"></div><span class="sg-label">--space-${n}</span></div>`).join("");
+
+      // Pill group demo
+      document.querySelectorAll("#demo-pills button").forEach((b, _, all) =>
+        b.addEventListener("click", () => all.forEach((x) => x.setAttribute("aria-pressed", String(x === b)))));
+
+      // Panel demo
+      const sheet = FieldNotes.panel(document.getElementById("panel"));
+      const opener = document.getElementById("open-panel");
+      opener.addEventListener("click", () => sheet.open(opener));
+    })();
+  </script>
+</body>
+</html>

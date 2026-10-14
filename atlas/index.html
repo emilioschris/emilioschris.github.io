@@ -8,13 +8,7 @@
   <meta name="theme-color" content="#F2EBDD">
 
   <!-- Same Day/Dusk choice as the homepage, applied before the page draws -->
-  <script>
-    document.documentElement.classList.add("js");
-    try {
-      var saved = localStorage.getItem("fieldnotes-theme");
-      if (saved === "day" || saved === "dusk") document.documentElement.dataset.theme = saved;
-    } catch (e) {}
-  </script>
+  <script src="../shared/theme-init.js"></script>
 
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../apple-touch-icon.png">
@@ -23,8 +17,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..600&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Instrument+Sans:wght@400..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <!-- The homepage's colours, fonts and top bar, then the Atlas's own styles -->
-  <link rel="stylesheet" href="../styles.css">
+  <!-- The shared design system, then the Atlas's own styles -->
+  <link rel="stylesheet" href="../shared/field-notes.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="atlas-page">
@@ -68,7 +62,7 @@
     </header>
 
     <!-- ================= FILTERS ================= -->
-    <div class="filters" role="group" aria-label="Show countries">
+    <div class="filters pill-group" role="group" aria-label="Show countries">
       <button type="button" data-filter="all" aria-pressed="true">All</button>
       <button type="button" data-filter="visited" aria-pressed="false">Visited</button>
       <button type="button" data-filter="want" aria-pressed="false">Want to go</button>
@@ -82,7 +76,7 @@
 
       <div class="map-tooltip" id="map-tooltip" aria-hidden="true"></div>
 
-      <div class="map-zoom" role="group" aria-label="Map zoom">
+      <div class="map-zoom icon-stack" role="group" aria-label="Map zoom">
         <button type="button" id="zoom-in" aria-label="Zoom in">+</button>
         <button type="button" id="zoom-out" aria-label="Zoom out">−</button>
         <button type="button" id="zoom-reset" aria-label="Reset map view">⟲</button>
@@ -112,7 +106,7 @@
   <!-- ================= COUNTRY PANEL (a journal page) ================= -->
   <aside class="panel" id="panel" role="dialog" aria-labelledby="panel-title" aria-hidden="true" hidden>
     <div class="panel-scroll">
-      <button class="panel-close" id="panel-close" type="button">Close <span aria-hidden="true">✕</span></button>
+      <button class="btn panel-close" id="panel-close" type="button">Close <span aria-hidden="true">✕</span></button>
       <div id="panel-body"></div>
     </div>
   </aside>
@@ -120,7 +114,8 @@
   <!-- Libraries: D3 (drawing maps) and TopoJSON (reading the map file) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
-  <!-- Your data, then the Atlas itself -->
+  <!-- The shared script, your data, then the Atlas itself -->
+  <script src="../shared/field-notes.js"></script>
   <script src="data.js"></script>
   <script src="script.js"></script>
 </body>

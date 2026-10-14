@@ -1,7 +1,8 @@
 /* =========================================================
    THE ATLAS · styles
-   Colours, fonts and the top bar come from ../styles.css.
-   This file adds the map, counter, list and country panel.
+   Colours, fonts, the top bar, buttons, stamps and the
+   slide-in panel come from ../shared/field-notes.css.
+   This file adds the map, counter, list and panel contents.
    ========================================================= */
 
 /* ---------- Map colours (Day) ---------- */
@@ -14,7 +15,6 @@
   --visited-line: #7E3722;
   --want-fill: color-mix(in srgb, var(--ochre) 24%, var(--bg));
   --want-line: #B07F2A;
-  --panel-w: min(460px, 100vw);
 }
 
 /* ---------- Map colours (Dusk) ---------- */
@@ -43,9 +43,6 @@
 
 /* ---------- Page ---------- */
 .atlas-page { padding-top: var(--bar-h); }
-.back-hawk { width: 30px; height: 30px; }
-.atlas-page .bar-tools { margin-left: auto; }
-.back-link .wordmark-title { font-size: 17px; }
 
 .atlas {
   max-width: var(--max);
@@ -114,28 +111,7 @@
 .counter div:first-child dd { color: var(--accent); }
 
 /* ---------- Filters ---------- */
-.filters {
-  display: inline-flex;
-  gap: 2px;
-  padding: 3px;
-  margin-bottom: 16px;
-  border: 1px solid var(--rule);
-  border-radius: 999px;
-}
-.filters button {
-  padding: 7px 16px;
-  border: 0;
-  border-radius: 999px;
-  background: none;
-  color: var(--muted);
-  font: 500 12px/1 var(--font-mono);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background-color 0.25s, color 0.25s;
-}
-.filters button:hover { color: var(--text); }
-.filters button[aria-pressed="true"] { background: var(--text); color: var(--bg); }
+.filters { margin-bottom: 16px; }
 
 /* ---------- Map frame ---------- */
 .map-frame {
@@ -268,29 +244,8 @@
 .map-tooltip.is-on { opacity: 1; }
 .map-tooltip small { display: block; opacity: 0.7; font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; }
 
-/* Zoom buttons */
-.map-zoom {
-  position: absolute;
-  right: 16px; bottom: 16px;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--rule);
-  border-radius: 14px;
-  overflow: hidden;
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-}
-.map-zoom button {
-  width: 40px; height: 40px;
-  border: 0;
-  background: none;
-  color: var(--text);
-  font: 400 18px/1 var(--font-body);
-  cursor: pointer;
-}
-.map-zoom button + button { border-top: 1px solid var(--rule); }
-.map-zoom button:hover { background: var(--rule); }
+/* Zoom buttons (looks come from .icon-stack) */
+.map-zoom { position: absolute; right: 16px; bottom: 16px; }
 
 /* Legend */
 .map-legend {
@@ -405,63 +360,9 @@
 }
 .country-list .group-label:first-child { padding-top: 4px; }
 
-/* ---------- Country panel: a journal page sliding in ---------- */
-.panel {
-  position: fixed;
-  top: 0; right: 0; bottom: 0;
-  z-index: 60;
-  width: var(--panel-w);
-  background: var(--bg-raised);
-  border-left: 1px solid var(--rule);
-  box-shadow: -24px 0 60px -30px rgba(20, 14, 8, 0.45);
-  transform: translateX(104%);
-  transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.panel.is-open { transform: none; }
-/* Faint ruled lines, like a notebook page */
-.panel::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: repeating-linear-gradient(to bottom, transparent 0 31px, color-mix(in srgb, var(--link) 9%, transparent) 31px 32px);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 220px);
-          mask-image: linear-gradient(to bottom, transparent 0, #000 220px);
-}
-.panel-scroll {
-  position: relative;
-  height: 100%;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  padding: 24px clamp(20px, 4vw, 36px) 48px;
-}
-.panel-close {
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  float: right;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border: 1px solid var(--rule);
-  border-radius: 999px;
-  background: var(--bg-raised);
-  color: var(--text);
-  font: 500 11px/1 var(--font-mono);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-.panel-close:hover { border-color: var(--text); }
-
-.p-coords {
-  padding-top: 8px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.04em;
-  color: var(--muted);
-}
+/* ---------- Country panel contents ----------
+   The panel itself, its title, labels, notes, errors and loading
+   lines come from the shared file. */
 .p-head {
   clear: both;
   display: flex;
@@ -476,39 +377,8 @@
   border-radius: 4px;
   box-shadow: 0 0 0 1px var(--rule);
 }
-.p-title {
-  font-size: clamp(2.2rem, 6vw, 3rem);
-  font-weight: 360;
-  font-variation-settings: "opsz" 144, "SOFT" 40;
-  line-height: 0.95;
-  letter-spacing: -0.03em;
-}
-.p-stamp {
-  display: inline-block;
-  margin-top: 18px;
-  padding: 6px 12px 5px;
-  border: 2px solid var(--stamp);
-  outline: 1px solid var(--stamp);
-  outline-offset: 2px;
-  border-radius: 3px;
-  color: var(--stamp-text);
-  font: 500 11px/1.2 var(--font-mono);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  transform: rotate(-4deg);
-}
-.p-stamp.visited { border-color: var(--accent); outline-color: var(--accent); color: var(--accent-text); }
-.p-stamp.next { background: color-mix(in srgb, var(--ochre) 14%, transparent); }
 
-.p-section { margin-top: 36px; }
-.p-label {
-  margin-bottom: 12px;
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--accent-text);
-}
+.p-stamp { margin-top: 18px; }
 .p-facts {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -526,14 +396,6 @@
 .p-facts dd { margin: 0; }
 .p-overview { font-size: 1rem; line-height: 1.65; }
 .p-overview a { display: inline-block; margin-top: 10px; font-size: 0.9rem; }
-.p-note {
-  font-family: var(--font-hand);
-  font-size: 1.7rem;
-  line-height: 1.2;
-  color: var(--accent-text);
-  transform: rotate(-1.5deg);
-  transform-origin: left;
-}
 .p-links {
   list-style: none;
   margin: 0;
@@ -554,32 +416,6 @@
 }
 .p-links a:hover { color: var(--link); border-bottom-color: var(--link); }
 .p-links a span { color: var(--muted); }
-.p-error {
-  padding: 12px 14px;
-  border: 1px dashed var(--rule);
-  border-radius: 10px;
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-.p-sources {
-  margin-top: 40px;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.04em;
-  color: var(--muted);
-}
-.p-sources a { color: inherit; }
-
-/* Loading placeholders: soft shimmering lines */
-.skeleton {
-  display: block;
-  height: 0.9em;
-  margin: 0.45em 0;
-  border-radius: 4px;
-  background: linear-gradient(90deg, var(--rule) 0%, color-mix(in srgb, var(--rule) 40%, transparent) 50%, var(--rule) 100%) 0 0 / 200% 100%;
-  animation: shimmer 1.4s linear infinite;
-}
-@keyframes shimmer { to { background-position: -200% 0; } }
 
 /* ---------- Phones ---------- */
 @media (max-width: 640px) {
@@ -589,19 +425,6 @@
   .map-legend { left: 10px; bottom: 10px; right: 64px; font-size: 9.5px; }
   .map-zoom { right: 10px; bottom: 10px; }
   .p-links { grid-template-columns: 1fr; }
-
-  /* The panel rises from the bottom like a sheet */
-  .panel {
-    top: auto;
-    left: 0;
-    width: 100%;
-    height: 86svh;
-    border-left: 0;
-    border-top: 1px solid var(--rule);
-    border-radius: 22px 22px 0 0;
-    transform: translateY(104%);
-  }
-  .panel.is-open { transform: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

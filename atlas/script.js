@@ -1,43 +1,23 @@
 /* =========================================================
    THE ATLAS · script
    ---------------------------------------------------------
-   1. Day / Dusk theme
-   2. Your data + country codes
-   3. Counter
-   4. The map (drawing, ocean contours, markers, zoom, hover)
-   5. Filters
-   6. Logbook (searchable country list)
-   7. Country panel (live facts, overview, note, links)
+   The Day/Dusk switch and the slide-in panel's open/close
+   behaviour come from ../shared/field-notes.js.
+
+   1. Your data + country codes
+   2. Counter
+   3. The map (drawing, ocean contours, markers, zoom, hover)
+   4. Filters
+   5. Logbook (searchable country list)
+   6. Country panel (live facts, overview, note, links)
    ========================================================= */
 (() => {
   "use strict";
 
-  const root = document.documentElement;
-  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
-  const prefersDark = matchMedia("(prefers-color-scheme: dark)");
-  const motion = (ms) => (reducedMotion.matches ? 0 : ms);
+  const motion = FieldNotes.motion;
 
   /* ---------------------------------------------------------
-     1. DAY / DUSK THEME (shares the homepage's saved choice)
-     --------------------------------------------------------- */
-  const themeButton = document.getElementById("theme-toggle");
-  const themeMeta = document.querySelector('meta[name="theme-color"]');
-  const isDusk = () => (root.dataset.theme ? root.dataset.theme === "dusk" : prefersDark.matches);
-  function syncTheme() {
-    themeButton.setAttribute("aria-checked", String(isDusk()));
-    themeMeta.content = getComputedStyle(root).getPropertyValue("--bg").trim();
-  }
-  themeButton.addEventListener("click", () => {
-    const next = isDusk() ? "day" : "dusk";
-    root.dataset.theme = next;
-    try { localStorage.setItem("fieldnotes-theme", next); } catch (e) {}
-    syncTheme();
-  });
-  prefersDark.addEventListener("change", syncTheme);
-  syncTheme();
-
-  /* ---------------------------------------------------------
-     2. YOUR DATA + COUNTRY CODES
+     1. YOUR DATA + COUNTRY CODES
      The map file numbers each country (Cyprus is "196").
      This table links those numbers to the 3-letter codes in
      data.js and the 2-letter codes used by flags and links.
@@ -100,7 +80,7 @@
   };
 
   /* ---------------------------------------------------------
-     3. COUNTER
+     2. COUNTER
      "% of the world" = visited ÷ 195 countries.
      --------------------------------------------------------- */
   const WORLD_COUNTRIES = 195;
@@ -112,7 +92,7 @@
     `${(Math.round((visitedCount / WORLD_COUNTRIES) * 1000) / 10).toFixed(1)}%`;
 
   /* ---------------------------------------------------------
-     4. THE MAP
+     3. THE MAP
      --------------------------------------------------------- */
   const WORLD_URL = "https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json";
   const frame = document.getElementById("map-frame");
@@ -330,7 +310,7 @@
   function hideTooltip() { tooltip.classList.remove("is-on"); }
 
   /* ---------------------------------------------------------
-     5. FILTERS: All / Visited / Want to go
+     4. FILTERS: All / Visited / Want to go
      --------------------------------------------------------- */
   let filter = "all";
   document.querySelectorAll(".filters button").forEach((btn) => {
@@ -343,7 +323,7 @@
   });
 
   /* ---------------------------------------------------------
-     6. LOGBOOK: every country as a button, searchable
+     5. LOGBOOK: every country as a button, searchable
      --------------------------------------------------------- */
   const listEl = document.getElementById("country-list");
   const searchEl = document.getElementById("country-search");
@@ -403,49 +383,36 @@
   searchEl.addEventListener("input", renderList);
 
   /* ---------------------------------------------------------
-     7. COUNTRY PANEL
+     6. COUNTRY PANEL
      Opens like a journal page. Facts come live from Wikidata,
      the overview from Wikipedia, the flag from REST Countries'
      free flag images. Each lookup is remembered for the visit.
      --------------------------------------------------------- */
-  const panel = document.getElementById("panel");
   const panelBody = document.getElementById("panel-body");
-  const panelClose = document.getElementById("panel-close");
-  let lastFocus = null;
+  const panel = document.getElementById("panel");
+  const sheet = FieldNotes.panel(panel, {
+    onClose() {
+      selected = null;
+      svg.selectAll(".country").classed("is-selected", false);
+    },
+  });
   let openToken = 0;
   const cache = new Map();
 
   function openCountry(p, { zoomTo = false, opener = null } = {}) {
-    lastFocus = opener || document.activeElement;
     const token = ++openToken;
     selected = p;
     svg.selectAll(".country").classed("is-selected", (d) => d.num === p.num);
     hideTooltip();
 
     panelBody.innerHTML = panelTemplate(p);
-    panel.hidden = false;
-    panel.setAttribute("aria-hidden", "false");
-    requestAnimationFrame(() => panel.classList.add("is-open"));
-    panelClose.focus({ preventScroll: true });
-    panel.querySelector(".panel-scroll").scrollTop = 0;
+    sheet.open(opener || document.activeElement);
     if (zoomTo) zoomToPlace(p);
 
     lookUp(p).then((info) => {
       if (token === openToken) fillPanel(p, info);
     });
   }
-
-  function closePanel() {
-    if (panel.hidden) return;
-    panel.classList.remove("is-open");
-    panel.setAttribute("aria-hidden", "true");
-    selected = null;
-    svg.selectAll(".country").classed("is-selected", false);
-    setTimeout(() => { if (!panel.classList.contains("is-open")) panel.hidden = true; }, motion(560));
-    if (lastFocus && document.contains(lastFocus)) lastFocus.focus({ preventScroll: true });
-  }
-  panelClose.addEventListener("click", closePanel);
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closePanel(); });
 
   function panelTemplate(p) {
     const s = p.entry ? p.entry.status : null;
@@ -456,7 +423,7 @@
     return `
       <p class="p-coords">${coords}</p>
       <div class="p-head">${flag}<h2 class="p-title" id="panel-title">${escapeHtml(p.name)}</h2></div>
-      ${s ? `<p class="p-stamp ${s}">${STATUS[s].stamp}</p>` : ""}
+      ${s ? `<p class="stamp stamp--large stamp--${s} p-stamp">${STATUS[s].stamp}</p>` : ""}
 
       <section class="p-section" aria-label="Basics">
         <p class="p-label">Basics</p>
@@ -580,10 +547,10 @@
 
     if (info.facts) {
       const f = info.facts;
-      const list = (arr) => (arr.length ? arr.map(escapeHtml).join(", ") : "—");
+      const list = (arr) => (arr.length ? arr.map(escapeHtml).join(", ") : "Not listed");
       facts.innerHTML = `
         <dt>Capital</dt><dd>${list(f.capital)}</dd>
-        <dt>Population</dt><dd>${f.population ? f.population.toLocaleString("en-GB") : "—"}</dd>
+        <dt>Population</dt><dd>${f.population ? f.population.toLocaleString("en-GB") : "Not listed"}</dd>
         <dt>Official languages</dt><dd>${list(f.languages)}</dd>
         <dt>Currency</dt><dd>${list(f.currencies)}</dd>
         <dt>Region</dt><dd>${list(f.region)}</dd>`;
