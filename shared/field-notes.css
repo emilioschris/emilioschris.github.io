@@ -662,6 +662,15 @@ a { color: var(--link); }
   font-size: 0.97rem;
   color: var(--muted);
 }
+/* Optional "Last tended 2026·10·14" line under the description */
+.card-tended {
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--secondary);
+  font-variant-numeric: tabular-nums;
+}
 
 /* ---------- 9. SLIDE-IN PANEL ----------
    A journal page that slides in from the right (from the bottom on phones).

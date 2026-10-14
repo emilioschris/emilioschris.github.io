@@ -101,6 +101,15 @@
     }
     card.append(title);
     card.append(el("p", "card-desc", project.description || ""));
+
+    // When it last grew, e.g. "2026-10-14" is shown as "Last tended 2026·10·14"
+    if (project.tended) {
+      const tended = el("p", "card-tended", "Last tended ");
+      const time = el("time", "", project.tended.replaceAll("-", "·"));
+      time.dateTime = project.tended;
+      tended.append(time);
+      card.append(tended);
+    }
     return card;
   }
 

@@ -18,6 +18,8 @@
      description  One line about it.
      coords       A place it relates to, e.g. "35.17°N 33.36°E".
      date         When it started, as "YYYY-MM".
+     tended       Optional. When it last grew, as "YYYY-MM-DD".
+                  Shown on the card as "Last tended …".
      elevation    The card's "elevation" line, e.g. "ELEV 220 m".
      image        Optional. Leave it out for a placeholder pebble, or:
                     { src: "kypriaka/cover.jpg", alt: "What the picture shows" }
@@ -47,6 +49,18 @@ const PROJECTS = [
     elevation: "ELEV 0 m · SEA LEVEL",
     image: "atlas-map",
     shape: 3,
+  },
+  {
+    title: "Course Records",
+    section: "library",
+    status: "ongoing",
+    link: "library/races/index.html",
+    description: "A race tracker: every finish line on a medal rail, with paces and the shape of each course.",
+    coords: "37.97°N 23.74°E",
+    date: "2026-10",
+    tended: "2026-10-14",
+    elevation: "ELEV ≈ 245 m · ATHENS KM 31",
+    shape: 1,
   },
   {
     title: "Spanish Trainer",
