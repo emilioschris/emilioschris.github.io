@@ -42,6 +42,7 @@ KYPRIAKA.types = {
   event:   { label: "Event", plural: "Events" },
   myth:    { label: "Myth or cult", plural: "Myth & cult" },
   thinker: { label: "Thinker or faith", plural: "Thinkers & faith" },
+  writing: { label: "Writing", plural: "Writing" },
 };
 
 /* Relationships are written once; the reverse appears automatically.
@@ -62,4 +63,10 @@ KYPRIAKA.inverse = {
   "wrote": "written by",
   "fought in": "fought by",
   "traded with": "traded with",
+  "proposed capital of": "proposed capital",
+  "sent from": "sender of",
+  "clay traced to": "possible source of the clay of",
+  "abandoned during": "saw the abandonment of",
+  "destroyed during": "saw the destruction of",
+  "prospered after": "followed by prosperity at",
 };

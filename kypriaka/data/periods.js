@@ -13,6 +13,7 @@
    disagree      Where sources differ, or what is uncertain.
    hellenika     Ids of matching pages on Hellenika.
    sites         Ids of places in data/geo.js linked to this layer.
+   overview      A few plain sentences, each with its sources.
    excavated     false until the layer has real content.
 
    The main scheme is Harper and Fox (2008), Table 1. Other
@@ -191,8 +192,14 @@ KYPRIAKA.periods = [
       "Wikipedia treats Cyprus as the \"Alashiya\" of ancient letters. The identification is widely used but is flagged here until it is checked against specialist sources.",
     ],
     hellenika: ["mycenaean-civilisation", "bronze-age-collapse", "enkomi", "hala-sultan-tekke", "ugarit-letters", "uluburun-shipwreck", "sea-peoples-invasion"],
-    sites: ["enkomi", "kition"],
-    excavated: false,
+    sites: ["enkomi", "kition", "hala-sultan-tekke", "kalavasos", "alassa", "pyla-kokkinokremos", "apliki"],
+    overview: [
+      { text: "In the Late Bronze Age, Cyprus was a major source of copper for its neighbours, and copper was traded by sea in heavy slabs called oxhide ingots.", sources: ["wikipedia-alashiya", "wikipedia-oxhide-ingot"] },
+      { text: "Letters found in Egypt and at Ugarit show a king of \"Alashiya\" writing to the pharaoh as his \"brother\". Testing the clay of those letters points to southern Cyprus.", sources: ["wikipedia-alashiya", "goren-2003"] },
+      { text: "Towns such as Enkomi, Kition and Hala Sultan Tekke grew rich on this trade, and the island's people wrote in their own script, Cypro-Minoan, which has never been deciphered.", sources: ["wikipedia-enkomi", "wikipedia-hala-sultan-tekke", "wikipedia-cypro-minoan"] },
+      { text: "Around 1200 BC, as kingdoms fell across the eastern Mediterranean, some Cypriot settlements were abandoned and at least one was destroyed, while others, like Kition, went on to prosper.", sources: ["wikipedia-bronze-age-collapse"] },
+    ],
+    excavated: true,
   },
   {
     id: "bronze-iron-transition",

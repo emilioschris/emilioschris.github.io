@@ -11,8 +11,12 @@
              hellenika: the matching Hellenika page, if any.
              label: "left" puts a name on the left of its marker,
              for places too close to a neighbour.
+             mini: the same for the small layer maps ("left", "below").
+             approx: a note when the coordinates are a nearby village
+             or monument rather than the ancient site itself.
              altNames: Greek and Turkish names, from Wikidata labels
-             (Palaepaphos uses the labels of Kouklia, Q930838).
+             (Palaepaphos uses the labels of Kouklia, Q930838; Pyla-
+             Kokkinokremos's Greek name is from its Wikipedia article).
    ========================================================= */
 
 window.KYPRIAKA = window.KYPRIAKA || {};
@@ -21,7 +25,7 @@ KYPRIAKA.places = [
     {"id": "aetokremnos", "name": "Akrotiri Aetokremnos", "scope": "cyprus", "lat": 34.571, "lon": 32.991, "wikidata": "Q1752701", "altNames": ["Αετόκρεμνος", "Aetokremnos"]},
     {"id": "khirokitia", "name": "Khirokitia (Choirokoitia)", "scope": "cyprus", "lat": 34.797, "lon": 33.344, "wikidata": "Q385086", "hellenika": "choirokoitia", "altNames": ["Χοιροκοιτία", "Hirokitya"]},
     {"id": "enkomi", "label": "left", "name": "Enkomi", "scope": "cyprus", "lat": 35.162, "lon": 33.883, "wikidata": "Q1343280", "hellenika": "enkomi", "altNames": ["Έγκωμη", "Tuzla"]},
-    {"id": "kition", "name": "Kition", "scope": "cyprus", "lat": 34.93, "lon": 33.629, "wikidata": "Q1743884", "hellenika": "kition", "altNames": ["Κίτιο"]},
+    {"id": "kition", "mini": "left", "name": "Kition", "scope": "cyprus", "lat": 34.93, "lon": 33.629, "wikidata": "Q1743884", "hellenika": "kition", "altNames": ["Κίτιο"]},
     {"id": "salamis", "name": "Salamis", "scope": "cyprus", "lat": 35.175, "lon": 33.904, "wikidata": "Q767089", "hellenika": "salamis-cyprus", "altNames": ["Σαλαμίνα Κύπρου"]},
     {"id": "palaepaphos", "name": "Palaepaphos (Kouklia)", "scope": "cyprus", "lat": 34.707, "lon": 32.574, "wikidata": "Q53556453", "hellenika": "palaepaphos", "altNames": ["Κούκλια", "Kukla, Baf"]},
     {"id": "kourion", "name": "Kourion", "scope": "cyprus", "lat": 34.664, "lon": 32.888, "wikidata": "Q1785592", "hellenika": "kourion", "altNames": ["Κούριο"]},
@@ -29,6 +33,11 @@ KYPRIAKA.places = [
     {"id": "nicosia", "name": "Nicosia", "scope": "cyprus", "lat": 35.172, "lon": 33.365, "wikidata": "Q3856", "altNames": ["Λευκωσία", "Lefkoşa"]},
     {"id": "famagusta", "name": "Famagusta", "scope": "cyprus", "lat": 35.117, "lon": 33.95, "wikidata": "Q193190", "altNames": ["Αμμόχωστος", "Gazimağusa"]},
     {"id": "kyrenia", "name": "Kyrenia", "scope": "cyprus", "lat": 35.34, "lon": 33.319, "wikidata": "Q206760", "altNames": ["Κερύνεια", "Girne"]},
+    {"id": "hala-sultan-tekke", "mini": "below", "name": "Hala Sultan Tekke", "scope": "cyprus", "lat": 34.885, "lon": 33.61, "wikidata": "Q1570185", "hellenika": "hala-sultan-tekke", "altNames": ["Χαλά Σουλτάν Τεκκέ", "Hala Sultan Tekkesi"], "approx": "These are the coordinates of the later mosque; the Bronze Age town lies a few hundred metres to the west."},
+    {"id": "kalavasos", "name": "Kalavasos-Ayios Dhimitrios", "scope": "cyprus", "lat": 34.758, "lon": 33.308, "wikidata": "Q1722060", "altNames": ["Καλαβασός", "Kalavason"], "approx": "These are the coordinates of Kalavasos village; the Bronze Age site is nearby."},
+    {"id": "alassa", "name": "Alassa-Paliotaverna", "scope": "cyprus", "lat": 34.764, "lon": 32.928, "wikidata": "Q521403", "altNames": ["Άλασσα"], "approx": "These are the coordinates of Alassa village; the Bronze Age site is nearby.", "label": "left"},
+    {"id": "pyla-kokkinokremos", "name": "Pyla-Kokkinokremos", "scope": "cyprus", "lat": 34.985, "lon": 33.702, "wikidata": "Q6426672", "altNames": ["Πύλα-Κοκκινόκρεμος"]},
+    {"id": "apliki", "name": "Apliki", "scope": "cyprus", "lat": 34.931, "lon": 33.118, "wikidata": "Q591348", "altNames": ["Απλίκι", "Aplıç"], "approx": "These are the coordinates of Apliki village; the ancient mine is nearby."},
     {"id": "ugarit", "name": "Ugarit", "scope": "mediterranean", "lat": 35.602, "lon": 35.786, "wikidata": "Q191369", "altNames": ["Ουγκαρίτ"]},
     {"id": "byblos", "name": "Byblos", "scope": "mediterranean", "lat": 34.12, "lon": 35.647, "wikidata": "Q173532", "altNames": ["Βύβλος", "Biblos"]},
     {"id": "sidon", "name": "Sidon", "scope": "mediterranean", "lat": 33.56, "lon": 35.375, "wikidata": "Q163490", "altNames": ["Σιδώνα", "Sayda"]},

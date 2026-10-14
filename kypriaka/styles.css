@@ -375,6 +375,7 @@ kbd {
 .k-results { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
 .k-card {
   display: grid;
+  align-content: start;
   gap: 4px;
   height: 100%;
   padding: 16px 18px;
@@ -509,6 +510,60 @@ kbd {
 .k-search-results small { font-family: var(--font-mono); font-size: 10.5px; color: var(--muted); white-space: nowrap; }
 .k-search-results .k-empty { padding: 12px 14px; }
 .k-search-hint { padding: 10px 16px; border-top: 1px solid var(--rule); font-family: var(--font-mono); font-size: 10.5px; color: var(--muted); }
+
+/* ---------- Excavated layers: overview, photos, finds ---------- */
+.k-wide { max-width: none; }
+.k-overview p { font-family: var(--font-display); font-size: clamp(1.15rem, 1.8vw, 1.35rem); font-weight: 340; line-height: 1.5; }
+.k-overview p + p { margin-top: 14px; }
+.k-overview .k-src { font-family: var(--font-mono); font-size: 11px; white-space: normal; }
+.k-group { margin: 28px 0 12px; font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.k-group:first-of-type { margin-top: 8px; }
+
+.k-single {
+  padding: 2px 7px;
+  border: 1px dashed var(--stamp);
+  border-radius: 999px;
+  font: 500 9.5px/1.3 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--stamp-text);
+  cursor: help;
+}
+.k-approx { margin-top: 14px; padding: 10px 12px; border-left: 2px solid var(--stamp); background: color-mix(in srgb, var(--ochre) 10%, transparent); font-size: 0.92rem; color: var(--muted); }
+
+/* Photos: a pebble-ish frame, with caption and credit */
+.k-figure { max-width: var(--measure); margin: 32px 0 0; }
+.k-figure img {
+  display: block;
+  width: 100%;
+  max-height: 520px;
+  object-fit: contain;
+  background: var(--bg-raised);
+  border: 1px solid var(--rule);
+  border-radius: 28px 18px 32px 22px / 22px 30px 18px 28px;
+}
+.k-figure figcaption { margin-top: 10px; font-size: 0.92rem; color: var(--muted); }
+.k-credit-line { display: block; margin-top: 2px; font-family: var(--font-mono); font-size: 10.5px; }
+.k-credit-line a { color: inherit; }
+
+/* Cards with photos */
+.k-card.has-image { padding-top: 0; overflow: hidden; }
+.k-card-img {
+  display: block;
+  width: calc(100% + 36px);
+  height: 150px;
+  margin: 0 -18px 10px;
+  object-fit: cover;
+  background: var(--bg-raised);
+  border-bottom: 1px solid var(--rule);
+}
+.k-card-sum { margin-top: 4px; font-size: 0.9rem; line-height: 1.45; color: var(--muted); }
+.k-card-note--dug { color: var(--accent-text); }
+
+/* The small still map on a layer page */
+.k-minimap { margin: 0; max-width: 820px; border: 1px solid var(--rule); border-radius: 22px; background: var(--k-sea); overflow: hidden; }
+.k-minimap svg { display: block; width: 100%; height: auto; }
+.k-marker--still { cursor: default; }
 
 /* ---------- 10. SMALL SCREENS ---------- */
 @media (max-width: 900px) {

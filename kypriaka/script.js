@@ -89,6 +89,9 @@
     return `<span class="k-conf" title="${esc(c.desc)}"><span class="k-dots" aria-hidden="true">${dots}</span>${esc(c.label)}</span>`;
   }
 
+  // A claim resting only on encyclopedias gets a visible "single source" marker
+  const singleSource = (ids) => ids && ids.length > 0 && ids.every((id) => K.sources[id] && K.sources[id].kind === "reference");
+
   // One claim, with its evidence type, confidence and sources
   function claim(c) {
     const ev = K.evidence[c.evidence];
@@ -98,6 +101,7 @@
         ${ev ? `<span class="k-ev" title="${esc(ev.desc)}">${esc(ev.label)}</span>` : ""}
         ${confidenceMeter(c.confidence)}
         ${c.sources && c.sources.length ? `<span class="k-src">Source: ${cite(c.sources)}</span>` : ""}
+        ${singleSource(c.sources) ? `<span class="k-single" title="This claim rests only on an encyclopedia. It matches other accounts, but a scholarly source has not been checked yet.">Single source</span>` : ""}
       </p>
     </li>`;
   }
@@ -109,6 +113,50 @@
       <h2 class="p-label">See also in <span lang="el">Ἑλληνικά</span> (Hellenika)</h2>
       <ul class="k-links">${known.map((id) => `<li>${external(hellenikaUrl(id), esc(K.hellenika.pages[id]))}</li>`).join("")}</ul>
     </section>`;
+  }
+
+  // A photo with its caption and the photographer's credit (required by the licence)
+  function figure(img, cls = "k-figure") {
+    if (!img) return "";
+    return `<figure class="${cls}">
+      <img src="${esc(img.src)}" alt="${esc(img.alt)}" loading="lazy" decoding="async">
+      <figcaption>${esc(img.caption)} <span class="k-credit-line">Photo: ${esc(img.credit)}, ${esc(img.licence)}, ${external(img.page, "Wikimedia Commons")}</span></figcaption>
+    </figure>`;
+  }
+
+  // A card linking to an entity, with its photo if it has one
+  function entityCard(e) {
+    const type = (K.types[e.type] || {}).label || e.type;
+    return `<li><a class="k-card${e.image ? " has-image" : ""}" href="#/e/${e.id}">
+      ${e.image ? `<img class="k-card-img" src="${esc(e.image.src)}" alt="" loading="lazy" decoding="async">` : ""}
+      <span class="k-card-type">${esc(type)}</span>
+      <span class="k-card-name">${esc(e.name)}</span>
+      ${e.summary ? `<span class="k-card-sum">${esc(e.summary)}</span>` : ""}
+    </a></li>`;
+  }
+
+  // A small, still map of Cyprus with some places marked (drawn after the page is shown)
+  function miniMap(id, placeIds) {
+    return `<figure class="k-minimap" id="${id}" data-places="${placeIds.join(",")}" aria-hidden="true"></figure>`;
+  }
+  function drawMiniMaps() {
+    if (!window.d3) return;
+    view.querySelectorAll(".k-minimap").forEach((fig) => {
+      const ids = fig.dataset.places.split(",").filter(Boolean);
+      const w = fig.clientWidth || 600, h = Math.round(w * 0.5);
+      const projection = d3.geoMercator().fitExtent([[16, 16], [w - 16, h - 16]], K.outlines.cyprus);
+      const path = d3.geoPath(projection);
+      const svg = d3.select(fig).append("svg").attr("viewBox", `0 0 ${w} ${h}`);
+      svg.append("path").attr("class", "k-island").attr("d", path(K.outlines.cyprus));
+      ids.map((pid) => placeById.get(pid)).filter(Boolean).forEach((p) => {
+        const [x, y] = projection([p.lon, p.lat]);
+        const g = svg.append("g").attr("class", "k-marker k-marker--still").attr("transform", `translate(${x},${y})`);
+        g.append("path").attr("class", "k-cross").attr("d", "M-5 0H5M0 -5V5");
+        g.append("circle").attr("class", "k-dot").attr("r", 2.2);
+        const pos = p.mini || p.label || "right";
+        g.append("text").attr("x", pos === "left" ? -8 : pos === "below" ? 6 : 8).attr("y", pos === "below" ? 13 : -5).attr("text-anchor", pos === "left" ? "end" : "start").text(p.name.replace(/\s*\(.*\)$/, "").replace(/-Paliotaverna|-Ayios Dhimitrios|-Kokkinokremos/, ""));
+      });
+    });
   }
 
   const notExcavated = (what = "Layer not yet excavated") => `<p class="stamp stamp--large k-stamp">${esc(what)}</p>`;
@@ -158,8 +206,8 @@
       </section>
 
       <section class="k-block k-stage">
-        ${notExcavated("Stage 1: mapped, not yet excavated")}
-        <p>The layers, their dates and their sources are in place. The people, places, objects and events inside them come next, one layer at a time.</p>
+        ${excavated ? `<p class="stamp stamp--large stamp--visited k-stamp">${excavated} of ${periods.length} layers excavated</p>` : notExcavated("Stage 1: mapped, not yet excavated")}
+        <p>${excavated ? `Excavated so far: ${periods.filter((p) => p.excavated).map((p) => `<a href="#/layer/${p.id}">${esc(p.name)}</a> (${esc(p.dates)})`).join(", ")}. The other layers have cited dates and wait their turn.` : "The layers, their dates and their sources are in place. The people, places, objects and events inside them come next, one layer at a time."}</p>
       </section>`,
     };
   };
@@ -227,6 +275,24 @@
         ${pageHead(`Layer ${periods.length - i} of ${periods.length} from the top · ${esc(p.era)}`, esc(p.name), esc(p.subtitle),
           `<p class="k-dates">${esc(p.dates)}</p>${p.excavated ? "" : notExcavated()}`)}
 
+        ${p.overview ? `<section class="k-block k-overview">
+          <h2 class="p-label">Overview</h2>
+          ${p.overview.map((o) => `<p>${esc(o.text)} <span class="k-src">${cite(o.sources)}</span></p>`).join("")}
+        </section>` : ""}
+
+        ${p.excavated && places.length ? `<section class="k-block k-wide">
+          <h2 class="p-label">Sites in this layer</h2>
+          ${miniMap("mm-" + p.id, places.map((pl) => pl.id))}
+          <p class="k-actions"><a class="btn" href="#/map">Open the full map</a></p>
+        </section>` : ""}
+
+        ${p.excavated && inLayer.length ? `<section class="k-block k-wide">
+          <h2 class="p-label">Found in this layer</h2>
+          ${Object.keys(K.types).filter((t) => inLayer.some((e) => e.type === t)).map((t) => `
+            <h3 class="k-group">${esc(K.types[t].plural)}</h3>
+            <ul class="k-results">${inLayer.filter((e) => e.type === t).map(entityCard).join("")}</ul>`).join("")}
+        </section>` : ""}
+
         <section class="k-block">
           <h2 class="p-label">What the sources say about its dates</h2>
           <ul class="k-says">${p.says.map((s) => `<li><p>${esc(s.text)}</p><p class="k-src">Source: ${cite([s.source])}</p></li>`).join("")}</ul>
@@ -237,12 +303,12 @@
           <ul class="k-disagree">${p.disagree.map((d) => `<li>${esc(d)}</li>`).join("")}</ul>
         </section>` : ""}
 
-        <section class="k-block">
+        ${p.excavated ? "" : `<section class="k-block">
           <h2 class="p-label">Found in this layer</h2>
           ${inLayer.length ? `<ul class="k-links">${inLayer.map((e) => `<li>${linkTo(e.id)}</li>`).join("")}</ul>`
             : `<p class="k-empty">Nothing excavated yet.</p>`}
           ${places.length ? `<p class="k-chips">${places.map((pl) => `<a class="k-chip" href="#/map?place=${pl.id}"><span class="crosshair" aria-hidden="true"></span>${esc(pl.name)}</a>`).join("")}</p>` : ""}
-        </section>
+        </section>`}
 
         ${hellenikaLinks(p.hellenika)}
 
@@ -251,6 +317,7 @@
           ${older ? `<a href="#/layer/${older.id}"><span>↓ Dig deeper</span>${esc(older.name)}</a>` : `<span class="k-dig-end">Bedrock: this is the earliest layer.</span>`}
         </nav>
       </article>`,
+      mount: drawMiniMaps,
     };
   };
 
@@ -270,6 +337,8 @@
         ${pageHead(`${esc(type.label)}${e.period ? " · " + e.period.map(linkTo).join(", ") : ""}`, esc(e.name),
           e.summary ? esc(e.summary) : "",
           e.altNames && e.altNames.length ? `<p class="k-alt">Also: ${e.altNames.map(esc).join(" · ")}</p>` : "")}
+        ${figure(e.image)}
+        ${e.place && placeById.get(e.place) ? `<p class="k-chips"><a class="k-chip" href="#/map?place=${e.place}"><span class="crosshair" aria-hidden="true"></span>See it on the map</a></p>` : ""}
         ${e.type === "myth" ? mythParts.filter(([k]) => e[k]).map(([k, label]) => `<section class="k-block"><h2 class="p-label">${label}</h2><p>${esc(e[k])}</p></section>`).join("") : ""}
         ${e.claims && e.claims.length ? `<section class="k-block"><h2 class="p-label">Claims</h2><ul class="k-claims">${e.claims.map(claim).join("")}</ul></section>` : ""}
         ${rels.length ? `<section class="k-block"><h2 class="p-label">Connections</h2><ul class="k-rels">${rels.map((r) => `<li><span>${esc(r.rel)}</span> ${linkTo(r.id)}</li>`).join("")}</ul></section>` : ""}
@@ -313,11 +382,11 @@
             return true;
           });
           count.textContent = `${list.length} ${list.length === 1 ? "result" : "results"}`;
-          results.innerHTML = list.length ? list.map((e) => `<li><a class="k-card" href="${e.type === "period" ? "#/layer/" : "#/e/"}${e.id}">
-              <span class="k-card-type">${esc((K.types[e.type] || {}).label || e.type)}</span>
+          results.innerHTML = list.length ? list.map((e) => e.type !== "period" ? entityCard(e) : `<li><a class="k-card" href="#/layer/${e.id}">
+              <span class="k-card-type">Layer</span>
               <span class="k-card-name">${esc(e.name)}</span>
               <span class="k-card-meta">${esc(e.dates || "")}</span>
-              ${e.type === "period" && !e.excavated ? `<span class="k-card-note">Not yet excavated</span>` : ""}
+              ${e.excavated ? `<span class="k-card-note k-card-note--dug">Excavated</span>` : `<span class="k-card-note">Not yet excavated</span>`}
             </a></li>`).join("")
             : `<li class="k-empty">Nothing excavated here yet. As layers are dug, the people, places, objects and events found in them will appear here.</li>`;
         }
@@ -446,7 +515,8 @@
 
       <section class="k-block">
         <h2 class="p-label">Where it's up to</h2>
-        <p>Stage 1: the architecture, the ${periods.length} layers with cited dates, and every page template. No layer has been excavated yet.</p>
+        <p>The ${periods.length} layers all have cited dates. Excavated so far: ${periods.filter((p) => p.excavated).map((p) => `<a href="#/layer/${p.id}">${esc(p.name)}</a>`).join(", ") || "none"}, with ${K.entities.length} entities and ${K.entities.reduce((n, e) => n + (e.claims || []).length, 0)} tagged claims.</p>
+        <p>Claims marked <span class="k-single">Single source</span> rest only on an encyclopedia. They match other accounts, but a scholarly source hasn't been checked yet; they're shown so you can judge them for yourself.</p>
       </section>`,
     };
   };
@@ -468,13 +538,16 @@
 
   function openPlace(place, opener) {
     const layers = periods.filter((p) => (p.sites || []).includes(place.id)).reverse();
+    const found = K.entities.filter((e) => e.place === place.id || (e.relations || []).some((r) => r.rel === "found at" && byId.get(r.id) && byId.get(r.id).place === place.id));
     const lat = `${Math.abs(place.lat).toFixed(3)}°${place.lat >= 0 ? "N" : "S"}`;
     const lon = `${Math.abs(place.lon).toFixed(3)}°${place.lon >= 0 ? "E" : "W"}`;
     panelBody.innerHTML = `
       <p class="p-coords">${lat} ${lon}</p>
       <h2 class="p-title" id="panel-title">${esc(place.name)}</h2>
       ${place.altNames ? `<p class="k-alt">${place.altNames.map(esc).join(" · ")}</p>` : ""}
-      ${notExcavated("Not yet excavated")}
+      ${found.length ? "" : notExcavated("Not yet excavated")}
+      ${place.approx ? `<p class="k-approx">${esc(place.approx)}</p>` : ""}
+      ${found.length ? `<section class="p-section"><p class="p-label">Found here</p><ul class="k-links">${found.map((e) => `<li>${linkTo(e.id)} <span class="k-muted">${esc((K.types[e.type] || {}).label || "")}</span></li>`).join("")}</ul></section>` : ""}
       ${layers.length ? `<section class="p-section"><p class="p-label">Layers</p><ul class="k-links">${layers.map((l) => `<li><a href="#/layer/${l.id}">${esc(l.name)}</a> <span class="k-muted">${esc(l.dates)}</span></li>`).join("")}</ul></section>` : ""}
       ${place.hellenika ? `<section class="p-section"><p class="p-label">See also in <span lang="el">Ἑλληνικά</span></p><p>${external(hellenikaUrl(place.hellenika), esc(K.hellenika.pages[place.hellenika] || place.name))}</p></section>` : ""}
       <p class="p-sources">Coordinates: ${external(`https://www.wikidata.org/wiki/${place.wikidata}`, `Wikidata ${esc(place.wikidata)}`)}</p>`;
