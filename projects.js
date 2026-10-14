@@ -29,7 +29,8 @@ const PROJECTS = [
   {
     title: "Κυπριακά (Kypriaka)",
     section: "base-camp",
-    status: "planned",
+    status: "ongoing",
+    link: "kypriaka/index.html",
     description: "An interactive history of Cyprus, dug through layer by layer like an excavation.",
     coords: "35.17°N 33.36°E",
     date: "2026-10",

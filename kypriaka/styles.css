@@ -1,0 +1,533 @@
+/* =========================================================
+   KYPRIAKA · styles
+   ---------------------------------------------------------
+   Colours, fonts, the top bar, buttons, stamps and the panel
+   come from ../shared/field-notes.css. This file adds:
+
+   1. Page frame (bar, tabs, layout)
+   2. Shared page parts (headings, blocks, links, claims)
+   3. Home
+   4. Strata
+   5. Layer pages
+   6. Explore
+   7. Sources and About
+   8. Map
+   9. Search
+   10. Small screens
+   ========================================================= */
+
+/* Fraunces has no Greek letters: Noto Serif Display steps in for Greek only */
+.kypriaka {
+  --font-display: "Fraunces", "Noto Serif Display", "Iowan Old Style", Georgia, serif;
+  --tabs-h: 46px;
+  --measure: 760px;
+  --k-sea: color-mix(in srgb, var(--aegean) 7%, var(--bg));
+  --k-land: color-mix(in srgb, var(--text) 9%, var(--bg));
+  --k-island: color-mix(in srgb, var(--terracotta) 26%, var(--bg));
+  padding-top: calc(var(--bar-h) + var(--tabs-h));
+  scroll-padding-top: calc(var(--bar-h) + var(--tabs-h) + 16px);
+}
+html:has(.kypriaka) { scroll-padding-top: calc(var(--bar-h) + 46px + 16px); }
+
+/* ---------- 1. PAGE FRAME ---------- */
+
+/* "Κυπριακά" in the middle of the bar */
+.k-mark {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  color: var(--text);
+  text-decoration: none;
+}
+.k-mark-greek { font-family: var(--font-display); font-size: 21px; font-weight: 400; letter-spacing: -0.01em; }
+.k-mark-latin { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+
+.k-search-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px 6px 10px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--bg-raised);
+  color: var(--muted);
+  font: 500 11px/1 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.k-search-button:hover { color: var(--text); border-color: var(--text); }
+.k-search-button svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
+kbd {
+  display: inline-block;
+  min-width: 1.6em;
+  padding: 2px 5px;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  font: 500 10px/1.2 var(--font-mono);
+  text-align: center;
+  color: var(--muted);
+}
+
+/* Section tabs, just under the bar */
+.k-tabs {
+  position: fixed;
+  top: var(--bar-h);
+  left: 0; right: 0;
+  z-index: 40;
+  height: var(--tabs-h);
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--rule);
+}
+.k-tabs ul {
+  display: flex;
+  gap: 4px;
+  height: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.k-tabs ul::-webkit-scrollbar { display: none; }
+.k-tabs a {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 12px;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  font: 500 11.5px/1 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.k-tabs a:hover { color: var(--text); }
+.k-tabs a[aria-current="page"] { color: var(--text); border-bottom-color: var(--accent); }
+
+.k-view {
+  max-width: var(--max);
+  min-height: 70vh;
+  margin: 0 auto;
+  padding: clamp(32px, 6vh, 64px) var(--gutter) 96px;
+}
+.k-view:focus { outline: none; }
+.k-noscript { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+
+.k-foot {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 32px var(--gutter) 48px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px 24px;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+.k-foot-meta { display: flex; flex-wrap: wrap; gap: 6px 20px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; }
+.k-foot-meta a { text-decoration: none; }
+
+/* ---------- 2. SHARED PAGE PARTS ---------- */
+.k-head { max-width: var(--measure); margin-bottom: 40px; }
+.k-eyebrow {
+  margin-bottom: 14px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+.k-h1 {
+  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  font-weight: 340;
+  font-variation-settings: "opsz" 144, "SOFT" 40;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+.k-h1:focus { outline: none; }
+.k-lede { margin-top: 16px; max-width: 60ch; font-size: 1.12rem; color: var(--muted); }
+.k-dates { margin-top: 18px; font-family: var(--font-mono); font-size: 14px; letter-spacing: 0.04em; }
+.k-alt { margin-top: 10px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+.k-stamp { margin-top: 20px; }
+.k-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.k-actions a:not(.btn) { font-size: 0.95rem; }
+.k-muted { color: var(--muted); font-size: 0.9em; }
+.k-note { margin-top: 14px; color: var(--muted); font-size: 0.95rem; max-width: 64ch; }
+.k-empty { color: var(--muted); font-style: italic; font-family: var(--font-display); }
+
+.k-block { max-width: var(--measure); margin-top: 40px; }
+.k-block > p + p { margin-top: 12px; }
+
+.k-links { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.k-links li { padding: 8px 0; border-bottom: 1px solid var(--rule); }
+.k-links a { text-decoration: none; }
+.k-links a:hover { text-decoration: underline; }
+
+.k-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.k-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px 6px 8px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  color: var(--text);
+  font-size: 0.92rem;
+  text-decoration: none;
+}
+.k-chip:hover { border-color: var(--text); }
+.k-chip .crosshair { width: 14px; height: 14px; }
+.k-chip .crosshair::before { left: 6.5px; height: 14px; }
+.k-chip .crosshair::after { top: 6.5px; width: 14px; }
+
+/* Claims with evidence and confidence tags */
+.k-claims { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.k-claim { padding: 16px 18px; border: 1px solid var(--rule); border-radius: 14px; background: var(--bg-raised); }
+.k-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-top: 10px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; color: var(--muted); }
+.k-ev { padding: 3px 8px; border-radius: 999px; background: color-mix(in srgb, var(--link) 12%, transparent); color: var(--link); }
+.k-conf { display: inline-flex; align-items: center; gap: 8px; color: var(--text); }
+.k-dots { display: inline-flex; gap: 3px; }
+.k-dots i { width: 7px; height: 7px; border-radius: 50%; border: 1px solid var(--accent); }
+.k-dots i.on { background: var(--accent); }
+.k-src { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+.k-cite { color: var(--link); text-decoration: none; border-bottom: 1px dotted currentColor; }
+.k-cite:hover { border-bottom-style: solid; }
+
+.k-sibling .k-links a { color: var(--text); }
+
+/* ---------- 3. HOME ---------- */
+.k-home { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 40px; }
+.k-home-intro { max-width: 720px; }
+.k-title {
+  font-size: clamp(3.4rem, 10vw, 7.5rem);
+  font-weight: 340;
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+}
+.k-title:focus { outline: none; }
+.k-title em {
+  display: block;
+  font-family: "Fraunces", Georgia, serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 0.42em;
+  letter-spacing: -0.01em;
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  color: var(--accent);
+}
+.k-stats { display: grid; grid-template-columns: repeat(2, auto); gap: 18px 40px; margin: 0; }
+.k-stats div { display: flex; flex-direction: column-reverse; gap: 2px; }
+.k-stats dt { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.k-stats dd { margin: 0; font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 340; line-height: 1; }
+
+.k-grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-top: 64px; }
+.k-tile {
+  display: block;
+  padding: 22px 22px 24px;
+  border: 1px solid var(--rule);
+  border-radius: 34px 22px 38px 26px / 26px 34px 24px 32px;
+  background: var(--bg-raised);
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color 0.3s, border-radius 1.6s cubic-bezier(0.45, 0, 0.2, 1);
+}
+.k-tile:hover { border-color: var(--accent); border-radius: 24px 38px 26px 40px / 34px 24px 36px 26px; }
+.k-tile-n { font-family: var(--font-mono); font-size: 11px; color: var(--accent-text); letter-spacing: 0.08em; }
+.k-tile h2 { margin: 10px 0 8px; font-size: 1.5rem; font-weight: 400; }
+.k-tile p { color: var(--muted); font-size: 0.97rem; }
+.k-stage p:last-child { margin-top: 14px; color: var(--muted); }
+
+/* ---------- 4. STRATA ----------
+   Today at the top, the earliest layer at the bottom. Each
+   layer's height comes from its length (square-root scale). */
+.strata {
+  list-style: none;
+  margin: 0 0 0 clamp(64px, 10vw, 120px);
+  padding: 0;
+  position: relative;
+}
+.stratum {
+  position: relative;
+  min-height: var(--h);
+  background:
+    radial-gradient(circle at 20% 30%, color-mix(in srgb, var(--text) 10%, transparent) 0 1px, transparent 1.5px) 0 0 / 23px 19px,
+    radial-gradient(circle at 70% 60%, color-mix(in srgb, var(--text) 7%, transparent) 0 1px, transparent 1.5px) 0 0 / 31px 27px,
+    var(--soil);
+}
+/* The wavy top edge of each layer, overlapping the one above */
+.stratum-edge {
+  position: absolute;
+  left: 0; right: 0; top: -14px;
+  width: 100%;
+  height: 16px;
+  fill: var(--soil);
+  pointer-events: none;
+}
+.stratum-edge .stratum-line { fill: none; stroke: color-mix(in srgb, var(--text) 28%, transparent); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.stratum:first-child .stratum-edge { display: none; }
+.stratum:first-child { border-radius: 18px 18px 0 0; }
+.stratum:last-child { border-radius: 0 0 18px 18px; }
+
+/* The year at the top of each layer, in the margin like a section drawing */
+.stratum-top {
+  position: absolute;
+  right: calc(100% + 14px);
+  top: -7px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.stratum-top::after {
+  content: "";
+  position: absolute;
+  left: calc(100% + 4px);
+  top: 50%;
+  width: 8px;
+  height: 1px;
+  background: var(--muted);
+}
+
+.stratum-link {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: "dates stamp" "name stamp" "sub sub" "era era";
+  align-content: center;
+  column-gap: 16px;
+  min-height: var(--h);
+  padding: 18px clamp(16px, 3vw, 32px);
+  color: var(--text);
+  text-decoration: none;
+}
+.stratum-link:hover .stratum-name { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.stratum-link:focus-visible { outline-offset: -4px; }
+.stratum-dates { grid-area: dates; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.04em; color: var(--muted); }
+.stratum-name { grid-area: name; font-family: var(--font-display); font-size: clamp(1.35rem, 2.6vw, 1.9rem); font-weight: 380; line-height: 1.1; letter-spacing: -0.015em; }
+.stratum-sub { grid-area: sub; margin-top: 4px; color: var(--muted); font-size: 0.95rem; }
+.stratum-era { grid-area: era; margin-top: 6px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.stratum-stamp { grid-area: stamp; align-self: center; font-size: 9.5px; }
+
+.strata-bedrock {
+  margin: 18px 0 0 clamp(64px, 10vw, 120px);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.strata-bedrock span { margin-right: 10px; color: var(--accent-text); text-transform: uppercase; letter-spacing: 0.12em; }
+
+/* ---------- 5. LAYER PAGES ---------- */
+.k-says, .k-disagree { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.k-says li { padding: 14px 16px; border-left: 2px solid var(--link); background: var(--bg-raised); border-radius: 0 10px 10px 0; }
+.k-says .k-src { margin-top: 6px; }
+.k-disagree li { position: relative; padding-left: 24px; }
+.k-disagree li::before { content: "≠"; position: absolute; left: 0; top: 0; font-family: var(--font-mono); color: var(--accent-text); }
+
+.k-dig {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: var(--measure);
+  margin-top: 56px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+}
+.k-dig a { display: grid; gap: 2px; color: var(--text); text-decoration: none; font-family: var(--font-display); font-size: 1.15rem; }
+.k-dig a:last-child { text-align: right; }
+.k-dig a span { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-text); }
+.k-dig a:hover { color: var(--accent-text); }
+.k-dig-end { font-family: var(--font-mono); font-size: 11px; color: var(--muted); align-self: end; }
+
+.k-rels { list-style: none; margin: 0; padding: 0; }
+.k-rels li { padding: 8px 0; border-bottom: 1px solid var(--rule); }
+.k-rels span { font-family: var(--font-mono); font-size: 11px; color: var(--muted); margin-right: 8px; }
+
+.k-six { margin: 0; padding-left: 1.4em; display: grid; gap: 8px; }
+.k-six b { font-weight: 600; }
+
+/* ---------- 6. EXPLORE ---------- */
+.k-filters { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 14px 18px; }
+.k-select { display: grid; gap: 4px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.k-select select {
+  min-width: 170px;
+  padding: 8px 10px;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: var(--bg-raised);
+  color: var(--text);
+  font: 400 14px/1.2 var(--font-body);
+  text-transform: none;
+  letter-spacing: 0;
+}
+.k-count { margin: 22px 0 12px; font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+.k-results { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+.k-card {
+  display: grid;
+  gap: 4px;
+  height: 100%;
+  padding: 16px 18px;
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  background: var(--bg-raised);
+  color: var(--text);
+  text-decoration: none;
+}
+.k-card:hover { border-color: var(--accent); }
+.k-card-type, .k-card-meta, .k-card-note { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.06em; color: var(--muted); }
+.k-card-type { text-transform: uppercase; color: var(--accent-text); }
+.k-card-name { font-family: var(--font-display); font-size: 1.3rem; line-height: 1.15; }
+.k-card-note { color: var(--stamp-text); }
+
+/* ---------- 7. SOURCES AND ABOUT ---------- */
+.k-sources { margin: 0; padding-left: 1.4em; display: grid; gap: 18px; }
+.k-sources li { padding: 4px 0 4px 6px; border-radius: 8px; transition: background-color 0.6s; }
+.k-sources li.is-target { background: color-mix(in srgb, var(--ochre) 18%, transparent); }
+.k-source-cite { font-family: var(--font-display); font-size: 1.08rem; }
+.k-sources p + p { margin-top: 6px; font-size: 0.95rem; }
+.k-source-note { color: var(--muted); }
+.k-source-meta { display: flex; flex-wrap: wrap; gap: 6px 16px; font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+.k-source-id { opacity: 0.7; }
+
+.k-credit { padding: 22px 24px; border: 1px solid var(--rule); border-radius: 18px; background: var(--bg-raised); }
+.k-defs { display: grid; gap: 10px; margin: 0; }
+.k-defs div { display: grid; grid-template-columns: minmax(170px, 230px) 1fr; gap: 6px 18px; padding: 10px 0; border-bottom: 1px solid var(--rule); }
+.k-defs dt { font-weight: 600; }
+.k-defs dd { margin: 0; color: var(--muted); }
+.k-new { margin-left: 6px; padding: 2px 6px; border: 1px dashed var(--stamp); border-radius: 999px; font: 500 9.5px/1 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--stamp-text); }
+
+/* ---------- 8. MAP ---------- */
+.k-map-switch { margin-bottom: 14px; }
+.k-map-frame {
+  position: relative;
+  margin: 0;
+  height: clamp(380px, 64vh, 680px);
+  border: 1px solid var(--rule);
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--k-sea);
+  touch-action: none;
+}
+.k-map { display: block; width: 100%; height: 100%; cursor: grab; }
+.k-map:active { cursor: grabbing; }
+.k-sea { fill: var(--k-sea); }
+.k-graticule { fill: none; stroke: color-mix(in srgb, var(--link) 18%, transparent); stroke-width: 0.6; vector-effect: non-scaling-stroke; }
+.k-land { fill: var(--k-land); stroke: color-mix(in srgb, var(--text) 30%, transparent); stroke-width: 0.6; vector-effect: non-scaling-stroke; }
+.k-island { fill: var(--k-island); stroke: var(--accent); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+.k-marker { cursor: pointer; }
+.k-marker:focus { outline: none; }
+.k-marker:focus-visible .k-hit { stroke: var(--link); stroke-width: 2; }
+.k-hit { fill: transparent; }
+.k-cross { stroke: var(--text); stroke-width: 1.1; }
+.k-dot { fill: var(--accent); }
+.k-marker text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: var(--text);
+  paint-order: stroke;
+  stroke: var(--k-sea);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+.k-marker:hover text { fill: var(--accent-text); }
+.k-map-zoom { position: absolute; right: 14px; bottom: 14px; }
+.k-map-credit { position: absolute; left: 14px; bottom: 12px; font-family: var(--font-mono); font-size: 10px; color: var(--muted); }
+
+.k-place-list { list-style: none; margin: 0 0 24px; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.k-place-list button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px 6px 8px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: none;
+  color: var(--text);
+  font: 400 0.92rem/1.2 var(--font-body);
+  cursor: pointer;
+}
+.k-place-list button:hover { border-color: var(--text); }
+.k-place-list .crosshair { width: 14px; height: 14px; }
+.k-place-list .crosshair::before { left: 6.5px; height: 14px; }
+.k-place-list .crosshair::after { top: 6.5px; width: 14px; }
+
+/* ---------- 9. SEARCH ---------- */
+.k-search {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  justify-items: center;
+  align-items: start;
+  padding: 12vh 16px 16px;
+  background: color-mix(in srgb, var(--text) 30%, transparent);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+.k-search[hidden] { display: none; }
+.k-search-box {
+  width: min(640px, 100%);
+  border: 1px solid var(--rule);
+  border-radius: 18px;
+  background: var(--bg-raised);
+  box-shadow: 0 30px 80px -30px rgba(20, 14, 8, 0.55);
+  overflow: hidden;
+}
+.k-search-box input {
+  width: 100%;
+  padding: 18px 20px;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  background: none;
+  color: var(--text);
+  font: 400 1.15rem/1.2 var(--font-body);
+}
+.k-search-box input:focus { outline: none; }
+.k-search-results { list-style: none; margin: 0; padding: 6px; max-height: 50vh; overflow-y: auto; }
+.k-search-results:empty { display: none; }
+.k-search-results li a {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  color: var(--text);
+  text-decoration: none;
+}
+.k-search-results li[aria-selected="true"] a { background: color-mix(in srgb, var(--accent) 14%, transparent); }
+.k-search-results small { font-family: var(--font-mono); font-size: 10.5px; color: var(--muted); white-space: nowrap; }
+.k-search-results .k-empty { padding: 12px 14px; }
+.k-search-hint { padding: 10px 16px; border-top: 1px solid var(--rule); font-family: var(--font-mono); font-size: 10.5px; color: var(--muted); }
+
+/* ---------- 10. SMALL SCREENS ---------- */
+@media (max-width: 900px) {
+  .k-mark { position: static; transform: none; margin-left: auto; }
+  .k-mark-latin { display: none; }
+  .bar-tools { margin-left: 12px; }
+  .back-link .wordmark-owner { display: none; }
+}
+@media (max-width: 640px) {
+  .k-search-label, .k-search-button kbd { display: none; }
+  .k-search-button { padding: 8px; }
+  .back-link .wordmark-text { display: none; }
+  .strata { margin-left: 58px; }
+  .strata-bedrock { margin-left: 58px; }
+  .stratum-top { font-size: 9.5px; right: calc(100% + 10px); }
+  .stratum-link { grid-template-areas: "dates" "name" "sub" "era" "stamp"; grid-template-columns: 1fr; }
+  .stratum-stamp { justify-self: start; margin-top: 10px; }
+  .k-defs div { grid-template-columns: 1fr; }
+  .k-dig { flex-direction: column; }
+  .k-dig a:last-child { text-align: left; }
+  .k-map-frame { height: 58svh; }
+}
