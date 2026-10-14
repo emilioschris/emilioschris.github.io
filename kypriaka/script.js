@@ -474,15 +474,37 @@
   });
 
   /* ---- The Deepest Layer: Dr Carole McCartney ---- */
-  // A chipped-stone blade: the outline, two ridges down its back, flake scars and fine retouch
-  const BLADE = `
-    <svg class="k-blade" viewBox="0 0 340 96" role="img" aria-label="A chipped-stone blade, drawn for this page">
-      <path class="k-blade-body" d="M16 36L22 30C90 26 190 24 262 28C296 30 318 38 330 48C312 56 284 62 250 64C180 68 90 68 24 64L16 58Z"/>
-      <path class="k-blade-platform" d="M16 36L16 58M22 30C32 38 34 52 24 64"/>
-      <path class="k-blade-ridge" d="M34 42C110 38 210 37 322 47M36 54C120 56 220 56 318 50"/>
-      <path class="k-blade-scar" d="M70 29C84 35 104 37 126 35M140 27C160 33 184 34 210 31M222 28C244 34 268 37 292 38M76 66C98 60 122 59 146 62M160 67C186 61 212 61 238 63M248 63C268 58 290 55 308 52M30 46C40 44 52 44 60 46"/>
-      <path class="k-blade-retouch" d="${Array.from({ length: 22 }, (_, i) => { const x = 70 + i * 11; const y = 67 - Math.pow(Math.max(0, x - 250) / 80, 2) * 14; return `M${x} ${y.toFixed(1)}l2 -5`; }).join("")}"/>
+  /* A chipped-stone blade, drawn in the conventions of archaeological
+     lithic illustration (not traced from any published figure):
+     upright, striking end at the bottom; ink outline; the two ridges
+     (arrises) down its back; ripple lines curving away from the point
+     of impact; stepped retouch along the lower edges; a dashed line
+     restoring the broken tip; and the arrow-and-cross for the blow. */
+  const BLADE = (() => {
+    const leftX = (y) => (y <= 226 ? 38 - ((y - 44) / 182) * 7 : 31 + Math.pow((y - 226) / 52, 1.6) * 17);
+    const rightX = (y) => (y <= 228 ? 86 + ((y - 40) / 188) * 4 : 90 - Math.pow((y - 228) / 50, 1.4) * 20);
+    let retouch = "";
+    for (let y = 188; y <= 268; y += 5.5) {
+      const l = leftX(y), r = rightX(y);
+      retouch += `M${l.toFixed(1)} ${y.toFixed(1)}q3.5 0.6 5 4.2M${r.toFixed(1)} ${y.toFixed(1)}q-3.5 0.6 -5 4.2`;
+    }
+    const ripple = (x1, x2, y, sag = 3) => `M${x1} ${y}C${x1 + (x2 - x1) * 0.3} ${y - sag} ${x1 + (x2 - x1) * 0.7} ${y - sag} ${x2} ${y}`;
+    const ripples = [
+      [34, 49, 78], [33, 49, 126], [32, 49, 172], [31.5, 49, 212],
+      [50, 68, 62], [50, 69, 104], [50, 70, 150], [50, 70, 196], [51, 68, 236],
+      [69, 87, 72], [70, 88, 118], [71, 89, 164], [70, 89, 206],
+    ].map(([x1, x2, y]) => ripple(x1, x2, y)).join("");
+    return `
+    <svg class="k-blade" viewBox="0 0 120 326" role="img" aria-label="A chipped-stone blade, drawn in the conventions of archaeological stone-tool illustration">
+      <path class="k-blade-restore" d="M38 44L60 6L86 40"/>
+      <path class="k-blade-body" d="M38 44L86 40C89 110 91 180 90 228C89 250 82 268 70 278C64 283 54 283 48 278C38 266 32 248 31 226C30 170 33 100 38 44Z"/>
+      <path class="k-blade-ridge" d="M50 43C48 110 47 180 50 252M68 41C70 110 72 180 66 252"/>
+      <path class="k-blade-scar" d="${ripples}M52 271C56 265 62 265 66 271"/>
+      <path class="k-blade-retouch" d="${retouch}"/>
+      <path class="k-blade-arrow" d="M60 298V320M55 314H65"/>
+      <path class="k-blade-head" d="M60 290L56 299H64Z"/>
     </svg>`;
+  })();
 
   views.deepest = () => {
     const H = K.homage;
