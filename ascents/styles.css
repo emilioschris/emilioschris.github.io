@@ -2,7 +2,7 @@
    ASCENTS · styles
    Colours, fonts, the top bar, stamps and the slide-in panel
    come from ../shared/field-notes.css. This file adds the
-   hero, the rack of carabiners and the outdoor sketch.
+   hero, the rack of carabiners and the outdoor topos.
    ========================================================= */
 
 /* ---------- Page ---------- */
@@ -203,26 +203,14 @@
 .project-beta { font-size: 1.5rem; }
 
 /* ---------- 4. Outdoor ---------- */
-.outdoor { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 32px 48px; align-items: start; }
-.fells {
-  margin: 0;
-  border: 1px solid var(--rule);
-  border-radius: 28px;
-  background: color-mix(in srgb, var(--olive) 6%, var(--bg));
-  overflow: hidden;
-}
-.fells-sketch { display: block; width: 100%; height: auto; }
-.contour { fill: none; stroke: color-mix(in srgb, var(--olive) 45%, transparent); stroke-width: 1; }
-.contour--index { stroke-width: 1.6; }
-.pin line { stroke: var(--text); stroke-width: 1.2; }
-.pin circle { fill: var(--accent); }
-.pin-name { font: 500 13px var(--font-mono); fill: var(--text); }
-.pin-meta { font: 11px var(--font-mono); fill: var(--muted); }
-.north path { fill: var(--text); }
-.north text, .sketch-note { font: 10.5px var(--font-mono); fill: var(--muted); letter-spacing: 0.08em; }
+/* One column, centred: the topo photo leads */
+.outdoor { display: grid; gap: 28px; max-width: 880px; margin: 0 auto; }
 
 .boulders { display: grid; gap: 20px; }
 .boulder { padding: 20px 22px; border: 1px solid var(--rule); border-radius: 18px; background: var(--bg-raised); }
+.boulder--topo { padding: clamp(22px, 4vw, 34px); border-radius: 26px; box-shadow: 0 30px 60px -44px rgba(20, 14, 8, 0.55); }
+.boulder--topo .boulder-name { font-size: clamp(2rem, 4.4vw, 2.8rem); }
+.boulder--topo .topo { border-radius: 18px; }
 .boulder-meta { font: 11px/1.4 var(--font-mono); letter-spacing: 0.04em; color: var(--muted); }
 .boulder-name {
   margin-top: 6px;
@@ -251,7 +239,7 @@
   letter-spacing: 0.04em;
   color: var(--link);
 }
-.credit { grid-column: 1 / -1; font: 10.5px/1.6 var(--font-mono); color: var(--muted); max-width: 90ch; }
+.credit { font: 10.5px/1.6 var(--font-mono); color: var(--muted); max-width: 90ch; }
 
 /* ---------- 5. Indoor progression ---------- */
 .progress {
@@ -412,7 +400,6 @@ img.topo { height: auto; object-fit: cover; }
 /* ---------- Small screens ---------- */
 @media (max-width: 860px) {
   .block-head { grid-template-columns: 1fr; }
-  .outdoor { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
   .figure, .figure + .figure { padding: 18px 0; border-left: 0; }

@@ -5,7 +5,7 @@
    1. The hero figures
    2. The rack (two slings of carabiners, V0 to V10)
    3. The projects board
-   4. Outdoor: a sketch of the Fells and each boulder's problems
+   4. Outdoor: each boulder, its topo photo and its problems
    5. The ticklist
    6. Indoor progression chart
    7. Session log
@@ -297,59 +297,9 @@
   }
 
   /* ---------------------------------------------------------
-     4. OUTDOOR: a sketch of the Fells, and the problems
+     4. OUTDOOR: each boulder, its topo photo and its problems
      --------------------------------------------------------- */
-  // A soft, wobbly ring, like a hand-drawn contour line
-  function blob(cx, cy, r, seed) {
-    const n = 14, pts = [];
-    for (let i = 0; i < n; i++) {
-      const a = (i / n) * Math.PI * 2;
-      const rr = r * (1 + 0.09 * Math.sin(3 * a + seed) + 0.05 * Math.sin(5 * a + seed * 2));
-      pts.push([cx + rr * Math.cos(a) * 1.25, cy + rr * Math.sin(a)]);
-    }
-    let d = `M${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)}`;
-    for (let i = 0; i < n; i++) {
-      const p0 = pts[(i - 1 + n) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
-      d += ` C${(p1[0] + (p2[0] - p0[0]) / 6).toFixed(1)} ${(p1[1] + (p2[1] - p0[1]) / 6).toFixed(1)}`
-        + ` ${(p2[0] - (p3[0] - p1[0]) / 6).toFixed(1)} ${(p2[1] - (p3[1] - p1[1]) / 6).toFixed(1)}`
-        + ` ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}`;
-    }
-    return d + "Z";
-  }
-
   const coord = ([lat, lon]) => `${Math.abs(lat).toFixed(5)}°${lat >= 0 ? "N" : "S"} ${Math.abs(lon).toFixed(5)}°${lon >= 0 ? "E" : "W"}`;
-
-  function sketchMap() {
-    const W = 560, H = 400, cx = 300, cy = 210;
-    const pinned = [...boulders.values()].filter((b) => b.gps);
-    const rings = [150, 118, 88, 60, 34].map((r, i) => `<path class="contour${i % 2 ? "" : " contour--index"}" d="${blob(cx, cy, r, i * 0.7 + 1)}"/>`).join("");
-
-    // One boulder sits in the middle; any more are placed around it by their real offsets
-    const [lat0, lon0] = pinned.length ? pinned[0].gps : [0, 0];
-    const pins = pinned.map((b) => {
-      const dx = (b.gps[1] - lon0) * 90000 * Math.cos((lat0 * Math.PI) / 180) * 0.6;   // ~0.6 px per metre
-      const dy = -(b.gps[0] - lat0) * 111000 * 0.6;
-      const x = cx + dx, y = cy + dy;
-      return `
-        <g class="pin" transform="translate(${x.toFixed(1)} ${y.toFixed(1)})">
-          <line x1="-12" y1="0" x2="12" y2="0"/><line x1="0" y1="-12" x2="0" y2="12"/>
-          <circle r="4.5"/>
-          <text class="pin-name" x="16" y="-8">${b.name}</text>
-          <text class="pin-meta" x="16" y="8">${b.elevation != null ? `${b.elevation} m · ` : ""}${coord(b.gps)}</text>
-        </g>`;
-    }).join("");
-
-    return `
-      <svg class="fells-sketch" viewBox="0 0 ${W} ${H}" role="img"
-           aria-label="A hand-drawn sketch, not to scale: contour lines around ${pinned.map((b) => b.name).join(" and ")} in the Middlesex Fells.">
-        ${rings}
-        ${pins}
-        <g class="north" transform="translate(${W - 46} ${H - 70})">
-          <path d="M0 -22L6 4L0 0L-6 4Z"/><text y="22" text-anchor="middle">N</text>
-        </g>
-        <text class="sketch-note" x="24" y="${H - 18}">Sketch · not to scale</text>
-      </svg>`;
-  }
 
   /* The topo: a real photo of the boulder with each problem's
      line on top. Sent lines are solid, the project is a bold dash,
@@ -418,14 +368,10 @@
     const holder = document.getElementById("outdoor");
     const ticklist = new Set(ASCENTS.ticklist.map((t) => t.problem));
 
-    const map = el("figure", { class: "fells" });
-    map.innerHTML = sketchMap();
-    holder.append(map);
-
     const list = el("div", { class: "boulders" });
     for (const area of ASCENTS.areas) {
       for (const b of area.boulders) {
-        const card = el("article", { class: "boulder" });
+        const card = el("article", { class: `boulder${hasTopo(b) ? " boulder--topo" : ""}` });
         card.append(el("p", { class: "boulder-meta" },
           b.gps ? `${b.elevation != null ? `${b.elevation} m · ` : ""}${coord(b.gps)}` : "Location to add"));
         card.append(el("h3", { class: "boulder-name" }, b.name));
@@ -468,7 +414,7 @@
     holder.append(list);
 
     holder.append(el("p", { class: "credit" },
-      "Problem names and grades from Mountain Project, where you'll find each problem's description and photos. The sketch is drawn by hand around the GPS point and is not a real map."));
+      "Problem names and grades from Mountain Project, where you'll find each problem's description and more photos."));
   }
 
   /* ---------------------------------------------------------
