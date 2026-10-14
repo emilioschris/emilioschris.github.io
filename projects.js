@@ -150,10 +150,12 @@ const PROJECTS = [
   {
     title: "Ascents",
     section: "the-wild",
-    status: "planned",
+    status: "ongoing",
+    link: "ascents/index.html",
     description: "A climbing journal: sessions, grades and projects, indoors and out.",
     coords: "42.44°N 71.10°W",
     date: "2026-10",
+    tended: "2026-10-14",
     elevation: "ELEV 90 m",
     shape: 2,
     image: {

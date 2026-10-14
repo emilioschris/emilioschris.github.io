@@ -1,0 +1,390 @@
+/* =========================================================
+   ASCENTS · styles
+   Colours, fonts, the top bar, stamps and the slide-in panel
+   come from ../shared/field-notes.css. This file adds the
+   hero, the rack of carabiners and the outdoor sketch.
+   ========================================================= */
+
+/* ---------- Page ---------- */
+.ascents-page { padding-top: var(--bar-h); }
+.ascents {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(32px, 6vh, 64px) var(--gutter) 96px;
+}
+
+/* ---------- 1. Hero ---------- */
+.eyebrow {
+  margin-bottom: 14px;
+  font: 12px/1 var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+.hero-title {
+  font-size: clamp(3.4rem, 9vw, 7rem);
+  font-weight: 330;
+  font-style: italic;
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: var(--accent);
+}
+.hero-lede { max-width: 46ch; margin-top: 16px; color: var(--muted); }
+
+.hero-figures {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0;
+  margin: clamp(32px, 5vh, 48px) 0 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.figure { display: flex; flex-direction: column; gap: 6px; padding: 22px 24px 20px 0; }
+.figure + .figure { padding-left: 24px; border-left: 1px solid var(--rule); }
+.figure dt {
+  order: 1;
+  font: 10.5px/1 var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.figure dd {
+  order: 2;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+  font-weight: 350;
+  font-variation-settings: "opsz" 120, "SOFT" 30;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.figure--project dd { font-style: italic; color: var(--accent); }
+.figure-note { order: 3; font: 11px/1.4 var(--font-mono); letter-spacing: 0.04em; color: var(--muted); }
+
+/* ---------- Section blocks ---------- */
+.block { margin-top: clamp(56px, 9vh, 96px); }
+.block-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 12px 48px; align-items: end; margin-bottom: 24px; }
+.block-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 3.6vw, 2.8rem);
+  font-weight: 360;
+  font-variation-settings: "opsz" 96;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.block-desc { max-width: 56ch; color: var(--muted); font-size: 0.97rem; }
+
+/* ---------- 2. The rack ---------- */
+.rack {
+  position: relative;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  margin: 0 calc(var(--gutter) * -1);
+  padding: 0 var(--gutter);
+}
+.rack:focus { outline: none; }
+.sling { margin: 0; min-width: 720px; }
+.sling + .sling { margin-top: 18px; }
+.sling-title {
+  font: 10.5px/1 var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+.sling-art { display: block; width: 100%; height: auto; overflow: visible; }
+.sling-note { margin-top: -6px; font: 11px/1.5 var(--font-mono); color: var(--muted); }
+
+.bolt { fill: var(--bg-raised); stroke: var(--text); stroke-width: 2; }
+.webbing { fill: none; stroke: var(--webbing); stroke-width: 13; stroke-linecap: round; }
+.webbing-stitch { fill: none; stroke: color-mix(in srgb, var(--bg) 55%, transparent); stroke-width: 1.2; stroke-dasharray: 5 6; }
+
+/* A carabiner: drawn twice, a thick line and a thin hollow on top */
+.biner { cursor: pointer; outline: none; }
+.biner-hit { fill: transparent; }
+.biner-line { fill: none; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+.biner-hollow { fill: none; stroke: var(--bg); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.biner-fill { fill: none; stroke: none; }
+.biner-line.biner-gate { stroke-width: 3.6; }
+.biner-hollow.biner-gate { stroke-width: 1.2; }
+.biner-gate { transform-box: fill-box; transform-origin: 50% 100%; transition: transform 0.4s var(--ease-out); }
+.biner--sent .biner-fill { fill: color-mix(in srgb, var(--accent) 22%, transparent); }
+
+.biner--sent .biner-line { stroke: var(--accent); }
+.biner--sent .biner-hollow { display: none; }
+.biner--projecting .biner-line { stroke: var(--stamp); }
+.biner--projecting .biner-hollow { display: none; }
+.biner--empty .biner-line { stroke: color-mix(in srgb, var(--muted) 70%, transparent); stroke-width: 4.4; }
+.biner--empty .biner-hollow { stroke-width: 1.8; }
+.biner--gate-open .biner-gate { transform: rotate(-24deg); }
+
+.biner-grade { font: 500 13px var(--font-mono); fill: var(--text); letter-spacing: 0.04em; }
+.biner--empty .biner-grade { fill: var(--muted); }
+.biner-ticks { font: 13px var(--font-mono); fill: var(--accent-text); letter-spacing: 0.08em; }
+
+.biner-body { transform-box: fill-box; transform-origin: 50% 0; }
+.biner:hover .biner-body,
+.biner:focus-visible .biner-body { animation: biner-swing 1.6s var(--ease-soft) both; }
+.biner:focus-visible .biner-line { stroke-width: 7.5; }
+.biner:focus-visible .biner-grade { fill: var(--link); text-decoration: underline; }
+@keyframes biner-swing {
+  0% { transform: rotate(0); }
+  25% { transform: rotate(5deg); }
+  55% { transform: rotate(-3deg); }
+  80% { transform: rotate(1.2deg); }
+  100% { transform: rotate(0); }
+}
+
+/* The list behind a carabiner */
+.rack-tip {
+  position: absolute;
+  z-index: 5;
+  width: min(320px, 86vw);
+  padding: 12px 14px;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  background: var(--bg-raised);
+  box-shadow: 0 14px 30px -18px rgba(20, 14, 8, 0.5);
+  pointer-events: none;
+}
+.rack-tip[hidden] { display: none; }
+.tip-title { font: 500 10.5px/1 var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-text); }
+.rack-tip ul { margin: 8px 0 0; padding-left: 1.1em; font-size: 0.9rem; line-height: 1.45; }
+.rack-tip li + li { margin-top: 4px; }
+.block:has(.rack) { position: relative; }
+
+/* ---------- Empty states: quiet, dashed, deliberate ---------- */
+.empty {
+  padding: 18px 20px;
+  border: 1px dashed color-mix(in srgb, var(--muted) 45%, transparent);
+  border-radius: 16px;
+  font-family: var(--font-hand);
+  font-size: 1.45rem;
+  line-height: 1.25;
+  color: var(--muted);
+  list-style: none;
+}
+.empty--inline { padding: 10px 14px; font-size: 1.25rem; }
+
+/* ---------- 3. Projects ---------- */
+.projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); gap: 24px; }
+.project {
+  position: relative;
+  padding: 26px 26px 24px;
+  border: 1px solid var(--rule);
+  border-radius: 22px;
+  background: var(--bg-raised);
+}
+.project-stamp { position: absolute; top: 22px; right: 20px; }
+.project-meta { font: 11px/1.4 var(--font-mono); letter-spacing: 0.06em; color: var(--muted); padding-right: 140px; }
+.project-name {
+  margin-top: 8px;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 3.4vw, 2.5rem);
+  font-weight: 360;
+  font-style: italic;
+  font-variation-settings: "opsz" 96, "SOFT" 60;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+.project-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 20px 0 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.project-stats div { padding: 12px 10px 12px 0; }
+.project-stats div + div { padding-left: 12px; border-left: 1px solid var(--rule); }
+.project-stats dt { font: 9.5px/1 var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.project-stats dd { margin: 8px 0 0; font-family: var(--font-display); font-size: 1.35rem; line-height: 1.1; }
+.project-stats dd.is-blank { font: 10.5px/1.4 var(--font-mono); color: var(--muted); }
+.project-label { margin: 20px 0 10px; font: 10px/1 var(--font-mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-text); }
+.project-beta { font-size: 1.5rem; }
+
+/* ---------- 4. Outdoor ---------- */
+.outdoor { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 32px 48px; align-items: start; }
+.fells {
+  margin: 0;
+  border: 1px solid var(--rule);
+  border-radius: 28px;
+  background: color-mix(in srgb, var(--olive) 6%, var(--bg));
+  overflow: hidden;
+}
+.fells-sketch { display: block; width: 100%; height: auto; }
+.contour { fill: none; stroke: color-mix(in srgb, var(--olive) 45%, transparent); stroke-width: 1; }
+.contour--index { stroke-width: 1.6; }
+.pin line { stroke: var(--text); stroke-width: 1.2; }
+.pin circle { fill: var(--accent); }
+.pin-name { font: 500 13px var(--font-mono); fill: var(--text); }
+.pin-meta { font: 11px var(--font-mono); fill: var(--muted); }
+.north path { fill: var(--text); }
+.north text, .sketch-note { font: 10.5px var(--font-mono); fill: var(--muted); letter-spacing: 0.08em; }
+
+.boulders { display: grid; gap: 20px; }
+.boulder { padding: 20px 22px; border: 1px solid var(--rule); border-radius: 18px; background: var(--bg-raised); }
+.boulder-meta { font: 11px/1.4 var(--font-mono); letter-spacing: 0.04em; color: var(--muted); }
+.boulder-name {
+  margin-top: 6px;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 400;
+  font-variation-settings: "opsz" 48;
+  line-height: 1.1;
+}
+.problems { margin: 14px 0 0; padding: 0; list-style: none; }
+.problem {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 40px 108px;
+  gap: 12px;
+  align-items: center;
+  min-height: 40px;
+  border-top: 1px solid var(--rule);
+}
+.problem-name { font-size: 0.98rem; }
+.problem-grade { font: 500 12px var(--font-mono); color: var(--muted); }
+.problem .stamp { justify-self: end; transform: rotate(-3deg); font-size: 9px; padding: 4px 8px 3px; }
+.mp-link {
+  display: inline-block;
+  margin-top: 14px;
+  font: 11px var(--font-mono);
+  letter-spacing: 0.04em;
+  color: var(--link);
+}
+.credit { grid-column: 1 / -1; font: 10.5px/1.6 var(--font-mono); color: var(--muted); max-width: 90ch; }
+
+/* ---------- 5. Indoor progression ---------- */
+.progress {
+  position: relative;
+  margin: 0;
+  padding: 18px 18px 6px;
+  border: 1px solid var(--rule);
+  border-radius: 22px;
+  background: var(--bg-raised);
+}
+.progress-chart { display: block; width: 100%; height: auto; overflow: visible; }
+.progress .grid { stroke: var(--rule); stroke-width: 1; }
+.progress .axis { font: 11px var(--font-mono); fill: var(--muted); }
+.progress .baseline { stroke: var(--stamp); stroke-width: 1.3; stroke-dasharray: 5 6; }
+.progress .baseline-label { font: 10.5px var(--font-mono); fill: var(--stamp-text); letter-spacing: 0.04em; }
+.progress .trend { fill: none; stroke: var(--accent); stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; }
+.progress .echo { fill: none; stroke: var(--accent); stroke-width: 1; }
+.progress .dot { fill: var(--bg-raised); stroke: var(--accent); stroke-width: 2; }
+.chart-empty {
+  position: absolute;
+  left: 50%;
+  top: 70%;
+  translate: -50% -50%;
+  font-family: var(--font-hand);
+  font-size: 1.7rem;
+  color: var(--muted);
+  transform: rotate(-3deg);
+  white-space: nowrap;
+}
+
+/* ---------- 6. Session log: journal entries ---------- */
+.log { margin: 0; padding: 0; list-style: none; display: grid; gap: 18px; }
+.entry {
+  padding: 22px 24px;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px 18px 18px 6px;
+  background:
+    repeating-linear-gradient(to bottom, transparent 0 31px, color-mix(in srgb, var(--link) 8%, transparent) 31px 32px),
+    var(--bg-raised);
+}
+.entry-head { display: flex; gap: 12px; align-items: center; font: 11px var(--font-mono); letter-spacing: 0.06em; color: var(--muted); }
+.entry-zone { padding: 2px 8px; border: 1px solid currentColor; border-radius: 999px; text-transform: uppercase; font-size: 9.5px; letter-spacing: 0.14em; }
+.entry-zone--in { color: var(--stamp-text); }
+.entry-zone--out { color: var(--secondary); }
+.entry-place { margin-top: 8px; font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; font-variation-settings: "opsz" 48; }
+.climbs { margin: 12px 0 0; padding: 0; list-style: none; }
+.climb { display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; gap: 12px; align-items: center; min-height: 32px; }
+.climb-grade { font: 500 12px var(--font-mono); }
+.climb-what { font-size: 0.95rem; color: var(--muted); }
+.climb-result { font: 10px var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; }
+.climb-result--flash { color: var(--accent-text); }
+.climb-result--send { color: var(--secondary); }
+.climb-result--attempt { color: var(--muted); }
+.entry-felt { margin-top: 12px; font-family: var(--font-hand); font-size: 1.45rem; line-height: 1.25; color: var(--accent-text); }
+
+/* ---------- 7. Lessons ---------- */
+.lessons { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 16px; }
+.lessons .empty { grid-column: 1 / -1; }
+.lesson { padding: 18px 20px; border-radius: 16px; background: color-mix(in srgb, var(--ochre) 12%, var(--bg)); }
+.lesson-text { font-family: var(--font-hand); font-size: 1.45rem; line-height: 1.25; }
+.lesson-meta { margin-top: 10px; font: 10.5px var(--font-mono); color: var(--muted); }
+
+/* ---------- 9. Problem panel ---------- */
+.problem-name,
+.tick-name {
+  justify-self: start;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.4s var(--ease-out);
+}
+.problem .problem-name { font-size: 0.98rem; }
+.problem-name:hover, .tick-name:hover,
+.problem-name:focus-visible, .tick-name:focus-visible { background-size: 100% 1px; outline: none; }
+.problem-name:focus-visible, .tick-name:focus-visible { color: var(--link); }
+
+.pp-sub { margin-top: 10px; color: var(--muted); }
+.pp-grade { font: 500 13px var(--font-mono); color: var(--text); }
+.pp-stamp { margin-top: 18px; }
+.pp-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.pp-photo { margin: 0; }
+.pp-photo:first-child:nth-last-child(odd) { grid-column: 1 / -1; }
+.pp-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; display: block; }
+.pp-photo figcaption { margin-top: 6px; font: 10.5px var(--font-mono); color: var(--muted); }
+.pp-facts { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; margin: 0 0 14px; font-size: 0.95rem; }
+.pp-facts dt { font: 10px/1.8 var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.pp-facts dd { margin: 0; }
+.pp-tries { margin: 0; padding: 0; list-style: none; }
+.pp-tries li { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--rule); font: 12px var(--font-mono); }
+.pp-quiet { margin-top: 8px; font-size: 0.92rem; color: var(--muted); }
+
+/* ---------- 8. Ticklist ---------- */
+.ticklist { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--rule); }
+.tick {
+  display: grid;
+  grid-template-columns: 18px 32px minmax(0, 1fr) 56px minmax(0, 0.8fr);
+  gap: 16px;
+  align-items: center;
+  min-height: 56px;
+  border-bottom: 1px solid var(--rule);
+}
+.tick-box { width: 16px; height: 16px; border: 1.5px solid var(--text); border-radius: 4px; }
+.tick-num, .tick-grade, .tick-where { font: 12px var(--font-mono); color: var(--muted); }
+.tick-grade { color: var(--text); font-weight: 500; }
+.tick-name { font-family: var(--font-display); font-size: 1.3rem; font-variation-settings: "opsz" 36; }
+
+/* ---------- Small screens ---------- */
+@media (max-width: 860px) {
+  .block-head { grid-template-columns: 1fr; }
+  .outdoor { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .figure, .figure + .figure { padding: 18px 0; border-left: 0; }
+  .figure + .figure { border-top: 1px solid var(--rule); }
+  .project-stats { grid-template-columns: 1fr 1fr; }
+  .project-stats div:nth-child(3) { padding-left: 0; border-left: 0; }
+  .project-stats div:nth-child(n + 3) { border-top: 1px solid var(--rule); }
+  .project-meta { padding-right: 0; margin-top: 44px; }
+  .tick { grid-template-columns: 18px minmax(0, 1fr) 44px; }
+  .tick-num, .tick-where { display: none; }
+}
+
+/* ---------- Reduced motion: carabiners hang still ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .biner:hover .biner-body,
+  .biner:focus-visible .biner-body { animation: none; }
+}

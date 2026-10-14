@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ascents · Field Notes</title>
+  <meta name="description" content="A bouldering journal: grades on a rack of carabiners, projects, sessions and lessons, indoors and on the rock at the Middlesex Fells.">
+  <meta name="theme-color" content="#F2EBDD">
+
+  <!-- Link preview (WhatsApp, iMessage, social apps) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emilioschris.github.io/ascents/">
+  <meta property="og:title" content="Ascents · Field Notes">
+  <meta property="og:description" content="A bouldering journal: grades on a rack of carabiners, projects, sessions and lessons, indoors and on the rock at the Middlesex Fells.">
+  <meta property="og:image" content="https://emilioschris.github.io/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="A red-tailed hawk with a terracotta tail perched on a branch over faint contour lines, beside the words Field Notes and the coordinates 35.1°N 33.4°E.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://emilioschris.github.io/og-image.png">
+
+  <!-- Same Day/Dusk choice as the homepage, applied before the page draws -->
+  <script src="../shared/theme-init.js"></script>
+
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..600&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Instrument+Sans:wght@400..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../shared/field-notes.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="ascents-page">
+
+  <a class="skip-link" href="#rack">Skip to the rack</a>
+
+  <!-- ================= TOP BAR ================= -->
+  <header class="bar is-scrolled">
+    <a class="wordmark back-link" href="../index.html#the-wild">
+      <img class="back-hawk" src="../favicon.svg" alt="" width="30" height="30">
+      <span class="wordmark-text">
+        <span class="wordmark-title"><span aria-hidden="true">← </span>Field Notes</span>
+        <span class="wordmark-owner">Back to the homepage</span>
+      </span>
+    </a>
+    <div class="bar-tools">
+      <button class="theme-switch" id="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Dusk mode">
+        <span class="theme-label" aria-hidden="true">Day</span>
+        <span class="theme-track" aria-hidden="true"><span class="theme-dot"></span></span>
+        <span class="theme-label" aria-hidden="true">Dusk</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main" class="ascents">
+
+    <!-- ================= 1. HERO ================= -->
+    <header class="hero">
+      <p class="eyebrow">The Wild · N 297°</p>
+      <h1 class="hero-title">Ascents</h1>
+      <p class="hero-lede">A bouldering journal: what I've climbed, what I'm working on, and what I learned along the way.</p>
+      <dl class="hero-figures" id="hero-figures"></dl>
+    </header>
+
+    <!-- ================= 2. THE RACK ================= -->
+    <section class="block" aria-labelledby="rack-title">
+      <div class="block-head">
+        <h2 class="block-title" id="rack-title">The rack</h2>
+        <p class="block-desc">One carabiner per grade. Solid means sent, an open gate means I'm projecting it, an outline means not yet. Ticks underneath count the sends.</p>
+      </div>
+      <div class="rack" id="rack" tabindex="-1"></div>
+      <div class="rack-tip" id="rack-tip" role="status" aria-live="polite" hidden></div>
+    </section>
+
+    <!-- ================= 3. PROJECTS ================= -->
+    <section class="block" aria-labelledby="projects-title">
+      <div class="block-head">
+        <h2 class="block-title" id="projects-title">Projects</h2>
+        <p class="block-desc">Problems I keep coming back to. Attempts and sessions count up from the log.</p>
+      </div>
+      <div class="projects" id="projects"></div>
+    </section>
+
+    <!-- ================= 4. OUTDOOR ================= -->
+    <section class="block" aria-labelledby="outdoor-title">
+      <div class="block-head">
+        <h2 class="block-title" id="outdoor-title">Outdoor</h2>
+        <p class="block-desc">On the rock at the Middlesex Fells.</p>
+      </div>
+      <div class="outdoor" id="outdoor"></div>
+    </section>
+
+    <!-- ================= 5. INDOOR PROGRESSION ================= -->
+    <section class="block" aria-labelledby="indoor-title">
+      <div class="block-head">
+        <h2 class="block-title" id="indoor-title">Indoor</h2>
+        <p class="block-desc">The hardest grade I sent in each gym session, over time. The dashed lines mark where I stood before the log began.</p>
+      </div>
+      <figure class="progress" id="progress"></figure>
+    </section>
+
+    <!-- ================= 6. SESSION LOG ================= -->
+    <section class="block" aria-labelledby="log-title">
+      <div class="block-head">
+        <h2 class="block-title" id="log-title">Session log</h2>
+        <p class="block-desc">Every day out, newest first.</p>
+      </div>
+      <ol class="log" id="log"></ol>
+    </section>
+
+    <!-- ================= 7. LESSONS ================= -->
+    <section class="block" aria-labelledby="lessons-title">
+      <div class="block-head">
+        <h2 class="block-title" id="lessons-title">Lessons</h2>
+        <p class="block-desc">Technique notes gathered from every session.</p>
+      </div>
+      <ul class="lessons" id="lessons"></ul>
+    </section>
+
+    <!-- ================= 8. TICKLIST ================= -->
+    <section class="block" aria-labelledby="ticklist-title">
+      <div class="block-head">
+        <h2 class="block-title" id="ticklist-title">Ticklist</h2>
+        <p class="block-desc">Outdoor problems to try next.</p>
+      </div>
+      <ol class="ticklist" id="ticklist"></ol>
+    </section>
+  </main>
+
+  <!-- ================= PROBLEM PANEL (a journal page) ================= -->
+  <aside class="panel" id="panel" role="dialog" aria-labelledby="panel-title" aria-hidden="true" hidden>
+    <div class="panel-scroll">
+      <button class="btn panel-close" id="panel-close" type="button">Close <span aria-hidden="true">✕</span></button>
+      <div id="panel-body"></div>
+    </div>
+  </aside>
+
+  <script src="../shared/field-notes.js"></script>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
