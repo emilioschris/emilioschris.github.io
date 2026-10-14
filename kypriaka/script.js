@@ -481,28 +481,30 @@
      of impact; stepped retouch along the lower edges; a dashed line
      restoring the broken tip; and the arrow-and-cross for the blow. */
   const BLADE = (() => {
-    const leftX = (y) => (y <= 226 ? 38 - ((y - 44) / 182) * 7 : 31 + Math.pow((y - 226) / 52, 1.6) * 17);
-    const rightX = (y) => (y <= 228 ? 86 + ((y - 40) / 188) * 4 : 90 - Math.pow((y - 228) / 50, 1.4) * 20);
+    // Long, nearly parallel edges, a small flat platform at the butt,
+    // tapering to a point: the shape that makes a blade a blade
+    const leftX = (y) => (y >= 268 ? 35 + Math.pow((y - 268) / 32, 1.5) * 15 : 35.5 + Math.max(0, (104 - y) / 86) * 0);
+    const rightX = (y) => (y >= 268 ? 84.5 - Math.pow((y - 268) / 32, 1.5) * 14.5 : 84.5);
     let retouch = "";
-    for (let y = 188; y <= 268; y += 5.5) {
-      const l = leftX(y), r = rightX(y);
-      retouch += `M${l.toFixed(1)} ${y.toFixed(1)}q3.5 0.6 5 4.2M${r.toFixed(1)} ${y.toFixed(1)}q-3.5 0.6 -5 4.2`;
+    // Fine, uneven retouch along one working edge only
+    for (let y = 168; y <= 262; y += 4.5) {
+      const step = [2.2, 3.1, 2.6, 3.6, 2.4][Math.round(y) % 5];
+      retouch += `M84.8 ${y}q-${step} 0.6 -${(step + 0.8).toFixed(1)} 3.2`;
     }
-    const ripple = (x1, x2, y, sag = 3) => `M${x1} ${y}C${x1 + (x2 - x1) * 0.3} ${y - sag} ${x1 + (x2 - x1) * 0.7} ${y - sag} ${x2} ${y}`;
+    const ripple = (x1, x2, y, sag = 2.6) => `M${x1} ${y}C${(x1 + (x2 - x1) * 0.3).toFixed(1)} ${y - sag} ${(x1 + (x2 - x1) * 0.7).toFixed(1)} ${y - sag} ${x2} ${y}`;
     const ripples = [
-      [34, 49, 78], [33, 49, 126], [32, 49, 172], [31.5, 49, 212],
-      [50, 68, 62], [50, 69, 104], [50, 70, 150], [50, 70, 196], [51, 68, 236],
-      [69, 87, 72], [70, 88, 118], [71, 89, 164], [70, 89, 206],
+      [37, 52, 96], [36, 52, 136], [36, 52, 176], [36, 52, 214], [36.5, 52, 248],
+      [53, 67, 66], [52.5, 67.5, 110], [52, 68, 152], [52, 68, 196], [52.5, 67.5, 236], [53, 67, 266],
+      [68, 83, 104], [68, 84, 144], [68, 84, 186], [68, 84, 226], [68.5, 83.5, 256],
     ].map(([x1, x2, y]) => ripple(x1, x2, y)).join("");
     return `
-    <svg class="k-blade" viewBox="0 0 120 326" role="img" aria-label="A chipped-stone blade, drawn in the conventions of archaeological stone-tool illustration">
-      <path class="k-blade-restore" d="M38 44L60 6L86 40"/>
-      <path class="k-blade-body" d="M38 44L86 40C89 110 91 180 90 228C89 250 82 268 70 278C64 283 54 283 48 278C38 266 32 248 31 226C30 170 33 100 38 44Z"/>
-      <path class="k-blade-ridge" d="M50 43C48 110 47 180 50 252M68 41C70 110 72 180 66 252"/>
-      <path class="k-blade-scar" d="${ripples}M52 271C56 265 62 265 66 271"/>
+    <svg class="k-blade" viewBox="0 0 120 336" role="img" aria-label="A chipped-stone blade, drawn in the conventions of archaeological stone-tool illustration">
+      <path class="k-blade-body" d="M50 300H70C78 294 83 284 84.5 268L85 108C84 74 77 42 63 14C48 44 39 72 36.5 104C34.5 170 34 220 35.5 268C36.5 284 42 294 50 300Z"/>
+      <path class="k-blade-ridge" d="M53 293C52 230 51.8 170 52.4 120C53 82 57 50 62 22M67 293L67.6 124C67.2 86 65 54 63 24"/>
+      <path class="k-blade-scar" d="${ripples}M52.5 289C56 281 64 281 67.5 289"/>
       <path class="k-blade-retouch" d="${retouch}"/>
-      <path class="k-blade-arrow" d="M60 298V320M55 314H65"/>
-      <path class="k-blade-head" d="M60 290L56 299H64Z"/>
+      <path class="k-blade-arrow" d="M60 314V334M55 328H65"/>
+      <path class="k-blade-head" d="M60 306L56 315H64Z"/>
     </svg>`;
   })();
 
