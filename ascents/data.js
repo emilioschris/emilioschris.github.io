@@ -27,6 +27,22 @@
                                             caption: "Optional line" }]
                                (Put them in ascents/photos/. Claude strips
                                the GPS and other metadata first.)
+                topo           Optional: a real photo of the boulder with each
+                               problem's line drawn on it. Shown once src is set.
+                                 src    "photos/recess-topo.webp" (my photo, or
+                                        one I have permission to use)
+                                 credit who took it, if it isn't mine
+                                 linesInPhoto  true if the photo already has
+                                        the route lines drawn on it (then
+                                        lines just lists which problems)
+                                 alt    what the picture shows
+                                 lines  one per problem: { problem, d, label }
+                                        d = the line, in a 1000 × 720 frame
+                                        label = [x, y] for its name, plus
+                                        "end" or "middle" to anchor it
+                               Claude draws the lines when you send a photo.
+                topoLink       Optional: someone else's topo photo to link to
+                               (never copied): { url, credit }
 
    sessions   One per day out, newest anywhere (the page sorts them):
                 {
@@ -84,6 +100,20 @@ const ASCENTS = {
           gps: [42.44488, -71.08875],
           mountainProject: "https://www.mountainproject.com/area/109257563/recess-boulder",
           photos: [],
+          // Topo photo by Carson Darling, used with his permission (granted 14 Oct 2026)
+          topo: {
+            src: "photos/recess-topo.webp",
+            alt: "Recess Boulder in autumn woods, with three problem lines drawn on it: Hop Scotch in red up the left edge, Sunset Dual Arete in yellow up the middle, Leap Frog in green up the right side.",
+            linesInPhoto: true,
+            credit: "Carson Darling, used with permission",
+            lines: [
+              { problem: "Hop Scotch" }, { problem: "Sunset Dual Arete" }, { problem: "Leap Frog" },
+            ],
+          },
+          topoLink: {
+            url: "https://www.mountainproject.com/photo/112311362",
+            credit: "Topo photo by Carson Darling on Mountain Project, used with permission",
+          },
           problems: [
             { name: "Free Period", grade: "V0", status: "" },
             { name: "Hop Scotch", grade: "V2+", status: "" },

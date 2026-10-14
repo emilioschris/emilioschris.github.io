@@ -351,6 +351,67 @@
       </svg>`;
   }
 
+  /* The topo: a real photo of the boulder with each problem's
+     line on top. Sent lines are solid, the project is a bold dash,
+     the rest a light dash. "active" highlights one problem. */
+  const TOPO_W = 1000, TOPO_H = 720;
+
+  function topoSVG(b, active) {
+    const t = b.topo;
+    const status = new Map(b.problems.map((p) => [p.name, p.status]));
+    const lines = t.lines.map((l) => {
+      const st = status.get(l.problem) || "todo";
+      const on = active ? (l.problem === active ? " is-active" : " is-dim") : "";
+      const [lx, ly, anchor = "start"] = l.label;
+      const start = l.d.match(/^M\s*([\d.]+)[ ,]?([\d.]+)/);
+      return `
+        <g class="topo-line topo-line--${st || "todo"}${on}" data-line="${l.problem}">
+          <path class="topo-halo" d="${l.d}"/>
+          <path class="topo-path" d="${l.d}"/>
+          ${start ? `<circle class="topo-start" cx="${start[1]}" cy="${start[2]}" r="9"/>` : ""}
+          <text class="topo-label" x="${lx}" y="${ly}" text-anchor="${anchor}">${l.problem}</text>
+        </g>`;
+    }).join("");
+    return `
+      <svg class="topo" viewBox="0 0 ${TOPO_W} ${TOPO_H}" role="img" aria-label="${t.alt}">
+        <image href="${t.src}" x="0" y="0" width="${TOPO_W}" height="${TOPO_H}" preserveAspectRatio="xMidYMid slice"/>
+        ${lines}
+      </svg>`;
+  }
+
+  function topoFigure(b, active) {
+    const fig = el("figure", { class: "topo-figure" });
+    const cap = el("figcaption", { class: "topo-key" });
+    if (b.topo.linesInPhoto) {
+      // The photo already has its route lines: show it as it is
+      fig.append(el("img", { class: "topo topo--photo", src: b.topo.src, alt: b.topo.alt, loading: "lazy", width: 1400, height: 1087 }));
+    } else {
+      fig.innerHTML = topoSVG(b, active);
+      cap.innerHTML = `<span class="key key--sent"></span>Sent <span class="key key--projecting"></span>Projecting <span class="key key--todo"></span>To try`;
+    }
+    const missing = b.problems.filter((p) => !b.topo.lines.some((l) => l.problem === p.name)).map((p) => p.name);
+    if (missing.length) cap.append(el("span", { class: "topo-missing" }, `Not on this topo: ${missing.join(", ")}`));
+    if (b.topo.credit) {
+      const credit = el("span", { class: "topo-missing" }, "Photo: ");
+      if (b.topoLink) credit.append(el("a", { href: b.topoLink.url, target: "_blank", rel: "noopener" }, b.topo.credit));
+      else credit.append(b.topo.credit);
+      cap.append(credit);
+    }
+    fig.append(cap);
+    return fig;
+  }
+
+  const hasTopo = (b) => !!(b.topo && b.topo.src);
+
+  // A clear button to someone else's topo photo, credited, never copied
+  function topoButton(b) {
+    const wrap = el("div", { class: "topo-cta" });
+    const a = el("a", { class: "btn", href: b.topoLink.url, target: "_blank", rel: "noopener" }, `View the ${b.name} topo photo ↗`);
+    a.append(el("span", { class: "visually-hidden" }, " (opens in a new tab)"));
+    wrap.append(a, el("p", { class: "topo-credit" }, b.topoLink.credit));
+    return wrap;
+  }
+
   const STATUS_STAMP = { sent: ["Sent", "stamp--sent"], projecting: ["Projecting", "stamp--projecting"] };
 
   function buildOutdoor() {
@@ -368,6 +429,8 @@
         card.append(el("p", { class: "boulder-meta" },
           b.gps ? `${b.elevation != null ? `${b.elevation} m · ` : ""}${coord(b.gps)}` : "Location to add"));
         card.append(el("h3", { class: "boulder-name" }, b.name));
+        if (hasTopo(b)) card.append(topoFigure(b));
+        else if (b.topoLink) card.append(topoButton(b));
 
         const ul = el("ul", { class: "problems" });
         for (const p of b.problems) {
@@ -380,6 +443,19 @@
           ul.append(li);
         }
         card.append(ul);
+
+        // Point at a problem in the list and its line lights up on the topo
+        if (hasTopo(b) && !b.topo.linesInPhoto) {
+          const svg = card.querySelector(".topo");
+          const light = (name) => svg.querySelectorAll(".topo-line").forEach((g) => {
+            g.classList.toggle("is-active", g.dataset.line === name);
+            g.classList.toggle("is-dim", !!name && g.dataset.line !== name);
+          });
+          ul.querySelectorAll("[data-problem]").forEach((btn) => {
+            ["mouseenter", "focus"].forEach((ev) => btn.addEventListener(ev, () => light(btn.dataset.problem)));
+            ["mouseleave", "blur"].forEach((ev) => btn.addEventListener(ev, () => light(null)));
+          });
+        }
 
         const link = b.mountainProject || area.mountainProject;
         const a = el("a", { class: "mp-link", href: link, target: "_blank", rel: "noopener" },
@@ -562,6 +638,16 @@
     sub.append(el("span", { class: "pp-grade" }, p.grade || "V?"), ` ${b.name} · ${area.name}`);
     panelBody.append(sub);
     if (stampText) panelBody.append(el("span", { class: `stamp stamp--large ${stampCls} pp-stamp` }, stampText));
+
+    // The topo, with this problem's line picked out
+    if (hasTopo(b) || b.topoLink) {
+      const topoSec = el("section", { class: "p-section" });
+      topoSec.append(el("p", { class: "p-label" }, "Topo"));
+      if (hasTopo(b) && b.topo.lines.some((l) => l.problem === name)) topoSec.append(topoFigure(b, name));
+      else if (hasTopo(b)) topoSec.append(el("p", { class: "pp-quiet" }, "This one isn't on the topo."));
+      else topoSec.append(topoButton(b));
+      panelBody.append(topoSec);
+    }
 
     // Photos: mine, or a quiet empty frame
     const photoSec = el("section", { class: "p-section" });

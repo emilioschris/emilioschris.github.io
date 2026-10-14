@@ -315,6 +315,48 @@
 .lesson-text { font-family: var(--font-hand); font-size: 1.45rem; line-height: 1.25; }
 .lesson-meta { margin-top: 10px; font: 10.5px var(--font-mono); color: var(--muted); }
 
+/* ---------- Topos: lines drawn over the boulder ---------- */
+.topo-figure { margin: 16px 0 0; }
+.topo {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--olive) 7%, var(--bg));
+}
+.topo-cta { margin-top: 16px; }
+.topo-cta .btn { white-space: normal; text-align: left; }
+
+.topo-line { --line: var(--stamp); transition: opacity 0.3s var(--ease-soft); }
+.topo-line--sent { --line: var(--secondary); }
+.topo-line--projecting { --line: var(--accent); }
+.topo-halo { fill: none; stroke: var(--bg-raised); stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; opacity: 0.8; }
+.topo-path { fill: none; stroke: var(--line); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 2 13; }
+.topo-line--projecting .topo-path { stroke-width: 7; stroke-dasharray: 18 12; }
+.topo-line--sent .topo-path { stroke-dasharray: none; }
+.topo-start { fill: var(--bg-raised); stroke: var(--line); stroke-width: 4; }
+.topo-label {
+  font: 500 24px var(--font-mono);
+  fill: var(--line);
+  paint-order: stroke;
+  stroke: var(--bg-raised);
+  stroke-width: 7px;
+  stroke-linejoin: round;
+}
+.topo-line.is-dim { opacity: 0.22; }
+.topo-line.is-active .topo-path { stroke-width: 8; }
+.topo .topo-halo { stroke: rgba(20, 14, 8, 0.55); }
+.topo .topo-label { stroke: rgba(20, 14, 8, 0.7); }
+
+.topo-key { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; margin-top: 10px; font: 10.5px var(--font-mono); color: var(--muted); }
+.key { display: inline-block; width: 22px; height: 0; margin-right: -8px; border-top: 3px dashed var(--stamp); vertical-align: middle; }
+.key--sent { border-top-style: solid; border-color: var(--secondary); }
+.key--projecting { border-color: var(--accent); }
+.topo-missing { flex-basis: 100%; }
+.topo-missing a { color: var(--link); }
+img.topo { height: auto; object-fit: cover; }
+.topo-credit { margin-top: 4px; font: 10px var(--font-mono); color: var(--muted); }
+
 /* ---------- 9. Problem panel ---------- */
 .problem-name,
 .tick-name {
