@@ -19,7 +19,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://emilioschris.github.io/og-image.png">
 
-  <script src="../shared/theme-init.js?v=2026-10-14.3"></script>
+  <script src="../shared/theme-init.js?v=2026-10-14.4"></script>
 
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../apple-touch-icon.png">
@@ -28,8 +28,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..600&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Instrument+Sans:wght@400..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="../shared/field-notes.css?v=2026-10-14.3">
-  <link rel="stylesheet" href="styles.css?v=2026-10-14.3">
+  <link rel="stylesheet" href="../shared/field-notes.css?v=2026-10-14.4">
+  <link rel="stylesheet" href="styles.css?v=2026-10-14.4">
 </head>
 <body class="spanish-page">
 
@@ -61,11 +61,65 @@
       <h1 class="title" id="home-title">Spanish <em>Trainer</em></h1>
       <p class="lede">Mexican Spanish, a little every day. Each word climbs from Base Camp to the Summit as you get it right, and slides back down when you don't.</p>
 
+      <section class="grade" id="grade" aria-label="Your Spanish grade"></section>
+
       <dl class="today" id="today"></dl>
       <div class="home-actions">
         <button class="btn btn--solid btn--big" id="start" type="button">Start today's climb</button>
         <p class="home-hint" id="home-hint"></p>
       </div>
+      <div class="home-actions home-actions--free">
+        <button class="btn btn--big" id="free" type="button">Free climb</button>
+        <p class="home-hint" id="free-hint"></p>
+      </div>
+      <figure class="mountain">
+        <figcaption class="mountain-title">The mountain · words at each camp</figcaption>
+        <div id="mountain"></div>
+      </figure>
+
+      <!-- ================= ROUTE AND GEAR ================= -->
+      <section class="gear" aria-labelledby="gear-title">
+        <h2 class="gear-title" id="gear-title">Route and gear</h2>
+
+        <div class="gear-block">
+          <p class="gear-label" id="decks-label">Decks to study</p>
+          <div class="decks pill-group" id="decks" role="group" aria-labelledby="decks-label"></div>
+          <p class="gear-hint" id="decks-hint"></p>
+        </div>
+
+        <div class="gear-row">
+          <label class="gear-block">
+            <span class="gear-label">New words per day</span>
+            <select class="gear-select" id="new-per-day">
+              <option value="0">0 (reviews only)</option>
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+              <option value="20">20</option>
+              <option value="30">30</option>
+            </select>
+          </label>
+          <div class="gear-block">
+            <label class="gear-label" for="voice-select">Voice for words without a recording</label>
+            <div class="gear-inline">
+              <select class="gear-select" id="voice-select"></select>
+              <button class="btn" id="voice-test" type="button">▶ Test</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="gear-block">
+          <p class="gear-label">Backup</p>
+          <p class="gear-hint">Progress lives in this browser. Save a backup file to keep it safe or to move it to another device.</p>
+          <div class="gear-inline">
+            <button class="btn" id="export" type="button">Save backup</button>
+            <button class="btn" id="import" type="button">Load backup…</button>
+            <input type="file" id="import-file" accept="application/json,.json" hidden>
+          </div>
+          <p class="gear-status" id="backup-status" role="status"></p>
+        </div>
+      </section>
+
       <p class="voice-note" id="voice-note" hidden></p>
 
       <details class="voices" id="voices" hidden>
@@ -81,6 +135,7 @@
         <button class="btn study-quit" id="quit" type="button">End early</button>
         <div class="study-progress" aria-hidden="true"><span id="progress-bar"></span></div>
         <p class="study-count" id="study-count" aria-live="polite"></p>
+        <p class="study-combo" id="combo" aria-live="polite"></p>
       </div>
       <article class="card" id="card" aria-live="polite"></article>
     </section>
@@ -89,9 +144,9 @@
     <section class="screen" id="end" hidden aria-labelledby="end-title"></section>
   </main>
 
-  <script src="../shared/field-notes.js?v=2026-10-14.3"></script>
-  <script src="data.js?v=2026-10-14.3"></script>
-  <script src="audio.js?v=2026-10-14.3"></script>
-  <script src="script.js?v=2026-10-14.3"></script>
+  <script src="../shared/field-notes.js?v=2026-10-14.4"></script>
+  <script src="data.js?v=2026-10-14.4"></script>
+  <script src="audio.js?v=2026-10-14.4"></script>
+  <script src="script.js?v=2026-10-14.4"></script>
 </body>
 </html>
