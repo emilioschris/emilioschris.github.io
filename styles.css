@@ -397,15 +397,6 @@
   gap: 24px;
   border-top: 1px solid var(--rule);
 }
-.colophon-note {
-  max-width: 46ch;
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.1rem;
-  font-variation-settings: "opsz" 24, "SOFT" 60;
-  line-height: 1.5;
-  color: var(--muted);
-}
 .colophon-meta {
   display: flex;
   flex-wrap: wrap;
@@ -417,6 +408,15 @@
 }
 .colophon-meta a { color: var(--link); text-decoration: none; }
 .colophon-meta a:hover { text-decoration: underline; }
+.colophon-credit {
+  flex-basis: 100%;
+  margin-top: 8px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
 
 /* ---------- 6. SMALL SCREENS ---------- */
 @media (max-width: 1020px) {
