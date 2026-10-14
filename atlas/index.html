@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Atlas · Field Notes</title>
+  <meta name="description" content="An interactive world map of places visited and places next, with knowledge on each country.">
+  <meta name="theme-color" content="#F2EBDD">
+
+  <!-- Same Day/Dusk choice as the homepage, applied before the page draws -->
+  <script>
+    document.documentElement.classList.add("js");
+    try {
+      var saved = localStorage.getItem("fieldnotes-theme");
+      if (saved === "day" || saved === "dusk") document.documentElement.dataset.theme = saved;
+    } catch (e) {}
+  </script>
+
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..600&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Instrument+Sans:wght@400..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- The homepage's colours, fonts and top bar, then the Atlas's own styles -->
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="atlas-page">
+
+  <a class="skip-link" href="#country-list">Skip to the country list</a>
+
+  <!-- ================= TOP BAR ================= -->
+  <header class="bar is-scrolled">
+    <a class="wordmark back-link" href="../index.html#library">
+      <img class="back-hawk" src="../favicon.svg" alt="" width="30" height="30">
+      <span class="wordmark-text">
+        <span class="wordmark-title"><span aria-hidden="true">← </span>Field Notes</span>
+        <span class="wordmark-owner">Back to the homepage</span>
+      </span>
+    </a>
+
+    <div class="bar-tools">
+      <button class="theme-switch" id="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Dusk mode">
+        <span class="theme-label" aria-hidden="true">Day</span>
+        <span class="theme-track" aria-hidden="true"><span class="theme-dot"></span></span>
+        <span class="theme-label" aria-hidden="true">Dusk</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main" class="atlas">
+
+    <!-- ================= TITLE + COUNTER ================= -->
+    <header class="atlas-head">
+      <div class="atlas-intro">
+        <p class="atlas-eyebrow">The Library · N 076°</p>
+        <h1 class="atlas-title">The <em>Atlas</em></h1>
+        <p class="atlas-lede">Where I've been, where I'm heading next, and what there is to know about each place.</p>
+      </div>
+
+      <dl class="counter" aria-label="Expedition totals">
+        <div><dt>Visited</dt><dd id="count-visited">–</dd></div>
+        <div><dt>On the list</dt><dd id="count-want">–</dd></div>
+        <div><dt>Of the world explored</dt><dd id="count-percent">–</dd></div>
+      </dl>
+    </header>
+
+    <!-- ================= FILTERS ================= -->
+    <div class="filters" role="group" aria-label="Show countries">
+      <button type="button" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" data-filter="visited" aria-pressed="false">Visited</button>
+      <button type="button" data-filter="want" aria-pressed="false">Want to go</button>
+    </div>
+
+    <!-- ================= THE MAP ================= -->
+    <figure class="map-frame" id="map-frame">
+      <svg class="map" id="map" role="img" aria-label="World map. Visited countries are filled terracotta; countries on the list have a dashed ochre outline. Use the country list below to open any country."></svg>
+
+      <p class="map-status" id="map-status" role="status">Unrolling the map…</p>
+
+      <div class="map-tooltip" id="map-tooltip" aria-hidden="true"></div>
+
+      <div class="map-zoom" role="group" aria-label="Map zoom">
+        <button type="button" id="zoom-in" aria-label="Zoom in">+</button>
+        <button type="button" id="zoom-out" aria-label="Zoom out">−</button>
+        <button type="button" id="zoom-reset" aria-label="Reset map view">⟲</button>
+      </div>
+
+      <figcaption class="map-legend">
+        <span><i class="key key-visited"></i>Visited</span>
+        <span><i class="key key-want"></i>On the list</span>
+        <span><i class="key key-origin"></i>Origin</span>
+      </figcaption>
+    </figure>
+
+    <!-- ================= COUNTRY LIST (keyboard + screen reader route) ================= -->
+    <section class="logbook" aria-labelledby="logbook-title">
+      <div class="logbook-head">
+        <h2 class="logbook-title" id="logbook-title">Logbook</h2>
+        <label class="search">
+          <span class="visually-hidden">Search countries</span>
+          <input type="search" id="country-search" placeholder="Search countries…" autocomplete="off">
+        </label>
+      </div>
+      <p class="logbook-count" id="logbook-count" role="status"></p>
+      <ul class="country-list" id="country-list"></ul>
+    </section>
+  </main>
+
+  <!-- ================= COUNTRY PANEL (a journal page) ================= -->
+  <aside class="panel" id="panel" role="dialog" aria-labelledby="panel-title" aria-hidden="true" hidden>
+    <div class="panel-scroll">
+      <button class="panel-close" id="panel-close" type="button">Close <span aria-hidden="true">✕</span></button>
+      <div id="panel-body"></div>
+    </div>
+  </aside>
+
+  <!-- Libraries: D3 (drawing maps) and TopoJSON (reading the map file) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+  <!-- Your data, then the Atlas itself -->
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

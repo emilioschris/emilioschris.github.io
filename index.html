@@ -3,185 +3,385 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Emilios Christodoulou · AI Projects</title>
-  <meta name="description" content="Apps, games, books and experiments built by Emilios Christodoulou with AI.">
+  <title>Field Notes · AI Projects</title>
+  <meta name="description" content="A field journal of things built with AI: history, knowledge, games, language and the natural world.">
+  <meta name="theme-color" content="#F2EBDD">
 
-  <!-- Apply the saved light/dark choice before the page draws, so it doesn't flash -->
+  <!-- Apply a saved Day/Dusk choice before the page draws, so it never flashes the wrong colours -->
   <script>
+    document.documentElement.classList.add("js");
     try {
-      var saved = localStorage.getItem("theme");
-      if (saved) document.documentElement.dataset.theme = saved;
+      var saved = localStorage.getItem("fieldnotes-theme");
+      if (saved === "day" || saved === "dusk") document.documentElement.dataset.theme = saved;
     } catch (e) {}
   </script>
 
-  <!-- Fonts: Fraunces (serif, for headings) and Inter (for body text) -->
+  <!-- Fonts: Fraunces (headings), Instrument Sans (body), JetBrains Mono (labels), Caveat (margin notes) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..800,50&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..600&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Instrument+Sans:wght@400..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- ============ TOP BAR: name + navigation + theme toggle ============ -->
-  <header class="topbar">
-    <a class="logo" href="#top">EC<span class="logo-dot">.</span></a>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-    <nav class="nav" aria-label="Sections">
-      <a href="#apps">Apps</a>
-      <a href="#games">Games</a>
-      <a href="#books">Books</a>
-      <a href="#experiments">Experiments</a>
+  <!-- ================= THE HAWK =================
+       Drawn once here, then reused in the top bar and on the map.
+       Traced from Emilios's own drawing (assets/EagerRival.jpeg).
+       Colours come from the --hawk-* variables in styles.css. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="hawk" viewBox="250 140 405 760">
+      <!-- branch -->
+      <g class="hk-line" stroke-width="3.5">
+        <path class="hk-branch" d="M252,714 C380,672 520,624 648,574 L648,622 C520,668 380,716 252,766 Z"/>
+        <path class="hk-branch" d="M606,586 L626,534 L638,522 L635,542 L624,580 Z"/>
+        <!-- far wing and tail -->
+        <path class="hk-far" d="M376,280 C350,300 318,330 300,375 C286,420 286,480 290,540 C296,630 312,720 328,797 C340,740 352,680 358,620 C362,520 364,420 376,280 Z"/>
+        <path class="hk-tail" d="M360,650 L406,676 L404,858 C401,882 386,890 373,885 C360,878 357,862 359,832 Z"/>
+        <path class="hk-tail" d="M394,686 L470,686 C474,750 478,820 475,858 C472,882 453,890 434,886 C414,882 405,870 403,850 Z"/>
+      </g>
+      <!-- tail bands -->
+      <g class="hk-band" stroke-width="5">
+        <path d="M396,800 Q432,790 471,796"/><path d="M399,822 Q436,812 473,818"/><path d="M401,845 Q436,836 475,842"/>
+        <path d="M362,808 Q382,800 404,806"/><path d="M361,830 Q382,823 404,828"/><path d="M361,852 Q382,846 404,850"/>
+      </g>
+      <!-- body, wings, head -->
+      <g class="hk-line" stroke-width="3.5">
+        <path class="hk-body" d="M468,153 C505,152 532,166 540,190 L535,228 C552,250 590,300 608,350 C622,410 615,480 585,550 C555,610 505,660 470,690 L392,690 C372,600 362,500 362,430 C364,360 372,300 380,250 C384,205 420,158 468,153 Z"/>
+        <path class="hk-shade" d="M455,282 C420,292 360,318 336,336 C348,372 356,410 362,440 C364,380 395,320 455,282 Z"/>
+        <path class="hk-shade" d="M608,350 C622,410 615,480 585,550 C555,610 505,660 470,690 C440,720 396,770 366,808 C392,730 432,630 488,540 C530,470 560,400 566,300 C580,312 598,328 608,350 Z"/>
+        <path class="hk-body" d="M455,282 C418,300 384,342 368,404 C356,470 358,620 366,808 C392,730 432,630 488,540 C530,470 560,400 566,300 C540,288 495,280 455,282 Z"/>
+        <path class="hk-shade" d="M484,264 L528,230 L538,248 C520,254 500,259 484,264 Z"/>
+        <path class="hk-beak" d="M520,196 C536,191 549,200 549,216 C549,228 546,236 538,243 C538,232 534,224 526,222 L478,216 C490,206 505,198 520,196 Z"/>
+        <path class="hk-dark" d="M537,203 C548,210 549,228 538,243 C540,229 538,216 531,208 Z"/>
+        <path d="M478,216 L528,219" fill="none"/>
+        <ellipse class="hk-ring" cx="472" cy="190" rx="17" ry="12"/>
+      </g>
+      <!-- eye -->
+      <circle class="hk-iris" cx="474" cy="190" r="7"/>
+      <circle class="hk-dark" cx="474.5" cy="190" r="3.6"/>
+      <circle class="hk-light" cx="476.5" cy="187.5" r="1.8"/>
+      <!-- eyelid: hidden until the hawk blinks -->
+      <ellipse class="hk-lid" cx="472" cy="190" rx="19" ry="14"/>
+      <!-- brow lashes -->
+      <g class="hk-band" stroke-width="2">
+        <path d="M500,178 l9,-7"/><path d="M510,180 l9,-8"/><path d="M520,182 l9,-7"/><path d="M529,186 l8,-6"/>
+      </g>
+    </symbol>
+  </svg>
+
+  <!-- ================= TOP BAR ================= -->
+  <header class="bar">
+    <a class="wordmark" href="#top" aria-label="Field Notes, back to top">
+      <svg class="hawk hawk-bar" viewBox="0 0 405 760" aria-hidden="true" focusable="false"><use href="#hawk"/></svg>
+      <span class="wordmark-text">
+        <span class="wordmark-title">Field Notes</span>
+        <span class="wordmark-owner">Emilios Christodoulou</span>
+      </span>
+    </a>
+
+    <nav class="nav" id="site-nav" aria-label="Sections">
+      <ul>
+        <li><a href="#base-camp">Base Camp</a></li>
+        <li><a href="#library">The Library</a></li>
+        <li><a href="#training-ground">Training Ground</a></li>
+        <li><a href="#language-routes">Language Routes</a></li>
+        <li><a href="#the-wild">The Wild</a></li>
+      </ul>
     </nav>
 
-    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch between light and dark mode">
-      <!-- Sun icon (shown in dark mode) -->
-      <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
-      <!-- Moon icon (shown in light mode) -->
-      <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg>
-    </button>
+    <div class="bar-tools">
+      <!-- Compass: the needle turns toward the bearing of the section on screen -->
+      <div class="compass" aria-hidden="true">
+        <svg viewBox="0 0 40 40">
+          <circle class="compass-ring" cx="20" cy="20" r="17" />
+          <g class="compass-ticks">
+            <line x1="20" y1="3" x2="20" y2="6.5" />
+            <line x1="37" y1="20" x2="33.5" y2="20" />
+            <line x1="20" y1="37" x2="20" y2="33.5" />
+            <line x1="3" y1="20" x2="6.5" y2="20" />
+          </g>
+          <g id="compass-needle" class="compass-needle">
+            <path class="needle-north" d="M20 8 L23 20 L17 20 Z" />
+            <path class="needle-south" d="M20 32 L23 20 L17 20 Z" />
+          </g>
+          <circle class="compass-pin" cx="20" cy="20" r="1.6" />
+        </svg>
+        <span class="compass-bearing" id="compass-bearing">N 000°</span>
+      </div>
+
+      <button class="theme-switch" id="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Dusk mode">
+        <span class="theme-label" aria-hidden="true">Day</span>
+        <span class="theme-track" aria-hidden="true"><span class="theme-dot"></span></span>
+        <span class="theme-label" aria-hidden="true">Dusk</span>
+      </button>
+
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="menu-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Sections menu</span>
+      </button>
+    </div>
   </header>
 
-  <main id="top">
+  <main id="main">
 
-    <!-- ============ INTRO ============ -->
-    <section class="hero">
-      <p class="eyebrow">A workshop of things made with AI</p>
-      <h1>Emilios<br><em>Christodoulou</em></h1>
-      <p class="intro">
-        These are the apps, games, books and odd little experiments I've built
-        with AI as my sidekick. Some are finished, some are still in progress.
-      </p>
-    </section>
+    <!-- ================= HERO: the origin point ================= -->
+    <section class="hero" id="top" data-bearing="0" aria-labelledby="hero-title">
 
-    <!--
-      ============ PROJECT SECTIONS ============
-      Each section has a grid of "cards". To add a project, copy one
-      <article class="card"> ... </article> block and change the text.
+      <!-- The live contour map. Decorative, so screen readers skip it. -->
+      <canvas class="terrain" id="terrain" aria-hidden="true"></canvas>
 
-      - To use a real picture, replace the <div class="card-media ..."> line with:
-          <img class="card-media" src="apps/my-app/cover.png" alt="Short description of the picture">
-      - To mark a project as unfinished, keep the <span class="badge">…</span> line.
-        Delete that line when it's done.
-      - Change href="#" to the project's link, e.g. href="apps/my-app/"
-    -->
-
-    <!-- ---------- APPS ---------- -->
-    <section class="section" id="apps">
-      <div class="section-head">
-        <span class="section-num">01</span>
-        <h2>Apps</h2>
-        <p>Useful (and not-so-useful) tools.</p>
+      <!-- Origin marker. JavaScript moves it to the summit of the map. -->
+      <div class="origin" id="origin" aria-hidden="true">
+        <span class="origin-cross"></span>
+        <span class="origin-label">
+          <span class="origin-zero">0,0</span>
+          <span class="origin-coords">35.1°N 33.4°E</span>
+        </span>
       </div>
-      <div class="grid">
-        <article class="card">
-          <a href="#">
-            <div class="card-media placeholder" data-label="App"></div>
-            <div class="card-body">
-              <h3>Placeholder App</h3>
-              <p>A one-line description of what this app does.</p>
-            </div>
-          </a>
-        </article>
-        <article class="card">
-          <a href="#">
-            <div class="card-media placeholder" data-label="App"></div>
-            <div class="card-body">
-              <span class="badge">Still being worked on</span>
-              <h3>Another App</h3>
-              <p>An example of a card with the work-in-progress badge.</p>
-            </div>
-          </a>
-        </article>
+
+      <div class="hero-copy">
+        <p class="hero-eyebrow">AI Projects / Vol. 01</p>
+        <h1 class="hero-title" id="hero-title">
+          <svg class="hawk hawk-title" viewBox="0 0 405 760" aria-hidden="true" focusable="false"><use href="#hawk"/></svg>
+          <span>Field <em>Notes</em></span>
+        </h1>
+        <p class="hero-lede">
+          A field journal of things built with AI, starting from one point and heading outward.
+        </p>
+      </div>
+
+      <div class="hero-foot">
+        <div class="scale-bar" aria-hidden="true">
+          <span class="scale-ticks"></span>
+          <span class="scale-text">0 &nbsp; 250 &nbsp; 500 m</span>
+        </div>
+        <a class="set-out" href="#base-camp">Set out <span class="set-out-arrow" aria-hidden="true">↓</span></a>
+        <p class="survey" id="survey-readout" aria-hidden="true">35.100°N 33.400°E · ELEV — m</p>
       </div>
     </section>
 
-    <!-- ---------- GAMES ---------- -->
-    <section class="section" id="games">
-      <div class="section-head">
-        <span class="section-num">02</span>
-        <h2>Games</h2>
-        <p>Small things to play in your browser.</p>
-      </div>
-      <div class="grid">
-        <article class="card">
-          <a href="#">
-            <div class="card-media placeholder" data-label="Game"></div>
-            <div class="card-body">
-              <span class="badge">Still being worked on</span>
-              <h3>Placeholder Game</h3>
-              <p>A one-line description of how this game plays.</p>
-            </div>
-          </a>
-        </article>
-      </div>
-    </section>
+    <!-- =========================================================
+         SECTIONS: five "legs" heading out from the origin.
+         Each has a compass bearing (data-bearing) that turns the
+         compass in the top bar.
 
-    <!-- ---------- BOOKS ---------- -->
-    <section class="section" id="books">
-      <div class="section-head">
-        <span class="section-num">03</span>
-        <h2>Books</h2>
-        <p>PDFs, stories and guides.</p>
-      </div>
-      <div class="grid">
+         HOW TO ADD A CARD: copy one <article class="card">…</article>
+         block inside a section's <div class="cards"> and change it.
+           - data-shape="1" to "4" picks the pebble shape.
+           - Keep <span class="stamp">…</span> while it's unfinished.
+           - For a real project, put a link inside the <h3>:
+               <h3 class="card-title"><a href="apps/my-app/">Title</a></h3>
+             (the whole card becomes clickable).
+           - For a real picture, replace the pebble's placeholder with:
+               <div class="pebble" data-shape="2"><img src="apps/my-app/cover.jpg" alt="What the picture shows"></div>
+         ========================================================= -->
+
+    <!-- ---------- 01 · BASE CAMP ---------- -->
+    <section class="leg reveal" id="base-camp" data-bearing="12" style="--tint: var(--terracotta)" aria-labelledby="base-camp-title">
+      <header class="leg-head">
+        <p class="leg-bearing"><span>01</span> N 012°</p>
+        <h2 class="leg-title" id="base-camp-title">Base Camp</h2>
+        <p class="leg-kicker">History</p>
+        <p class="leg-desc">Where every route begins: Cyprus, the ancient Mediterranean, and the long stories underneath the places we live.</p>
+        <p class="margin-note" aria-hidden="true">start here, everything else follows</p>
+      </header>
+      <div class="cards">
+        <svg class="trail" aria-hidden="true"><path /></svg>
         <article class="card">
-          <a href="#">
-            <div class="card-media placeholder" data-label="Book"></div>
-            <div class="card-body">
-              <h3>Placeholder Book</h3>
-              <p>A one-line description of what this book is about.</p>
-            </div>
-          </a>
+          <span class="card-pin" aria-hidden="true"></span>
+          <p class="card-meta"><span>34.67°N 32.88°E</span><time datetime="2026-10">2026·10</time></p>
+          <div class="card-media">
+            <div class="pebble pebble--placeholder" data-shape="1" role="img" aria-label="Placeholder image"></div>
+            <span class="stamp">Expedition ongoing</span>
+          </div>
+          <p class="card-elev">ELEV 120 m</p>
+          <h3 class="card-title">Cyprus Through Time</h3>
+          <p class="card-desc">Ten thousand years of one island, from the first villages to today.</p>
         </article>
         <article class="card">
-          <a href="#">
-            <div class="card-media placeholder" data-label="Book"></div>
-            <div class="card-body">
-              <span class="badge">Still being worked on</span>
-              <h3>Another Book</h3>
-              <p>A second card so you can see how the grid fills.</p>
-            </div>
-          </a>
+          <span class="card-pin" aria-hidden="true"></span>
+          <p class="card-meta"><span>36.40°N 25.43°E</span><time datetime="2026-11">2026·11</time></p>
+          <div class="card-media">
+            <div class="pebble pebble--placeholder" data-shape="2" role="img" aria-label="Placeholder image"></div>
+            <span class="stamp">Expedition ongoing</span>
+          </div>
+          <p class="card-elev">ELEV 300 m</p>
+          <h3 class="card-title">The Ancient Mediterranean</h3>
+          <p class="card-desc">Trade routes, empires and shipwrecks around the old middle sea.</p>
         </article>
       </div>
     </section>
 
-    <!-- ---------- EXPERIMENTS ---------- -->
-    <section class="section" id="experiments">
-      <div class="section-head">
-        <span class="section-num">04</span>
-        <h2>Experiments</h2>
-        <p>Half-ideas, tests and curiosities.</p>
-      </div>
-      <div class="grid">
+    <!-- ---------- 02 · THE LIBRARY ---------- -->
+    <section class="leg reveal" id="library" data-bearing="76" style="--tint: var(--aegean)" aria-labelledby="library-title">
+      <header class="leg-head">
+        <p class="leg-bearing"><span>02</span> N 076°</p>
+        <h2 class="leg-title" id="library-title">The Library</h2>
+        <p class="leg-kicker">Knowledge</p>
+        <p class="leg-desc">Notes, books and tools for exploring what we know, and how we came to know it.</p>
+      </header>
+      <div class="cards">
+        <svg class="trail" aria-hidden="true"><path /></svg>
         <article class="card">
-          <a href="#">
-            <div class="card-media placeholder" data-label="Lab"></div>
-            <div class="card-body">
-              <span class="badge">Still being worked on</span>
-              <h3>Placeholder Experiment</h3>
-              <p>A one-line description of what you were trying out.</p>
+          <span class="card-pin" aria-hidden="true"></span>
+          <p class="card-meta"><span>0.00°N 0.00°E</span><time datetime="2026-10">2026·10</time></p>
+          <div class="card-media">
+            <div class="pebble pebble--atlas" data-shape="3" role="img" aria-label="A small world map with two crosshair markers joined by a dotted route">
+              <svg viewBox="0 0 200 120" aria-hidden="true">
+                <path class="atlas-earth" d="M100 12 C150 12 188 30 192 60 C188 90 150 108 100 108 C50 108 12 90 8 60 C12 30 50 12 100 12 Z"/>
+                <g class="atlas-grid">
+                  <path d="M100 12 V108"/><path d="M60 15 C48 40 48 80 60 105"/><path d="M140 15 C152 40 152 80 140 105"/>
+                  <path d="M30 26 C24 48 24 72 30 94"/><path d="M170 26 C176 48 176 72 170 94"/>
+                  <path d="M10 60 H190"/><path d="M22 36 H178"/><path d="M22 84 H178"/>
+                </g>
+                <path class="atlas-route" d="M58 44 Q86 22 116 40"/>
+                <g class="atlas-cross"><path d="M54 44 h8 M58 40 v8"/><path d="M112 40 h8 M116 36 v8"/></g>
+              </svg>
             </div>
-          </a>
+            <span class="stamp">Expedition ongoing</span>
+          </div>
+          <p class="card-elev">ELEV 0 m · SEA LEVEL</p>
+          <h3 class="card-title"><a href="atlas/index.html">The Atlas</a></h3>
+          <p class="card-desc">An interactive world map of where I've been and where I'm going next.</p>
+        </article>
+        <article class="card">
+          <span class="card-pin" aria-hidden="true"></span>
+          <p class="card-meta"><span>31.20°N 29.92°E</span><time datetime="2026-12">2026·12</time></p>
+          <div class="card-media">
+            <div class="pebble pebble--placeholder" data-shape="4" role="img" aria-label="Placeholder image"></div>
+            <span class="stamp">Expedition ongoing</span>
+          </div>
+          <p class="card-elev">ELEV 210 m</p>
+          <h3 class="card-title">Reading Notes</h3>
+          <p class="card-desc">Short notes on the books that changed how I see things.</p>
         </article>
       </div>
     </section>
 
-    <!-- ============ ABOUT ============ -->
-    <section class="about" id="about">
-      <h2>About</h2>
-      <p>
-        Hi, I'm Emilios. I'm learning to build things by teaming up with AI tools,
-        and this site is where I keep everything I make along the way. Nothing here
-        has to be perfect. It's about trying ideas and seeing what happens.
-      </p>
+    <!-- ---------- 03 · TRAINING GROUND ---------- -->
+    <section class="leg reveal" id="training-ground" data-bearing="148" style="--tint: var(--olive)" aria-labelledby="training-title">
+      <header class="leg-head">
+        <p class="leg-bearing"><span>03</span> N 148°</p>
+        <h2 class="leg-title" id="training-title">Training Ground</h2>
+        <p class="leg-kicker">Games &amp; brain tools</p>
+        <p class="leg-desc">Small games and tools that make you a little sharper every time you play.</p>
+      </header>
+      <div class="cards">
+        <svg class="trail" aria-hidden="true"><path /></svg>
+        <article class="card">
+          <span class="card-pin" aria-hidden="true"></span>
+          <p class="card-meta"><span>37.97°N 23.72°E</span><time datetime="2026-11">2026·11</time></p>
+          <div class="card-media">
+            <div class="pebble pebble--placeholder" data-shape="2" role="img" aria-label="Placeholder image"></div>
+            <span class="stamp">Expedition ongoing</span>
+          </div>
+          <p class="card-elev">ELEV 70 m</p>
+          <h3 class="card-title">Memory Palace</h3>
+          <p class="card-desc">A game for remembering more, using the oldest trick in the book.</p>
+        </article>
+        <article class="card">
+          <span class="card-pin" aria-hidden="true"></span>
+          <p class="card-meta"><span>51.75°N 1.25°W</span><time datetime="2027-01">2027·01</time></p>
+          <div class="card-media">
+            <div class="pebble pebble--placeholder" data-shape="1" role="img" aria-label="Placeholder image"></div>
+          </div>
+          <p class="card-elev">ELEV 60 m</p>
+          <h3 class="card-title">Daily Puzzle</h3>
+          <p class="card-desc">One small logic puzzle a day. Placeholder for now.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ---------- 04 · LANGUAGE ROUTES ---------- -->
+    <section class="leg reveal" id="language-routes" data-bearing="213" style="--tint: var(--ochre)" aria-labelledby="language-title">
+      <header class="leg-head">
+        <p class="leg-bearing"><span>04</span> N 213°</p>
+        <h2 class="leg-title" id="language-title">Language Routes</h2>
+        <p class="leg-kicker">Spanish · <span class="in-progress">in progress</span></p>
+        <p class="leg-desc">Learning Spanish one step at a time, with tools I build along the way.</p>
+        <p class="margin-note" aria-hidden="true">¡poco a poco!</p>
+      </header>
+      <div class="cards">
+        <svg class="trail" aria-hidden="true"><path /></svg>
+        <article class="card">
+          <span class="card-pin" aria-hidden="true"></span>
+          <p class="card-meta"><span>40.42°N 3.70°W</span><time datetime="2026-10">2026·10</time></p>
+          <div class="card-media">
+            <div class="pebble pebble--placeholder" data-shape="4" role="img" aria-label="Placeholder image"></div>
+            <span class="stamp">Expedition ongoing</span>
+          </div>
+          <p class="card-elev">ELEV 650 m</p>
+          <h3 class="card-title">Spanish Field Guide</h3>
+          <p class="card-desc">Words, phrases and practice drills from my first year of Spanish.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ---------- 05 · THE WILD ---------- -->
+    <section class="leg reveal" id="the-wild" data-bearing="297" style="--tint: var(--olive)" aria-labelledby="wild-title">
+      <header class="leg-head">
+        <p class="leg-bearing"><span>05</span> N 297°</p>
+        <h2 class="leg-title" id="wild-title">The Wild</h2>
+        <p class="leg-kicker">Outdoors &amp; conservation</p>
+        <p class="leg-desc">The natural world, and how technology can help protect it.</p>
+        <p class="margin-note" aria-hidden="true">the best map is still a walk</p>
+      </header>
+      <div class="cards">
+        <svg class="trail" aria-hidden="true"><path /></svg>
+        <article class="card">
+          <span class="card-pin" aria-hidden="true"></span>
+          <p class="card-meta"><span>19.30°S 22.90°E</span><time datetime="2026-12">2026·12</time></p>
+          <div class="card-media">
+            <div class="pebble pebble--placeholder" data-shape="3" role="img" aria-label="Placeholder image"></div>
+            <span class="stamp">Expedition ongoing</span>
+          </div>
+          <p class="card-elev">ELEV 950 m</p>
+          <h3 class="card-title">Tracking the Delta</h3>
+          <p class="card-desc">How sensors and satellites help protect wildlife in the Okavango.</p>
+        </article>
+        <article class="card">
+          <span class="card-pin" aria-hidden="true"></span>
+          <p class="card-meta"><span>2.33°S 34.83°E</span><time datetime="2027-02">2027·02</time></p>
+          <div class="card-media">
+            <div class="pebble pebble--placeholder" data-shape="1" role="img" aria-label="Placeholder image"></div>
+            <span class="stamp">Expedition ongoing</span>
+          </div>
+          <p class="card-elev">ELEV 1,520 m</p>
+          <h3 class="card-title">Trail Log</h3>
+          <p class="card-desc">Notes and maps from walks, hikes and time outside.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ---------- ABOUT ---------- -->
+    <section class="about reveal" id="about" aria-labelledby="about-title">
+      <h2 class="about-title" id="about-title">About</h2>
+      <div class="about-body">
+        <p>I'm from an island in the eastern Mediterranean, where the past sits close to the surface: ruins in the middle of fields, mosaics under village churches, stories older than the roads. Later, life stretched across the Atlantic to a city of rivers and bridges.</p>
+        <p>Somewhere between the two I picked up a habit of wondering how things came to be: places, languages, animals, whole civilisations. These field notes are where that curiosity goes. I build things with AI to understand the world a little better, and keep them here as I go. Some are finished. Most are still on the trail.</p>
+      </div>
     </section>
 
   </main>
 
-  <footer class="footer">
-    <p>© <span id="year"></span> Emilios Christodoulou · Built with AI</p>
+  <!-- ---------- FOOTER ---------- -->
+  <footer class="colophon">
+    <p class="colophon-note">
+      I'm Emilios Christodoulou. I use AI to build this digital garden, and I'm actively
+      fact-checking the results and improving it as I go.
+    </p>
+    <div class="colophon-meta">
+      <p>Field Notes · Vol. 01 · © <span id="year">2026</span></p>
+      <p>35.1°N 33.4°E</p>
+      <a href="https://github.com/emilioschris" target="_blank" rel="noopener">GitHub ↗<span class="visually-hidden"> (opens in a new tab)</span></a>
+      <a href="#top">Back to 0,0 ↑</a>
+    </div>
   </footer>
 
   <script src="script.js"></script>
