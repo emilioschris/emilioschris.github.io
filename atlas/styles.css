@@ -19,24 +19,24 @@
 
 /* ---------- Map colours (Dusk) ---------- */
 :root[data-theme="dusk"] {
-  --ocean: #1E1B16;
+  --ocean: #33312C;
   --ocean-line: rgba(127, 176, 191, 0.13);
-  --land: #2E2923;
-  --land-line: rgba(236, 227, 210, 0.2);
+  --land: #4A4842;
+  --land-line: rgba(236, 233, 226, 0.24);
   --visited: #C8643F;
   --visited-line: #E58E68;
-  --want-fill: color-mix(in srgb, var(--ochre) 22%, #1B1813);
+  --want-fill: color-mix(in srgb, var(--ochre) 24%, #3A3833);
   --want-line: #D9A94F;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="day"]) {
-    --ocean: #1E1B16;
+    --ocean: #33312C;
     --ocean-line: rgba(127, 176, 191, 0.13);
-    --land: #2E2923;
-    --land-line: rgba(236, 227, 210, 0.2);
+    --land: #4A4842;
+    --land-line: rgba(236, 233, 226, 0.24);
     --visited: #C8643F;
     --visited-line: #E58E68;
-    --want-fill: color-mix(in srgb, var(--ochre) 22%, #1B1813);
+    --want-fill: color-mix(in srgb, var(--ochre) 24%, #3A3833);
     --want-line: #D9A94F;
   }
 }
