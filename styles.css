@@ -321,6 +321,22 @@
 }
 .leg .cards { grid-column: 6 / span 7; }
 
+/* A section with no projects yet: an empty, dashed pebble */
+.pebble--uncharted {
+  border: 1.5px dashed color-mix(in srgb, var(--tint) 45%, transparent);
+  background: color-mix(in srgb, var(--tint) 5%, transparent);
+}
+
+/* Shown only if JavaScript is off (the cards are built by script.js) */
+.cards-noscript {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 24px var(--gutter);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+}
+
 /* The Atlas card's little world map */
 .pebble--atlas {
   display: grid;

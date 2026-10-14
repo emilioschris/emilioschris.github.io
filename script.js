@@ -5,9 +5,10 @@
    reveals and the year come from shared/field-notes.js.
    This file only holds what's unique to the homepage:
 
-   1. Top bar + mobile menu
-   2. Compass
-   3. Contour map (the hero)
+   1. Project cards (from projects.js)
+   2. Top bar + mobile menu
+   3. Compass
+   4. Contour map (the hero)
    ========================================================= */
 (() => {
   "use strict";
@@ -16,7 +17,109 @@
   const reducedMotion = FieldNotes.reducedMotion;
 
   /* ---------------------------------------------------------
-     1. TOP BAR + MOBILE MENU
+     1. PROJECT CARDS
+     Builds a card for every project in projects.js and puts it
+     into its section, in the order listed. A section with no
+     projects gets one quiet "Uncharted" card.
+     --------------------------------------------------------- */
+  const STAMPS = {
+    planned: { text: "Planned", className: "stamp stamp--planned" },
+    ongoing: { text: "Expedition ongoing", className: "stamp" },
+  };
+
+  // The Atlas card's little world map, two crosshairs and a dotted route
+  const ATLAS_MAP = `
+    <svg viewBox="0 0 200 120" aria-hidden="true">
+      <path class="atlas-earth" d="M100 12 C150 12 188 30 192 60 C188 90 150 108 100 108 C50 108 12 90 8 60 C12 30 50 12 100 12 Z"/>
+      <g class="atlas-grid">
+        <path d="M100 12 V108"/><path d="M60 15 C48 40 48 80 60 105"/><path d="M140 15 C152 40 152 80 140 105"/>
+        <path d="M30 26 C24 48 24 72 30 94"/><path d="M170 26 C176 48 176 72 170 94"/>
+        <path d="M10 60 H190"/><path d="M22 36 H178"/><path d="M22 84 H178"/>
+      </g>
+      <path class="atlas-route" d="M58 44 Q86 22 116 40"/>
+      <g class="atlas-cross"><path d="M54 44 h8 M58 40 v8"/><path d="M112 40 h8 M116 36 v8"/></g>
+    </svg>`;
+
+  // Small helper: make an element with a class and (optionally) some text
+  function el(tag, className, text) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  }
+
+  function buildCard(project, index) {
+    const card = el("article", "card");
+    card.append(el("span", "card-pin"));
+    card.lastChild.setAttribute("aria-hidden", "true");
+
+    // Coordinates and date, e.g. "2026-10" is shown as "2026·10"
+    const meta = el("p", "card-meta");
+    meta.append(el("span", "", project.coords || ""));
+    if (project.date) {
+      const time = el("time", "", project.date.replace("-", "·"));
+      time.dateTime = project.date;
+      meta.append(time);
+    }
+    card.append(meta);
+
+    // The pebble picture (a photo, the Atlas drawing, or a placeholder)
+    const media = el("div", "card-media");
+    const pebble = el("div", "pebble");
+    pebble.dataset.shape = project.shape || (index % 4) + 1;
+    if (project.image && typeof project.image === "object") {
+      const img = el("img");
+      img.src = project.image.src;
+      img.alt = project.image.alt || "";
+      img.loading = "lazy";
+      pebble.append(img);
+    } else if (project.image === "atlas-map") {
+      pebble.classList.add("pebble--atlas");
+      pebble.setAttribute("role", "img");
+      pebble.setAttribute("aria-label", "A small world map with two crosshair markers joined by a dotted route");
+      pebble.innerHTML = ATLAS_MAP;
+    } else {
+      pebble.classList.add(project.uncharted ? "pebble--uncharted" : "pebble--placeholder");
+      pebble.setAttribute("role", "img");
+      pebble.setAttribute("aria-label", project.uncharted ? "An empty space on the map" : "Placeholder image");
+    }
+    media.append(pebble);
+    const stamp = STAMPS[project.status];
+    if (stamp) media.append(el("span", stamp.className, stamp.text));
+    card.append(media);
+
+    if (project.elevation) card.append(el("p", "card-elev", project.elevation));
+
+    // Title: a link (making the whole card clickable) if the project exists
+    const title = el("h3", "card-title");
+    if (project.link) {
+      const a = el("a", "", project.title);
+      a.href = project.link;
+      title.append(a);
+    } else {
+      title.textContent = project.title;
+    }
+    card.append(title);
+    card.append(el("p", "card-desc", project.description || ""));
+    return card;
+  }
+
+  document.querySelectorAll(".leg").forEach((section) => {
+    const holder = section.querySelector(".cards");
+    if (!holder) return;
+    const projects = (typeof PROJECTS !== "undefined" ? PROJECTS : []).filter((p) => p.section === section.id);
+    const list = projects.length ? projects : [{
+      title: "Uncharted",
+      uncharted: true,
+      description: "Nothing here yet. The route continues.",
+      coords: section.querySelector(".leg-bearing")?.textContent.replace(/^\s*\d+\s*/, "") || "",
+      elevation: "ELEV 0 m",
+    }];
+    list.forEach((project, i) => holder.append(buildCard(project, i)));
+  });
+
+  /* ---------------------------------------------------------
+     2. TOP BAR + MOBILE MENU
      --------------------------------------------------------- */
   const bar = document.querySelector(".bar");
   const nav = document.getElementById("site-nav");
@@ -42,7 +145,7 @@
   });
 
   /* ---------------------------------------------------------
-     2. COMPASS
+     3. COMPASS
      Every section has data-bearing="…". When a section crosses
      the middle of the screen, the needle turns to face it.
      --------------------------------------------------------- */
@@ -72,7 +175,7 @@
   legs.forEach((leg) => legWatcher.observe(leg));
 
   /* ---------------------------------------------------------
-     3. CONTOUR MAP
+     4. CONTOUR MAP
      How it works:
        a) Lay an invisible grid over the hero.
        b) Give every grid point a height: high at the origin,

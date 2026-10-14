@@ -419,7 +419,7 @@ a { color: var(--link); }
 
 /* ---------- 6. FIELD STAMPS ----------
    <span class="stamp">Expedition ongoing</span>
-   Variants: stamp--visited, stamp--next, stamp--sent, stamp--projecting
+   Variants: stamp--planned, stamp--visited, stamp--next, stamp--sent, stamp--projecting
    ("On the list" and "Expedition ongoing" use the plain ochre stamp).
    Size: stamp--large (used in panels). Inside a card it sits on the image. */
 .stamp {
@@ -447,6 +447,7 @@ a { color: var(--link); }
 .stamp--visited { border-color: var(--accent); outline-color: var(--accent); color: var(--accent-text); }
 .stamp--next { background: color-mix(in srgb, var(--ochre) 14%, transparent); }
 .stamp--sent { border-color: var(--secondary); outline-color: var(--secondary); color: var(--secondary); }
+.stamp--planned { border-style: dashed; }
 .stamp--projecting { border-style: dashed; border-color: var(--link); outline-color: var(--link); color: var(--link); }
 
 /* A small dashed "in progress" tag that sits inline with text */

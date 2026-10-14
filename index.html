@@ -181,16 +181,12 @@
          Each has a compass bearing (data-bearing) that turns the
          compass in the top bar.
 
-         HOW TO ADD A CARD: copy one <article class="card">…</article>
-         block inside a section's <div class="cards"> and change it.
-           - data-shape="1" to "4" picks the pebble shape.
-           - Keep <span class="stamp">…</span> while it's unfinished.
-           - For a real project, put a link inside the <h3>:
-               <h3 class="card-title"><a href="apps/my-app/">Title</a></h3>
-             (the whole card becomes clickable).
-           - For a real picture, replace the pebble's placeholder with:
-               <div class="pebble" data-shape="2"><img src="apps/my-app/cover.jpg" alt="What the picture shows"></div>
+         The cards are NOT written here: they come from projects.js
+         and script.js puts them into each section's <div class="cards">.
+         To add or change a project, edit projects.js.
          ========================================================= -->
+
+    <noscript><p class="cards-noscript">The project cards need JavaScript turned on to appear.</p></noscript>
 
     <!-- ---------- 01 · BASE CAMP ---------- -->
     <section class="leg reveal" id="base-camp" data-bearing="12" style="--tint: var(--terracotta)" aria-labelledby="base-camp-title">
@@ -203,28 +199,6 @@
       </header>
       <div class="cards">
         <svg class="trail" aria-hidden="true"><path /></svg>
-        <article class="card">
-          <span class="card-pin" aria-hidden="true"></span>
-          <p class="card-meta"><span>34.67°N 32.88°E</span><time datetime="2026-10">2026·10</time></p>
-          <div class="card-media">
-            <div class="pebble pebble--placeholder" data-shape="1" role="img" aria-label="Placeholder image"></div>
-            <span class="stamp">Expedition ongoing</span>
-          </div>
-          <p class="card-elev">ELEV 120 m</p>
-          <h3 class="card-title">Cyprus Through Time</h3>
-          <p class="card-desc">Ten thousand years of one island, from the first villages to today.</p>
-        </article>
-        <article class="card">
-          <span class="card-pin" aria-hidden="true"></span>
-          <p class="card-meta"><span>36.40°N 25.43°E</span><time datetime="2026-11">2026·11</time></p>
-          <div class="card-media">
-            <div class="pebble pebble--placeholder" data-shape="2" role="img" aria-label="Placeholder image"></div>
-            <span class="stamp">Expedition ongoing</span>
-          </div>
-          <p class="card-elev">ELEV 300 m</p>
-          <h3 class="card-title">The Ancient Mediterranean</h3>
-          <p class="card-desc">Trade routes, empires and shipwrecks around the old middle sea.</p>
-        </article>
       </div>
     </section>
 
@@ -238,39 +212,6 @@
       </header>
       <div class="cards">
         <svg class="trail" aria-hidden="true"><path /></svg>
-        <article class="card">
-          <span class="card-pin" aria-hidden="true"></span>
-          <p class="card-meta"><span>0.00°N 0.00°E</span><time datetime="2026-10">2026·10</time></p>
-          <div class="card-media">
-            <div class="pebble pebble--atlas" data-shape="3" role="img" aria-label="A small world map with two crosshair markers joined by a dotted route">
-              <svg viewBox="0 0 200 120" aria-hidden="true">
-                <path class="atlas-earth" d="M100 12 C150 12 188 30 192 60 C188 90 150 108 100 108 C50 108 12 90 8 60 C12 30 50 12 100 12 Z"/>
-                <g class="atlas-grid">
-                  <path d="M100 12 V108"/><path d="M60 15 C48 40 48 80 60 105"/><path d="M140 15 C152 40 152 80 140 105"/>
-                  <path d="M30 26 C24 48 24 72 30 94"/><path d="M170 26 C176 48 176 72 170 94"/>
-                  <path d="M10 60 H190"/><path d="M22 36 H178"/><path d="M22 84 H178"/>
-                </g>
-                <path class="atlas-route" d="M58 44 Q86 22 116 40"/>
-                <g class="atlas-cross"><path d="M54 44 h8 M58 40 v8"/><path d="M112 40 h8 M116 36 v8"/></g>
-              </svg>
-            </div>
-            <span class="stamp">Expedition ongoing</span>
-          </div>
-          <p class="card-elev">ELEV 0 m · SEA LEVEL</p>
-          <h3 class="card-title"><a href="atlas/index.html">The Atlas</a></h3>
-          <p class="card-desc">An interactive world map of where I've been and where I'm going next.</p>
-        </article>
-        <article class="card">
-          <span class="card-pin" aria-hidden="true"></span>
-          <p class="card-meta"><span>31.20°N 29.92°E</span><time datetime="2026-12">2026·12</time></p>
-          <div class="card-media">
-            <div class="pebble pebble--placeholder" data-shape="4" role="img" aria-label="Placeholder image"></div>
-            <span class="stamp">Expedition ongoing</span>
-          </div>
-          <p class="card-elev">ELEV 210 m</p>
-          <h3 class="card-title">Reading Notes</h3>
-          <p class="card-desc">Short notes on the books that changed how I see things.</p>
-        </article>
       </div>
     </section>
 
@@ -284,27 +225,6 @@
       </header>
       <div class="cards">
         <svg class="trail" aria-hidden="true"><path /></svg>
-        <article class="card">
-          <span class="card-pin" aria-hidden="true"></span>
-          <p class="card-meta"><span>37.97°N 23.72°E</span><time datetime="2026-11">2026·11</time></p>
-          <div class="card-media">
-            <div class="pebble pebble--placeholder" data-shape="2" role="img" aria-label="Placeholder image"></div>
-            <span class="stamp">Expedition ongoing</span>
-          </div>
-          <p class="card-elev">ELEV 70 m</p>
-          <h3 class="card-title">Memory Palace</h3>
-          <p class="card-desc">A game for remembering more, using the oldest trick in the book.</p>
-        </article>
-        <article class="card">
-          <span class="card-pin" aria-hidden="true"></span>
-          <p class="card-meta"><span>51.75°N 1.25°W</span><time datetime="2027-01">2027·01</time></p>
-          <div class="card-media">
-            <div class="pebble pebble--placeholder" data-shape="1" role="img" aria-label="Placeholder image"></div>
-          </div>
-          <p class="card-elev">ELEV 60 m</p>
-          <h3 class="card-title">Daily Puzzle</h3>
-          <p class="card-desc">One small logic puzzle a day. Placeholder for now.</p>
-        </article>
       </div>
     </section>
 
@@ -313,23 +233,12 @@
       <header class="leg-head">
         <p class="leg-bearing"><span>04</span> N 213°</p>
         <h2 class="leg-title" id="language-title">Language Routes</h2>
-        <p class="leg-kicker">Spanish · <span class="in-progress">in progress</span></p>
-        <p class="leg-desc">Learning Spanish one step at a time, with tools I build along the way.</p>
+        <p class="leg-kicker">Mexican Spanish · <span class="in-progress">in progress</span></p>
+        <p class="leg-desc">Learning Mexican Spanish one step at a time, with tools I build along the way.</p>
         <p class="margin-note" aria-hidden="true">¡poco a poco!</p>
       </header>
       <div class="cards">
         <svg class="trail" aria-hidden="true"><path /></svg>
-        <article class="card">
-          <span class="card-pin" aria-hidden="true"></span>
-          <p class="card-meta"><span>40.42°N 3.70°W</span><time datetime="2026-10">2026·10</time></p>
-          <div class="card-media">
-            <div class="pebble pebble--placeholder" data-shape="4" role="img" aria-label="Placeholder image"></div>
-            <span class="stamp">Expedition ongoing</span>
-          </div>
-          <p class="card-elev">ELEV 650 m</p>
-          <h3 class="card-title">Spanish Field Guide</h3>
-          <p class="card-desc">Words, phrases and practice drills from my first year of Spanish.</p>
-        </article>
       </div>
     </section>
 
@@ -338,34 +247,12 @@
       <header class="leg-head">
         <p class="leg-bearing"><span>05</span> N 297°</p>
         <h2 class="leg-title" id="wild-title">The Wild</h2>
-        <p class="leg-kicker">Outdoors &amp; conservation</p>
-        <p class="leg-desc">The natural world, and how technology can help protect it.</p>
+        <p class="leg-kicker">Climbing &amp; conservation</p>
+        <p class="leg-desc">Climbing, time outdoors, and how technology can help protect the natural world.</p>
         <p class="margin-note" aria-hidden="true">the best map is still a walk</p>
       </header>
       <div class="cards">
         <svg class="trail" aria-hidden="true"><path /></svg>
-        <article class="card">
-          <span class="card-pin" aria-hidden="true"></span>
-          <p class="card-meta"><span>19.30°S 22.90°E</span><time datetime="2026-12">2026·12</time></p>
-          <div class="card-media">
-            <div class="pebble pebble--placeholder" data-shape="3" role="img" aria-label="Placeholder image"></div>
-            <span class="stamp">Expedition ongoing</span>
-          </div>
-          <p class="card-elev">ELEV 950 m</p>
-          <h3 class="card-title">Tracking the Delta</h3>
-          <p class="card-desc">How sensors and satellites help protect wildlife in the Okavango.</p>
-        </article>
-        <article class="card">
-          <span class="card-pin" aria-hidden="true"></span>
-          <p class="card-meta"><span>2.33°S 34.83°E</span><time datetime="2027-02">2027·02</time></p>
-          <div class="card-media">
-            <div class="pebble pebble--placeholder" data-shape="1" role="img" aria-label="Placeholder image"></div>
-            <span class="stamp">Expedition ongoing</span>
-          </div>
-          <p class="card-elev">ELEV 1,520 m</p>
-          <h3 class="card-title">Trail Log</h3>
-          <p class="card-desc">Notes and maps from walks, hikes and time outside.</p>
-        </article>
       </div>
     </section>
 
@@ -395,6 +282,7 @@
   </footer>
 
   <script src="shared/field-notes.js"></script>
+  <script src="projects.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
