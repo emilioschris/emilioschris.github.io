@@ -11,7 +11,7 @@
 
    /System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Helpers/jsc \
      tools/setup.js data/sources.js data/method.js data/periods.js \
-     data/entities.js data/geo.js data/hellenika.js tools/check.js
+     data/entities.js data/geo.js data/hellenika.js data/homage.js tools/check.js
    ========================================================= */
 
 (function () {
@@ -83,6 +83,29 @@
       if (!known) fail(w, "relation label \"" + r.rel + "\" has no reverse in method.js");
     });
   });
+
+  // The Deepest Layer: every claim, timeline entry and reference is real and sourced
+  if (K.homage) {
+    var H = K.homage, hw = "The Deepest Layer";
+    var homageClaims = H.life.concat(H.work.map(function (w) { return w.claim; }));
+    homageClaims.forEach(function (c, i) {
+      var cw = hw + " claim " + (i + 1);
+      if (!K.evidence[c.evidence]) fail(cw, "unknown evidence type \"" + c.evidence + "\"");
+      if (!K.confidence[c.confidence]) fail(cw, "unknown confidence \"" + c.confidence + "\"");
+      if (!c.sources || !c.sources.length) fail(cw, "has no source");
+      checkSources(cw, c.sources);
+      checkText(cw, c.text);
+      claims++;
+    });
+    H.timeline.forEach(function (t) { checkSources(hw + " timeline " + t.year, t.sources); checkText(hw + " timeline " + t.year, t.text); });
+    H.bibliography.concat(H.further).forEach(function (id) { if (!K.sources[id]) fail(hw, "bibliography points to unknown source \"" + id + "\""); });
+    H.sites.forEach(function (id) {
+      var place = K.places.filter(function (p) { return p.id === id; })[0];
+      if (!place) fail(hw, "site \"" + id + "\" isn't on the map");
+      else if (!place.homage) fail(hw, "site \"" + id + "\" is missing homage: true");
+    });
+    [H.title, H.dedication, H.intro, H.crossingsCaption].forEach(function (t) { checkText(hw, t); });
+  }
 
   print("Kypriaka data check");
   print("  " + K.periods.length + " layers (" + K.periods.filter(function (p) { return p.excavated; }).length + " excavated), " +

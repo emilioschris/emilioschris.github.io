@@ -8,6 +8,7 @@
    kind      "scholarly"  peer-reviewed article or academic book
              "research"   research institute or university site
              "official"   government or international body
+             "news"       newspaper reports and obituaries
              "reference"  encyclopaedia (useful, but check it)
              "data"       a dataset (map outlines, coordinates)
              "sibling"    Hellenika, the site Kypriaka follows
@@ -196,6 +197,95 @@ KYPRIAKA.sources = {
     citation: "Wikimedia Commons, the free media repository.",
     url: "https://commons.wikimedia.org/",
     usedFor: "Photographs. Each photo is credited to its photographer, with its licence, and links to its own page.",
+    accessed: "2026-10-14",
+  },
+  // ---- The Deepest Layer: Dr Carole McCartney ----
+  "wikipedia-mccartney": {
+    short: "Wikipedia, Carole McCartney",
+    kind: "reference",
+    citation: "Carole McCartney. Wikipedia.",
+    url: "https://en.wikipedia.org/wiki/Carole_McCartney",
+    usedFor: "The Deepest Layer: her birth in Pittsburgh in 1965, her Edinburgh degrees, the number of her papers, her date of death, and the list of publications (each then checked in Crossref).",
+    accessed: "2026-10-14",
+  },
+  "cyprus-mail-aru-2021": {
+    short: "Cyprus Mail (2021), ARU tribute",
+    kind: "news",
+    citation: "ARU pays tribute to archaeologist Dr Carole McCartney. Cyprus Mail, 17 March 2021. Reporting the statement of the Archaeological Research Unit, University of Cyprus.",
+    url: "https://cyprus-mail.com/2021/03/17/aru-pays-tribute-to-archaeologist-dr-carole-mccartney/",
+    usedFor: "The Deepest Layer: her training, arrival in 1987 and settling in 1995, her work across the Eastern Mediterranean, the early date of the Mylouthkia, Tenta and Sydney Cyprus Survey Project material, the Elaborating Early Neolithic Cyprus project, the 2016 conference, the sea routes project, Roudias, and the ARU's words about her.",
+    accessed: "2026-10-14",
+  },
+  "pio-mccartney-2021": {
+    short: "Cyprus PIO (2021)",
+    kind: "official",
+    citation: "Press and Information Office, Republic of Cyprus. Press release on the death of Dr Carole McCartney, 17 March 2021.",
+    url: "https://pio.gov.cy/en/press-releases-article.html?id=19039",
+    usedFor: "Listed for completeness. The link now redirects to the PIO homepage, so no facts are taken from it directly; the Department of Antiquities announcement is reproduced in the archaeology.wiki obituary.",
+    accessed: "2026-10-14",
+  },
+  "archaeology-wiki-mccartney": {
+    short: "archaeology.wiki (2021), obituary",
+    kind: "news",
+    citation: "Obituary for the loss of Carole McCartney. archaeology.wiki, 18 March 2021. Announcement of the Department of Antiquities, Cyprus.",
+    url: "https://www.archaeology.wiki/blog/2021/03/18/obituary-for-the-loss-of-carole-mccartney/",
+    usedFor: "The Deepest Layer: her first season with the Edinburgh mission, her home in Kissonerga, her Cypriot citizenship, Ayia Varvara Asprokremnos and its partners, her museum work and teaching, and the date of her death.",
+    accessed: "2026-10-14",
+  },
+  "mccartney-1996": {
+    short: "McCartney (1996)",
+    kind: "scholarly",
+    citation: "McCartney, C. (1996). A report on the chipped stone assemblage from Tell Iktanu, Jordan. Levant 28(1): 131–155. doi:10.1179/lev.1996.28.1.131",
+    url: "https://doi.org/10.1179/lev.1996.28.1.131",
+    usedFor: "The Deepest Layer: selected bibliography (her work beyond Cyprus).",
+    accessed: "2026-10-14",
+  },
+  "mccartney-1998": {
+    short: "McCartney (1998)",
+    kind: "scholarly",
+    citation: "McCartney, C. (1998). Preliminary report on the chipped stone assemblage from the Aceramic Neolithic site of Ayia Varvara Asprokremnos, Cyprus. Levant 30(1): 85–90. doi:10.1179/lev.1998.30.1.85",
+    url: "https://doi.org/10.1179/lev.1998.30.1.85",
+    usedFor: "The Deepest Layer: her first report on Ayia Varvara Asprokremnos (1998), and the selected bibliography.",
+    accessed: "2026-10-14",
+  },
+  "peltenburg-2000": {
+    short: "Peltenburg et al. (2000)",
+    kind: "scholarly",
+    citation: "Peltenburg, E., Colledge, S., Croft, P., Jackson, A., McCartney, C. and Murray, M. A. (2000). Agro-pastoralist colonization of Cyprus in the 10th millennium BP: initial assessments. Antiquity 74(286): 844–853. doi:10.1017/S0003598X0006049X",
+    url: "https://doi.org/10.1017/S0003598X0006049X",
+    usedFor: "The Deepest Layer: the early colonisation of Cyprus (2000), and the selected bibliography.",
+    accessed: "2026-10-14",
+  },
+  "webb-2009": {
+    short: "Webb et al. (2009)",
+    kind: "scholarly",
+    citation: "Webb, J., Frankel, D., Croft, P. and McCartney, C. (2009). Excavations at Politiko Kokkinorotsos: a Chalcolithic hunting station in Cyprus. Proceedings of the Prehistoric Society 75: 189–237. doi:10.1017/S0079497X00000359",
+    url: "https://doi.org/10.1017/S0079497X00000359",
+    usedFor: "The Deepest Layer: selected bibliography.",
+    accessed: "2026-10-14",
+  },
+  "manning-2010": {
+    short: "Manning et al. (2010)",
+    kind: "scholarly",
+    citation: "Manning, S. W., McCartney, C., Kromer, B. and Stewart, S. T. (2010). The earlier Neolithic in Cyprus: recognition and dating of a Pre-Pottery Neolithic A occupation. Antiquity 84(325): 693–706. doi:10.1017/S0003598X00100171",
+    url: "https://doi.org/10.1017/S0003598X00100171",
+    usedFor: "The Deepest Layer: the Pre-Pottery Neolithic A occupation (2010), and the selected bibliography.",
+    accessed: "2026-10-14",
+  },
+  "stewart-2020": {
+    short: "Stewart et al. (2020)",
+    kind: "scholarly",
+    citation: "Stewart, S. T., Murphy, S., Bikoulis, P., McCartney, C., Manning, S. W. and Hancock, R. G. V. (2020). Early Neolithic chert variability in central Cyprus: geo-chemical and spatial analyses. Journal of Archaeological Science: Reports 29: 102088. doi:10.1016/j.jasrep.2019.102088",
+    url: "https://doi.org/10.1016/j.jasrep.2019.102088",
+    usedFor: "The Deepest Layer: selected bibliography.",
+    accessed: "2026-10-14",
+  },
+  "bolger-clarke-mccartney": {
+    short: "Bolger and Clarke, obituary",
+    kind: "scholarly",
+    citation: "Bolger, D. and Clarke, J. Carole McCartney 1965–2021. Levant 52(3): 299–300. doi:10.1080/00758914.2021.1909869",
+    url: "https://doi.org/10.1080/00758914.2021.1909869",
+    usedFor: "The Deepest Layer: further reading only; no facts are taken from it.",
     accessed: "2026-10-14",
   },
   "hellenika": {

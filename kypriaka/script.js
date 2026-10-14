@@ -256,6 +256,11 @@
       html: `${pageHead("Timeline", "Strata",
         "Today is at the top. Scroll down to dig deeper into the past. Longer periods are thicker, on a gentle square-root scale so short recent layers stay readable; the real dates are written on every layer.")}
       <ol class="strata" aria-label="Layers, from today at the top to the earliest at the bottom">${items}</ol>
+      <a class="stratum-deepest" href="#/deepest">
+        ${BLADE}
+        <span class="stratum-deepest-name">${esc(K.homage.title)}</span>
+        <span class="stratum-deepest-sub">${esc(K.homage.dedication)}</span>
+      </a>
       <p class="strata-bedrock"><span>Bedrock</span> Before the first people</p>`,
     };
   };
@@ -445,7 +450,7 @@
 
   /* ---- Sources ---- */
   const KINDS = [["scholarly", "Scholarly"], ["research", "Research institutes"], ["official", "Official bodies"],
-    ["reference", "Reference works"], ["data", "Data"], ["sibling", "Sibling site"]];
+    ["news", "News and obituaries"], ["reference", "Reference works"], ["data", "Data"], ["sibling", "Sibling site"]];
   views.sources = ({ id } = {}) => ({
     title: "Sources",
     html: `${pageHead("Sources", "Sources",
@@ -468,12 +473,106 @@
     },
   });
 
+  /* ---- The Deepest Layer: Dr Carole McCartney ---- */
+  // A chipped-stone blade: the outline, two ridges down its back, flake scars and fine retouch
+  const BLADE = `
+    <svg class="k-blade" viewBox="0 0 340 96" role="img" aria-label="A chipped-stone blade, drawn for this page">
+      <path class="k-blade-body" d="M16 36L22 30C90 26 190 24 262 28C296 30 318 38 330 48C312 56 284 62 250 64C180 68 90 68 24 64L16 58Z"/>
+      <path class="k-blade-platform" d="M16 36L16 58M22 30C32 38 34 52 24 64"/>
+      <path class="k-blade-ridge" d="M34 42C110 38 210 37 322 47M36 54C120 56 220 56 318 50"/>
+      <path class="k-blade-scar" d="M70 29C84 35 104 37 126 35M140 27C160 33 184 34 210 31M222 28C244 34 268 37 292 38M76 66C98 60 122 59 146 62M160 67C186 61 212 61 238 63M248 63C268 58 290 55 308 52M30 46C40 44 52 44 60 46"/>
+      <path class="k-blade-retouch" d="${Array.from({ length: 22 }, (_, i) => { const x = 70 + i * 11; const y = 67 - Math.pow(Math.max(0, x - 250) / 80, 2) * 14; return `M${x} ${y.toFixed(1)}l2 -5`; }).join("")}"/>
+    </svg>`;
+
+  views.deepest = () => {
+    const H = K.homage;
+    const bib = (ids) => ids.map((id) => {
+      const s = K.sources[id];
+      return `<li><span class="k-source-cite">${esc(s.citation)}</span> ${external(s.url, "DOI")}</li>`;
+    }).join("");
+    return {
+      title: H.title,
+      html: `
+      <article class="k-deepest">
+        <header class="k-deepest-head">
+          ${BLADE}
+          <p class="k-eyebrow">Beneath the Akrotiri phase</p>
+          <h1 tabindex="-1">${esc(H.title)}</h1>
+          <p class="k-deepest-dedication">${esc(H.dedication)}</p>
+          <p class="k-lede">${esc(H.intro)}</p>
+        </header>
+
+        <section class="k-block">
+          <h2 class="p-label">Her life</h2>
+          <ul class="k-claims">${H.life.map(claim).join("")}</ul>
+        </section>
+
+        <section class="k-block">
+          <h2 class="p-label">Her work</h2>
+          ${H.work.map((w) => `<h3 class="k-deepest-sub">${esc(w.title)}</h3><ul class="k-claims">${claim(w.claim)}</ul>`).join("")}
+          <p class="k-actions">${H.sites.map((id) => { const p = placeById.get(id); return `<a class="btn" href="#/map?place=${id}">${esc(p.name)} on the map</a>`; }).join(" ")}</p>
+        </section>
+
+        <section class="k-block">
+          <h2 class="p-label">Possible first crossings</h2>
+          <figure class="k-crossings">
+            <svg id="crossings" class="k-crossings-map" role="img" aria-label="${esc(H.crossingsCaption)}"></svg>
+            <figcaption>${esc(H.crossingsCaption)} <span class="k-src">Source for the project: ${cite(["cyprus-mail-aru-2021"])}</span></figcaption>
+          </figure>
+        </section>
+
+        <section class="k-block">
+          <h2 class="p-label">1987 to 2021</h2>
+          <ol class="k-deepest-timeline">${H.timeline.map((t) => `<li><span class="k-year">${esc(t.year)}</span><span>${esc(t.text)}</span> <span class="k-src">${cite(t.sources)}</span></li>`).join("")}</ol>
+        </section>
+
+        <section class="k-block">
+          <h2 class="p-label">Selected bibliography</h2>
+          <ol class="k-bib">${bib(H.bibliography)}</ol>
+          <p class="k-note">Each confirmed in Crossref. Two further works listed on Wikipedia (a 2008 field report and a 2010 book chapter) couldn't be confirmed, so they're left out.</p>
+          <h3 class="k-deepest-sub">Further reading</h3>
+          <ol class="k-bib">${bib(H.further)}</ol>
+        </section>
+
+        <p class="k-deepest-foot">Facts on this page come from ${cite(["wikipedia-mccartney", "cyprus-mail-aru-2021", "archaeology-wiki-mccartney", "pio-mccartney-2021"])} and her own publications. <a href="#/strata">Back up to the strata</a></p>
+      </article>`,
+      mount() {
+        // The crossings map: the eastern Mediterranean, Cyprus picked out, dotted possible routes
+        const svg = d3.select("#crossings");
+        const node = svg.node();
+        if (!node) return;
+        const w = node.clientWidth || 640, h = Math.round(w * 0.56);
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+        const frame = { type: "MultiPoint", coordinates: [[30.2, 33.6], [36.6, 37.1]] };
+        const projection = d3.geoMercator().fitExtent([[8, 8], [w - 8, h - 8]], frame);
+        const path = d3.geoPath(projection);
+        svg.append("path").attr("class", "k-land").attr("d", path(K.outlines.mediterranean));
+        svg.append("path").attr("class", "k-island").attr("d", path(K.outlines.cyprus));
+        H.crossings.forEach((c, i) => {
+          const [x1, y1] = projection(c.from), [x2, y2] = projection(c.to);
+          const mx = (x1 + x2) / 2 + (i ? -20 : 26), my = (y1 + y2) / 2 + (i ? -26 : -10);
+          svg.append("path").attr("class", "k-crossing").attr("d", `M${x1} ${y1}Q${mx} ${my} ${x2} ${y2}`);
+          svg.append("circle").attr("class", "k-crossing-end").attr("cx", x1).attr("cy", y1).attr("r", 3.5);
+          const [lx, ly] = projection(c.labelAt || c.from);
+          svg.append("text").attr("class", "k-crossing-label").attr("x", lx).attr("y", ly).attr("text-anchor", c.anchor || "start").text(c.label);
+        });
+        H.sites.forEach((id) => {
+          const p = placeById.get(id);
+          const [x, y] = projection([p.lon, p.lat]);
+          svg.append("circle").attr("class", "k-crossing-site").attr("cx", x).attr("cy", y).attr("r", 3);
+        });
+        svg.append("text").attr("class", "k-crossing-note").attr("x", w - 10).attr("y", h - 10).attr("text-anchor", "end").text("Approximate and illustrative");
+      },
+    };
+  };
+
   /* ---- About & method ---- */
   views.about = () => {
     const example = { text: "Cyprus has been a member state of the European Union since 1 May 2004.", evidence: "documentary", confidence: "established", sources: ["eu-cyprus"] };
     return {
       title: "About & method",
       html: `${pageHead("About &amp; method", "About &amp; method", "")}
+      <p class="k-dedication">This excavation is dedicated to Dr Carole McCartney (1965 to 2021), who read the island's first chapters in stone. <a href="#/deepest">See The Deepest Layer ↓</a></p>
       <section class="k-block k-credit">
         <h2 class="p-label">A sibling of <span lang="el">Ἑλληνικά</span></h2>
         <p>Kypriaka is built in the shape of <b lang="el">Ἑλληνικά</b> (Hellenika), George Philippou's interactive atlas of the Ancient Greek world. Its structure (a timeline, a map, connected entities, search, sources, and a system for tagging every claim with its evidence and confidence) is George's work, mirrored here with his permission. Thank you, George.</p>
@@ -545,8 +644,9 @@
       <p class="p-coords">${lat} ${lon}</p>
       <h2 class="p-title" id="panel-title">${esc(place.name)}</h2>
       ${place.altNames ? `<p class="k-alt">${place.altNames.map(esc).join(" · ")}</p>` : ""}
-      ${found.length ? "" : notExcavated("Not yet excavated")}
+      ${found.length || place.homage ? "" : notExcavated("Not yet excavated")}
       ${place.approx ? `<p class="k-approx">${esc(place.approx)}</p>` : ""}
+      ${place.homage ? `<section class="p-section"><p class="p-label">In memory</p><p>A key site in the work of the archaeologist Carole McCartney. <a href="#/deepest">See The Deepest Layer</a></p></section>` : ""}
       ${found.length ? `<section class="p-section"><p class="p-label">Found here</p><ul class="k-links">${found.map((e) => `<li>${linkTo(e.id)} <span class="k-muted">${esc((K.types[e.type] || {}).label || "")}</span></li>`).join("")}</ul></section>` : ""}
       ${layers.length ? `<section class="p-section"><p class="p-label">Layers</p><ul class="k-links">${layers.map((l) => `<li><a href="#/layer/${l.id}">${esc(l.name)}</a> <span class="k-muted">${esc(l.dates)}</span></li>`).join("")}</ul></section>` : ""}
       ${place.hellenika ? `<section class="p-section"><p class="p-label">See also in <span lang="el">Ἑλληνικά</span></p><p>${external(hellenikaUrl(place.hellenika), esc(K.hellenika.pages[place.hellenika] || place.name))}</p></section>` : ""}
@@ -659,7 +759,8 @@
      names work with or without accents.
      --------------------------------------------------------- */
   const PAGES = [["Strata", "#/strata"], ["Map", "#/map"], ["Explore", "#/explore"], ["Myth & cult", "#/myth"],
-    ["Thinkers & faith", "#/thinkers"], ["Sources", "#/sources"], ["About & method", "#/about"]];
+    ["Thinkers & faith", "#/thinkers"], ["Sources", "#/sources"], ["About & method", "#/about"],
+    ["The Deepest Layer · Carole McCartney", "#/deepest"]];
   const searchIndex = [
     ...periods.map((p) => ({ label: p.name, detail: `Layer · ${p.dates}`, href: `#/layer/${p.id}`, hay: [p.name, p.subtitle, p.era, p.dates] })),
     ...K.entities.map((e) => ({ label: e.name, detail: (K.types[e.type] || {}).label || e.type, href: `#/e/${e.id}`, hay: [e.name, ...(e.altNames || []), e.summary] })),
@@ -726,7 +827,7 @@
   const ROUTES = [
     ["/", views.home], ["/strata", views.strata], ["/layer/:id", views.layer], ["/map", views.map],
     ["/explore", views.explore], ["/e/:id", views.entity], ["/myth", views.myth], ["/thinkers", views.thinkers],
-    ["/sources", views.sources], ["/sources/:id", views.sources], ["/about", views.about],
+    ["/sources", views.sources], ["/sources/:id", views.sources], ["/about", views.about], ["/deepest", views.deepest],
   ].map(([pattern, fn]) => {
     const keys = [];
     const rx = new RegExp("^" + pattern.replace(/:([a-z]+)/g, (_, key) => { keys.push(key); return "([^/]+)"; }) + "$");
@@ -752,7 +853,7 @@
 
     // Highlight the current section tab
     const top = "/" + (path.split("/")[1] || "");
-    const tabFor = { "/layer": "/strata", "/e": "/explore" }[top] || top;
+    const tabFor = { "/layer": "/strata", "/e": "/explore", "/deepest": "/strata" }[top] || top;
     document.querySelectorAll(".k-tabs a").forEach((a) => {
       if (a.dataset.tab === tabFor) a.setAttribute("aria-current", "page");
       else a.removeAttribute("aria-current");

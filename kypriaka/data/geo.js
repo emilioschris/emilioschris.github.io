@@ -14,6 +14,8 @@
              mini: the same for the small layer maps ("left", "below").
              approx: a note when the coordinates are a nearby village
              or monument rather than the ancient site itself.
+             homage: a key site in the work of Carole McCartney; its
+             panel links to The Deepest Layer.
              altNames: Greek and Turkish names, from Wikidata labels
              (Palaepaphos uses the labels of Kouklia, Q930838; Pyla-
              Kokkinokremos's Greek name is from its Wikipedia article).
@@ -22,6 +24,9 @@
 window.KYPRIAKA = window.KYPRIAKA || {};
 
 KYPRIAKA.places = [
+    {"id": "asprokremnos", "name": "Ayia Varvara Asprokremnos", "scope": "cyprus", "lat": 34.998, "lon": 33.369, "wikidata": "Q1942703", "homage": true, "altNames": ["Asprokremmos"], "approx": "These are the coordinates of Agia Varvara village (Nicosia District); the Neolithic site lies nearby, in the Troodos foothills."},
+    {"id": "mylouthkia", "label": "left", "name": "Kissonerga Mylouthkia", "scope": "cyprus", "lat": 34.823, "lon": 32.401, "wikidata": "Q6417285", "homage": true, "altNames": ["Κισσόνεργα-Μυλούθκια", "Cisonerga"], "approx": "These are the coordinates of Kissonerga village; the Mylouthkia wells lie nearby. The site's own Wikidata entry (Q25385619) has no coordinates."},
+    {"id": "tenta", "mini": "below", "name": "Kalavasos Tenta", "scope": "cyprus", "lat": 34.753, "lon": 33.303, "wikidata": "Q1404714", "homage": true, "altNames": ["Tenta"]},
     {"id": "aetokremnos", "name": "Akrotiri Aetokremnos", "scope": "cyprus", "lat": 34.571, "lon": 32.991, "wikidata": "Q1752701", "altNames": ["Αετόκρεμνος", "Aetokremnos"]},
     {"id": "khirokitia", "name": "Khirokitia (Choirokoitia)", "scope": "cyprus", "lat": 34.797, "lon": 33.344, "wikidata": "Q385086", "hellenika": "choirokoitia", "altNames": ["Χοιροκοιτία", "Hirokitya"]},
     {"id": "enkomi", "label": "left", "name": "Enkomi", "scope": "cyprus", "lat": 35.162, "lon": 33.883, "wikidata": "Q1343280", "hellenika": "enkomi", "altNames": ["Έγκωμη", "Tuzla"]},
