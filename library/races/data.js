@@ -51,7 +51,7 @@ const RACES = [
     time: "4:47:42",
     course: "The original route: from the town of Marathon past the Tomb of the Athenians, a long climb from km 10 to km 31, then down into the marble Panathenaic Stadium.",
     link: "https://www.athensauthenticmarathon.gr/en/",
-    notes: "",
+    notes: "My first race, and I hadn't trained enough for it. Major leg cramps set in along the way, but we made it over the finish line.",
     photo: null,
     profile: {
       points: [[0, 30], [4, 25], [10, 40], [14, 85], [18, 120], [21, 140], [24, 165], [27, 200], [29, 228], [31, 245], [33, 210], [36, 150], [39, 105], [42.195, 70]],
@@ -73,12 +73,12 @@ const RACES = [
     edition: "",
     place: "Hampton, New Hampshire",
     coords: "42.91°N 70.81°W",
-    date: "2025",
+    date: "2025-03-02",
     distanceKm: 21.0975,
     time: "1:51:25",
     course: "Flat, fast and coastal: the course runs along Hampton Beach with the Atlantic in view.",
     link: "https://hamptonhalf.com/",
-    notes: "",
+    notes: "Race morning was −15 °C. Crazy cold.",
     photo: null,
     profile: {
       points: [[0, 4], [2, 5], [4, 8], [6, 4], [8, 6], [10, 9], [12, 5], [14, 4], [16, 7], [18, 4], [21.1, 4]],
@@ -104,7 +104,7 @@ const RACES = [
     time: "2:02:05",
     course: "From Easton's Beach through town to Fort Adams, around the Ocean Drive loop and past Bellevue Avenue's mansions, then back to the beach.",
     link: "https://newportmarathon.com/",
-    notes: "",
+    notes: "Insanely fun and so beautiful: the Newport cows, and the mansions along the coast.",
     photo: null,
     profile: {
       points: [[0.0, 2], [0.6, 6], [1.0, 19], [1.3, 20], [1.6, 22], [1.9, 9], [2.3, 5], [2.7, 5], [3.2, 3], [3.9, 4], [4.2, 12], [4.5, 15], [4.8, 14], [5.1, 16], [5.6, 15], [5.8, 6], [6.3, 8], [6.8, 14], [7.4, 12], [7.9, 7], [8.2, 10], [8.7, 7], [9.7, 5], [10.5, 5], [11.3, 7], [11.7, 10], [12.2, 5], [12.9, 5], [13.2, 11], [13.7, 6], [14.2, 11], [14.6, 8], [15.3, 11], [16.1, 15], [16.7, 15], [17.1, 11], [17.7, 16], [18.2, 17], [18.7, 18], [19.3, 20], [20.0, 21], [20.3, 6], [20.9, 4], [21.1, 4]],
