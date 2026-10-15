@@ -186,7 +186,7 @@
       html: `
       <section class="k-home">
         <div class="k-home-intro">
-          <p class="k-eyebrow">Base Camp · History · Stage 1</p>
+          <p class="k-eyebrow">Base Camp · History · ${excavated === periods.length ? "Stage 2" : "Stage 1"}</p>
           <h1 class="k-title" tabindex="-1"><span lang="el">Κυπριακά</span> <em>Kypriaka</em></h1>
           <p class="k-lede">The island every empire passed through, dug layer by layer: from the first people on Cyprus, about ${fmtNum(ago)} years ago, to today. Every claim shows its source, the kind of evidence behind it, and how sure anyone can be.</p>
           <p class="k-actions"><a class="btn btn--solid" href="#/strata">Dig in</a> <a class="btn" href="#/map">Open the map</a> <a class="btn" href="#/about">How it works</a></p>
@@ -207,7 +207,7 @@
 
       <section class="k-block k-stage">
         ${excavated ? `<p class="stamp stamp--large stamp--visited k-stamp">${excavated} of ${periods.length} layers excavated</p>` : notExcavated("Stage 1: mapped, not yet excavated")}
-        <p>${excavated ? `Excavated so far: ${periods.filter((p) => p.excavated).map((p) => `<a href="#/layer/${p.id}">${esc(p.name)}</a> (${esc(p.dates)})`).join(", ")}. The other layers have cited dates and wait their turn.` : "The layers, their dates and their sources are in place. The people, places, objects and events inside them come next, one layer at a time."}</p>
+        <p>${excavated === periods.length ? "Every layer now has a sourced overview, the people, places, objects and events found in it, and its sites on the map. Most claims still rest on one encyclopedia; the next pass checks them against scholarly and official sources." : excavated ? `Excavated so far: ${periods.filter((p) => p.excavated).map((p) => `<a href="#/layer/${p.id}">${esc(p.name)}</a> (${esc(p.dates)})`).join(", ")}. The other layers have cited dates and wait their turn.` : "The layers, their dates and their sources are in place. The people, places, objects and events inside them come next, one layer at a time."}</p>
       </section>`,
     };
   };
@@ -686,7 +686,7 @@
     return {
       title: "Map",
       html: `${pageHead("Map", "Map",
-        "Cyprus, and the eastern Mediterranean it was always connected to. Places are marked but not yet excavated; select one to see its layers.")}
+        "Cyprus, and the eastern Mediterranean it was always connected to. Select a place to see its layers and what has been found there.")}
       <div class="pill-group k-map-switch" role="group" aria-label="Map view">
         <button type="button" data-scope="cyprus" aria-pressed="${scope === "cyprus"}">The island</button>
         <button type="button" data-scope="mediterranean" aria-pressed="${scope === "mediterranean"}">Eastern Mediterranean</button>

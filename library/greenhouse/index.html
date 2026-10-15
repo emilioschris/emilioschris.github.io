@@ -21,7 +21,7 @@
   <meta name="twitter:image:alt" content="A red-tailed hawk with a terracotta tail perched on a branch over faint contour lines, beside the words Field Notes and the coordinates 35.1°N 33.4°E.">
 
   <!-- Same Day/Dusk choice as the homepage, applied before the page draws -->
-  <script src="../../shared/theme-init.js?v=2026-10-14.14"></script>
+  <script src="../../shared/theme-init.js?v=2026-10-15.1"></script>
 
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -38,8 +38,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..600&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Instrument+Sans:wght@400..600&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 
   <!-- The shared design system, then the Greenhouse's own styles -->
-  <link rel="stylesheet" href="../../shared/field-notes.css?v=2026-10-14.14">
-  <link rel="stylesheet" href="styles.css?v=2026-10-14.14">
+  <link rel="stylesheet" href="../../shared/field-notes.css?v=2026-10-15.1">
+  <link rel="stylesheet" href="styles.css?v=2026-10-15.1">
 </head>
 <body class="gh-page">
 
@@ -94,6 +94,8 @@
         <!-- Light and glass: decoration only -->
         <div class="gh-sky" aria-hidden="true"></div>
         <svg class="gh-frame" id="gh-frame" aria-hidden="true" focusable="false"></svg>
+        <div class="gh-beams" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+        <div class="gh-mist" aria-hidden="true"></div>
         <div class="gh-lamps" id="gh-lamps" aria-hidden="true"></div>
         <svg class="gh-family" id="gh-family" aria-hidden="true" focusable="false"></svg>
 
@@ -126,13 +128,13 @@
   <!-- Small confirmation with an undo -->
   <div class="gh-toast" id="toast" role="status" aria-live="polite" hidden></div>
 
-  <script src="../../shared/field-notes.js?v=2026-10-14.14"></script>
-  <script src="data.js?v=2026-10-14.14"></script>
-  <script src="script.js?v=2026-10-14.14"></script>
+  <script src="../../shared/field-notes.js?v=2026-10-15.1"></script>
+  <script src="data.js?v=2026-10-15.1"></script>
+  <script src="script.js?v=2026-10-15.1"></script>
   <script>
     // The offline helper (sw.js). Its ?v= matches the files above, so a new version clears the old copies.
     if ("serviceWorker" in navigator && location.protocol === "https:") {
-      navigator.serviceWorker.register("sw.js?v=2026-10-14.14").catch(() => {});
+      navigator.serviceWorker.register("sw.js?v=2026-10-15.1").catch(() => {});
     }
   </script>
 </body>

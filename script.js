@@ -68,7 +68,7 @@
     const pebble = el("div", "pebble");
     pebble.dataset.shape = project.shape || (index % 4) + 1;
     if (project.image && typeof project.image === "object") {
-      // A photo, shown in its real colours (see .pebble--photo in field-notes.css)
+      // A photo, tinted in the palette (see .pebble--photo in field-notes.css)
       pebble.classList.add("pebble--photo");
       pebble.dataset.tone = project.image.tone || "terracotta";
       const img = el("img");

@@ -4,8 +4,8 @@
    1. Answers: reading data.js, matching what people type
    2. Rarity: world tier, adjusted by friend counts (survey)
    3. Saved games (localStorage, always inside try/catch)
-   4. Sound (Web Audio, made on the fly, no files): feedback only
-   5. The water: colour by depth, the depth gauge, bubbles on a catch
+   4. Sound (Web Audio, made on the fly, no files)
+   5. The water: colour by depth, bubbles, the depth gauge
    6. The Daily Dive
    ========================================================= */
 (() => {
@@ -174,7 +174,7 @@
      require that), and the mute choice is remembered.
      --------------------------------------------------------- */
   const Sound = (() => {
-    let ctx = null, master = null;
+    let ctx = null, master = null, hum = null;
     let muted = false;
     try { muted = localStorage.getItem(SOUND_KEY) === "off"; } catch (e) { /* default on */ }
 
@@ -240,6 +240,28 @@
         tone({ freq: 110, to: 48, dur: 0.28, gain: 0.35, type: "sine" });
         noise({ dur: 0.12, gain: 0.25, cutoff: 280 });
       },
+      // A low hum that sinks as you go deeper (0 = surface, 1 = deepest)
+      hum(depth) {
+        if (!ctx || muted) { this.humOff(); return; }
+        if (!hum) {
+          const o = ctx.createOscillator(), o2 = ctx.createOscillator(), f = ctx.createBiquadFilter(), g = ctx.createGain();
+          o.type = "sawtooth"; o2.type = "sine";
+          f.type = "lowpass"; f.Q.value = 0.7;
+          g.gain.value = 0.0001;
+          o.connect(f); o2.connect(f); f.connect(g).connect(master);
+          o.start(); o2.start();
+          hum = { o, o2, f, g };
+        }
+        const t = ctx.currentTime;
+        hum.o.frequency.setTargetAtTime(62 - 26 * depth, t, 1.5);
+        hum.o2.frequency.setTargetAtTime(31 - 13 * depth, t, 1.5);
+        hum.f.frequency.setTargetAtTime(240 - 140 * depth, t, 1.5);
+        hum.g.gain.setTargetAtTime(0.035 + 0.03 * depth, t, 1.5);
+      },
+      humOff() {
+        if (!hum || !ctx) return;
+        hum.g.gain.setTargetAtTime(0.0001, ctx.currentTime, 0.6);
+      },
     };
   })();
 
@@ -254,7 +276,7 @@
     soundBtn.querySelector(".sound-label").textContent = Sound.muted ? "Sound off" : "Sound on";
     soundBtn.classList.toggle("is-muted", Sound.muted);
   }
-  soundBtn.addEventListener("click", () => { Sound.wake(); Sound.setMuted(!Sound.muted); paintSound(); });
+  soundBtn.addEventListener("click", () => { Sound.wake(); Sound.setMuted(!Sound.muted); paintSound(); if (!Sound.muted && diving) Sound.hum(depthNow / MAX_DAILY_DEPTH); });
   paintSound();
 
   /* ---------------------------------------------------------
@@ -301,46 +323,59 @@
     $("gauge-scale").innerHTML = s;
   }
 
-  // Bubbles: a short burst on a right answer (more for deeper tiers),
-  // then still water. Nothing moves with reduced motion.
+  // Bubbles rising, a little faster near the surface. Stops when the
+  // tab is hidden; with reduced motion only a few sit still.
   const canvas = $("bubbles"), g = canvas.getContext("2d");
-  let bubbles = [], W = 0, H = 0, dpr = 1, lastT = 0, running = false;
+  let bubbles = [], W = 0, H = 0, dpr = 1, lastT = 0;
   function sizeCanvas() {
     dpr = Math.min(2, window.devicePixelRatio || 1);
     W = canvas.clientWidth; H = canvas.clientHeight;
     canvas.width = W * dpr; canvas.height = H * dpr;
+    const n = Math.round(Math.min(46, (W * H) / 26000));
+    bubbles = Array.from({ length: n }, () => newBubble(true));
   }
+  function newBubble(anywhere) {
+    return { x: Math.random() * W, y: anywhere ? Math.random() * H : H + 10, r: 1 + Math.random() * 4.5, v: 12 + Math.random() * 30, w: Math.random() * Math.PI * 2 };
+  }
+  // A burst of bubbles on a right answer (more for deeper tiers)
   function burst(tier) {
     if (reduced()) return;
-    const n = 8 + tier * 6;
     const from = $("catch").getBoundingClientRect();
     const x0 = from.width ? from.left + from.width / 2 : W / 2, y0 = from.width ? from.top + 30 : H * 0.7;
-    for (let i = 0; i < n; i++) {
+    for (let i = 0; i < 8 + tier * 6; i++) {
       bubbles.push({ x: x0 + (Math.random() - 0.5) * 160, y: y0 + Math.random() * 40, r: 1.5 + Math.random() * 4, v: 60 + Math.random() * 90, w: Math.random() * 6, life: 1 });
     }
-    if (!running) { running = true; requestAnimationFrame((t) => { lastT = t; drawBubbles(t); }); }
   }
   function drawBubbles(t) {
     const dt = Math.min(0.05, (t - lastT) / 1000 || 0);
     lastT = t;
     g.setTransform(dpr, 0, 0, dpr, 0, 0);
     g.clearRect(0, 0, W, H);
+    const alpha = document.body.classList.contains("is-deep") ? 0.32 : 0.5;
+    bubbles = bubbles.filter((b) => b.life === undefined || (b.life > 0 && b.y > -10));
     for (const b of bubbles) {
-      b.y -= b.v * dt;
-      b.w += dt * 3;
-      b.life -= dt * 0.55;
-      const x = b.x + Math.sin(b.w) * 5, a = Math.max(0, b.life) * 0.6;
+      if (!reduced()) {
+        b.y -= b.v * dt;
+        b.w += dt * 1.6;
+        if (b.life !== undefined) b.life -= dt * 0.55;
+        else if (b.y < -10) Object.assign(b, newBubble(false));
+      }
+      const x = b.x + Math.sin(b.w) * 6;
       g.beginPath();
       g.arc(x, b.y, b.r, 0, Math.PI * 2);
-      g.strokeStyle = `rgba(255, 255, 255, ${a})`;
+      g.strokeStyle = `rgba(255, 255, 255, ${b.life === undefined ? alpha : Math.max(0, b.life) * 0.6})`;
       g.lineWidth = 1;
       g.stroke();
+      g.beginPath();
+      g.arc(x - b.r * 0.35, b.y - b.r * 0.35, b.r * 0.25, 0, Math.PI * 2);
+      g.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+      g.fill();
     }
-    bubbles = bubbles.filter((b) => b.life > 0 && b.y > -10);
-    if (bubbles.length) requestAnimationFrame(drawBubbles);
-    else { running = false; g.clearRect(0, 0, W, H); }
+    if (!reduced() && !document.hidden) requestAnimationFrame(drawBubbles);
   }
-  window.addEventListener("resize", sizeCanvas);
+  function startBubbles() { requestAnimationFrame((t) => { lastT = t; drawBubbles(t); }); }
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) startBubbles(); });
+  window.addEventListener("resize", () => { sizeCanvas(); if (reduced()) drawBubbles(lastT); });
 
   /* ---------------------------------------------------------
      6. THE DAILY DIVE
@@ -445,6 +480,7 @@
     $("guess").value = "";
     $("guess").focus({ preventScroll: true });
     Sound.ping();
+    Sound.hum(run.depth / MAX_DAILY_DEPTH);
     paintAir();
     round.raf = requestAnimationFrame(tick);
     // A backup clock, in case animation frames are paused
@@ -528,6 +564,7 @@
     }
     $("play-depth").textContent = `${run.depth.toLocaleString("en-GB")} m`;
     setDepth(run.depth);
+    Sound.hum(run.depth / MAX_DAILY_DEPTH);
     const last = run.i === run.prompts.length - 1;
     $("next").textContent = last ? "Surface" : "Next prompt";
     $("next").focus({ preventScroll: true });
@@ -543,6 +580,7 @@
     saved.days[dayKey(run.day)] = result;
     save();
     diving = false;
+    Sound.humOff();
     renderEnd(result, run.day);
   });
 
@@ -603,6 +641,7 @@
      --------------------------------------------------------- */
   drawScale();
   sizeCanvas();
+  startBubbles();
   renderStart();
 
   // For checking the data: DEEP.check() in the console lists any

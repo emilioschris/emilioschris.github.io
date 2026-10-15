@@ -81,6 +81,9 @@
       if (!ids[r.id]) fail(w, "relation points to unknown \"" + r.id + "\"");
       var known = has(K.inverse, r.rel) || Object.keys(K.inverse).some(function (k) { return K.inverse[k] === r.rel; });
       if (!known) fail(w, "relation label \"" + r.rel + "\" has no reverse in method.js");
+      var back = K.entities.filter(function (o) { return o.id === r.id; })[0];
+      if (back && (back.relations || []).some(function (b) { return b.id === e.id; }))
+        fail(w, "relation to \"" + r.id + "\" is written in both directions (write it once; the reverse appears automatically)");
     });
   });
 
