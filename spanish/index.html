@@ -19,7 +19,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://emilioschris.github.io/og-image.png">
 
-  <script src="../shared/theme-init.js?v=2026-10-14.12"></script>
+  <script src="../shared/theme-init.js?v=2026-10-14.13"></script>
 
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../apple-touch-icon.png">
@@ -28,8 +28,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..600&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Instrument+Sans:wght@400..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="../shared/field-notes.css?v=2026-10-14.12">
-  <link rel="stylesheet" href="styles.css?v=2026-10-14.12">
+  <link rel="stylesheet" href="../shared/field-notes.css?v=2026-10-14.13">
+  <link rel="stylesheet" href="styles.css?v=2026-10-14.13">
 </head>
 <body class="spanish-page">
 
@@ -72,10 +72,29 @@
         <button class="btn btn--big" id="free" type="button">Free climb</button>
         <p class="home-hint" id="free-hint"></p>
       </div>
+      <div class="home-actions home-actions--build">
+        <button class="btn btn--big" id="build" type="button">Sentence builder</button>
+        <p class="home-hint" id="build-hint"></p>
+      </div>
       <figure class="mountain">
         <figcaption class="mountain-title">The mountain · words at each camp</figcaption>
         <div id="mountain"></div>
       </figure>
+
+      <!-- ================= LOGBOOK: saved automatically, day by day ================= -->
+      <section class="logbook" aria-labelledby="logbook-title">
+        <div class="logbook-head">
+          <h2 class="gear-title" id="logbook-title">Logbook</h2>
+          <p class="logbook-sum" id="logbook-sum"></p>
+        </div>
+        <div class="logbook-cal" id="logbook-cal"></div>
+        <div class="logbook-key" aria-hidden="true">Less <i class="lv0"></i><i class="lv1"></i><i class="lv2"></i><i class="lv3"></i><i class="lv4"></i> More</div>
+        <div class="logbook-day" id="logbook-day" aria-live="polite"></div>
+        <figure class="logbook-chart">
+          <figcaption class="mountain-title">Words known, last 60 days</figcaption>
+          <div id="logbook-chart"></div>
+        </figure>
+      </section>
 
       <!-- ================= ROUTE AND GEAR ================= -->
       <section class="gear" aria-labelledby="gear-title">
@@ -140,13 +159,23 @@
       <article class="card" id="card" aria-live="polite"></article>
     </section>
 
+    <!-- ================= SENTENCE BUILDER ================= -->
+    <section class="screen" id="builder" hidden aria-label="Sentence builder">
+      <div class="study-top">
+        <button class="btn study-quit" id="build-quit" type="button">End early</button>
+        <div class="study-progress" aria-hidden="true"><span id="build-bar"></span></div>
+        <p class="study-count" id="build-count" aria-live="polite"></p>
+      </div>
+      <article class="card build-card" id="build-card"></article>
+    </section>
+
     <!-- ================= END: the day's summary ================= -->
     <section class="screen" id="end" hidden aria-labelledby="end-title"></section>
   </main>
 
-  <script src="../shared/field-notes.js?v=2026-10-14.12"></script>
-  <script src="data.js?v=2026-10-14.12"></script>
-  <script src="audio.js?v=2026-10-14.12"></script>
-  <script src="script.js?v=2026-10-14.12"></script>
+  <script src="../shared/field-notes.js?v=2026-10-14.13"></script>
+  <script src="data.js?v=2026-10-14.13"></script>
+  <script src="audio.js?v=2026-10-14.13"></script>
+  <script src="script.js?v=2026-10-14.13"></script>
 </body>
 </html>

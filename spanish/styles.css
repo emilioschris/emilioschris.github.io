@@ -288,3 +288,121 @@ kbd {
   .study-progress { grid-column: 1 / -1; }
   .option kbd, .replay kbd, .fb-next kbd { display: none; }   /* no keyboard on a phone */
 }
+
+/* ---------- Logbook: saved automatically, day by day ---------- */
+.logbook { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--rule); }
+.logbook-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 18px; }
+.logbook-sum { font: 11px/1.4 var(--font-mono); color: var(--muted); }
+.logbook-cal { margin-top: 16px; overflow-x: auto; }
+.cal-grid {
+  display: grid;
+  grid-template-columns: 18px repeat(12, minmax(18px, 40px));
+  grid-template-rows: 16px;
+  grid-auto-rows: auto;
+  gap: 5px;
+  max-width: 560px;
+}
+.cal-months { display: contents; }
+.cal-months span { grid-row: 1; font: 10px/16px var(--font-mono); color: var(--muted); white-space: nowrap; }
+.cal-wd { grid-column: 1; align-self: center; font: 10px/1 var(--font-mono); color: var(--muted); }
+.cal-cell {
+  width: 100%;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--text) 7%, transparent);
+  cursor: pointer;
+}
+.cal-cell.lv1 { background: color-mix(in srgb, var(--secondary) 30%, transparent); }
+.cal-cell.lv2 { background: color-mix(in srgb, var(--secondary) 55%, transparent); }
+.cal-cell.lv3 { background: color-mix(in srgb, var(--secondary) 80%, transparent); }
+.cal-cell.lv4 { background: var(--accent); }
+.cal-cell.is-future { background: none; border: 1px dashed var(--rule); cursor: default; }
+.cal-cell.is-today { box-shadow: inset 0 0 0 2px var(--text); }
+.cal-cell.is-shown { outline: 2px solid var(--accent); outline-offset: 2px; }
+.cal-cell:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+.logbook-key { display: flex; align-items: center; gap: 4px; margin-top: 10px; font: 10px var(--font-mono); color: var(--muted); }
+.logbook-key i { width: 12px; height: 12px; border-radius: 3px; background: color-mix(in srgb, var(--text) 7%, transparent); }
+.logbook-key .lv1 { background: color-mix(in srgb, var(--secondary) 30%, transparent); }
+.logbook-key .lv2 { background: color-mix(in srgb, var(--secondary) 55%, transparent); }
+.logbook-key .lv3 { background: color-mix(in srgb, var(--secondary) 80%, transparent); }
+.logbook-key .lv4 { background: var(--accent); }
+
+.logbook-day {
+  margin-top: 18px;
+  padding: 16px 18px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  background: var(--bg-raised);
+}
+.day-title { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-family: var(--font-display); font-size: 1.3rem; }
+.day-stamp { font-size: 9px; transform: rotate(-3deg); }
+.day-none { margin-top: 6px; color: var(--muted); font-size: 0.95rem; }
+.day-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 12px 16px; margin-top: 12px; }
+.day-stats dt { font: 10px/1.2 var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.day-stats dd { margin: 2px 0 0; font-family: var(--font-display); font-size: 1.6rem; line-height: 1; }
+
+.logbook-chart { margin-top: 22px; }
+.logbook-chart svg { display: block; width: 100%; height: auto; }
+.ch-axis { stroke: var(--rule); stroke-width: 1; }
+.ch-goal { stroke: var(--secondary); stroke-width: 1; stroke-dasharray: 3 5; }
+.ch-area { fill: color-mix(in srgb, var(--accent) 14%, transparent); }
+.ch-line { fill: none; stroke: var(--accent); stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; }
+.ch-dot { fill: var(--accent); }
+.ch-label { font: 10px var(--font-mono); fill: var(--muted); }
+
+/* ---------- Sentence builder ---------- */
+.home-actions--build { margin-top: 14px; }
+.build-en { margin-top: 10px; font-family: var(--font-display); font-size: clamp(1.4rem, 3.4vw, 1.9rem); line-height: 1.2; }
+.build-uses { margin-top: 6px; font: 11px/1.4 var(--font-mono); color: var(--muted); }
+.build-uses span { color: var(--accent-text); }
+.build-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 8px;
+  min-height: 64px;
+  margin-top: 20px;
+  padding: 10px;
+  border: 1.5px dashed color-mix(in srgb, var(--text) 25%, transparent);
+  border-radius: 14px;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+.build-line.is-over { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 6%, transparent); }
+.build-empty { align-self: center; padding: 0 6px; color: var(--muted); font-size: 0.92rem; }
+.build-bank { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; min-height: 46px; }
+.tile {
+  padding: 9px 14px;
+  border: 1px solid color-mix(in srgb, var(--text) 22%, transparent);
+  border-radius: 10px;
+  background: var(--bg-raised);
+  color: var(--text);
+  font: 400 1.08rem/1.2 var(--font-body);
+  box-shadow: 0 2px 0 color-mix(in srgb, var(--text) 14%, transparent);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.tile:hover { border-color: var(--text); }
+.tile:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+.tile--placed { background: color-mix(in srgb, var(--accent) 10%, var(--bg-raised)); border-color: color-mix(in srgb, var(--accent) 45%, transparent); }
+.tile--gap { visibility: hidden; }
+.tile--lifted { opacity: 0.35; }
+.tile--ghost {
+  position: fixed;
+  z-index: 100;
+  translate: -50% -60%;
+  rotate: -3deg;
+  pointer-events: none;
+  box-shadow: 0 14px 24px -10px rgba(20, 14, 8, 0.45);
+  cursor: grabbing;
+}
+.tile.is-right { background: color-mix(in srgb, var(--secondary) 22%, var(--bg-raised)); border-color: var(--secondary); }
+.tile.is-wrong { background: color-mix(in srgb, var(--accent) 18%, var(--bg-raised)); border-color: var(--accent); }
+.tile:disabled { cursor: default; }
+.build-actions { display: flex; justify-content: space-between; gap: 10px; margin-top: 20px; }
+.card--shake { animation: shake 0.35s; }
+@keyframes shake { 20%, 60% { translate: -5px 0; } 40%, 80% { translate: 5px 0; } }
+@media (prefers-reduced-motion: reduce) { .card--shake { animation: none; } }

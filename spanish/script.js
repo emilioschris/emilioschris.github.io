@@ -6,7 +6,7 @@
    3. Checking typed answers (accents, ñ, articles)
    4. Audio (the browser's own Spanish voice)
    5. The session: cards, feedback, end screen
-   6. Home screen and keyboard
+   6. Home screen, logbook, sentence builder and keyboard
    ========================================================= */
 (() => {
   "use strict";
@@ -27,7 +27,8 @@
     settings: { newPerDay: 10, cap: 40, decks: [] },   // decks: [] = all
     streak: { count: 0, lastDay: "" },
     newToday: { day: "", count: 0 },
-    history: [],   // { day, total, correct, climbed, dropped }
+    history: [],   // { day, total, correct, climbed, dropped } (finished daily climbs)
+    log: {},       // "YYYY-MM-DD" → that day's practice, saved after every answer (see logDay)
     points: { total: 0, day: "", today: 0, bestRun: 0, bestCombo: 0 },   // metres climbed
   });
 
@@ -46,6 +47,13 @@
     try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) { /* storage unavailable */ }
   }
   let state = load();
+
+  // Days logged before the logbook existed come from the old history list
+  if (!state.log || typeof state.log !== "object") state.log = {};
+  for (const h of state.history || []) {
+    if (!h || !h.day || state.log[h.day]) continue;
+    state.log[h.day] = { cards: h.total || 0, right: h.correct || 0, almost: 0, wrong: Math.max(0, (h.total || 0) - (h.correct || 0)), climbed: h.climbed || 0, dropped: h.dropped || 0, metres: 0, newWords: 0, sentences: 0, finished: true };
+  }
 
   /* ---------------------------------------------------------
      2. THE CLIMB
@@ -160,6 +168,24 @@
     if (state.points.day !== now) { state.points.day = now; state.points.today = 0; }
     state.points.total += m;
     state.points.today += m;
+  }
+
+  /* The logbook: one entry per day, updated after every answer in
+     any mode (daily climb, free climb, sentence builder), so each
+     day is saved as you go, even if you stop halfway. Each entry
+     also keeps a snapshot of the mountain that day, for the chart. */
+  function logDay(change) {
+    const now = today();
+    const e = state.log[now] || (state.log[now] = { cards: 0, right: 0, almost: 0, wrong: 0, climbed: 0, dropped: 0, metres: 0, newWords: 0, sentences: 0, finished: false });
+    for (const [k, v] of Object.entries(change)) e[k] = typeof v === "number" ? (e[k] || 0) + v : v;
+    const camps = [0, 0, 0, 0, 0];
+    for (const r of Object.values(state.words)) camps[r.camp]++;
+    e.camps = camps;
+    e.known = camps[3] + camps[4];
+    e.met = Object.keys(state.words).length;
+    // Keep about a year and a bit
+    const days = Object.keys(state.log).sort();
+    for (const d of days.slice(0, Math.max(0, days.length - 400))) delete state.log[d];
   }
 
   /* Free climb: endless practice on words I've already met, weaker
@@ -310,7 +336,7 @@
      5. THE SESSION
      --------------------------------------------------------- */
   const $ = (id) => document.getElementById(id);
-  const screens = ["home", "study", "end"];
+  const screens = ["home", "study", "builder", "end"];
   function show(id) {
     screens.forEach((s) => { $(s).hidden = s !== id; });
     window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
@@ -446,6 +472,7 @@
     const { w, camp, retry, kind } = session.current;
     const free = session.mode === "free";
     const ok = verdict !== "wrong";
+    const st0 = state.words[w.id];   // was this word already on the mountain?
     const now = today();
     let to = camp;
 
@@ -481,6 +508,15 @@
       if (!ok) session.queue.push({ w, retry: true });
     }
     session.results.push({ id: w.id, verdict, from: camp, to, retry });
+    if (!retry) {
+      logDay({
+        cards: 1, [verdict]: 1, metres: earned,
+        climbed: !free && to > camp ? 1 : 0,
+        dropped: !free && !ok && camp > 0 ? 1 : 0,
+        newWords: !free && !st0 ? 1 : 0,
+      });
+      save();
+    }
 
     const moved = free ? (ok ? "Free climb: practice only, camps stay as they are." : `A fall. ${FREE_FALLS - session.falls} left on this run.`)
       : retry ? "Practice only: this one doesn't move." : ok
@@ -568,11 +604,13 @@
       }
       state.history.push({ day: now, total: first.length, correct, climbed, dropped });
       state.history = state.history.slice(-365);
+      logDay({ finished: true });
       // Summit bonus for finishing, plus a little for every day of the streak
       const bonus = 100 + 20 * state.streak.count;
       session.metres += bonus;
       addMetres(bonus);
       session.bonus = bonus;
+      logDay({ metres: bonus });
       save();
     }
 
@@ -667,6 +705,7 @@
   function renderHome() {
     renderGrade();
     renderMountain();
+    renderLogbook();
     const q = buildQueue();
     const reviews = Math.min(q.dueTotal, q.cards.length);
     const news = q.cards.length - reviews;
@@ -679,12 +718,398 @@
     const met = metWords().length;
     $("free").disabled = !met;
     $("free-hint").textContent = met ? `Endless practice on the ${met} word${met > 1 ? "s" : ""} you've met. Three falls end a run.` : "Free climb opens after your first daily climb.";
+    $("build-hint").textContent = met ? `Rebuild ${BUILD_COUNT} example sentences from the words you've met, tile by tile. Practice only: camps don't change.` : `Rebuild ${BUILD_COUNT} example sentences, tile by tile. A good warm-up before your first climb.`;
     $("start").disabled = !q.cards.length;
     $("start").textContent = q.cards.length ? `Start today's climb · ${q.cards.length} cards` : "All done for today";
     $("home-hint").textContent = q.cards.length
       ? `About ${minutes} minute${minutes > 1 ? "s" : ""}.${q.carried ? ` ${q.carried} more reviews wait for tomorrow, so today stays short.` : ""}`
       : "Nothing due. Come back tomorrow, the words will be waiting.";
   }
+
+  /* ---- The logbook: calendar, day detail and the words-known chart ---- */
+  const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const niceDay = (d) => { const [y, m, dd] = d.split("-").map(Number); return `${dd} ${MONTHS[m - 1]} ${y}`; };
+  const weekdayOf = (d) => { const [y, m, dd] = d.split("-").map(Number); return (new Date(y, m - 1, dd).getDay() + 6) % 7; };   // Monday = 0
+  const level = (n) => (!n ? 0 : n < 10 ? 1 : n < 25 ? 2 : n < 50 ? 3 : 4);
+  let shownDay = null;
+
+  function renderLogbook() {
+    const now = today();
+    const log = state.log;
+    // 12 weeks, Monday to Sunday, ending with this week
+    const first = addDays(now, -(weekdayOf(now) + 7 * 11));
+    let cells = "", months = "";
+    for (let wk = 0; wk < 12; wk++) {
+      const monday = addDays(first, wk * 7);
+      const dd = Number(monday.slice(8));
+      // Label the week a month starts in (and the first week, if there's room before the next label)
+      const nextStart = Number(addDays(monday, 7).slice(8)) <= 7 || Number(addDays(monday, 14).slice(8)) <= 7;
+      if (dd <= 7 || (wk === 0 && !nextStart)) months += `<span style="grid-column:${wk + 2}">${MONTHS[Number(monday.slice(5, 7)) - 1]}</span>`;
+      for (let d = 0; d < 7; d++) {
+        const day = addDays(monday, d);
+        if (day > now) { cells += `<span class="cal-cell is-future" style="grid-column:${wk + 2};grid-row:${d + 2}"></span>`; continue; }
+        const e = log[day];
+        const n = e ? e.cards : 0;
+        const acc = e && e.cards ? Math.round(((e.right + e.almost) / e.cards) * 100) : 0;
+        const label = `${niceDay(day)}: ${n ? `${n} card${n > 1 ? "s" : ""}, ${acc}% right` : "no practice"}`;
+        cells += `<button class="cal-cell lv${level(n)}${day === now ? " is-today" : ""}${day === shownDay ? " is-shown" : ""}" type="button" data-day="${day}" style="grid-column:${wk + 2};grid-row:${d + 2}" aria-label="${label}" title="${label}"></button>`;
+      }
+    }
+    const rows = ["M", "", "W", "", "F", "", "S"].map((l, i) => `<span class="cal-wd" style="grid-row:${i + 2}">${l}</span>`).join("");
+    $("logbook-cal").innerHTML = `<div class="cal-grid"><div class="cal-months">${months}</div>${rows}${cells}</div>`;
+
+    // This week and this month at a glance
+    const last7 = Array.from({ length: 7 }, (_, i) => log[addDays(now, -i)]).filter(Boolean);
+    const cards7 = last7.reduce((n, e) => n + e.cards, 0);
+    const right7 = last7.reduce((n, e) => n + e.right + e.almost, 0);
+    const month = now.slice(0, 7);
+    const daysThisMonth = Object.keys(log).filter((d) => d.startsWith(month) && log[d].cards).length;
+    $("logbook-sum").textContent = `${daysThisMonth} day${daysThisMonth === 1 ? "" : "s"} this month · ${cards7} cards this week${cards7 ? ` · ${Math.round((right7 / cards7) * 100)}% right` : ""}`;
+
+    renderDay(shownDay || (log[now] ? now : Object.keys(log).filter((d) => log[d].cards).sort().pop() || now));
+    renderChart();
+  }
+
+  function renderDay(day) {
+    shownDay = day;
+    document.querySelectorAll(".cal-cell.is-shown").forEach((c) => c.classList.remove("is-shown"));
+    document.querySelector(`.cal-cell[data-day="${day}"]`)?.classList.add("is-shown");
+    const e = state.log[day];
+    if (!e || !e.cards) {
+      $("logbook-day").innerHTML = `<p class="day-title">${day === today() ? "Today" : niceDay(day)}</p><p class="day-none">${day === today() ? "Nothing yet today. Every answer is saved here as you go." : "No practice that day."}</p>`;
+      return;
+    }
+    const acc = Math.round(((e.right + e.almost) / e.cards) * 100);
+    $("logbook-day").innerHTML = `
+      <p class="day-title">${day === today() ? "Today" : niceDay(day)}${e.finished ? ` <span class="stamp stamp--sent day-stamp">Climb finished</span>` : ""}</p>
+      <dl class="day-stats">
+        <div><dt>Cards</dt><dd>${e.cards}</dd></div>
+        <div><dt>Right</dt><dd>${acc}%</dd></div>
+        <div><dt>Climbed</dt><dd>${e.climbed}</dd></div>
+        <div><dt>Dropped</dt><dd>${e.dropped}</dd></div>
+        <div><dt>New words</dt><dd>${e.newWords}</dd></div>
+        ${e.sentences ? `<div><dt>Sentences</dt><dd>${e.sentences}</dd></div>` : ""}
+        <div><dt>Metres</dt><dd>${e.metres}</dd></div>
+        ${e.known !== undefined ? `<div><dt>Known by then</dt><dd>${e.known}</dd></div>` : ""}
+      </dl>`;
+  }
+
+  $("logbook-cal").addEventListener("click", (e) => {
+    const c = e.target.closest(".cal-cell[data-day]");
+    if (c) renderDay(c.dataset.day);
+  });
+
+  // Words known each day for the last 60 days (carried forward on days off)
+  function renderChart() {
+    const now = today();
+    const pts = [];
+    let last = null;
+    // Start from the most recent snapshot before the window
+    const before = Object.keys(state.log).filter((d) => d < addDays(now, -59) && state.log[d].known !== undefined).sort().pop();
+    if (before) last = state.log[before].known;
+    for (let i = 59; i >= 0; i--) {
+      const d = addDays(now, -i);
+      const e = state.log[d];
+      if (e && e.known !== undefined) last = e.known;
+      if (i === 0) last = Object.values(state.words).filter((r) => r.camp >= 3).length;
+      pts.push(last);
+    }
+    const known = pts.filter((v) => v !== null);
+    if (known.length < 2 || !Object.keys(state.log).length) {
+      $("logbook-chart").innerHTML = `<p class="day-none">The line starts once you've practised on a couple of days.</p>`;
+      return;
+    }
+    const W = 720, H = 160, padL = 30, padB = 22, padT = 14;
+    const g = gradeInfo();
+    const top = Math.max(10, ...known, g.next ? g.next.need : 0) * 1.1;
+    const x = (i) => padL + (i / 59) * (W - padL - 8);
+    const y = (v) => padT + (1 - v / top) * (H - padT - padB);
+    let line = "", started = false;
+    pts.forEach((v, i) => { if (v === null) return; line += `${started ? "L" : "M"}${x(i).toFixed(1)},${y(v).toFixed(1)} `; started = true; });
+    const firstI = pts.findIndex((v) => v !== null);
+    const area = `${line}L${x(59).toFixed(1)},${y(0)} L${x(firstI).toFixed(1)},${y(0)} Z`;
+    const goal = g.next ? `<path class="ch-goal" d="M${padL},${y(g.next.need).toFixed(1)} H${W - 8}"/><text class="ch-label" x="${W - 8}" y="${(y(g.next.need) - 5).toFixed(1)}" text-anchor="end">${g.next.g} at ${g.next.need}</text>` : "";
+    $("logbook-chart").innerHTML = `
+      <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Words known over the last 60 days: now ${pts[59]}.">
+        <path class="ch-axis" d="M${padL},${y(0)} H${W - 8}"/>
+        ${goal}
+        <path class="ch-area" d="${area}"/>
+        <path class="ch-line" d="${line}"/>
+        <circle class="ch-dot" cx="${x(59)}" cy="${y(pts[59]).toFixed(1)}" r="4"/>
+        <text class="ch-label" x="${padL - 6}" y="${y(0) + 4}" text-anchor="end">0</text>
+        <text class="ch-label" x="${padL}" y="${H - 4}">${niceDay(addDays(now, -59)).replace(/ \d{4}$/, "")}</text>
+        <text class="ch-label" x="${W - 8}" y="${H - 4}" text-anchor="end">Today · ${pts[59]} known</text>
+      </svg>`;
+  }
+
+  /* ---------------------------------------------------------
+     SENTENCE BUILDER
+     Each word's example sentence, cut into word tiles and
+     shuffled. Tap a tile (or drag it) to build the sentence
+     in order; tap a placed tile to send it back. Enter checks.
+     It earns metres and is logged, but never moves words
+     between camps.
+     --------------------------------------------------------- */
+  const BUILD_COUNT = 6;
+  const BUILD_METRES = [25, 10];   // right first time, right on the second try
+
+  // "¿Dónde está el baño?" → ["dónde", "está", "el", "baño"] (the first
+  // letter is lowered so the capital doesn't give the start away)
+  function tilesOf(sentence) {
+    const raw = sentence.split(/\s+/).filter(Boolean);
+    const words = [];
+    raw.forEach((t, i) => {
+      let word = t.replace(/^[¿¡"«(]+/, "").replace(/[.,;:!?"»)]+$/, "");
+      if (!word) return;
+      // Lower the first letter at the start of each sentence inside it
+      if (i === 0 || /[.!?]$/.test(raw[i - 1]) || /^[¿¡]/.test(t)) word = word.charAt(0).toLowerCase() + word.slice(1);
+      words.push(word);
+    });
+    return words;
+  }
+  const tileKey = (t) => plain(t);
+
+  function pickSentences() {
+    const usable = (w) => w.ex && inDecks(w) && tilesOf(w.ex).length >= 3 && tilesOf(w.ex).length <= 10;
+    const met = WORDS.filter((w) => usable(w) && state.words[w.id]);
+    // Weaker words more often, then fill up with words not met yet
+    const weight = (w) => { const st = state.words[w.id]; return 1 + (4 - st.camp) + 3 * (st.wrong / (st.seen || 1)); };
+    const chosen = [];
+    const pool = met.slice();
+    while (chosen.length < BUILD_COUNT && pool.length) {
+      let r = Math.random() * pool.reduce((n, w) => n + weight(w), 0);
+      const i = pool.findIndex((w) => (r -= weight(w)) <= 0);
+      chosen.push(pool.splice(i < 0 ? 0 : i, 1)[0]);
+    }
+    const fresh = WORDS.filter((w) => usable(w) && !state.words[w.id]);
+    while (chosen.length < BUILD_COUNT && fresh.length) chosen.push(fresh.splice(Math.floor(Math.random() * fresh.length), 1)[0]);
+    return chosen;
+  }
+
+  let build = null;   // { items, i, tiles, placed, tries, done, metres, right, combo }
+
+  function startBuilder() {
+    const items = pickSentences();
+    if (!items.length) return;
+    build = { items, i: 0, metres: 0, right: 0, results: [] };
+    show("builder");
+    nextSentence();
+  }
+
+  function nextSentence() {
+    const w = build.items[build.i];
+    const words = tilesOf(w.ex);
+    // Shuffle until the order differs from the answer
+    let order;
+    do { order = words.map((t, k) => ({ id: k, text: t })).sort(() => Math.random() - 0.5); }
+    while (order.length > 1 && order.every((t, k) => tileKey(t.text) === tileKey(words[k])));
+    Object.assign(build, { w, answer: words, tiles: order, placed: [], tries: 0, done: false });
+    $("build-count").textContent = `${build.i + 1} of ${build.items.length} · ${build.metres} m`;
+    $("build-bar").style.width = `${(build.i / build.items.length) * 100}%`;
+    $("build-card").className = "card build-card";
+    $("build-card").innerHTML = `
+      <header class="card-head">
+        <span class="card-deck">${esc(DECKS.find((d) => d.id === w.theme).name)}</span>
+        <span class="stamp card-stamp">Sentence builder</span>
+      </header>
+      <div class="card-body">
+        <p class="card-ask">Put the words in order</p>
+        <p class="build-en" lang="en">${esc(w.exEn)}</p>
+        <p class="build-uses">Uses <span lang="es">${esc(w.es)}</span> · ${esc(w.en)}</p>
+        <div class="build-line" id="build-line" aria-label="Your sentence"></div>
+        <div class="build-bank" id="build-bank" aria-label="Word tiles"></div>
+        <div class="build-actions">
+          <button class="btn" id="build-clear" type="button">Clear</button>
+          <button class="btn btn--solid" id="build-check" type="button">Check <kbd>↵</kbd></button>
+        </div>
+      </div>
+      <div class="card-feedback" id="build-feedback" hidden></div>`;
+    $("build-clear").addEventListener("click", () => { if (!build.done) { build.placed = []; paintTiles(); } });
+    $("build-check").addEventListener("click", checkSentence);
+    paintTiles(true);
+    $("build-bank").querySelector(".tile")?.focus({ preventScroll: true });
+  }
+
+  // Draw the tiles, gliding each one from where it was (FLIP)
+  function paintTiles(first) {
+    const before = new Map();
+    if (!first) document.querySelectorAll("#build-card .tile").forEach((el) => before.set(el.dataset.id, el.getBoundingClientRect()));
+    const tile = (t, where, k) => `<button class="tile${where === "line" ? " tile--placed" : ""}" type="button" data-id="${t.id}" data-where="${where}" lang="es"
+        aria-label="${esc(t.text)}${where === "line" ? `, word ${k + 1}. Tap to take it out.` : ". Tap to add it."}">${esc(t.text)}</button>`;
+    const placedSet = new Set(build.placed);
+    $("build-line").innerHTML = build.placed.length
+      ? build.placed.map((id, k) => tile(build.tiles.find((t) => t.id === id), "line", k)).join("")
+      : `<span class="build-empty">Tap or drag the words here</span>`;
+    $("build-bank").innerHTML = build.tiles.map((t) => (placedSet.has(t.id) ? `<span class="tile tile--gap" aria-hidden="true">${esc(t.text)}</span>` : tile(t, "bank"))).join("");
+    $("build-check").disabled = build.placed.length !== build.tiles.length || build.done;
+    if (FieldNotes.reducedMotion.matches) return;
+    document.querySelectorAll("#build-card .tile[data-id]").forEach((el) => {
+      const was = before.get(el.dataset.id);
+      if (!was) return;
+      const now = el.getBoundingClientRect();
+      const dx = was.left - now.left, dy = was.top - now.top;
+      if (!dx && !dy) return;
+      el.animate([{ transform: `translate(${dx}px, ${dy}px)` }, { transform: "none" }], { duration: 260, easing: "cubic-bezier(0.2, 0.8, 0.2, 1)" });
+    });
+  }
+
+  function moveTile(id, toLine, at) {
+    if (build.done) return;
+    build.placed = build.placed.filter((p) => p !== id);
+    if (toLine) build.placed.splice(at === undefined ? build.placed.length : at, 0, id);
+    paintTiles();
+  }
+
+  // Tapping (or Enter / Space on a focused tile)
+  $("build-card").addEventListener("click", (e) => {
+    const t = e.target.closest(".tile[data-id]");
+    if (!t || build.dragged) return;
+    const id = Number(t.dataset.id);
+    const toLine = t.dataset.where === "bank";
+    moveTile(id, toLine);
+    // Keep the keyboard on the next free tile
+    const next = $("build-bank").querySelector(".tile[data-id]") || $("build-check");
+    if (toLine) next.focus({ preventScroll: true });
+  });
+
+  // Dragging: pick a tile up, drop it into the sentence (at a spot) or back in the bank
+  $("build-card").addEventListener("pointerdown", (e) => {
+    const t = e.target.closest(".tile[data-id]");
+    if (!t || build.done || e.button > 0) return;
+    const start = { x: e.clientX, y: e.clientY };
+    const id = Number(t.dataset.id);
+    let ghost = null;
+    build.dragged = false;
+    const move = (ev) => {
+      if (!ghost) {
+        if (Math.hypot(ev.clientX - start.x, ev.clientY - start.y) < 6) return;
+        build.dragged = true;
+        ghost = t.cloneNode(true);
+        ghost.classList.add("tile--ghost");
+        document.body.append(ghost);
+        t.classList.add("tile--lifted");
+      }
+      ghost.style.left = `${ev.clientX}px`;
+      ghost.style.top = `${ev.clientY}px`;
+      $("build-line").classList.toggle("is-over", !!document.elementFromPoint(ev.clientX, ev.clientY)?.closest("#build-line"));
+    };
+    const up = (ev) => {
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("pointerup", up);
+      window.removeEventListener("pointercancel", up);
+      $("build-line").classList.remove("is-over");
+      if (!ghost) return;
+      ghost.remove();
+      const over = document.elementFromPoint(ev.clientX, ev.clientY);
+      if (over?.closest("#build-line")) {
+        // Insert before the first placed tile that sits after the pointer
+        const others = [...$("build-line").querySelectorAll(".tile[data-id]")].filter((el) => Number(el.dataset.id) !== id);
+        let at = others.length;
+        for (let k = 0; k < others.length; k++) {
+          const r = others[k].getBoundingClientRect();
+          if (ev.clientY < r.top || (ev.clientY <= r.bottom && ev.clientX < r.left + r.width / 2)) { at = k; break; }
+        }
+        moveTile(id, true, at);
+      } else if (over?.closest("#build-bank")) {
+        moveTile(id, false);
+      } else {
+        paintTiles();
+      }
+      setTimeout(() => { build.dragged = false; }, 0);
+    };
+    window.addEventListener("pointermove", move);
+    window.addEventListener("pointerup", up);
+    window.addEventListener("pointercancel", up);
+  });
+
+  function checkSentence() {
+    if (!build || build.done || build.placed.length !== build.tiles.length) return;
+    const got = build.placed.map((id) => tileKey(build.tiles.find((t) => t.id === id).text));
+    const want = build.answer.map(tileKey);
+    const right = got.every((k, i) => k === want[i]);
+    build.tries++;
+    const lineTiles = [...$("build-line").querySelectorAll(".tile[data-id]")];
+    lineTiles.forEach((el, i) => el.classList.toggle("is-right", got[i] === want[i]));
+    if (!right && build.tries === 1) {
+      lineTiles.forEach((el, i) => el.classList.toggle("is-wrong", got[i] !== want[i]));
+      $("build-card").classList.add("card--shake");
+      setTimeout(() => $("build-card").classList.remove("card--shake"), 400);
+      const fb = $("build-feedback");
+      fb.hidden = false;
+      fb.innerHTML = `<p class="fb-verdict">Not quite</p><p class="fb-note">The green words are in the right place. Move the others and check again.</p>`;
+      return;
+    }
+    finishSentence(right);
+  }
+
+  function finishSentence(right) {
+    build.done = true;
+    const w = build.w;
+    const earned = right ? BUILD_METRES[Math.min(build.tries, 2) - 1] : 0;
+    if (right) { build.right++; build.metres += earned; addMetres(earned); }
+    build.results.push({ id: w.id, right, tries: build.tries });
+    logDay({ sentences: right ? 1 : 0, metres: earned });
+    save();
+    $("build-check").disabled = true;
+    $("build-clear").disabled = true;
+    $("build-card").classList.add(right ? "card--right" : "card--wrong");
+    $("build-line").querySelectorAll(".tile").forEach((el) => { el.disabled = true; });
+    const last = build.i === build.items.length - 1;
+    const fb = $("build-feedback");
+    fb.hidden = false;
+    fb.innerHTML = `
+      <p class="fb-verdict">${right ? (build.tries === 1 ? "¡Perfecto!" : "Got it") : "Here's how it goes"}${earned ? ` <span class="fb-metres">+${earned} m</span>` : ""}</p>
+      <p class="fb-example" lang="es">${esc(w.ex)} <button class="btn replay replay--small" id="build-say" type="button" aria-label="Play the sentence">▶</button></p>
+      <p class="fb-example-en">${esc(w.exEn)}</p>
+      <p class="fb-moved">Practice only: the word's camp doesn't change.</p>
+      <button class="btn btn--solid fb-next" id="build-next" type="button">${last ? "Finish" : "Next"} <kbd>↵</kbd></button>`;
+    $("build-say").addEventListener("click", () => speak(w.ex));
+    $("build-next").addEventListener("click", nextBuild);
+    $("build-next").focus({ preventScroll: true });
+    if (canSpeak()) speak(w.ex);
+  }
+
+  function nextBuild() {
+    build.i++;
+    if (build.i < build.items.length) nextSentence();
+    else endBuilder();
+  }
+
+  function endBuilder() {
+    if (synth) synth.cancel();
+    const n = build.results.length;
+    $("end").innerHTML = `
+      <p class="eyebrow">Sentence builder · ${today()}</p>
+      <h2 class="title title--end" id="end-title">${n && build.right === n ? "Every <em>sentence</em>" : "Words in <em>order</em>"}</h2>
+      <dl class="today today--end">
+        <div><dt>Sentences right</dt><dd>${build.right}</dd><p>of ${n}</p></div>
+        <div><dt>Metres</dt><dd>${build.metres}</dd><p>${state.points.total.toLocaleString("en")} m in total</p></div>
+      </dl>
+      <div class="home-actions">
+        <button class="btn btn--solid btn--big" id="again" type="button">Build more</button>
+        <button class="btn" id="to-home" type="button">Back to base</button>
+      </div>`;
+    build = null;
+    show("end");
+    $("again").addEventListener("click", startBuilder);
+    $("to-home").addEventListener("click", () => { renderHome(); show("home"); });
+    $("again").focus({ preventScroll: true });
+  }
+
+  $("build").addEventListener("click", startBuilder);
+  $("build-quit").addEventListener("click", () => build && endBuilder());
+
+  // Keys while building: Enter checks or moves on, Backspace takes the last word out
+  document.addEventListener("keydown", (e) => {
+    if (!build || $("builder").hidden) return;
+    if (e.key === "Enter" && !e.target.closest(".tile")) {
+      e.preventDefault();
+      if (build.done) nextBuild(); else checkSentence();
+    } else if (e.key === "Backspace" && !build.done && build.placed.length) {
+      e.preventDefault();
+      moveTile(build.placed[build.placed.length - 1], false);
+    }
+  });
 
   $("start").addEventListener("click", () => startSession());
   $("quit").addEventListener("click", () => session && (session.mode === "free" ? endFree() : endSession(false)));
@@ -824,6 +1249,7 @@
         streak: { ...base.streak, ...(data.streak || {}) },
         newToday: { ...base.newToday, ...(data.newToday || {}) },
         history: Array.isArray(data.history) ? data.history : [],
+        log: data.log && typeof data.log === "object" ? data.log : {},
         points: { ...base.points, ...(data.points || {}) },
       };
       save();
