@@ -21,11 +21,11 @@
      tended       Optional. When it last grew, as "YYYY-MM-DD".
                   Shown on the card as "Last tended …".
      elevation    The card's "elevation" line, e.g. "ELEV 220 m".
-     image        Optional. Leave it out for a placeholder pebble, or:
+     image        Optional. Leave it out for a block of the section's colour, or:
                     {
                       src:  "assets/cards/kypriaka.webp",   ← swap in your own photo here
                       alt:  "What the picture shows",
-                      tone: "terracotta" or "olive",        (the colour tint)
+                      tone: "terracotta" or "olive",        (not used by the current cards)
                       credit: { … }                          (leave out for your own photos)
                     }
                   Card images are 1000 × 800 (5:4). Ask Claude to resize,
@@ -34,7 +34,7 @@
                   credit lists where an image came from, for the Image
                   credits page: title, author, date, source, url, licence,
                   licenceUrl, and an optional note about what it is.
-     shape        Optional pebble shape, 1 to 4. Picked for you if left out.
+     shape        Not used by the current cards (left from the pebble design).
    ========================================================= */
 
 const PROJECTS = [
@@ -122,6 +122,17 @@ const PROJECTS = [
         licenceUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
       },
     },
+  },
+  {
+    title: "The Greenhouse",
+    section: "library",
+    status: "ongoing",
+    link: "library/greenhouse/index.html",
+    description: "My house plants on their benches: what each one needs, with sources, and what to check this week.",
+    coords: "51.47°N 0.30°W",
+    date: "2026-10",
+    tended: "2026-10-14",
+    elevation: "ELEV 3 TIERS · 13 PLANTS",
   },
   {
     title: "Spanish Trainer",

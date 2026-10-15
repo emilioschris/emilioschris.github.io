@@ -1,0 +1,1076 @@
+/* =========================================================
+   THE GREENHOUSE · styles
+   Colours, fonts, the top bar, buttons and the slide-in
+   panel come from ../../shared/field-notes.css.
+   This file adds the glasshouse: glass, light, cedar benches,
+   the Bedroom Tower, pots, sketches and tags.
+
+   The Day/Dusk switch changes the page around the glasshouse.
+   Inside it, the light follows the clock (data-light on
+   #glasshouse), so it has its own set of colours.
+   ========================================================= */
+
+:root {
+  --cedar-hi: #C68A60;
+  --cedar: #A5653F;
+  --cedar-lo: #7A472B;
+  --cedar-edge: #5A321E;
+  --tag-paper: #F5EEDD;
+  --tag-ink: #2B2A26;
+  --tag-muted: #6A665B;
+}
+
+/* ---------- Page ---------- */
+.gh-page { padding-top: var(--bar-h); }
+.gh {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(32px, 6vh, 64px) var(--gutter) 96px;
+}
+.gh-eyebrow {
+  margin-bottom: 14px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+.gh-title {
+  font-size: clamp(3.2rem, 8vw, 6.5rem);
+  font-weight: 340;
+  font-variation-settings: "opsz" 144, "SOFT" 30;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+}
+.gh-title em {
+  font-style: italic;
+  font-weight: 300;
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  color: var(--accent);
+}
+.gh-lede {
+  max-width: 46ch;
+  margin-top: 16px;
+  font-size: 1.08rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+/* ---------- The scene ---------- */
+.gh-scene { margin-top: clamp(32px, 5vh, 56px); }
+.gh-light {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.gh-light-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--sun);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--sun) 25%, transparent);
+}
+
+/* Light colours, set by the time of day (the herbarium sheet borrows the plant colours) */
+.glasshouse, .sheet-paper {
+  --sun: #F3D9A4;
+  --sky-1: #E2E1D8;
+  --sky-2: #F2EBDD;
+  --beam: #FFF8EA;
+  --beam-o: 0.4;
+  --tilt: 8deg;
+  --mist-o: 0.18;
+  --lamp-o: 0;
+  --wash: transparent;           /* a faint tint over everything */
+  --gl-line: rgba(43, 42, 38, 0.42);
+  --gl-glass: rgba(255, 255, 255, 0.22);
+  --sp-ink: #2E2C27;
+  --leaf: #8E9058;
+  --leaf-deep: #4F5A33;
+  --leaf-light: #A9AA72;
+  --leaf-jade: #7E9670;
+  --leaf-silver: #B9BFA5;
+  --leaf-blush: #D8A796;
+  --leaf-tired: #D6B672;
+  --wood: #6E4A33;
+  --soil: #3A2A1E;
+  --iron: #FBF8F0;
+  --iron-shadow: rgba(43, 42, 38, 0.28);
+  --fol-1: #5E6B3E;
+  --fol-2: #7E8A52;
+  --fol-3: #A3A873;
+  --bloom: #DFA9A0;
+  --bloom-deep: #C47A6E;
+  --trunk: #9A8468;
+  --ground: #8C8460;
+  --water: #B9CDCB;
+  --stone: #E6DDC8;
+}
+.glasshouse[data-light="dawn"] {
+  --sun: #EBC7B4;
+  --sky-1: #D6D8D6;
+  --sky-2: #EED8C8;
+  --beam: #F7E4D6;
+  --beam-o: 0.32;
+  --tilt: 28deg;
+  --mist-o: 0.5;
+  --wash: rgba(181, 88, 58, 0.04);
+}
+.glasshouse[data-light="morning"] {
+  --sun: #E9EEE6;
+  --sky-1: #CFDAD8;
+  --sky-2: #EDEBE1;
+  --beam: #FBFBF2;
+  --beam-o: 0.46;
+  --tilt: 20deg;
+  --mist-o: 0.32;
+  --wash: rgba(31, 78, 95, 0.05);
+  --water: #B3CDD0;
+}
+.glasshouse[data-light="golden"] {
+  --sun: #E9B865;
+  --sky-1: #E8C994;
+  --sky-2: #F2DDBC;
+  --beam: #F4C677;
+  --beam-o: 0.55;
+  --tilt: -26deg;
+  --mist-o: 0.16;
+  --lamp-o: 0.12;
+  --wash: rgba(201, 151, 63, 0.1);
+  --iron: #FBF1DD;
+  --water: #D9C49A;
+  --fol-3: #ADA66C;
+}
+.glasshouse[data-light="dusk"] {
+  --sun: #D98A5E;
+  --sky-1: #7E6A60;
+  --sky-2: #C49A7E;
+  --beam: #E39C6B;
+  --beam-o: 0.16;
+  --tilt: -34deg;
+  --mist-o: 0.3;
+  --lamp-o: 0.7;
+  --wash: rgba(58, 38, 24, 0.12);
+  --gl-line: rgba(30, 24, 20, 0.5);
+  --iron: #E9D9C6;
+  --fol-1: #4A5034;
+  --fol-2: #5E6440;
+  --fol-3: #7C7A52;
+  --water: #9C8C80;
+  --ground: #5E5440;
+}
+.glasshouse[data-light="night"] {
+  --sun: #E8B866;
+  --sky-1: #2C2B28;
+  --sky-2: #3D3B35;
+  --beam-o: 0;
+  --mist-o: 0.2;
+  --lamp-o: 1;
+  --wash: rgba(20, 16, 12, 0.18);
+  --gl-line: rgba(236, 233, 226, 0.22);
+  --gl-glass: rgba(255, 255, 255, 0.05);
+  --sp-ink: #2A2722;
+  --iron: rgba(236, 228, 210, 0.42);
+  --iron-shadow: rgba(0, 0, 0, 0.4);
+  --fol-1: #2F3424;
+  --fol-2: #3C4230;
+  --fol-3: #4E523A;
+  --bloom: #8E6A62;
+  --bloom-deep: #7A5048;
+  --trunk: #4E4436;
+  --ground: #34322C;
+  --water: #3E4746;
+  --stone: #6A645A;
+}
+
+.glasshouse {
+  position: relative;
+  container-type: inline-size;
+  overflow: hidden;
+  border-radius: var(--radius-lg) var(--radius-lg) var(--radius-md) var(--radius-md);
+  border: 1px solid var(--rule);
+  background: var(--sky-2);
+  isolation: isolate;
+  transition: background-color 2s var(--ease-soft);
+}
+.glasshouse:focus { outline: none; }
+
+/* Sky through the glass, with soft blurred garden shapes beyond */
+.gh-sky {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background:
+    radial-gradient(38% 30% at 12% 86%, color-mix(in srgb, var(--leaf-deep) 22%, transparent), transparent 70%),
+    radial-gradient(30% 26% at 46% 92%, color-mix(in srgb, var(--leaf) 20%, transparent), transparent 70%),
+    radial-gradient(42% 32% at 88% 84%, color-mix(in srgb, var(--leaf-deep) 18%, transparent), transparent 70%),
+    linear-gradient(to bottom, var(--sky-1), var(--sky-2) 70%);
+  transition: opacity 2s;
+}
+.gh-frame, .gh-family {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.gh-frame { z-index: -2; }
+/* The conservatory: white-painted iron, glass, water and planting */
+.cv-glass { fill: rgba(255, 255, 255, 0.16); }
+.cv-bar { fill: none; stroke: var(--iron); stroke-width: 2.4; stroke-linecap: round; }
+.cv-bar--fine { stroke-width: 1; opacity: 0.85; }
+.cv-arch { fill: rgba(255, 255, 255, 0.22); stroke: var(--iron); stroke-width: 2.4; }
+.cv-truss { fill: none; stroke: var(--iron); stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 1px 0 var(--iron-shadow)); }
+.cv-truss--lattice { opacity: 0.8; filter: none; }
+.cv-ground { fill: var(--ground); }
+.cv-ground-haze { fill: var(--sky-2); opacity: 0.3; }
+.cv-bank { opacity: 0.78; }
+.cv-water { fill: var(--water); }
+.cv-glint { fill: none; stroke: rgba(255, 255, 255, 0.7); stroke-width: 1.4; stroke-linecap: round; opacity: 0.8; }
+.cv-kerb { fill: none; stroke: var(--stone); stroke-width: 3; stroke-linecap: round; }
+.cv-step { fill: var(--stone); stroke: rgba(43, 42, 38, 0.15); stroke-width: 0.6; }
+.cv-fall { fill: none; stroke: rgba(255, 255, 255, 0.75); stroke-width: 2; stroke-linecap: round; }
+.cv-chain { fill: none; stroke: var(--iron-shadow); stroke-width: 1; }
+.cv-far { opacity: 0.62; }
+.cv-mid { opacity: 0.74; }
+.cv-near { opacity: 0.94; }
+.fol-1 { fill: var(--fol-1); }
+.fol-2 { fill: var(--fol-2); }
+.fol-3 { fill: var(--fol-3); }
+.cv-mid .sp-vein, .cv-near .sp-vein { stroke: rgba(255, 255, 255, 0.35); opacity: 0.6; }
+.fol-bloom { fill: var(--bloom); }
+.fol-bloom--deep { fill: var(--bloom-deep); }
+.fol-frond, .fol-leaflet { fill: none; stroke: var(--fol-2); stroke-linecap: round; }
+.fol-rib { fill: none; stroke: var(--fol-1); stroke-width: 1.4; }
+.fol-trunk { fill: none; stroke: var(--trunk); stroke-linecap: round; }
+.fol-ring { fill: none; stroke: rgba(43, 42, 38, 0.25); stroke-width: 1; }
+.gl-drip { fill: none; stroke: rgba(255, 255, 255, 0.55); stroke-width: 1.1; stroke-linecap: round; opacity: calc(var(--mist-o) * 1.6); }
+.gl-drop { fill: rgba(255, 255, 255, 0.6); opacity: calc(var(--mist-o) * 1.8); }
+
+/* Light beams falling through the roof */
+.gh-beams {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: var(--beam-o);
+  transition: opacity 3s var(--ease-soft);
+  mix-blend-mode: screen;
+}
+.gh-beams span {
+  position: absolute;
+  top: -25%;
+  height: 150%;
+  width: 11%;
+  background: linear-gradient(to bottom, var(--beam), color-mix(in srgb, var(--beam) 30%, transparent) 55%, transparent 88%);
+  filter: blur(14px);
+  transform: rotate(var(--tilt));
+  transform-origin: top center;
+  transition: transform 3s var(--ease-soft);
+  animation: beam-drift 26s ease-in-out infinite alternate;
+}
+.gh-beams span:nth-child(1) { left: 14%; width: 9%; }
+.gh-beams span:nth-child(2) { left: 34%; width: 14%; animation-delay: -7s; animation-duration: 31s; }
+.gh-beams span:nth-child(3) { left: 58%; width: 8%; animation-delay: -15s; }
+.gh-beams span:nth-child(4) { left: 76%; width: 12%; animation-delay: -4s; animation-duration: 34s; }
+@keyframes beam-drift {
+  from { translate: -2% 0; opacity: 0.75; }
+  to   { translate: 3% 0; opacity: 1; }
+}
+
+/* Condensation: a fine mist of droplets, heavier low on the glass */
+.gh-mist {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: var(--mist-o);
+  transition: opacity 3s;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8) 0 0.6px, transparent 1.2px) 0 0 / 7px 9px,
+    radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.6) 0 0.9px, transparent 1.5px) 3px 5px / 13px 11px,
+    radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.7) 0 1.3px, transparent 2px) 8px 2px / 23px 29px,
+    linear-gradient(to top, rgba(255, 255, 255, 0.35), transparent 60%);
+  -webkit-mask-image: linear-gradient(to top, #000 10%, rgba(0, 0, 0, 0.35) 55%, rgba(0, 0, 0, 0.6) 100%);
+          mask-image: linear-gradient(to top, #000 10%, rgba(0, 0, 0, 0.35) 55%, rgba(0, 0, 0, 0.6) 100%);
+}
+
+/* Pendant lamps */
+.gh-lamps { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.lamp { position: absolute; top: 0; scale: calc(0.55 + var(--lamp-k, 1) * 0.6); transform-origin: top center; }
+.lamp-cord {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: var(--drop);
+  background: var(--gl-line);
+}
+.lamp-shade {
+  position: absolute;
+  left: -13px;
+  top: var(--drop);
+  width: 26px;
+  height: 13px;
+  border-radius: 13px 13px 3px 3px;
+  background: #4A463F;
+  box-shadow: inset 0 -3px 0 color-mix(in srgb, #F6D79A calc(var(--lamp-o) * 100%), #2B2A26);
+}
+.lamp-glow {
+  position: absolute;
+  left: -110px;
+  top: calc(var(--drop) - 40px);
+  width: 220px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(246, 205, 130, 0.55), rgba(233, 170, 90, 0.18) 55%, transparent);
+  opacity: var(--lamp-o);
+  transition: opacity 3s;
+  mix-blend-mode: screen;
+  animation: lamp-breathe 7s ease-in-out infinite alternate;
+}
+@keyframes lamp-breathe { to { scale: 1.06; } }
+
+/* A faint warm or cool tint over the whole scene */
+.glasshouse::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: var(--wash);
+  transition: background-color 3s;
+}
+
+.glasshouse[data-light="night"] .gh-beams { display: none; }
+.glasshouse:not(.is-lit) * { transition: none !important; }   /* no fade on first load */
+
+.is-paused .gh-beams span,
+.is-paused .lamp-glow,
+.is-paused .tag-wrap { animation-play-state: paused; }
+
+/* ---------- Furniture ---------- */
+.gh-floor {
+  --sm: 5.8cqi;
+  --md: 7.8cqi;
+  --lg: 9.4cqi;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: auto 1fr 1.2fr;
+  align-items: end;
+  gap: 2cqi;
+  padding: 64px 1.8cqi 0;
+}
+
+/* Cedar slats, used by the shelves and bench tops */
+.bench-top, .shelf {
+  background:
+    linear-gradient(to bottom, var(--cedar-hi) 0 2px, transparent 2px),
+    repeating-linear-gradient(to bottom, var(--cedar) 0 5px, var(--cedar-lo) 5px 6px),
+    var(--cedar);
+  border-radius: 2px;
+  box-shadow: 0 6px 10px -6px rgba(30, 18, 10, 0.45);
+}
+
+/* The Bedroom Tower: three tiers between two posts */
+.tower {
+  position: relative;
+  width: calc(var(--md) * 1.65);
+  padding: 0 calc(var(--md) * 0.12);
+  display: flex;
+  flex-direction: column;
+}
+.tower::before, .tower::after {          /* the posts */
+  content: "";
+  position: absolute;
+  top: 18px;
+  bottom: 0;
+  width: 6px;
+  border-radius: 3px 3px 1px 1px;
+  background: linear-gradient(to right, var(--cedar-hi), var(--cedar) 40%, var(--cedar-lo));
+}
+.tower::before { left: 0; }
+.tower::after { right: 0; }
+.tower-plate {
+  align-self: center;
+  margin-bottom: 4px;
+  padding: 3px 8px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #F6E8C8;
+  background: var(--cedar-lo);
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px rgba(255, 240, 210, 0.2);
+}
+.tier { padding-bottom: 78px; }
+.tier:last-of-type { padding-bottom: 70px; }
+.tier-slot { display: flex; justify-content: center; min-height: 40px; }
+.shelf { position: relative; height: 13px; margin: -8px -10px 0; }
+.tower-feet { height: 6px; margin: 0 -4px; border-radius: 2px; background: var(--cedar-lo); }
+
+/* Benches */
+.bench { min-width: 0; }
+.bench-scroll { overflow: visible; }
+.bench-track { position: relative; }
+.bench-plants {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-evenly;
+  gap: 0.6cqi;
+  padding: 0 1cqi;
+}
+.bench-top {
+  position: relative;
+  z-index: 1;
+  height: 20px;
+  margin-top: -10px;
+  clip-path: polygon(1.5% 0, 98.5% 0, 100% 100%, 0 100%);
+}
+.bench-under {
+  position: relative;
+  height: 210px;
+}
+.bench-under::before {     /* the apron board under the top */
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 16px;
+  background: linear-gradient(to bottom, var(--cedar-lo), var(--cedar-edge));
+  border-radius: 0 0 2px 2px;
+}
+.leg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 9px;
+  background: linear-gradient(to right, var(--cedar), var(--cedar-lo));
+  border-radius: 0 0 2px 2px;
+}
+.leg--l { left: 5%; }
+.leg--r { right: 5%; }
+.brace {
+  position: absolute;
+  left: 5%; right: 5%;
+  bottom: 42px;
+  height: 7px;
+  background: var(--cedar-lo);
+  border-radius: 2px;
+}
+.bench-plate {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  bottom: 54px;
+  translate: -50% 0;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gl-line);
+}
+
+.bench-hint { display: none; }
+
+/* ---------- Plants ---------- */
+.plant {
+  position: relative;
+  flex: none;
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  -webkit-tap-highlight-color: transparent;
+}
+.plant--sm { width: var(--sm); }
+.plant--md { width: var(--md); }
+.plant--lg { width: var(--lg); }
+.specimen {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 140 / 180;
+  overflow: visible;
+  transition: translate 0.4s var(--ease-out);
+}
+.plant:hover .specimen, .plant:focus-visible .specimen { translate: 0 -3px; }
+.plant:focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; }
+
+/* Sketch lines and washes */
+.specimen path, .specimen ellipse { stroke-linecap: round; stroke-linejoin: round; }
+.sp-leaf { fill: color-mix(in srgb, var(--leaf) 78%, transparent); stroke: var(--sp-ink); stroke-width: 0.9; }
+.sp-leaf--deep { fill: color-mix(in srgb, var(--leaf-deep) 82%, transparent); }
+.sp-leaf--light { fill: color-mix(in srgb, var(--leaf-light) 80%, transparent); }
+.sp-leaf--jade { fill: color-mix(in srgb, var(--leaf-jade) 82%, transparent); stroke: #6E3A26; }
+.sp-leaf--silver { fill: color-mix(in srgb, var(--leaf-silver) 88%, transparent); }
+.sp-leaf--blush { fill: color-mix(in srgb, var(--leaf-blush) 85%, transparent); }
+.sp-leaf--tired { fill: color-mix(in srgb, var(--leaf-tired) 85%, transparent); }
+.sp-leaf--tipped { stroke: #8A3A22; }
+.sp-vein { fill: none; stroke: var(--sp-ink); stroke-width: 0.5; opacity: 0.55; }
+.sp-leaf--silver + .sp-vein { stroke: #33402A; stroke-width: 0.8; opacity: 0.8; }
+.sp-variegate { fill: none; stroke: #E8D49A; stroke-width: 1.6; opacity: 0.85; }
+.sp-gloss { fill: none; stroke: rgba(255, 255, 255, 0.55); stroke-width: 0.9; }
+.sp-stem { fill: none; stroke: color-mix(in srgb, var(--leaf-deep) 70%, var(--sp-ink)); stroke-width: 1.1; }
+.sp-stem--thick { stroke-width: 2.2; stroke: var(--leaf-deep); }
+.sp-wood { fill: none; stroke: var(--wood); stroke-width: 2.8; }
+.sp-wood--braid { stroke-width: 3.4; stroke: #8A6544; }
+.sp-frond { fill: none; stroke: color-mix(in srgb, var(--leaf) 80%, var(--sp-ink)); stroke-width: 1.3; }
+.sp-soil { fill: none; stroke: var(--soil); stroke-width: 2.6; }
+
+/* Pots */
+.pot-shadow { fill: rgba(30, 18, 10, 0.28); }
+.pot-body { stroke: rgba(30, 20, 14, 0.55); stroke-width: 0.9; }
+.pot-shade { fill: rgba(20, 12, 6, 0.16); stroke: none; clip-path: inset(0 0 0 58%); }
+.pot-rim { stroke: rgba(30, 20, 14, 0.55); stroke-width: 0.9; }
+.pot-glint { fill: none; stroke: rgba(255, 250, 240, 0.4); stroke-width: 2.4; }
+.pot--clay .pot-body  { fill: #B5583A; }
+.pot--clay .pot-rim   { fill: #C66A4A; }
+.pot--lime .pot-body  { fill: #E6DDC8; }
+.pot--lime .pot-rim   { fill: #EFE8D7; }
+.pot--olive .pot-body { fill: #6B6A3A; }
+.pot--olive .pot-rim  { fill: #7D7C48; }
+.pot--ink .pot-body   { fill: #47433C; }
+.pot--ink .pot-rim    { fill: #57534A; }
+.pot-body { filter: drop-shadow(-3px 0 0 rgba(255, 255, 255, 0.06)); }
+.pot--lime .pot-glint { stroke: rgba(255, 255, 255, 0.7); }
+
+/* ---------- Hand-tied tags ---------- */
+.tag-wrap {
+  position: absolute;
+  left: 50%;
+  top: calc(100% - 4px);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform-origin: top center;
+  translate: -50% 0;
+  rotate: var(--tilt);
+  animation: tag-sway 7s ease-in-out infinite alternate;
+  animation-delay: var(--delay);
+}
+@keyframes tag-sway {
+  from { rotate: calc(var(--tilt) - 1.6deg); }
+  to   { rotate: calc(var(--tilt) + 1.6deg); }
+}
+.plant:hover .tag-wrap { animation-duration: 2.4s; }
+.tag-string {
+  width: 1px;
+  height: var(--string, 16px);
+  background: #8C7A5C;
+}
+.tag {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: max-content;
+  max-width: 106px;
+  min-width: 72px;
+  padding: 13px 8px 7px;
+  text-align: center;
+  color: var(--tag-ink);
+  background:
+    radial-gradient(circle at 50% 6px, #8C7A5C 0 2px, transparent 2.6px),
+    radial-gradient(circle at 50% 6px, rgba(43, 42, 38, 0.1) 0 3.6px, transparent 4px),
+    var(--tag-paper);
+  clip-path: polygon(9px 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 0 100%, 0 9px);
+  filter: drop-shadow(0 2px 2px rgba(30, 18, 10, 0.18));
+}
+.glasshouse[data-light="night"] .tag,
+.glasshouse[data-light="dusk"] .tag { --tag-paper: #E2D7C0; }
+.tag-name {
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  font-weight: 460;
+  font-variation-settings: "opsz" 24, "SOFT" 50;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.tag-species {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-style: italic;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+  color: var(--tag-muted);
+}
+.tag-mark {
+  margin-top: 3px;
+  padding: 1px 5px;
+  font-family: var(--font-mono);
+  font-size: 7.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+}
+.tag-mark--confirm { color: #8A6420; }
+.tag-mark--struggling { color: #9A4529; rotate: -3deg; }
+.tag-mark--dormant { color: #5E5B52; }
+
+/* ---------- The Pothos family line ---------- */
+.gh-family { z-index: 2; overflow: visible; }
+.fam-line {
+  fill: none;
+  stroke: #9A4529;
+  stroke-width: 1.6;
+  stroke-dasharray: 0.5 6;
+  stroke-linecap: round;
+  opacity: 0.75;
+}
+.fam-dot { fill: #9A4529; opacity: 0.85; }
+.fam-note {
+  font-family: var(--font-hand);
+  font-size: 19px;
+  fill: #9A4529;
+}
+.glasshouse[data-light="night"] .fam-line,
+.glasshouse[data-light="night"] .fam-dot { stroke: #E9A27E; fill: #E9A27E; }
+.glasshouse[data-light="night"] .fam-line { fill: none; }
+.glasshouse[data-light="night"] .fam-note { fill: #E9A27E; }
+
+/* ---------- Dusk theme: the glasshouse dims a little ---------- */
+:root[data-theme="dusk"] .glasshouse:not([data-light="night"]) { filter: brightness(0.92) saturate(0.95); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="day"]) .glasshouse:not([data-light="night"]) { filter: brightness(0.92) saturate(0.95); }
+}
+
+/* ---------- Phones and narrow windows ----------
+   The tower stands on its own, then each bench is a row you
+   can swipe along. */
+@container (max-width: 860px) {
+  .gh-floor {
+    --sm: 84px;
+    --md: 104px;
+    --lg: 128px;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 96px 0 0;
+  }
+  .tower { justify-self: center; }
+  .bench-scroll {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    padding: 0 16px;
+  }
+  .bench-scroll::-webkit-scrollbar { display: none; }
+  .bench-track { min-width: max-content; width: 100%; }
+  .bench-plants { gap: 14px; padding: 0 18px; justify-content: center; }
+  .bench-under { height: 130px; }
+  .bench-plate { display: none; }
+  .tag-string { height: calc(var(--string, 16px) * 0.6); }
+  .bench-hint {
+    display: block;
+    margin: 0 16px 8px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gl-line);
+  }
+}
+
+/* ---------- Reduced motion: the light is still right, but nothing moves ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .gh-beams span, .lamp-glow, .tag-wrap { animation: none; }
+}
+
+/* =========================================================
+   THIS WEEK IN THE GREENHOUSE
+   ========================================================= */
+.week { margin-top: clamp(32px, 5vh, 56px); }
+.week-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rule);
+}
+.week-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 380;
+  font-variation-settings: "opsz" 72, "SOFT" 40;
+  letter-spacing: -0.02em;
+}
+.week-season {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.week-dot { width: 8px; height: 8px; border-radius: 50%; }
+.week-dot--summer { background: var(--secondary); }
+.week-dot--winter { background: var(--link); }
+.week-empty {
+  padding: 24px 0;
+  font-family: var(--font-hand);
+  font-size: 1.6rem;
+  color: var(--accent-text);
+}
+
+.jobs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  align-items: start;
+  gap: 16px;
+  margin-top: 18px;
+}
+.job--wide { grid-column: 1 / -1; }
+.job {
+  position: relative;
+  padding: 16px 16px 14px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  background: var(--bg-raised);
+}
+.job::before {          /* a strip of colour per kind of job */
+  content: "";
+  position: absolute;
+  left: 16px; top: -1px;
+  width: 36px; height: 3px;
+  border-radius: 0 0 3px 3px;
+  background: var(--job, var(--secondary));
+}
+.job--check  { --job: var(--link); }
+.job--mist   { --job: color-mix(in srgb, var(--link) 50%, #9FC3CB); }
+.job--feed   { --job: var(--secondary); }
+.job--rotate { --job: var(--stamp); }
+.job--repot  { --job: var(--accent); }
+.job-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.job-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 420;
+  letter-spacing: -0.01em;
+}
+.job-count {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.job-hint { margin-top: 4px; font-size: 0.88rem; line-height: 1.45; color: var(--muted); }
+.chips { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; padding: 0; }
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 34px;
+  padding: 6px 11px 6px 8px;
+  border: 1px dashed var(--rule);
+  border-radius: 999px;
+  background: none;
+  color: var(--muted);
+  font: 400 0.86rem/1.2 var(--font-body);
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+}
+.chip--due { border-style: solid; border-color: color-mix(in srgb, var(--text) 30%, transparent); color: var(--text); }
+.chip--late .chip-when { color: var(--accent-text); }
+.chip:hover { border-color: var(--text); background: color-mix(in srgb, var(--job) 10%, transparent); }
+.chip-box {
+  width: 15px; height: 15px;
+  flex: none;
+  border: 1.5px solid currentColor;
+  border-radius: 4px;
+  opacity: 0.7;
+  transition: background-color 0.2s;
+}
+.chip:hover .chip-box { background: color-mix(in srgb, var(--job) 40%, transparent); }
+.chip-when {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+.job-all { margin-top: 12px; }
+
+/* =========================================================
+   HERBARIUM SHEET (inside the shared slide-in panel)
+   ========================================================= */
+.sheet-species { margin-top: 6px; font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
+.sheet-paper {
+  position: relative;
+  margin-top: 22px;
+  padding: 18px 18px 16px;
+  border-radius: 4px;
+  background:
+    radial-gradient(120% 90% at 30% 20%, rgba(255, 255, 255, 0.5), transparent 60%),
+    #F5EEDC;
+  box-shadow: 0 1px 0 rgba(43, 42, 38, 0.08), 0 14px 30px -18px rgba(30, 18, 10, 0.5);
+  color: #2B2A26;
+}
+.pressed { display: block; width: 72%; max-height: 380px; margin: 0 auto; overflow: visible; }
+.sp-flat { filter: sepia(0.28) saturate(0.85); }
+.sp-root { fill: none; stroke: #8A6A4E; stroke-width: 0.7; stroke-linecap: round; }
+.sp-tape { fill: rgba(236, 222, 186, 0.82); stroke: rgba(160, 130, 80, 0.25); stroke-width: 0.4; }
+.sheet-photo { display: block; width: 100%; height: auto; border-radius: 2px; }
+.sheet-label {
+  display: grid;
+  gap: 2px;
+  width: min(250px, 100%);
+  margin: 12px 0 0 auto;
+  padding: 9px 11px;
+  border: 1px solid rgba(43, 42, 38, 0.45);
+  background: #FBF7EC;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.5;
+}
+.sheet-label-head {
+  margin-bottom: 4px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(43, 42, 38, 0.3);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.sheet-label b { display: inline-block; min-width: 62px; font-weight: 500; color: #6A665B; }
+.sheet-sketch-note {
+  position: absolute;
+  left: 16px;
+  top: 12px;
+  max-width: 34%;
+  font-family: var(--font-hand);
+  font-size: 1.15rem;
+  line-height: 1.1;
+  color: #9A4529;
+}
+.sheet-stamps { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 22px; }
+.sheet-status--thriving, .sheet-status--steady { border-color: var(--secondary); outline-color: var(--secondary); color: var(--secondary); }
+.sheet-status--struggling { border-color: var(--accent); outline-color: var(--accent); color: var(--accent-text); }
+.sheet-status--dormant { border-color: var(--muted); outline-color: var(--muted); color: var(--muted); }
+
+.sched { display: grid; gap: 10px; }
+.sched-row { display: grid; grid-template-columns: 96px 1fr; gap: 12px; align-items: baseline; }
+.sched dt { font-family: var(--font-display); font-size: 1.02rem; }
+.sched dd { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 12px; font-size: 0.9rem; color: var(--muted); }
+.sched-next { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.04em; }
+.sched-next.is-due { color: var(--accent-text); }
+.sheet-small { margin-top: 12px; font-size: 0.82rem; line-height: 1.5; color: var(--muted); }
+.sheet-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.sheet-facts, .sheet-flags ul, .sheet-family { display: grid; gap: 10px; padding-left: 1.1em; }
+.sheet-facts li, .sheet-flags li { line-height: 1.55; }
+.sheet-family { list-style: none; padding: 0; gap: 6px; }
+.sheet-family span { font-size: 0.88rem; color: var(--muted); }
+.fam-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--link);
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.sheet-flags li::marker { content: "? "; color: var(--stamp-text); font-family: var(--font-mono); }
+.sheet-tox { line-height: 1.55; }
+.cite {
+  margin-left: 2px;
+  padding: 0 3px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: var(--link);
+  text-decoration: none;
+}
+.cite:hover { text-decoration: underline; }
+.sheet-log { list-style: none; display: grid; gap: 4px; padding: 0; }
+.sheet-log li { display: flex; align-items: baseline; gap: 10px; font-size: 0.92rem; }
+.sheet-log time { min-width: 92px; font-family: var(--font-mono); font-size: 10.5px; color: var(--muted); }
+.log-remove {
+  margin-left: auto;
+  padding: 2px 6px;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-size: 11px;
+  cursor: pointer;
+  opacity: 0.5;
+}
+.log-remove:hover, .log-remove:focus-visible { opacity: 1; color: var(--accent-text); }
+.sheet-quiet { color: var(--muted); font-size: 0.92rem; }
+.sheet-sources { display: grid; gap: 6px; padding-left: 1.3em; font-size: 0.86rem; line-height: 1.45; }
+.sheet-sources li::marker { font-family: var(--font-mono); font-size: 10px; color: var(--muted); }
+.sheet-sources a { color: var(--link); }
+.sheet-sources li:target { background: color-mix(in srgb, var(--stamp) 18%, transparent); }
+
+/* =========================================================
+   BACKUP AND TOAST
+   ========================================================= */
+.gh-backup {
+  margin-top: 56px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+  max-width: 60ch;
+}
+.gh-backup-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 400; }
+.gh-backup-text { margin-top: 6px; color: var(--muted); line-height: 1.5; }
+.gh-backup-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.gh-backup-status { margin-top: 8px; min-height: 1.2em; font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+
+.gh-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: calc(100vw - 32px);
+  padding: 10px 10px 10px 16px;
+  border-radius: 999px;
+  background: var(--text);
+  color: var(--bg);
+  font-size: 0.9rem;
+  box-shadow: 0 12px 30px -12px rgba(20, 14, 8, 0.5);
+  translate: -50% 12px;
+  opacity: 0;
+  transition: translate 0.3s var(--ease-out), opacity 0.3s;
+}
+.gh-toast.is-on { translate: -50% 0; opacity: 1; }
+.gh-toast-undo {
+  padding: 6px 12px;
+  border: 1px solid color-mix(in srgb, var(--bg) 40%, transparent);
+  border-radius: 999px;
+  background: none;
+  color: inherit;
+  font: 500 11px/1 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.gh-toast-undo:hover { background: color-mix(in srgb, var(--bg) 15%, transparent); }
+
+/* =========================================================
+   THE HAWK
+   ========================================================= */
+.gh-scene-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 16px;
+  margin-bottom: 10px;
+}
+.gh-scene-top .gh-light { margin-bottom: 0; }
+.hawk-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px 6px 8px;
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  color: var(--accent-text);
+  font: 500 11px/1.2 var(--font-mono);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+.hawk-note:hover { background: color-mix(in srgb, var(--accent) 16%, transparent); }
+
+/* The drawing (shared by the flying hawk and the notes card) */
+.hk2-far { fill: var(--hawk-far); stroke: var(--hawk-line); stroke-width: 1; stroke-linejoin: round; }
+.hk2-near, .hk2-body { fill: var(--hawk-body); stroke: var(--hawk-line); stroke-width: 1; stroke-linejoin: round; }
+.hk2-tail { fill: var(--hawk-tail); stroke: var(--hawk-line); stroke-width: 1; stroke-linejoin: round; }
+.hk2-band, .hk2-bar { fill: none; stroke: var(--hawk-shade); stroke-width: 2.6; stroke-linecap: round; }
+.hk2-belly { fill: #EFE3CB; }
+.hk2-streak { fill: none; stroke: var(--hawk-shade); stroke-width: 1.4; stroke-linecap: round; }
+.hk2-beak { fill: var(--hawk-beak); stroke: var(--hawk-line); stroke-width: 0.8; }
+.hk2-tip { fill: #2B2A26; }
+.hk2-ring { fill: var(--hawk-ring); }
+.hk2-eye { fill: #2B2A26; }
+.hk2-leg { fill: none; stroke: var(--hawk-beak); stroke-width: 2; stroke-linecap: round; }
+.hk2-string { fill: none; stroke: #8C7A5C; stroke-width: 0.8; }
+.hk2-tag path:first-child { fill: #F5EEDD; stroke: rgba(43, 42, 38, 0.4); stroke-width: 0.6; }
+.hk2-tag circle { fill: #8C7A5C; }
+.hk2-writing { fill: none; stroke: #9A4529; stroke-width: 1; stroke-linecap: round; }
+.hk2-wing { transform-origin: 114px 64px; }
+
+/* Flying across the upper glass, then a long pause out of sight */
+.hawk-fly {
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  top: clamp(30px, 9%, 90px);
+  width: clamp(116px, 12cqi, 168px);
+  padding: 8px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  translate: -160px 0;
+  animation: hawk-cross 46s linear infinite;
+  animation-delay: -6s;
+  -webkit-tap-highlight-color: transparent;
+}
+.hawk-bob { display: block; animation: hawk-bob 5.5s ease-in-out infinite alternate; }
+.hawk-svg { display: block; width: 100%; height: auto; overflow: visible; filter: drop-shadow(0 10px 8px rgba(30, 18, 10, 0.18)); }
+.hawk-fly .hk2-wing { animation: hawk-flap 11s ease-in-out infinite; }
+@keyframes hawk-cross {
+  0%   { translate: -160px 0; }
+  64%  { translate: calc(100cqi + 20px) 0; }
+  100% { translate: calc(100cqi + 20px) 0; }
+}
+@keyframes hawk-bob {
+  from { translate: 0 -8px; rotate: -3deg; }
+  to   { translate: 0 10px; rotate: 2deg; }
+}
+@keyframes hawk-flap {             /* two slow beats, then a long glide */
+  0%, 30%, 100% { rotate: 0deg; }
+  8%  { rotate: 16deg; }
+  15% { rotate: -6deg; }
+  22% { rotate: 14deg; }
+}
+.hawk-fly:hover, .hawk-fly:focus-visible,
+.hawk-fly:hover *, .hawk-fly:focus-visible * { animation-play-state: paused; }
+.hawk-fly:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.is-paused .hawk-fly, .is-paused .hawk-fly * { animation-play-state: paused; }
+.glasshouse[data-light="night"] .hawk-svg { filter: brightness(0.85) drop-shadow(0 10px 8px rgba(0, 0, 0, 0.3)); }
+
+/* The notes card */
+.hawk-head { display: flex; align-items: flex-end; gap: 12px; }
+.hawk-head .p-title em { font-style: italic; color: var(--accent); }
+.hawk-head-bird { flex: none; width: 92px; animation: hawk-arrive 1.1s var(--ease-out) both; }
+@keyframes hawk-arrive { from { translate: -40px -16px; opacity: 0; } }
+.hawk-plant { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--rule); }
+.hawk-plant-name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+.hawk-summary { margin-top: 12px; line-height: 1.5; }
+.p-note.hawk-summary { font-size: 1.45rem; line-height: 1.25; }
+.hawk-list { display: grid; gap: 10px; padding-left: 1.2em; line-height: 1.55; }
+ol.hawk-list li::marker { font-family: var(--font-mono); font-size: 11px; color: var(--accent-text); }
+.hawk-plant > .btn { margin-top: 22px; }
+.btn--hawk { margin-top: 16px; }
+.btn--hawk img { margin: -2px 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  /* The hawk holds still in the upper glass instead of flying */
+  .hawk-fly { animation: none; translate: none; left: 58%; }
+  .hawk-bob, .hawk-fly .hk2-wing, .hawk-head-bird { animation: none; }
+}
