@@ -22,7 +22,7 @@
   <meta name="twitter:image:alt" content="A red-tailed hawk with a terracotta tail perched on a branch over faint contour lines, beside the words Field Notes and the coordinates 35.1°N 33.4°E.">
 
   <!-- Apply a saved Day/Dusk choice before the page draws, so it never flashes the wrong colours -->
-  <script src="shared/theme-init.js?v=2026-10-15.1"></script>
+  <script src="shared/theme-init.js?v=2026-10-15.2"></script>
 
   <!-- Fonts: Fraunces (headings), Instrument Sans (body), JetBrains Mono (labels), Caveat (margin notes) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,8 +33,8 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
   <!-- The shared design system first, then this page's own styles -->
-  <link rel="stylesheet" href="shared/field-notes.css?v=2026-10-15.1">
-  <link rel="stylesheet" href="styles.css?v=2026-10-15.1">
+  <link rel="stylesheet" href="shared/field-notes.css?v=2026-10-15.2">
+  <link rel="stylesheet" href="styles.css?v=2026-10-15.2">
 </head>
 <body>
 
@@ -279,8 +279,102 @@
     <p class="colophon-credit">Made with AI. Ideas, direction and fact-checking by me; code written with Claude.</p>
   </footer>
 
-  <script src="shared/field-notes.js?v=2026-10-15.1"></script>
-  <script src="projects.js?v=2026-10-15.1"></script>
-  <script src="script.js?v=2026-10-15.1"></script>
+  <!-- ---------- THE BONSAI ----------
+       A small easter egg that drifts through the page's empty
+       margins and leads to The Greenhouse. Original drawing.
+       script.js moves it (section 5); it never covers text. -->
+  <button class="bonsai" id="bonsai" type="button" aria-label="Visit the Greenhouse" aria-haspopup="dialog" hidden>
+    <svg class="bonsai-art" viewBox="0 0 120 104" aria-hidden="true" focusable="false">
+      <defs><radialGradient id="bzGlow" cx=".55" cy=".45" r=".55"><stop class="bzs-glow" offset="0"/><stop class="bzs-glow-out" offset="1"/></radialGradient><radialGradient id="bzShadow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#1a140e" stop-opacity=".32"/><stop offset="1" stop-color="#1a140e" stop-opacity="0"/></radialGradient><linearGradient id="bzSlab" x1="0" y1="0" x2="0" y2="1"><stop class="bzs-slab-lit" offset="0"/><stop class="bzs-slab" offset=".45"/><stop class="bzs-slab-dk" offset="1"/></linearGradient><linearGradient id="bzSlabTop" x1="0" y1="0" x2="1" y2=".3"><stop class="bzs-slab-glow" offset="0"/><stop class="bzs-slab-lit" offset=".55"/><stop class="bzs-slab" offset="1"/></linearGradient><radialGradient id="bzStone" cx=".38" cy=".25" r=".8"><stop class="bzs-stone-lit" offset="0"/><stop class="bzs-stone" offset=".6"/><stop class="bzs-stone-dk" offset="1"/></radialGradient><linearGradient id="bzTrunk" gradientUnits="userSpaceOnUse" x1="36" y1="60" x2="70" y2="52"><stop class="bzs-trunk-dk" offset="0"/><stop class="bzs-trunk" offset=".45"/><stop class="bzs-trunk-lit" offset="1"/></linearGradient><radialGradient id="bzLeaf" cx=".62" cy=".28" r=".75"><stop class="bzs-leaf-lit" offset="0"/><stop class="bzs-leaf" offset=".55"/><stop class="bzs-leaf-dk" offset="1"/></radialGradient></defs>
+      <ellipse class="bz-glow" cx="66" cy="40" rx="52" ry="40" fill="url(#bzGlow)"/>
+      <ellipse cx="60" cy="100.5" rx="50" ry="3.6" fill="url(#bzShadow)"/>
+      <path fill="url(#bzSlab)" d="M7 91 C 9 86 24 84 40 85 C 58 83 74 85 90 83.5 C 104 82.5 115 86 114 90.5 C 113 95 104 97.5 92 98 C 72 100 46 101 24 99.5 C 12 98.6 5 95.5 7 91 Z"/>
+      <path fill="url(#bzSlabTop)" d="M10 90 C 22 86.5 40 86.5 56 86 C 74 85.5 92 84.8 111 88.6 C 100 91.6 74 92.4 52 92.6 C 34 92.8 18 92.2 10 90 Z"/>
+      <path class="bz-grain-lit" d="M15.9 87.8 C 40.9 86.9 76.2 87.9 104.2 86.7 M18.9 88.7 C 43.9 87.8 77.1 88.8 105.1 87.5 M17.8 89.5 C 42.8 88.6 73.6 89.6 101.6 88.4 M13.5 90.4 C 38.5 89.5 71.9 90.5 99.9 89.2 M13.3 91.2 C 38.3 90.3 72.8 91.3 100.8 90.1 M13.6 92.1 C 38.6 91.2 76.9 92.2 104.9 91"/>
+      <path class="bz-grain" d="M12 94.5 C 30 97 62 97.6 88 96 C 98 95.4 106 94.4 110 92.6 M20 97.4 C 40 99 70 99.2 92 97.6"/>
+      <ellipse class="bz-knot" cx="88" cy="89.6" rx="2.4" ry=".8"/><ellipse class="bz-knot" cx="24" cy="89.8" rx="1.6" ry=".55"/>
+      <path class="bz-rim" d="M10 89.8 C 22 86.4 40 86.4 56 85.9 C 74 85.4 92 84.7 111 88.5"/>
+      <ellipse cx="56" cy="88.6" rx="21" ry="2" fill="url(#bzShadow)"/>
+      <path fill="url(#bzStone)" d="M37 88.6 C 36.5 82.5 44 78.4 55 78.6 C 66 78.8 74.5 82 75.6 88 C 64 89.8 48 90 37 88.6 Z"/>
+      <path class="bz-moss" d="M40.5 84.6 C 45.5 80.2 54 79.3 60 80.1 C 66.5 81 71.5 82.8 73.6 85.6 C 64 84 50 83.8 40.5 84.6 Z"/>
+      <path class="bz-moss-dots" d="M54.9 83.7h.01 M46.5 81.9h.01 M60.6 84h.01 M59.2 82.4h.01 M70.3 81.3h.01 M67 82.1h.01 M47 81.6h.01 M51.6 83.6h.01 M48.1 82.9h.01 M60.9 82.3h.01 M58.3 81.4h.01 M44.7 81.8h.01 M62.1 82.5h.01 M51.8 83h.01 M55.7 82.1h.01 M65.2 83.3h.01 M49.8 82.9h.01 M57.7 83.8h.01 M63.4 82.1h.01 M70.4 81.6h.01 M54.7 83.5h.01 M47.3 82.7h.01 M44.1 83.2h.01 M64.4 82.9h.01 M67.5 82.1h.01 M62.5 83h.01"/>
+      <g class="bz-trunk" stroke="url(#bzTrunk)"><path stroke-width="8.4" d="M57 84 C 52 76 40 72 44 62"/><path stroke-width="6.2" d="M44 62 C 48 53 64 55 65 44"/><path stroke-width="4.2" d="M65 44 C 66 37 70 32 76 28"/><path stroke-width="2.7" d="M46 58 C 37 55.5 28 58 18 54"/><path stroke-width="2.3" d="M64 47 C 74 44 82 45 92 40"/><path stroke-width="1.9" d="M54 55 C 50 49 44 47 36 45"/></g>
+      <path class="bz-bark-dk" d="M55.2 83.2 C 50.6 76 39.4 71.8 42.4 62.8 M46.4 59 C 51.6 54.8 61 54.6 63.2 47.6"/>
+      <path class="bz-bark" d="M58.8 82.6 C 54.4 75.6 44.6 71.6 46.8 63.4 C 49.4 56.4 61.6 56.4 64.6 47.2 M66.6 45.4 C 67.4 39.4 70.6 34 75.2 30.4"/>
+      <path class="bz-bark-lit" d="M60.4 81.4 C 56.6 75.6 47.8 72.4 48.8 65.2"/>
+      <path class="bz-shari" d="M57.4 81 C 54.4 76.4 47.6 73 47.2 67.6 M48.2 61.2 C 50.6 58.2 55.2 57.6 58.4 55.4"/>
+      <path class="bz-jin" d="M75 28.5 C 80 24 85 22 91 15.5 M85 21.6 C 88 21.4 91 22.6 94 21"/>
+      <path class="bz-jin-shade" d="M77 27.6 C 81.4 24.4 86 22.2 90.6 17"/>
+      <g class="bz-pad" transform="translate(14 50)">
+      <ellipse class="bz-pad-under" rx="12.5" ry="3.8" cy="2"/>
+      <circle cx="-9.7" cy="0.3" r="3.7" fill="url(#bzLeaf)"/>
+      <circle cx="-4.3" cy="-1" r="5.3" fill="url(#bzLeaf)"/>
+      <circle cx="-0.5" cy="-1.4" r="6.2" fill="url(#bzLeaf)"/>
+      <circle cx="5.5" cy="-1.3" r="5.6" fill="url(#bzLeaf)"/>
+      <circle cx="9.6" cy="-0.4" r="3.8" fill="url(#bzLeaf)"/>
+      <path class="bz-needles-dk" d="M-10.5 1.3h.01M1.2 1.9h.01M7.6 1.8h.01M9.1 2.5h.01M6.6 1.9h.01M8.3 2.7h.01M0.7 2.6h.01M8.6 0.7h.01M11.5 1.8h.01M7.3 1.5h.01M11.6 2.5h.01M9.5 1.7h.01M9.7 1.3h.01M10.6 1h.01M9.6 1.5h.01M-8.4 1.6h.01M11.4 0.6h.01M-11.5 2.6h.01M-1.6 1.8h.01M2 2.1h.01M-1.9 2.2h.01M-11.8 1.5h.01M1.3 1.1h.01M10.5 0.8h.01M8.9 2.4h.01M-10.1 0.6h.01M6.7 2h.01M-8.2 0.8h.01M-4.3 0.7h.01M11.5 1.4h.01M-10.9 1.4h.01M9.8 1.6h.01M1.7 0.5h.01M3.2 1.3h.01M-9.9 1.8h.01M-10.3 1.9h.01"/>
+      <path class="bz-needles" d="M-0.9 -3.6h.01M-8.8 -2.4h.01M8.8 -3.5h.01M-5.3 -1.6h.01M-8.3 -3h.01M-6.3 -1h.01M-5.6 -4.6h.01M4.5 -0.8h.01M7.1 -1.6h.01M-10.4 -3.4h.01M-8 -1.8h.01M-11.9 -2.6h.01M2.7 -3.7h.01M-3.6 -2h.01M-0.8 -1.2h.01M-9.4 -1.7h.01M7.8 -3.1h.01M-8.4 -0.4h.01M-5.7 -1.9h.01M6.5 -0.6h.01M5.7 -2.9h.01M-3.4 -4.6h.01M-5.2 -2.7h.01M-3.2 -3.2h.01M-7.2 -2.9h.01M7.1 -3.8h.01M5.9 -1h.01M11.2 -1.1h.01M-7.8 -3.4h.01M-3.6 -0.6h.01M7.7 -2.8h.01M-4.9 -2.9h.01M-5.7 -1.5h.01M9.7 -1.6h.01M0 -0.8h.01M-11.4 -0.8h.01M-7.8 -0.9h.01M1.3 -2.4h.01M-6 -2.5h.01M0.2 -0.6h.01M9.8 -0.9h.01M0.1 -1h.01M-1.1 -0.8h.01M8.1 -3.3h.01M-1.4 -4.4h.01M7.9 -3.1h.01M0.4 -2.3h.01M-1.4 -4.8h.01M2.9 -0.9h.01M11.2 -3h.01M-5.5 -3.7h.01M-9.8 -3.5h.01M-1.1 -2.3h.01M10.1 -2.1h.01M0.6 -3.1h.01M-8 -3.9h.01M-4.5 -2.4h.01M-5 -0.9h.01"/>
+      <path class="bz-tufts" d="M-3.1 -4.8l-0.5 -0.7M-3.1 -4.8l0.1 -1.2M-3.1 -4.8l0.5 -1.1M8.7 -4l-0.4 -1.1M8.7 -4l-0 -1.4M8.7 -4l0.6 -1.1M3.8 -3.7l-0.8 -1.2M3.8 -3.7l0.1 -1.3M3.8 -3.7l0.5 -1M-8.9 -3.9l-0.9 -1M-8.9 -3.9l-0.1 -1M-8.9 -3.9l0.5 -1.3M7.4 -3.6l-0.6 -0.9M7.4 -3.6l-0.1 -1.2M7.4 -3.6l0.4 -1.1M-4.7 -3.6l-0.4 -1.2M-4.7 -3.6l-0.2 -1.5M-4.7 -3.6l0.5 -1M-10 -3.5l-0.6 -1M-10 -3.5l-0.2 -1.2M-10 -3.5l0.3 -1M-8.2 -3.8l-0.6 -0.7M-8.2 -3.8l-0.1 -1M-8.2 -3.8l0.6 -1M5 -3.9l-0.6 -1.3M5 -3.9l-0.1 -1.1M5 -3.9l0.7 -0.7M4.5 -4l-0.9 -1.1M4.5 -4l0.2 -1.3M4.5 -4l0.8 -1.1M-7.2 -3.8l-0.7 -1.2M-7.2 -3.8l0.2 -1.4M-7.2 -3.8l0.8 -1.2M3.7 -4l-0.5 -0.7M3.7 -4l-0.2 -1.1M3.7 -4l0.5 -1.3M1.2 -4.2l-0.6 -1.2M1.2 -4.2l-0 -0.9M1.2 -4.2l0.8 -1.1M0.1 -4.4l-0.4 -0.8M0.1 -4.4l0.1 -1M0.1 -4.4l0.4 -1M4.6 -4.5l-0.6 -1.4M4.6 -4.5l-0 -1.1M4.6 -4.5l0.6 -1.1"/>
+      </g>
+      <g class="bz-pad" transform="translate(36 42)">
+      <ellipse class="bz-pad-under" rx="10.5" ry="3.3" cy="1.7"/>
+      <circle cx="-7.9" cy="0.1" r="3.3" fill="url(#bzLeaf)"/>
+      <circle cx="-3.2" cy="-1.4" r="4.6" fill="url(#bzLeaf)"/>
+      <circle cx="3" cy="-1.1" r="4.8" fill="url(#bzLeaf)"/>
+      <circle cx="7.6" cy="-0.2" r="3" fill="url(#bzLeaf)"/>
+      <path class="bz-needles-dk" d="M3.4 0.4h.01M6.4 2.2h.01M-7.3 1.3h.01M0.2 1.7h.01M4.2 1.8h.01M-4.3 2h.01M7.7 1.3h.01M2.6 1.9h.01M-1 0.8h.01M8.1 2.4h.01M7.7 0.9h.01M-4.4 2.2h.01M9.1 1.6h.01M4.2 1.8h.01M-2.2 1.9h.01M6.5 1.5h.01M8.8 0.8h.01M2.9 0.9h.01M9.2 0.4h.01M-5 2.2h.01M-6 1.2h.01M-4.1 2.1h.01M-5.7 2.3h.01M-2.1 1.7h.01M7.7 0.8h.01M9.9 2.1h.01M-3 2.1h.01M-7.5 2.2h.01"/>
+      <path class="bz-needles" d="M3.5 -2.2h.01M-0.7 -1.2h.01M8.7 -3.2h.01M-1 -2.5h.01M8.9 -2.1h.01M-0.3 -4.2h.01M-0.2 -1.3h.01M-7.2 -1.5h.01M6.8 -3.7h.01M-4.2 -1.6h.01M-2.8 -1.4h.01M-5 -2.3h.01M4.4 -3.7h.01M2.9 -2.3h.01M8.5 -2.6h.01M-3.1 -2.2h.01M9.5 -1.7h.01M-4 -0.5h.01M-6.6 -2.7h.01M8.1 -0.5h.01M-1 -3.4h.01M-8.2 -1.4h.01M-5.2 -2.3h.01M-1.7 -1.5h.01M-2.5 -2h.01M-7.5 -0.5h.01M7.2 -2.3h.01M-5 -1.4h.01M7.4 -3.4h.01M-0.5 -0.4h.01M9.4 -1.8h.01M-6.9 -0.5h.01M-0.9 -0.6h.01M2.9 -2.2h.01M4 -3.4h.01M0.5 -0.4h.01M-9.8 -1.4h.01M7.7 -0.7h.01M4.1 -2.1h.01M-1.6 -2.6h.01M8.5 -2.1h.01M-3.2 -1.4h.01M4.8 -0.7h.01M-5.4 -2.5h.01M-0.1 -3.1h.01M9 -2.4h.01M-7.1 -3.3h.01M4.9 -3.8h.01M-2.4 -1.7h.01M-6.6 -3.7h.01"/>
+      <path class="bz-tufts" d="M5.4 -3.5l-0.8 -0.9M5.4 -3.5l-0.1 -1.4M5.4 -3.5l0.4 -1M6.7 -3.7l-0.7 -1.2M6.7 -3.7l0.1 -0.9M6.7 -3.7l0.3 -0.9M7.1 -3.4l-0.6 -1.3M7.1 -3.4l-0.1 -1.1M7.1 -3.4l0.8 -1M-4 -3.3l-0.6 -0.9M-4 -3.3l-0.3 -1.3M-4 -3.3l0.8 -1M7.4 -3.6l-0.7 -1M7.4 -3.6l0.3 -1.4M7.4 -3.6l0.5 -0.9M-1.2 -3.8l-0.3 -1M-1.2 -3.8l0.2 -1.3M-1.2 -3.8l0.8 -1.1M1.8 -3.9l-0.6 -0.9M1.8 -3.9l0.1 -0.9M1.8 -3.9l0.5 -1.2M-4.2 -4l-0.8 -0.9M-4.2 -4l-0.1 -1.5M-4.2 -4l0.9 -1.2M-3.9 -4l-0.8 -0.9M-3.9 -4l0.1 -1.2M-3.9 -4l0.5 -1.1M2 -3.5l-0.6 -1.3M2 -3.5l0.1 -1M2 -3.5l0.7 -0.8M1.1 -3.9l-0.4 -0.9M1.1 -3.9l-0.1 -1M1.1 -3.9l0.5 -1.3M1.3 -4l-0.8 -1.3M1.3 -4l0 -1M1.3 -4l0.8 -1"/>
+      </g>
+      <g class="bz-pad" transform="translate(58 37)">
+      <ellipse class="bz-pad-under" rx="8" ry="2.7" cy="1.4"/>
+      <circle cx="-5.7" cy="-0" r="2.4" fill="url(#bzLeaf)"/>
+      <circle cx="-1.7" cy="-0.6" r="4.3" fill="url(#bzLeaf)"/>
+      <circle cx="1.5" cy="-1.3" r="3.9" fill="url(#bzLeaf)"/>
+      <circle cx="5.9" cy="0.1" r="2.9" fill="url(#bzLeaf)"/>
+      <path class="bz-needles-dk" d="M-4.5 0.9h.01M-1.4 1.3h.01M6.7 1.9h.01M-1.7 1.5h.01M1.8 1h.01M-5.2 0.9h.01M4 0.8h.01M-7 0.3h.01M-6.3 0.7h.01M-5.5 1.3h.01M7.5 0.8h.01M-0.1 1.7h.01M-3.4 1h.01M-5.1 1.7h.01M2.7 1.4h.01M-5 0.9h.01M-2.1 1.3h.01M-6 1.9h.01M-3.6 1.9h.01"/>
+      <path class="bz-needles" d="M-0.8 -2.1h.01M6.8 -2.2h.01M1.8 -2.3h.01M-5.5 -1.9h.01M-4.5 -3.1h.01M2.7 -2.4h.01M0.7 -3.2h.01M-1.6 -0.5h.01M-6.2 -2h.01M-1.4 -1.9h.01M6.9 -1.2h.01M7.5 -0.9h.01M3.5 -2.2h.01M-0.6 -2.6h.01M6.2 -2.4h.01M-2 -0.7h.01M7.1 -1.7h.01M5 -2.1h.01M-1.5 -0.6h.01M-5.7 -1.7h.01M6 -2.6h.01M-2.9 -1.1h.01M-0.8 -1.1h.01M1.8 -0.8h.01M-0.6 -2.5h.01M-6 -2.2h.01M-6.2 -0.7h.01M4.2 -0.5h.01M6.3 -2h.01M6.5 -2.4h.01M-4.4 -1.8h.01M-2.8 -3.2h.01M-5.9 -0.3h.01M2 -1.3h.01M1.2 -1.5h.01"/>
+      <path class="bz-tufts" d="M-0.7 -3.4l-0.4 -0.8M-0.7 -3.4l0.1 -1M-0.7 -3.4l0.8 -1.2M1.1 -2.8l-0.5 -0.7M1.1 -2.8l-0.2 -1M1.1 -2.8l0.6 -1M0.2 -2.6l-0.6 -0.8M0.2 -2.6l0.1 -0.9M0.2 -2.6l0.3 -1.1M-5 -2.7l-0.7 -1M-5 -2.7l0 -1M-5 -2.7l0.6 -1M-4.7 -2.1l-0.6 -0.8M-4.7 -2.1l-0.2 -1.3M-4.7 -2.1l0.9 -1.1M-1.3 -3.3l-0.9 -1M-1.3 -3.3l0 -1.1M-1.3 -3.3l0.6 -1M5.6 -2.2l-0.8 -1.2M5.6 -2.2l-0.2 -1.2M5.6 -2.2l0.5 -0.9M-5.7 -2.1l-0.8 -0.9M-5.7 -2.1l0.2 -1M-5.7 -2.1l0.5 -1.2M0.1 -2.9l-0.4 -0.9M0.1 -2.9l-0.1 -1.1M0.1 -2.9l0.5 -1.4"/>
+      </g>
+      <g class="bz-pad" transform="translate(91 37)">
+      <ellipse class="bz-pad-under" rx="11.5" ry="3.6" cy="1.9"/>
+      <circle cx="-8.6" cy="-0.4" r="3.6" fill="url(#bzLeaf)"/>
+      <circle cx="-2.6" cy="-1.3" r="5.5" fill="url(#bzLeaf)"/>
+      <circle cx="3.3" cy="-1.5" r="5.3" fill="url(#bzLeaf)"/>
+      <circle cx="8.5" cy="-0.4" r="3.3" fill="url(#bzLeaf)"/>
+      <path class="bz-needles-dk" d="M-3.6 0.8h.01M4.3 1.5h.01M-1.4 1.1h.01M5.3 2.2h.01M2.9 0.4h.01M3.6 2.5h.01M-0.7 1.4h.01M4.3 1.6h.01M-1.4 0.6h.01M2.9 0.4h.01M-3 1.3h.01M7 1.9h.01M-9.5 1.8h.01M9.1 2.3h.01M-10.2 1.7h.01M-4.8 0.6h.01M0.1 1.5h.01M-1.4 1h.01M-3.3 0.5h.01M-8.9 1.5h.01M5.7 2.5h.01M-3.3 1.4h.01M-5.2 2.2h.01M-9.2 1.3h.01M4.3 1.1h.01M-2.3 1.8h.01M-9 1.9h.01M0.7 0.8h.01M7.5 0.4h.01M4.4 1.5h.01M6.4 0.8h.01M-2.1 0.7h.01M4.9 1.8h.01M6 0.6h.01M7.7 0.5h.01M6.2 0.7h.01M-7.4 1.2h.01M-2.3 0.9h.01M-8.3 2.5h.01M-1.7 0.4h.01"/>
+      <path class="bz-needles" d="M4.6 -2.5h.01M0.5 -2.7h.01M-10.6 -1.8h.01M1.5 -2.4h.01M-7.8 -3.7h.01M9.4 -1.5h.01M-10.3 -3.2h.01M5.2 -3.8h.01M-8.6 -2.4h.01M-4.6 -3.7h.01M5.6 -2.8h.01M-1.7 -4.5h.01M2.6 -4.3h.01M-7.2 -4h.01M-10.8 -0.4h.01M6.5 -2.9h.01M-4.7 -2.9h.01M-0 -3.8h.01M2.8 -2h.01M-10.4 -2.2h.01M8.8 -0.5h.01M8.4 -2.3h.01M-3.3 -2.2h.01M5.3 -3.1h.01M-5.7 -2.9h.01M-7.5 -2.9h.01M-3.8 -0.8h.01M-1.4 -3.2h.01M-8.6 -2.4h.01M-10.2 -1h.01M4.2 -0.9h.01M-0.8 -3.6h.01M8.9 -1h.01M5.4 -1.4h.01M3.1 -1.3h.01M2.8 -3.8h.01M2.8 -2.7h.01M9.4 -2.5h.01M6.1 -1.5h.01M10.4 -3.2h.01M9.6 -0.4h.01M1.6 -0.7h.01M7.2 -0.5h.01M9.8 -2.2h.01M-3.2 -4.1h.01M-2.2 -4.5h.01"/>
+      <path class="bz-tufts" d="M-2.7 -4.3l-0.8 -1.1M-2.7 -4.3l0.2 -1.2M-2.7 -4.3l0.5 -1.3M-2 -4.4l-0.9 -1.1M-2 -4.4l0.2 -1.3M-2 -4.4l0.6 -1.1M-5 -3.3l-0.7 -1.1M-5 -3.3l0.2 -1.4M-5 -3.3l0.5 -0.9M0.9 -4.5l-0.4 -1M0.9 -4.5l0.2 -1M0.9 -4.5l0.5 -0.9M-1.4 -4.4l-0.9 -1M-1.4 -4.4l-0.1 -1M-1.4 -4.4l0.5 -1.1M-1.3 -3.9l-0.5 -1M-1.3 -3.9l0.3 -1.4M-1.3 -3.9l0.5 -1.3M7.5 -3.1l-0.9 -1.1M7.5 -3.1l0.1 -0.9M7.5 -3.1l0.5 -1.4M2.9 -4.3l-0.6 -0.8M2.9 -4.3l-0.2 -1.4M2.9 -4.3l0.4 -0.9M7.4 -3.1l-0.9 -1.1M7.4 -3.1l0.1 -1.4M7.4 -3.1l0.8 -1.2M5.3 -3.4l-0.8 -1M5.3 -3.4l0 -1.3M5.3 -3.4l0.7 -1.3M1 -4.3l-0.6 -0.8M1 -4.3l-0 -0.9M1 -4.3l0.5 -0.9M-0.2 -4.1l-0.7 -1.2M-0.2 -4.1l-0.3 -1.4M-0.2 -4.1l0.6 -1.1M3 -3.6l-0.6 -1M3 -3.6l0.2 -0.9M3 -3.6l0.7 -1.1"/>
+      </g>
+      <g class="bz-pad" transform="translate(70 24)">
+      <ellipse class="bz-pad-under" rx="14.5" ry="4.6" cy="2.4"/>
+      <circle cx="-11.9" cy="0.1" r="4.5" fill="url(#bzLeaf)"/>
+      <circle cx="-6.3" cy="-0.7" r="5.8" fill="url(#bzLeaf)"/>
+      <circle cx="-2.2" cy="-1.4" r="7" fill="url(#bzLeaf)"/>
+      <circle cx="1.7" cy="-1.7" r="7.3" fill="url(#bzLeaf)"/>
+      <circle cx="6.6" cy="-1.2" r="6.4" fill="url(#bzLeaf)"/>
+      <circle cx="11.3" cy="0.2" r="4.4" fill="url(#bzLeaf)"/>
+      <path class="bz-needles-dk" d="M1.5 1.7h.01M-5.7 1.8h.01M0.2 3.1h.01M4.3 1.4h.01M4.4 1.4h.01M-1.2 1.1h.01M7.6 2.6h.01M2.1 2.6h.01M2.5 2.8h.01M-11 0.5h.01M-13.6 0.9h.01M-10.4 3.1h.01M-11.3 2.3h.01M-7.1 1h.01M5.9 2h.01M-6.8 3h.01M4.2 1.7h.01M-9.2 2.2h.01M-9.8 1.6h.01M7.9 2.9h.01M-12.1 3.1h.01M5.6 1.8h.01M13.2 2h.01M2.8 2.4h.01M8.7 2.4h.01M-12.6 2h.01M8.6 2.2h.01M8.5 0.6h.01M1.5 1.5h.01M-8.3 1.2h.01M-6.8 1.1h.01M8.4 1.4h.01M10.9 2.4h.01M-12.5 3.3h.01M-12.8 3.3h.01M-6.6 1.4h.01M-2 2.8h.01M7.4 1.8h.01M12.6 0.8h.01M12.8 3.3h.01M-4.1 2.4h.01M11.1 2h.01M-12.5 1.7h.01M7 2.8h.01M-7.7 2.8h.01M10.1 2.4h.01M11.8 2.1h.01M-5 2.5h.01M-10.6 3.2h.01M-12.2 2.5h.01M-3.7 3.2h.01"/>
+      <path class="bz-needles" d="M-8 -1.5h.01M-2.7 -1.2h.01M-4.7 -2.8h.01M7.8 -4.9h.01M10.6 -0.4h.01M-5.5 -5.5h.01M5 -3.7h.01M-11 -3.3h.01M7.9 -0.4h.01M-5.5 -1.8h.01M12 -4.1h.01M-1.5 -5.8h.01M13.2 -0.7h.01M-7.9 -4h.01M-10.2 -4.8h.01M-8.6 -4.7h.01M6.3 -4.8h.01M6 -5.4h.01M-11.6 -2.2h.01M-0.4 -5.4h.01M2.1 -1.8h.01M3.6 -2h.01M7.8 -0.4h.01M2.8 -3h.01M10.7 -1.7h.01M8.5 -2.8h.01M-6.5 -1.8h.01M11.4 -1.9h.01M11.9 -2.7h.01M4.9 -1.5h.01M8 -1.3h.01M0.6 -1.5h.01M-8.6 -3.5h.01M5.5 -2.4h.01M-2.7 -1.1h.01M-3.5 -4.8h.01M7.9 -3.9h.01M-4.3 -1h.01M10.1 -0.9h.01M12.8 -2.4h.01M-8.2 -3.7h.01M11.3 -4.2h.01M-6.7 -0.5h.01M-2.9 -1.7h.01M-7.7 -5h.01M13.4 -3.9h.01M4.9 -3h.01M7.1 -4.5h.01M-6.7 -4.4h.01M-9.1 -3.1h.01M4.9 -5.6h.01M-9.9 -1.2h.01M3.5 -1.7h.01M8.9 -1.1h.01M-9.8 -3.1h.01M5.9 -0.6h.01M10.2 -2.7h.01M-4.6 -4.2h.01M4.6 -3.8h.01M-5.9 -3.3h.01"/>
+      <path class="bz-tufts" d="M11.6 -3.6l-0.7 -0.8M11.6 -3.6l0.2 -0.9M11.6 -3.6l0.6 -0.9M11.1 -4.6l-0.4 -1M11.1 -4.6l-0.1 -0.9M11.1 -4.6l0.7 -1M-7.3 -4.8l-0.4 -1M-7.3 -4.8l0 -1M-7.3 -4.8l0.5 -1.3M4.9 -5.4l-0.6 -0.7M4.9 -5.4l0.1 -1.2M4.9 -5.4l0.4 -0.9M2.6 -5l-0.5 -1.2M2.6 -5l-0.1 -0.9M2.6 -5l0.7 -0.9M5.1 -5.5l-0.4 -1M5.1 -5.5l0.2 -1.4M5.1 -5.5l0.5 -0.8M9.5 -4.4l-0.4 -1M9.5 -4.4l-0.2 -1.4M9.5 -4.4l0.5 -0.9M-3 -5.1l-0.8 -0.9M-3 -5.1l-0 -1.2M-3 -5.1l0.5 -1.2M7.3 -4.3l-0.7 -1.1M7.3 -4.3l-0.1 -1.3M7.3 -4.3l0.5 -1.3M10.5 -4.2l-0.6 -1.1M10.5 -4.2l0 -0.9M10.5 -4.2l0.7 -0.8M-7.4 -5.2l-0.8 -1.1M-7.4 -5.2l-0.2 -0.9M-7.4 -5.2l0.6 -0.8M-11.2 -4l-0.6 -1.1M-11.2 -4l0.1 -1M-11.2 -4l0.8 -1M-10.6 -4.6l-0.6 -1M-10.6 -4.6l-0.1 -1M-10.6 -4.6l0.5 -0.9M2.1 -4.9l-0.8 -1M2.1 -4.9l0.1 -1M2.1 -4.9l0.9 -1.2M-2.6 -5.3l-0.5 -1.1M-2.6 -5.3l-0.1 -1.5M-2.6 -5.3l0.7 -0.9M-6 -5.1l-0.8 -1.3M-6 -5.1l0.2 -1.4M-6 -5.1l0.9 -1.1M-10.4 -4.2l-0.5 -1.4M-10.4 -4.2l-0.1 -1.1M-10.4 -4.2l0.6 -0.9"/>
+      </g>
+    </svg>
+    <span class="bonsai-tag" aria-hidden="true">The Greenhouse</span>
+  </button>
+
+  <dialog class="bonsai-dialog" id="bonsai-dialog" aria-labelledby="bonsai-dialog-title">
+    <div class="bonsai-card">
+      <p class="bonsai-eyebrow">The Library · N 076°</p>
+      <h2 class="bonsai-title" id="bonsai-dialog-title">Step into the Greenhouse?</h2>
+      <div class="bonsai-actions">
+        <a class="btn btn--solid" href="library/greenhouse/" autofocus>Yes, take me there</a>
+        <button class="btn" type="button" data-close>Not now</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="shared/field-notes.js?v=2026-10-15.2"></script>
+  <script src="projects.js?v=2026-10-15.2"></script>
+  <script src="script.js?v=2026-10-15.2"></script>
 </body>
 </html>

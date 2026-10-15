@@ -9,6 +9,7 @@
    2. Top bar + mobile menu
    3. Compass
    4. Contour map (the hero)
+   5. The bonsai (easter egg that leads to The Greenhouse)
    ========================================================= */
 (() => {
   "use strict";
@@ -552,4 +553,191 @@
 
   // Recolour the map whenever Day/Dusk changes
   document.addEventListener("fieldnotes:themechange", () => terrain.refreshColours());
+
+  /* ---------------------------------------------------------
+     5. THE BONSAI
+     A small bonsai drifts slowly through the page's empty
+     margins and gaps, bobbing like a leaf on still water.
+     It never crosses text, cards, links or buttons: before
+     each move it checks its whole path against them, and if
+     the page shifts under it, it fades out and finds a clear
+     spot. If there's no clear spot on screen (a narrow phone,
+     say), it hides rather than cover anything.
+     It pauses on hover, on focus, while the pop-up is open and
+     when the tab is hidden. With reduced motion it sits still
+     in a clear corner of the hero.
+     Clicking it opens a small pop-up offering The Greenhouse.
+     --------------------------------------------------------- */
+  (() => {
+    const tree = document.getElementById("bonsai");
+    const dialog = document.getElementById("bonsai-dialog");
+    if (!tree || !dialog || typeof dialog.showModal !== "function") return;
+
+    const PAD = 14;          // breathing room kept around everything it avoids
+    const EDGE = 8;          // distance kept from the window edges
+    const AVOID = "main h1, main h2, main h3, main p, main a, main button, main li, main img, " +
+      ".card, .hawk, .origin, .scale-bar, .margin-note, .colophon p, .colophon a";
+
+    tree.hidden = false;
+    let w = tree.offsetWidth, h = tree.offsetHeight;
+    const pos = { x: 0, y: 0 };
+    let leg = null;          // { from, to, start, duration }
+    let restUntil = 0;       // pause between legs, in "drift time"
+    let clock = 0;           // drift time: only runs while it's free to move
+    let last = 0, raf = 0, checkedAt = -1e9;
+    let hovered = false, focused = false, placed = false;
+    let blocks = [];
+
+    // Everything to stay clear of, in page coordinates
+    function measure() {
+      w = tree.offsetWidth; h = tree.offsetHeight;
+      const sx = scrollX, sy = scrollY;
+      blocks = [];
+      document.querySelectorAll(AVOID).forEach((node) => {
+        if (tree.contains(node) || dialog.contains(node)) return;
+        const r = node.getBoundingClientRect();
+        if (!r.width || !r.height) return;
+        blocks.push({ l: r.left + sx - PAD, t: r.top + sy - PAD, r: r.right + sx + PAD, b: r.bottom + sy + PAD });
+      });
+    }
+    const clearAt = (x, y) => !blocks.some((k) => x < k.r && x + w > k.l && y < k.b && y + h > k.t);
+    function pathClear(a, b) {
+      const steps = Math.max(1, Math.ceil(Math.hypot(b.x - a.x, b.y - a.y) / 6));
+      for (let i = 1; i <= steps; i++) {
+        if (!clearAt(a.x + ((b.x - a.x) * i) / steps, a.y + ((b.y - a.y) * i) / steps)) return false;
+      }
+      return true;
+    }
+    // The part of the page currently on screen, below the top bar
+    function view() {
+      const bar = parseFloat(getComputedStyle(root).getPropertyValue("--bar-h")) || 64;
+      const docW = root.clientWidth, docH = root.scrollHeight;
+      return {
+        l: scrollX + EDGE, r: Math.min(scrollX + root.clientWidth, docW) - w - EDGE,
+        t: scrollY + bar + EDGE, b: Math.min(scrollY + innerHeight, docH) - h - EDGE,
+      };
+    }
+    const onScreen = (v) => pos.x >= v.l - w && pos.x <= v.r + w && pos.y >= v.t - h && pos.y <= v.b + h;
+
+    // A clear spot on screen, preferring the side margins
+    function findSpot(v, prefer) {
+      const spots = [];
+      for (let y = v.t; y <= v.b; y += 18) {
+        for (let x = v.l; x <= v.r; x += 18) if (clearAt(x, y)) spots.push({ x, y });
+      }
+      if (!spots.length) return null;
+      const score = prefer || ((p) => Math.min(p.x - v.l, v.r - p.x) + Math.random() * 60);
+      return spots.reduce((best, p) => (score(p) < score(best) ? p : best));
+    }
+    // Somewhere new to drift to, along a clear path
+    function pickTarget(v) {
+      let best = null;
+      for (let i = 0; i < 70; i++) {
+        const p = { x: v.l + Math.random() * Math.max(0, v.r - v.l), y: v.t + Math.random() * Math.max(0, v.b - v.t) };
+        const d = Math.hypot(p.x - pos.x, p.y - pos.y);
+        if (d < 90 || !clearAt(p.x, p.y) || !pathClear(pos, p)) continue;
+        if (!best || Math.abs(d - 320) < Math.abs(best.d - 320)) best = { x: p.x, y: p.y, d };
+      }
+      return best;
+    }
+
+    // About 35 seconds to cross the window, whatever its size
+    const speed = () => Math.max(14, Math.min(40, root.clientWidth / 35));
+    const ease = (t) => t * t * (3 - 2 * t);
+
+    function draw(t) {
+      const still = reducedMotion.matches;
+      const bob = still ? 0 : Math.sin(t / 2600) * 3;
+      const sway = still ? 0 : Math.sin(t / 4100) * 2.2;
+      tree.style.transform = `translate(${pos.x.toFixed(1)}px, ${(pos.y + bob).toFixed(1)}px) rotate(${sway.toFixed(2)}deg)`;
+      tree.classList.toggle("tag-left", pos.x - scrollX > root.clientWidth - w - 150);
+    }
+    function show(spot) {
+      if (!spot) { tree.classList.remove("is-shown"); tree.style.visibility = "hidden"; return false; }
+      tree.style.visibility = "";
+      pos.x = spot.x; pos.y = spot.y;
+      leg = null; restUntil = clock + 1500;
+      draw(clock);
+      tree.classList.add("is-shown");
+      placed = true;
+      return true;
+    }
+    // Fade out, then reappear somewhere clear on screen
+    let moving = false;
+    function relocate() {
+      if (moving) return;
+      moving = true;
+      const wait = placed && tree.classList.contains("is-shown") ? 600 : 0;
+      tree.classList.remove("is-shown");
+      placed = false;
+      setTimeout(() => { moving = false; measure(); show(findSpot(view())); }, wait);
+    }
+
+    // Reduced motion: one quiet spot in a clear corner of the hero
+    function settle() {
+      cancelAnimationFrame(raf); raf = 0;
+      measure();
+      const hero = document.querySelector(".hero").getBoundingClientRect();
+      const v = { l: scrollX + EDGE, r: scrollX + root.clientWidth - w - EDGE, t: hero.top + scrollY + 80, b: hero.bottom + scrollY - h - EDGE };
+      const corner = { x: v.r, y: v.b };
+      show(findSpot(v, (p) => Math.hypot(p.x - corner.x, p.y - corner.y)) || findSpot(view()));
+    }
+
+    const paused = () => hovered || focused || dialog.open || document.hidden;
+
+    function tick(now) {
+      raf = requestAnimationFrame(tick);
+      const dt = Math.min(100, now - (last || now));
+      last = now;
+      if (paused() || moving) return;
+      clock += dt;
+
+      // Every so often: re-measure, and make sure it's on screen and clear
+      if (clock - checkedAt > 1200 || !placed) {
+        checkedAt = clock;
+        measure();
+        const v = view();
+        if (!placed || !onScreen(v) || (!leg && !clearAt(pos.x, pos.y))) { relocate(); return; }
+        if (leg && !pathClear(pos, leg.to)) leg = null;
+      }
+      if (!placed) return;
+
+      if (!leg && clock >= restUntil) {
+        const to = pickTarget(view());
+        if (to) leg = { from: { x: pos.x, y: pos.y }, to, start: clock, duration: (to.d / speed()) * 1000 };
+        else restUntil = clock + 2000;
+      }
+      if (leg) {
+        const k = Math.min(1, (clock - leg.start) / leg.duration);
+        pos.x = leg.from.x + (leg.to.x - leg.from.x) * ease(k);
+        pos.y = leg.from.y + (leg.to.y - leg.from.y) * ease(k);
+        if (k >= 1) { leg = null; restUntil = clock + 2500 + Math.random() * 5000; }
+      }
+      draw(clock);
+    }
+
+    function begin() {
+      if (reducedMotion.matches) { settle(); return; }
+      if (!raf) { last = 0; raf = requestAnimationFrame(tick); }
+    }
+
+    tree.addEventListener("pointerenter", () => (hovered = true));
+    tree.addEventListener("pointerleave", () => (hovered = false));
+    tree.addEventListener("focus", () => (focused = true));
+    tree.addEventListener("blur", () => (focused = false));
+    document.addEventListener("visibilitychange", () => { last = 0; });
+    reducedMotion.addEventListener("change", () => { placed = false; begin(); });
+    addEventListener("resize", () => { if (reducedMotion.matches) settle(); else placed = false; });
+    if (reducedMotion.matches) addEventListener("scroll", () => { if (!tree.classList.contains("is-shown")) settle(); }, { passive: true });
+
+    // The pop-up
+    tree.addEventListener("click", () => dialog.showModal());
+    dialog.querySelector("[data-close]").addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", (e) => { if (e.target === dialog) dialog.close(); });   // the backdrop
+    dialog.addEventListener("close", () => tree.focus({ preventScroll: true }));
+
+    // Start once the cards and fonts are in, so it measures the real layout
+    const ready = document.fonts ? document.fonts.ready : Promise.resolve();
+    ready.then(() => setTimeout(begin, 1500));
+  })();
 })();

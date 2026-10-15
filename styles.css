@@ -11,6 +11,7 @@
    4. Sections on the grid
    5. About + footer
    6. Small screens
+   7. The bonsai (easter egg) and its pop-up
    ========================================================= */
 
 /* ---------- 1. MAP COLOURS (read by script.js) ---------- */
@@ -474,4 +475,156 @@
   .set-out { display: none; }
   .scale-ticks { width: 80px; }
   .survey { font-size: 10px; }
+}
+
+/* ---------- 7. THE BONSAI (easter egg) ----------
+   A small original bonsai that drifts through the empty
+   margins and leads to The Greenhouse. script.js (section 5)
+   moves it and keeps it off text, cards and links. */
+:root {
+  --bz-glow: #E8B46A; --bz-glow-a: .22;
+  --bz-trunk-dk: #3A2519; --bz-trunk: #6B4430; --bz-trunk-lit: #B9643E;
+  --bz-bark: #C26D45; --bz-bark-dk: #2E1F16; --bz-bark-lit: #E9A066; --bz-shari: #E8DCC6;
+  --bz-jin: #DCCFB7; --bz-jin-shade: #8C7C64;
+  --bz-leaf-dk: #3F4122; --bz-leaf: #636331; --bz-leaf-lit: #A9A55A;
+  --bz-needle: #C2BC6E; --bz-needle-dk: #34361C; --bz-pad-under: #33351C;
+  --bz-slab-dk: #3E2618; --bz-slab: #6A4329; --bz-slab-lit: #9C6A42; --bz-slab-glow: #D3995E;
+  --bz-grain: #3E2618; --bz-grain-lit: #B27C4E; --bz-rim: #E7B47A;
+  --bz-stone-dk: #3D3934; --bz-stone: #6A645B; --bz-stone-lit: #A29A8C;
+  --bz-moss: #6F7036; --bz-moss-dot: #A8A55A;
+}
+:root[data-theme="dusk"] {
+  --bz-glow: #F0B060; --bz-glow-a: .16; --bz-jin: #EDE3D0; --bz-jin-shade: #A89880;
+  --bz-trunk-dk: #4A3020; --bz-trunk: #85563C; --bz-trunk-lit: #D5794B;
+  --bz-bark: #DB8152; --bz-bark-dk: #3A281C; --bz-bark-lit: #F2B07A;
+  --bz-leaf-dk: #4C4E2A; --bz-leaf: #77773C; --bz-leaf-lit: #BDB867;
+  --bz-needle: #D3CC7C; --bz-needle-dk: #3D3F21; --bz-pad-under: #3A3C20;
+  --bz-slab-dk: #4A2E1D; --bz-slab: #7E5133; --bz-slab-lit: #B07A4C; --bz-slab-glow: #E3A86A;
+  --bz-grain: #4A2E1D; --bz-grain-lit: #C48D5C; --bz-rim: #F0C08A;
+  --bz-stone-dk: #48443E; --bz-stone: #7A7469; --bz-stone-lit: #B4AC9E;
+  --bz-moss: #7E7F3E; --bz-moss-dot: #B9B666;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="day"]) {
+    --bz-glow: #F0B060; --bz-glow-a: .16; --bz-jin: #EDE3D0; --bz-jin-shade: #A89880;
+    --bz-trunk-dk: #4A3020; --bz-trunk: #85563C; --bz-trunk-lit: #D5794B;
+    --bz-bark: #DB8152; --bz-bark-dk: #3A281C; --bz-bark-lit: #F2B07A;
+    --bz-leaf-dk: #4C4E2A; --bz-leaf: #77773C; --bz-leaf-lit: #BDB867;
+    --bz-needle: #D3CC7C; --bz-needle-dk: #3D3F21; --bz-pad-under: #3A3C20;
+    --bz-slab-dk: #4A2E1D; --bz-slab: #7E5133; --bz-slab-lit: #B07A4C; --bz-slab-glow: #E3A86A;
+    --bz-grain: #4A2E1D; --bz-grain-lit: #C48D5C; --bz-rim: #F0C08A;
+    --bz-stone-dk: #48443E; --bz-stone: #7A7469; --bz-stone-lit: #B4AC9E;
+    --bz-moss: #7E7F3E; --bz-moss-dot: #B9B666;
+  }
+}
+.bonsai {
+  --bz-size: 64px;
+  position: absolute;
+  top: 0; left: 0;
+  z-index: 40;                       /* under the top bar (50) and panels */
+  width: var(--bz-size);
+  height: calc(var(--bz-size) * 0.87);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  will-change: transform;
+  -webkit-tap-highlight-color: transparent;
+}
+.bonsai.is-shown { opacity: 1; }
+.bonsai:not(.is-shown) { pointer-events: none; }   /* never catches a click while faded out */
+.bonsai[hidden] { display: none; }
+.bonsai:focus-visible { outline: 2px solid var(--link); outline-offset: 6px; border-radius: 12px; }
+.bonsai-art { display: block; width: 100%; height: 100%; overflow: visible; }
+
+.bzs-glow { stop-color: var(--bz-glow); stop-opacity: var(--bz-glow-a); }
+.bzs-glow-out { stop-color: var(--bz-glow); stop-opacity: 0; }
+.bzs-trunk-dk { stop-color: var(--bz-trunk-dk); } .bzs-trunk { stop-color: var(--bz-trunk); } .bzs-trunk-lit { stop-color: var(--bz-trunk-lit); }
+.bzs-leaf-dk { stop-color: var(--bz-leaf-dk); } .bzs-leaf { stop-color: var(--bz-leaf); } .bzs-leaf-lit { stop-color: var(--bz-leaf-lit); }
+.bzs-slab-dk { stop-color: var(--bz-slab-dk); } .bzs-slab { stop-color: var(--bz-slab); } .bzs-slab-lit { stop-color: var(--bz-slab-lit); } .bzs-slab-glow { stop-color: var(--bz-slab-glow); }
+.bzs-stone-dk { stop-color: var(--bz-stone-dk); } .bzs-stone { stop-color: var(--bz-stone); } .bzs-stone-lit { stop-color: var(--bz-stone-lit); }
+.bz-grain { fill: none; stroke: var(--bz-grain); stroke-width: .6; stroke-linecap: round; opacity: .7; }
+.bz-grain-lit { fill: none; stroke: var(--bz-grain-lit); stroke-width: .35; stroke-linecap: round; opacity: .6; }
+.bz-knot { fill: none; stroke: var(--bz-grain); stroke-width: .4; opacity: .7; }
+.bz-rim { fill: none; stroke: var(--bz-rim); stroke-width: .6; stroke-linecap: round; opacity: .8; }
+.bz-moss { fill: var(--bz-moss); }
+.bz-moss-dots { fill: none; stroke: var(--bz-moss-dot); stroke-width: .9; stroke-linecap: round; }
+.bz-trunk { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.bz-bark { fill: none; stroke: var(--bz-bark); stroke-width: .7; stroke-linecap: round; opacity: .7; }
+.bz-bark-dk { fill: none; stroke: var(--bz-bark-dk); stroke-width: .6; stroke-linecap: round; opacity: .55; }
+.bz-bark-lit { fill: none; stroke: var(--bz-bark-lit); stroke-width: .5; stroke-linecap: round; opacity: .8; }
+.bz-shari { fill: none; stroke: var(--bz-shari); stroke-width: .6; stroke-linecap: round; opacity: .65; }
+.bz-jin { fill: none; stroke: var(--bz-jin); stroke-width: 1.6; stroke-linecap: round; }
+.bz-jin-shade { fill: none; stroke: var(--bz-jin-shade); stroke-width: .5; stroke-linecap: round; }
+.bz-pad-under { fill: var(--bz-pad-under); }
+.bz-needles { fill: none; stroke: var(--bz-needle); stroke-width: .75; stroke-linecap: round; opacity: .75; }
+.bz-needles-dk { fill: none; stroke: var(--bz-needle-dk); stroke-width: .8; stroke-linecap: round; opacity: .45; }
+.bz-tufts { fill: none; stroke: var(--bz-needle); stroke-width: .3; stroke-linecap: round; opacity: .85; }
+
+/* "The Greenhouse" tag fades in beside it on hover or keyboard focus */
+.bonsai-tag {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 8px);
+  transform: translateY(-50%);
+  padding: 4px 8px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--bg-raised);
+  color: var(--text);
+  font: 500 10px/1 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.bonsai.tag-left .bonsai-tag { left: auto; right: calc(100% + 8px); }
+.bonsai:hover .bonsai-tag,
+.bonsai:focus-visible .bonsai-tag { opacity: 1; }
+
+/* The pop-up: a field-journal card over a soft dimmed backdrop */
+.bonsai-dialog {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  max-width: min(400px, calc(100vw - 32px));
+  width: 100%;
+  overflow: visible;                 /* let the card's shadow show */
+}
+.bonsai-dialog::backdrop {
+  background: rgba(43, 42, 38, 0.38);
+  backdrop-filter: blur(2px);
+}
+.bonsai-dialog[open] { animation: bonsai-in 0.35s ease both; }
+@keyframes bonsai-in { from { opacity: 0; transform: translateY(8px); } }
+.bonsai-card {
+  padding: 28px 28px 24px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-lg);
+  background: var(--bg-raised);
+  box-shadow: 0 18px 40px rgba(20, 18, 14, 0.22);
+}
+.bonsai-eyebrow {
+  margin: 0 0 10px;
+  color: var(--accent);
+  font: 500 11px/1 var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.bonsai-title { margin: 0 0 22px; font-size: 28px; line-height: 1.15; }
+.bonsai-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.bonsai-actions .btn { padding: 11px 16px; }
+
+@media (max-width: 640px) {
+  .bonsai { --bz-size: 52px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bonsai, .bonsai-tag { transition: none; }
+  .bonsai-dialog[open] { animation: none; }
 }

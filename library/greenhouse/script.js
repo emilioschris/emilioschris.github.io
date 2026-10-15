@@ -13,6 +13,7 @@
    9. Herbarium sheets
    10. Backup
    11. The hawk
+   12. Elephant ears framing the page
    Plants come from data.js (window.GREENHOUSE).
    ========================================================= */
 (() => {
@@ -239,6 +240,26 @@
       return { back, front: "" };
     },
 
+    // Dracaena marginata: a braided trunk under a burst of long, narrow,
+    // red-edged leaves that arch up and out, then droop at the tips
+    dracaena(r) {
+      let back = SKETCH.braid(46);
+      let front = "";
+      const head = [70, 44];
+      const n = 40;
+      for (let i = 0; i < n; i++) {
+        const ang = -178 + (176 / (n - 1)) * i + (r() - 0.5) * 9;
+        const len = 34 + r() * 26 - Math.abs(ang + 90) * 0.08;
+        const lift = Math.abs(ang + 90) / 90;              // side leaves droop more
+        const p2 = [head[0] + Math.cos(ang * DEG) * len, head[1] + Math.sin(ang * DEG) * len * (1 - lift * 0.6) + lift * 16];
+        const p1 = [head[0] + Math.cos(ang * DEG) * len * 0.55, head[1] + Math.sin(ang * DEG) * len * 0.75 - 4];
+        const d = curve(head, p1, p2);
+        const g = `<path class="sp-blade" d="${d}"/><path class="sp-blade-edge" d="${d}"/>`;
+        if (i % 3 === 1) front += g; else back += g;
+      }
+      return { back, front };
+    },
+
     pachira(r) {
       let back = SKETCH.braid(62);
       const n = 6;
@@ -299,6 +320,7 @@
     "jade":           { draw: "jade", pot: ["glaze", "olive"], size: "md" },
     "zz":             { draw: "zz", pot: ["tall", "lime"], size: "md" },
     "palm":           { draw: "palm", pot: ["clay", "clay"], size: "lg" },
+    "dracaena":       { draw: "dracaena", pot: ["tall", "lime"], size: "lg" },
     "pachira":        { draw: "pachira", pot: ["glaze", "ink"], size: "lg" },
     "succulent":      { draw: "succulent", pot: ["bowl", "clay"], size: "sm" },
     "alocasia":       { draw: "alocasia", pot: ["glaze", "lime"], size: "md" },
@@ -329,6 +351,7 @@
     const parts = SKETCH[kind.draw](r, kind.small, plant.status === "struggling");
     let [shape, glaze] = kind.pot;
     if (plant.sketch === "zz") glaze = ZZ_GLAZES[(parseInt(plant.id.slice(-1), 10) - 1) % 3];
+    if (plant.pot) [shape, glaze] = plant.pot;          // its real pot, from a photo
     return `<svg class="specimen" viewBox="0 0 140 180" aria-hidden="true" focusable="false">
       <g class="sp-back">${parts.back}</g>
       ${pot(shape, glaze)}
@@ -353,7 +376,7 @@
     if (plant.status === "struggling" || plant.status === "dormant") marks.push(`<span class="tag-mark tag-mark--${plant.status}">${STATUS[plant.status]}</span>`);
     const label = `${plant.name}, ${plant.species}${plant.confirmed ? "" : " (to confirm)"}. ${STATUS[plant.status]}. Open its herbarium sheet.`;
     return `<button class="plant plant--${kind.size} is-${plant.status}" type="button" data-id="${esc(plant.id)}" aria-label="${esc(label)}">
-      ${plant.photo ? `<img class="specimen specimen--photo" src="${esc(plant.photo.src)}" alt="">` : specimen(plant)}
+      ${plant.photo && plant.photo.scene ? `<img class="specimen specimen--photo" src="${esc(plant.photo.src)}" alt="">` : specimen(plant)}
       <span class="tag-wrap" style="--tilt:${tilt}deg; --delay:${delay}s; --string:${string}px" aria-hidden="true">
         <span class="tag-string"></span>
         <span class="tag">
@@ -985,7 +1008,7 @@
       <p class="sheet-species"><em>${esc(plant.species)}</em></p>
 
       <figure class="sheet-paper">
-        ${plant.photo ? `<img class="sheet-photo" src="${esc(plant.photo.src)}" alt="${esc(plant.photo.alt)}">` : pressed(plant)}
+        ${plant.photo ? `<span class="sheet-print"><img class="sheet-photo" src="${esc(plant.photo.src)}" alt="${esc(plant.photo.alt)}" loading="lazy"><span class="sheet-tape sheet-tape--a"></span><span class="sheet-tape sheet-tape--b"></span></span><span class="sheet-photo-note">Field photo${plant.photo.date ? `, ${niceDate(plant.photo.date)}` : ""}</span>` : pressed(plant)}
         <figcaption class="sheet-label">
           <span class="sheet-label-head">The Greenhouse · Herbarium</span>
           <span class="sheet-label-row"><b>Name</b> ${esc(plant.name)}</span>
@@ -1211,8 +1234,55 @@
   }
 
   /* ---------------------------------------------------------
+     12. ELEPHANT EARS
+     Big alocasia-style leaves rise from the bottom corners of
+     the window, behind everything, nodding in a slow breeze
+     (CSS animates them; reduced motion keeps them still).
+     One leaf is drawn once and reused at different sizes.
+     --------------------------------------------------------- */
+  function drawEars() {
+    const leaf = `<symbol id="ear-leaf" viewBox="0 0 200 260" overflow="visible">
+      <defs>
+        <linearGradient id="ear-grad" x1="0" y1="0" x2="1" y2="1">
+          <stop class="ear-stop-lit" offset="0"/><stop class="ear-stop" offset=".5"/><stop class="ear-stop-dk" offset="1"/>
+        </linearGradient>
+      </defs>
+      <path class="ear-blade-fill" fill="url(#ear-grad)" d="M100,48 C88,22 50,8 26,22 C2,38 2,92 22,140 C42,188 80,228 100,252 C120,228 158,188 178,140 C198,92 198,38 174,22 C150,8 112,22 100,48Z"/>
+      <path class="ear-shade" d="M100,52 C100,120 100,190 100,250 C120,228 158,188 178,140 C198,92 198,38 174,22 C150,8 112,22 100,48Z"/>
+      <path class="ear-vein ear-vein--mid" d="M100,56 L100,244"/>
+      <path class="ear-vein" d="M100,60 C80,44 56,30 34,30 M100,60 C120,44 144,30 166,30
+        M100,82 C76,82 44,84 18,100 M100,82 C124,82 156,84 182,100
+        M100,112 C78,116 50,128 26,150 M100,112 C122,116 150,128 174,150
+        M100,146 C82,152 62,166 46,188 M100,146 C118,152 138,166 154,188
+        M100,180 C88,188 78,200 70,216 M100,180 C112,188 122,200 130,216"/>
+      <path class="ear-rim" d="M100,48 C88,22 50,8 26,22 C2,38 2,92 22,140 C42,188 80,228 100,252 C120,228 158,188 178,140 C198,92 198,38 174,22 C150,8 112,22 100,48Z"/>
+    </symbol>`;
+    // [base x, petiole bend, where it meets the blade, blade angle, size, sway seconds]
+    const EARS = [
+      [6, [24, 820], [70, 600], 22, 0.95, 11],
+      [22, [80, 720], [168, 400], -18, 1.3, 9],
+      [70, [120, 920], [236, 760], -34, 0.78, 7.5],
+    ];
+    const side = (cls) => `<svg class="ear-side ${cls}" viewBox="0 0 420 1000" preserveAspectRatio="xMinYMax meet" focusable="false">
+      ${EARS.map(([bx, bend, [ax, ay], ang, sz, secs], i) => `
+        <g class="ear ear--${i + 1}" style="transform-origin:${bx}px 1000px; --sway:${secs}s; --delay:${-i * 2.3}s">
+          <path class="ear-stem" d="M${bx},1000 Q${bend[0]},${bend[1]} ${ax},${ay}"/>
+          <g class="ear-flutter" style="transform-origin:${ax}px ${ay}px; --delay:${-i * 1.7}s">
+            <use href="#ear-leaf" width="200" height="260" transform="translate(${ax} ${ay}) rotate(${ang}) scale(${sz}) translate(-100 -60)"/>
+          </g>
+        </g>`).join("")}
+    </svg>`;
+    const wrap = document.createElement("div");
+    wrap.className = "gh-ears";
+    wrap.setAttribute("aria-hidden", "true");
+    wrap.innerHTML = `<svg width="0" height="0" style="position:absolute">${leaf}</svg>${side("ear-side--l")}${side("ear-side--r")}`;
+    document.body.prepend(wrap);
+  }
+
+  /* ---------------------------------------------------------
      START
      --------------------------------------------------------- */
+  drawEars();
   buildScene();
   updateLight();
   requestAnimationFrame(() => requestAnimationFrame(() => house.classList.add("is-lit")));

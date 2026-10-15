@@ -23,8 +23,13 @@
      facts       Care facts, each { text, sources: [ids] }.
      toxicity    Pets: { text, sources: [ids] }.
      notes       Your own notes.
-     photo       null for the drawn specimen, or { src, alt }
-                 (photos go in library/greenhouse/photos/).
+     photo       null for the drawn specimen, or { src, alt, date }
+                 (photos go in library/greenhouse/photos/, cropped to the
+                 plant, metadata stripped). It shows on the herbarium
+                 sheet; add scene: true to stand it in the glasshouse too.
+     pot         Optional [shape, glaze] for its real pot, e.g. ["glaze", "yellow"].
+                 Shapes: clay, tall, glaze, bowl. Glazes: clay, lime (white),
+                 olive, ink (charcoal), yellow, slate (blue-grey).
      sketch      Which drawing to use while there's no photo.
      added       "YYYY-MM-DD" it joined the greenhouse ("" if unknown).
      flags       Anything still uncertain, shown on the sheet.
@@ -58,6 +63,9 @@ GREENHOUSE.sources = {
   "aspca-pothos":    { title: "Golden Pothos", publisher: "ASPCA Animal Poison Control", url: "https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants/golden-pothos" },
   "aspca-jade":      { title: "Jade Plant", publisher: "ASPCA Animal Poison Control", url: "https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants/jade-plant" },
   "aspca-money":     { title: "Money Tree", publisher: "ASPCA Animal Poison Control", url: "https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants/money-tree" },
+  "ncsu-dracaena":   { title: "Dracaena marginata", publisher: "NC State Extension Gardener Plant Toolbox", url: "https://plants.ces.ncsu.edu/plants/dracaena-marginata/" },
+  "aspca-dracaena":  { title: "Dracaena", publisher: "ASPCA Animal Poison Control", url: "https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants/dracaena" },
+  "aspca-kalanchoe": { title: "Kalanchoe", publisher: "ASPCA Animal Poison Control", url: "https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants/kalanchoe" },
   "aspca-oxalates":  { title: "These houseplants can cause trouble for your pets (13 Oct 2025)", publisher: "ASPCA", url: "https://www.aspca.org/news/these-houseplants-can-cause-trouble-your-pets" },
 };
 
@@ -87,8 +95,8 @@ GREENHOUSE.plants = [
     water: { summer: 7, winter: 14 }, feed: { every: 60, season: "Apr to Oct" },
     tasks: [{ task: "rotate", every: 30 }],
     status: "thriving", facts: POTHOS_FACTS, toxicity: POTHOS_TOX,
-    notes: "The parent plant, on the top tier of the Bedroom Tower. Propagations 1, 2 and 3 were cut from her.",
-    photo: null, sketch: "pothos", added: "", flags: [],
+    notes: "The parent plant, on the top tier of the Bedroom Tower. Propagations 1, 2 and 3 were cut from her. From the photo (15 Oct 2026): a yellow honeycomb-textured pot on a round wooden stand by the window, with long vines trailing down that are bare for much of their length. Another cutting is rooting in water in a pink glass vase.",
+    photo: { src: "photos/mother-pothos.webp", alt: "Mother Pothos in a yellow honeycomb pot on a wooden stand by a window, long bare vines trailing down", date: "2026-10-15" }, pot: ["glaze", "yellow"], sketch: "pothos", added: "", flags: [],
   },
   ...[1, 2, 3].map(n => ({
     id: `pothos-prop-${n}`, name: `Pothos propagation ${n}`, species: "Epipremnum aureum", confirmed: true,
@@ -97,9 +105,14 @@ GREENHOUSE.plants = [
     water: { summer: 5, winter: 10 }, feed: { every: 60, season: "Apr to Oct" },
     tasks: [{ task: "rotate", every: 30 }],
     status: "steady", facts: POTHOS_FACTS, toxicity: POTHOS_TOX,
-    notes: "Rooted from a cutting of the Mother, now potted in soil.",
-    photo: null, sketch: "pothos-cutting", added: "",
-    flags: [],
+    notes: [
+      "Rooted from a cutting of the Mother, now potted in soil. From the photo (15 Oct 2026): two stems in a terracotta pot on a saucer, on the windowsill.",
+      "Rooted from a cutting of the Mother, now potted in soil. From the photo (15 Oct 2026): one stem with two leaves in a terracotta pot on a saucer, on the windowsill.",
+      "Rooted from a cutting of the Mother, now potted in soil. From the photo (15 Oct 2026): three leaves, in a small can on the windowsill.",
+    ][n - 1],
+    photo: n < 3 ? { src: `photos/pothos-prop-${n}.webp`, alt: `Pothos propagation ${n}: a young pothos cutting in a terracotta pot of fresh potting mix`, date: "2026-10-15" } : null,
+    pot: n < 3 ? ["clay", "clay"] : ["tall", "ink"], sketch: "pothos-cutting", added: "",
+    flags: n === 3 ? ["Which cutting is number 3 is my guess from the photo: the one in the small can."] : ["Which cutting is which number is my guess from the photo."],
   })),
   {
     id: "bubblegum", name: "Bubblegum", species: "Callisia repens 'Bubblegum'", confirmed: false,
@@ -114,9 +127,9 @@ GREENHOUSE.plants = [
       { text: "Watch for spider mites, aphids and mealybugs.", sources: ["ncsu-callisia"] },
     ],
     toxicity: { text: "NC State lists it as toxic to cats and dogs (calcium oxalates) and an irritant to skin. ASPCA has no entry for Callisia repens.", sources: ["ncsu-callisia"] },
-    notes: "",
-    photo: null, sketch: "callisia", added: "",
-    flags: ["Species to confirm from a photo.", "Feeding interval is my starting guess: no source gives one.", "Pet toxicity comes from one source only."],
+    notes: "From the photo (15 Oct 2026): a dense, rounded mound of small pink, cream and green leaves.",
+    photo: { src: "photos/bubblegum.webp", alt: "Bubblegum: a dense mound of tiny pink, cream and green leaves", date: "2026-10-15" }, sketch: "callisia", added: "",
+    flags: ["The photo fits Callisia repens (tiny fleshy leaves, pink and cream variegation); the cultivar name is still to confirm.", "Feeding interval is my starting guess: no source gives one.", "Pet toxicity comes from one source only."],
   },
   {
     id: "jade", name: "Jade", species: "Crassula ovata", confirmed: true,
@@ -132,8 +145,8 @@ GREENHOUSE.plants = [
       { text: "Aphids, scale, spider mites and mealybugs are occasional problems.", sources: ["ncsu-jade"] },
     ],
     toxicity: { text: "Toxic to dogs, cats and horses (toxic principle unknown): vomiting, depression, loss of coordination.", sources: ["aspca-jade"] },
-    notes: "On the bottom tier of the Bedroom Tower.",
-    photo: null, sketch: "jade", added: "",
+    notes: "On the bottom tier of the Bedroom Tower. From the photo (15 Oct 2026): full and bushy, packed with fleshy, rounded leaves.",
+    photo: { src: "photos/jade.webp", alt: "Jade: a bushy mass of thick, glossy, spoon-shaped leaves", date: "2026-10-15" }, sketch: "jade", added: "",
     flags: ["Feeding interval is my starting guess: no source gives one."],
   },
   ...[1, 2, 3].map(n => ({
@@ -142,20 +155,33 @@ GREENHOUSE.plants = [
     water: { summer: 14, winter: 30 }, feed: { every: 180, season: "Apr to Oct" },
     tasks: [{ task: "rotate", every: 30 }],
     status: "steady", facts: ZZ_FACTS, toxicity: ZZ_TOX,
-    notes: "",
-    photo: null, sketch: "zz", added: "", flags: [],
+    notes: [
+      "From the photo (15 Oct 2026): upright stems of glossy leaflets in a terracotta pot with a saucer, on the floor in a corner.",
+      "From the photo (15 Oct 2026): a bushy, dark green clump in a white pot, beside the braided palm.",
+      "From the photo (15 Oct 2026): in a dark pot, next to the Money Tree.",
+    ][n - 1],
+    photo: n < 3 ? { src: `photos/zz-${n}.webp`, alt: n === 1 ? "ZZ plant 1: upright stems of glossy leaflets in a terracotta pot" : "ZZ plant 2: a dark green clump in a white pot", date: "2026-10-15" } : null,
+    pot: [["clay", "clay"], ["tall", "lime"], ["tall", "ink"]][n - 1],
+    sketch: "zz", added: "", flags: n === 3 ? ["Only the edge of this one is in the photos."] : [],
   })),
   {
-    id: "braided-palm", name: "Braided palm", species: "To identify", confirmed: false,
-    location: { place: "bench", bench: 2 }, light: "Bright, indirect (general advice until identified)",
-    water: { summer: 7, winter: 14 }, feed: null,
+    id: "braided-palm", name: "Braided palm", species: "Dracaena marginata", confirmed: false,
+    location: { place: "bench", bench: 2 }, light: "Bright, indirect",
+    water: { summer: 10, winter: 21 }, feed: { every: 90, season: "Apr to Oct" },
     tasks: [{ task: "rotate", every: 30 }],
     status: "steady",
-    facts: [],
-    toxicity: { text: "Unknown until the species is identified.", sources: [] },
-    notes: "",
-    photo: null, sketch: "palm", added: "",
-    flags: ["Species to identify from a photo. Care and pet safety will be filled in then."],
+    facts: [
+      { text: "Not actually a palm: it looks like a Madagascar dragon tree, whose stems can be trained into braids or spirals.", sources: ["ncsu-dracaena"] },
+      { text: "Bright, indirect light is ideal.", sources: ["ncsu-dracaena"] },
+      { text: "Use a well-draining mix and let it dry between waterings, but not severely.", sources: ["ncsu-dracaena"] },
+      { text: "Needs little feeding: a controlled-release feed in spring, summer and autumn.", sources: ["ncsu-dracaena"] },
+      { text: "Sensitive to fluoride, like most dracaenas: distilled or non-fluoridated water is better.", sources: ["ncsu-dracaena"] },
+      { text: "Mites, thrips and chewing insects can be a problem, and it is prone to leaf spot.", sources: ["ncsu-dracaena"] },
+    ],
+    toxicity: { text: "Toxic to dogs and cats (saponins): vomiting, sometimes with blood, depression, loss of appetite, drooling, and dilated pupils in cats.", sources: ["aspca-dracaena", "ncsu-dracaena"] },
+    notes: "From the photo (15 Oct 2026): three braided trunks under a burst of long, narrow leaves, in a white pot by the window.",
+    photo: { src: "photos/braided-palm.webp", alt: "Braided palm: a tall braided trunk topped by a burst of long, narrow leaves, in a white pot by a window", date: "2026-10-15" }, pot: ["tall", "lime"], sketch: "dracaena", added: "",
+    flags: ["Identified from a photo, so still to confirm: braided trunks and long, narrow leaves in a rosette fit Dracaena marginata.", "Check and feeding intervals are my starting guesses: the source gives no numbers."],
   },
   {
     id: "money-tree", name: "Braided Money Tree", species: "Pachira aquatica", confirmed: true,
@@ -171,12 +197,12 @@ GREENHOUSE.plants = [
       { text: "Watch for aphids, mealybugs, scale and fungus gnats.", sources: ["ncsu-pachira"] },
     ],
     toxicity: { text: "ASPCA lists it as non-toxic to dogs, cats and horses. NC State rates it low severity: the seeds can be harmful, but indoor plants rarely make them.", sources: ["aspca-money", "ncsu-pachira"] },
-    notes: "",
-    photo: null, sketch: "pachira", added: "",
+    notes: "From the photo (15 Oct 2026): a full head of hand-shaped leaves in a charcoal pot, by the window.",
+    photo: { src: "photos/money-tree.webp", alt: "Braided Money Tree: a full head of hand-shaped leaves seen from above, in a charcoal pot", date: "2026-10-15" }, sketch: "pachira", added: "",
     flags: ["Feeding interval is my starting guess: no source gives one."],
   },
   {
-    id: "succulents", name: "Small succulents", species: "To identify", confirmed: false,
+    id: "succulents", name: "Small succulents", species: "To identify (an Echeveria and a Kalanchoe?)", confirmed: false,
     location: { place: "bench", bench: 1 }, light: "Bright; as much light as possible",
     water: { summer: 14, winter: 30 }, feed: null,
     tasks: [],
@@ -186,10 +212,10 @@ GREENHOUSE.plants = [
       { text: "Most want a cool, dry winter rest from about November to early March: water only enough to stop them shrivelling.", sources: ["rhs-succulents"] },
       { text: "Overwatering is the main cause of failure.", sources: ["rhs-succulents"] },
     ],
-    toxicity: { text: "Unknown until the species are identified: some succulents are toxic to pets, some are not.", sources: [] },
-    notes: "One entry for now.",
-    photo: null, sketch: "succulent", added: "",
-    flags: ["Species to identify from a photo.", "General succulent advice only."],
+    toxicity: { text: "If the green one is a Kalanchoe, the ASPCA lists Kalanchoe as toxic to dogs and cats: vomiting, diarrhoea and, rarely, an abnormal heart rhythm. The rosette's safety isn't checked yet.", sources: ["aspca-kalanchoe"] },
+    notes: "One entry for now. From the photo (15 Oct 2026): a blue-grey rosette and a green plant with scalloped leaves and pink buds, sharing a white bowl dressed with moss.",
+    photo: { src: "photos/succulents.webp", alt: "Small succulents: a blue-grey rosette beside a green plant with scalloped leaves, in a white bowl with moss", date: "2026-10-15" }, pot: ["bowl", "lime"], sketch: "succulent", added: "",
+    flags: ["Species to identify. From the photo, the rosette looks like an Echeveria and the green one like a Kalanchoe, but neither is certain.", "General succulent advice only."],
   },
   {
     id: "dragon-scale", name: "Dragon Scale", species: "Alocasia baginda 'Dragon Scale'", confirmed: false,
@@ -206,9 +232,9 @@ GREENHOUSE.plants = [
       { text: "Alocasias rest in winter and may lose some leaves. This is nothing to worry about: new leaves come in spring.", sources: ["rhs-alocasia"] },
     ],
     toxicity: { text: "Toxic to cats, dogs and people (calcium oxalates): mouth and throat pain, drooling, vomiting. The sap irritates skin, so wear gloves.", sources: ["aspca-oxalates", "ncsu-alocasia", "rhs-alocasia"] },
-    notes: "Sold as a philodendron. Struggling with the cold and low humidity.",
-    photo: null, sketch: "alocasia", added: "",
-    flags: ["Species to confirm: sold as a philodendron, but probably Alocasia baginda 'Dragon Scale'.", "Care facts are for Alocasia in general: no reliable source covers 'Dragon Scale' on its own."],
+    notes: "Sold as a philodendron. Struggling with the cold and low humidity. From the photo (15 Oct 2026): thick, silvery, deeply veined leaves, in a blue-grey pot on a wooden tray.",
+    photo: { src: "photos/dragon-scale.webp", alt: "Dragon Scale: large, thick, silvery-green leaves with deep dark veins, in a blue-grey pot", date: "2026-10-15" }, pot: ["glaze", "slate"], sketch: "alocasia", added: "",
+    flags: ["Species to confirm: sold as a philodendron, but the thick, silvery, deeply veined leaves in the photo fit Alocasia baginda 'Dragon Scale'.", "Care facts are for Alocasia in general: no reliable source covers 'Dragon Scale' on its own."],
 
     // Field notes from above: what the hawk says when this plant is struggling
     hawk: {
