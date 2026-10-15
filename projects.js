@@ -133,6 +133,12 @@ const PROJECTS = [
     date: "2026-10",
     tended: "2026-10-14",
     elevation: "ELEV 3 TIERS · 13 PLANTS",
+    shape: 2,
+    image: {
+      src: "assets/cards/greenhouse.webp",
+      alt: "A drawing of the Greenhouse at golden hour: a tall glass conservatory with palms and a hanging fern, my plants on two cedar benches, and the hawk flying under the roof.",
+      tone: "olive",
+    },
   },
   {
     title: "Spanish Trainer",
