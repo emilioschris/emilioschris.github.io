@@ -207,7 +207,6 @@
     const canvas = document.getElementById("terrain");
     const ctx = canvas.getContext("2d");
     const originMarker = document.getElementById("origin");
-    const readout = document.getElementById("survey-readout");
 
     /* --- Simplex noise: smooth random hills (seeded, so the map is the same every visit) --- */
     const perm = new Uint8Array(512);
@@ -261,7 +260,6 @@
     let colours = {};
     let labels = [];
     let running = false, onScreen = true, frameId = 0, lastT = 0;
-    let lastReadout = "";
 
     // The cursor: x/y glide toward tx/ty, strength fades between 0 and 1
     const pointer = { x: 0, y: 0, tx: 0, ty: 0, s: 0, ts: 0 };
@@ -436,7 +434,6 @@
       ctx.globalAlpha = 1;
 
       drawLabels();
-      updateReadout(t);
     }
 
     /* Tiny elevation numbers sitting in a gap cut out of the bold lines */
@@ -470,17 +467,6 @@
         ctx.fillText(text, 0, 0.5);
         ctx.restore();
       }
-    }
-
-    /* The live readout in the corner: position and height under the cursor */
-    function updateReadout(t) {
-      const active = pointer.s > 0.05;
-      const px = active ? pointer.x : originX;
-      const py = active ? pointer.y : originY;
-      const lat = 35.1 - (py - originY) * 0.00035;
-      const lon = 33.4 + (px - originX) * 0.00042;
-      const text = `${lat.toFixed(3)}°N ${lon.toFixed(3)}°E · ELEV ${toMetres(heightAt(px, py, t))} m`;
-      if (text !== lastReadout) { readout.textContent = text; lastReadout = text; }
     }
 
     /* --- Animation loop --- */
@@ -577,7 +563,7 @@
     const PAD = 14;          // breathing room kept around everything it avoids
     const EDGE = 8;          // distance kept from the window edges
     const AVOID = "main h1, main h2, main h3, main p, main a, main button, main li, main img, " +
-      ".card, .hawk, .origin, .scale-bar, .margin-note, .colophon p, .colophon a";
+      ".card, .hawk, .origin, .margin-note, .colophon p, .colophon a";
 
     tree.hidden = false;
     let w = tree.offsetWidth, h = tree.offsetHeight;
