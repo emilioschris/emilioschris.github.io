@@ -22,7 +22,7 @@
   <meta name="twitter:image:alt" content="A red-tailed hawk with a terracotta tail perched on a branch over faint contour lines, beside the words Field Notes and the coordinates 35.1°N 33.4°E.">
 
   <!-- Apply a saved Day/Dusk choice before the page draws, so it never flashes the wrong colours -->
-  <script src="shared/theme-init.js?v=2026-10-14.9"></script>
+  <script src="shared/theme-init.js?v=2026-10-14.10"></script>
 
   <!-- Fonts: Fraunces (headings), Instrument Sans (body), JetBrains Mono (labels), Caveat (margin notes) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,8 +33,8 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
   <!-- The shared design system first, then this page's own styles -->
-  <link rel="stylesheet" href="shared/field-notes.css?v=2026-10-14.9">
-  <link rel="stylesheet" href="styles.css?v=2026-10-14.9">
+  <link rel="stylesheet" href="shared/field-notes.css?v=2026-10-14.10">
+  <link rel="stylesheet" href="styles.css?v=2026-10-14.10">
 </head>
 <body>
 
@@ -179,81 +179,81 @@
     <!-- =========================================================
          SECTIONS: five "legs" heading out from the origin.
          Each has a compass bearing (data-bearing) that turns the
-         compass in the top bar, and a colour (data-sec, set in
-         styles.css). Base Camp is shown full size; the others are
-         compact (data-size="compact") for now.
+         compass in the top bar.
 
          The cards are NOT written here: they come from projects.js
-         and script.js puts them into each section's <div class="sec-grid">.
+         and script.js puts them into each section's <div class="cards">.
          To add or change a project, edit projects.js.
          ========================================================= -->
 
     <noscript><p class="cards-noscript">The project cards need JavaScript turned on to appear.</p></noscript>
 
     <!-- ---------- 01 · BASE CAMP ---------- -->
-    <section class="sec reveal" id="base-camp" data-sec="base-camp" data-bearing="12" aria-labelledby="base-camp-title">
-      <header class="sec-head">
-        <span class="sec-num" aria-hidden="true">01</span>
-        <div class="sec-head-text">
-          <h2 class="sec-title" id="base-camp-title">Base Camp</h2>
-          <p class="sec-kicker">History <span class="sec-bearing">· N 012°</span></p>
-        </div>
-        <p class="sec-desc">Where every route begins: Cyprus, the ancient Mediterranean, and the long stories underneath the places we live.</p>
+    <section class="leg reveal" id="base-camp" data-bearing="12" style="--tint: var(--terracotta)" aria-labelledby="base-camp-title">
+      <header class="leg-head">
+        <p class="leg-bearing"><span>01</span> N 012°</p>
+        <h2 class="leg-title" id="base-camp-title">Base Camp</h2>
+        <p class="leg-kicker">History</p>
+        <p class="leg-desc">Where every route begins: Cyprus, the ancient Mediterranean, and the long stories underneath the places we live.</p>
         <p class="margin-note" aria-hidden="true">start here, everything else follows</p>
       </header>
-      <div class="sec-grid"></div>
+      <div class="cards">
+        <svg class="trail" aria-hidden="true"><path /></svg>
+      </div>
     </section>
 
     <!-- ---------- 02 · THE LIBRARY ---------- -->
-    <section class="sec reveal" id="library" data-sec="library" data-size="compact" data-bearing="76" aria-labelledby="library-title">
-      <header class="sec-head">
-        <span class="sec-num" aria-hidden="true">02</span>
-        <div class="sec-head-text">
-          <h2 class="sec-title" id="library-title">The Library</h2>
-          <p class="sec-kicker">Knowledge <span class="sec-bearing">· N 076°</span></p>
-        </div>
-        <p class="sec-desc">Notes, books and tools for exploring what we know, and how we came to know it.</p>
+    <section class="leg reveal" id="library" data-bearing="76" style="--tint: var(--aegean)" aria-labelledby="library-title">
+      <header class="leg-head">
+        <p class="leg-bearing"><span>02</span> N 076°</p>
+        <h2 class="leg-title" id="library-title">The Library</h2>
+        <p class="leg-kicker">Knowledge</p>
+        <p class="leg-desc">Notes, books and tools for exploring what we know, and how we came to know it.</p>
       </header>
-      <div class="sec-grid"></div>
+      <div class="cards">
+        <svg class="trail" aria-hidden="true"><path /></svg>
+      </div>
     </section>
 
     <!-- ---------- 03 · TRAINING GROUND ---------- -->
-    <section class="sec reveal" id="training-ground" data-sec="training-ground" data-size="compact" data-bearing="148" aria-labelledby="training-ground-title">
-      <header class="sec-head">
-        <span class="sec-num" aria-hidden="true">03</span>
-        <div class="sec-head-text">
-          <h2 class="sec-title" id="training-ground-title">Training Ground</h2>
-          <p class="sec-kicker">Games &amp; brain tools <span class="sec-bearing">· N 148°</span></p>
-        </div>
-        <p class="sec-desc">Small games and tools that make you a little sharper every time you play.</p>
+    <section class="leg reveal" id="training-ground" data-bearing="148" style="--tint: var(--olive)" aria-labelledby="training-title">
+      <header class="leg-head">
+        <p class="leg-bearing"><span>03</span> N 148°</p>
+        <h2 class="leg-title" id="training-title">Training Ground</h2>
+        <p class="leg-kicker">Games &amp; brain tools</p>
+        <p class="leg-desc">Small games and tools that make you a little sharper every time you play.</p>
       </header>
-      <div class="sec-grid"></div>
+      <div class="cards">
+        <svg class="trail" aria-hidden="true"><path /></svg>
+      </div>
     </section>
 
     <!-- ---------- 04 · LANGUAGE ROUTES ---------- -->
-    <section class="sec reveal" id="language-routes" data-sec="language-routes" data-size="compact" data-bearing="213" aria-labelledby="language-routes-title">
-      <header class="sec-head">
-        <span class="sec-num" aria-hidden="true">04</span>
-        <div class="sec-head-text">
-          <h2 class="sec-title" id="language-routes-title">Language Routes</h2>
-          <p class="sec-kicker">Mexican Spanish <span class="sec-bearing">· N 213°</span></p>
-        </div>
-        <p class="sec-desc">Learning Mexican Spanish one step at a time, with tools I build along the way.</p>
+    <section class="leg reveal" id="language-routes" data-bearing="213" style="--tint: var(--ochre)" aria-labelledby="language-title">
+      <header class="leg-head">
+        <p class="leg-bearing"><span>04</span> N 213°</p>
+        <h2 class="leg-title" id="language-title">Language Routes</h2>
+        <p class="leg-kicker">Mexican Spanish · <span class="in-progress">in progress</span></p>
+        <p class="leg-desc">Learning Mexican Spanish one step at a time, with tools I build along the way.</p>
+        <p class="margin-note" aria-hidden="true">¡poco a poco!</p>
       </header>
-      <div class="sec-grid"></div>
+      <div class="cards">
+        <svg class="trail" aria-hidden="true"><path /></svg>
+      </div>
     </section>
 
     <!-- ---------- 05 · THE WILD ---------- -->
-    <section class="sec reveal" id="the-wild" data-sec="the-wild" data-size="compact" data-bearing="297" aria-labelledby="the-wild-title">
-      <header class="sec-head">
-        <span class="sec-num" aria-hidden="true">05</span>
-        <div class="sec-head-text">
-          <h2 class="sec-title" id="the-wild-title">The Wild</h2>
-          <p class="sec-kicker">Climbing &amp; conservation <span class="sec-bearing">· N 297°</span></p>
-        </div>
-        <p class="sec-desc">Climbing, time outdoors, and how technology can help protect the natural world.</p>
+    <section class="leg reveal" id="the-wild" data-bearing="297" style="--tint: var(--olive)" aria-labelledby="wild-title">
+      <header class="leg-head">
+        <p class="leg-bearing"><span>05</span> N 297°</p>
+        <h2 class="leg-title" id="wild-title">The Wild</h2>
+        <p class="leg-kicker">Climbing &amp; conservation</p>
+        <p class="leg-desc">Climbing, time outdoors, and how technology can help protect the natural world.</p>
+        <p class="margin-note" aria-hidden="true">the best map is still a walk</p>
       </header>
-      <div class="sec-grid"></div>
+      <div class="cards">
+        <svg class="trail" aria-hidden="true"><path /></svg>
+      </div>
     </section>
 
     <!-- ---------- ABOUT ---------- -->
@@ -279,8 +279,8 @@
     <p class="colophon-credit">Made with AI. Ideas, direction and fact-checking by me; code written with Claude.</p>
   </footer>
 
-  <script src="shared/field-notes.js?v=2026-10-14.9"></script>
-  <script src="projects.js?v=2026-10-14.9"></script>
-  <script src="script.js?v=2026-10-14.9"></script>
+  <script src="shared/field-notes.js?v=2026-10-14.10"></script>
+  <script src="projects.js?v=2026-10-14.10"></script>
+  <script src="script.js?v=2026-10-14.10"></script>
 </body>
 </html>

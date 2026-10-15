@@ -21,11 +21,11 @@
      tended       Optional. When it last grew, as "YYYY-MM-DD".
                   Shown on the card as "Last tended …".
      elevation    The card's "elevation" line, e.g. "ELEV 220 m".
-     image        Optional. Leave it out for a block of the section's colour, or:
+     image        Optional. Leave it out for a placeholder pebble, or:
                     {
                       src:  "assets/cards/kypriaka.webp",   ← swap in your own photo here
                       alt:  "What the picture shows",
-                      tone: "terracotta" or "olive",        (not used by the current cards)
+                      tone: "terracotta" or "olive",        (the colour tint)
                       credit: { … }                          (leave out for your own photos)
                     }
                   Card images are 1000 × 800 (5:4). Ask Claude to resize,
@@ -34,7 +34,7 @@
                   credit lists where an image came from, for the Image
                   credits page: title, author, date, source, url, licence,
                   licenceUrl, and an optional note about what it is.
-     shape        Not used by the current cards (left from the pebble design).
+     shape        Optional pebble shape, 1 to 4. Picked for you if left out.
    ========================================================= */
 
 const PROJECTS = [
