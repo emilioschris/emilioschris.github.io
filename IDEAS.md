@@ -38,3 +38,9 @@ Decisions so far:
 - Two-factor on my email and GitHub before starting.
 
 When I pick it back up: ask Claude Code for a plan only (diagram, tables, security rules, my manual steps, build stages), and review it before building.
+
+## Akadimia: later
+
+- Library sections: Readings from my courses, Lectures and talks, Concepts (short notes on big ideas), more Professors.
+- Permanent saving via a "GitHub inbox": a Save button opens a pre-filled GitHub issue; an Action files it into the library (data.js) and closes the issue. Only issues opened by my account count; anything else is ignored.
+- Look again for official IMF blog and FAO newsroom feeds (none verified on 15 Oct 2026).

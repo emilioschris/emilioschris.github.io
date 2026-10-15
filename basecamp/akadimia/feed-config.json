@@ -1,0 +1,252 @@
+{
+  "_about": "Settings for the daily Akadimia feed (tools/update_feed.py, run by .github/workflows/akadimia-feed.yml). Edit the keyword lists to change what counts as each topic. A word ending in * matches any ending (agricultur* matches agriculture and agricultural). A feed can have a \"skip\" list: headlines containing any of those words are left out. A research source can have a \"require\" list: a paper must mention one of those words in its title or OpenAlex topics.",
+  "topics": [
+    {
+      "id": "energy-climate",
+      "name": "Energy and climate economics",
+      "keywords": [
+        "energy",
+        "climate",
+        "carbon",
+        "emission*",
+        "renewable*",
+        "electricity",
+        "power market*",
+        "net zero",
+        "decarbon*",
+        "fossil",
+        "oil",
+        "gas",
+        "coal",
+        "heat pump*",
+        "power grid*",
+        "energy transition",
+        "carbon price*",
+        "carbon tax*"
+      ]
+    },
+    {
+      "id": "climate-tech",
+      "name": "Climate tech",
+      "keywords": [
+        "clean tech*",
+        "cleantech",
+        "hydrogen",
+        "batter*",
+        "solar",
+        "wind power",
+        "wind farm*",
+        "offshore wind",
+        "carbon capture",
+        "electric vehicle*",
+        "nuclear",
+        "energy storage",
+        "green technolog*",
+        "low-carbon technolog*",
+        "geoengineering"
+      ]
+    },
+    {
+      "id": "finance-markets",
+      "name": "Global finance and markets",
+      "keywords": [
+        "finance",
+        "financial",
+        "banking",
+        "banks",
+        "central bank*",
+        "monetary",
+        "interest rate*",
+        "inflation",
+        "bond*",
+        "stock market*",
+        "investment*",
+        "investor*",
+        "debt",
+        "currenc*",
+        "exchange rate*",
+        "fiscal",
+        "tariff*",
+        "crypto*",
+        "bitcoin",
+        "capital market*",
+        "capital flow*",
+        "international trade",
+        "trade policy",
+        "trade war*",
+        "free trade",
+        "trade deal*"
+      ]
+    },
+    {
+      "id": "food-agriculture",
+      "name": "Food systems and agriculture",
+      "keywords": [
+        "food",
+        "agricultur*",
+        "farm*",
+        "crop*",
+        "land use",
+        "fertili*",
+        "livestock",
+        "fisher*",
+        "nutrition",
+        "hunger"
+      ]
+    },
+    {
+      "id": "development-inequality",
+      "name": "Development and inequality",
+      "keywords": [
+        "inequalit*",
+        "poverty",
+        "low-income",
+        "middle-income",
+        "developing countr*",
+        "emerging econom*",
+        "wage*",
+        "labour market*",
+        "labor market*",
+        "migration",
+        "economic growth",
+        "economic development",
+        "development economics",
+        "sustainable development",
+        "international development",
+        "development finance",
+        "foreign aid",
+        "development aid",
+        "sdg*"
+      ]
+    }
+  ],
+  "feeds": [
+    {
+      "name": "Grantham Research Institute: news",
+      "school": "lse",
+      "kind": "news",
+      "url": "https://www.lse.ac.uk/granthaminstitute/feed/?post_type=news"
+    },
+    {
+      "name": "Grantham Research Institute: publications",
+      "school": "lse",
+      "kind": "research",
+      "url": "https://www.lse.ac.uk/granthaminstitute/feed/?post_type=publication"
+    },
+    {
+      "name": "LSE Business Review",
+      "school": "lse",
+      "kind": "blog",
+      "url": "https://blogs.lse.ac.uk/businessreview/feed/"
+    },
+    {
+      "name": "LSE International Development",
+      "school": "lse",
+      "kind": "blog",
+      "url": "https://blogs.lse.ac.uk/internationaldevelopment/feed/"
+    },
+    {
+      "name": "Carbon Brief",
+      "school": null,
+      "kind": "news",
+      "url": "https://www.carbonbrief.org/feed/"
+    },
+    {
+      "name": "Bank Underground (Bank of England staff blog)",
+      "school": null,
+      "kind": "blog",
+      "url": "https://bankunderground.co.uk/feed/"
+    },
+    {
+      "name": "Our World in Data",
+      "school": null,
+      "kind": "data",
+      "url": "https://ourworldindata.org/atom.xml"
+    },
+    {
+      "name": "Bank of England news",
+      "school": null,
+      "kind": "news",
+      "url": "https://www.bankofengland.co.uk/rss/news",
+      "skip": [
+        "minutes",
+        "market notice",
+        "committee dates",
+        "transcript",
+        "taskforce",
+        "sub-committee",
+        "record –",
+        "auction",
+        "results of",
+        "statistical notice"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "name": "UCL research (via OpenAlex)",
+      "school": "ucl",
+      "institution": "I45129253",
+      "fields": [
+        "20",
+        "21"
+      ],
+      "days": 90,
+      "require": [
+        "econom*",
+        "policy",
+        "policies",
+        "market*",
+        "price*",
+        "pricing",
+        "cost*",
+        "financ*",
+        "investment*",
+        "governance",
+        "regulat*",
+        "tax*",
+        "subsid*",
+        "welfare",
+        "transition*"
+      ]
+    },
+    {
+      "name": "Skidmore research (via OpenAlex)",
+      "school": "skidmore",
+      "institution": "I21104390",
+      "fields": [
+        "20"
+      ],
+      "days": 365
+    }
+  ],
+  "people": [
+    {
+      "id": "michael-grubb",
+      "name": "Michael Grubb",
+      "school": "ucl",
+      "orcid": "0000-0003-2393-3041",
+      "openalex": "A5072267426",
+      "role": "UCL Institute for Sustainable Resources",
+      "bio": "Energy and climate change: climate policy and economics, international climate agreements and renewable power."
+    },
+    {
+      "id": "silvia-ferrini",
+      "name": "Silvia Ferrini",
+      "school": "ucl",
+      "orcid": "0000-0003-1861-5604",
+      "openalex": "A5090004424",
+      "role": "UCL",
+      "bio": "Environmental economics: putting a value on nature, land use and ecosystem services."
+    },
+    {
+      "id": "rodrigo-schneider",
+      "name": "Rodrigo Schneider",
+      "school": "skidmore",
+      "orcid": "0000-0001-5324-2781",
+      "openalex": "A5012007128",
+      "role": "Skidmore College, Economics",
+      "bio": "Political economy: fiscal rules, elections and public spending, with a focus on Brazil."
+    }
+  ]
+}
