@@ -141,6 +141,18 @@ const PROJECTS = [
     },
   },
   {
+    title: "The Deep End",
+    section: "training-ground",
+    status: "ongoing",
+    link: "games/deep-end/index.html",
+    description: "A daily dive of seven prompts for my friends: the rarer your answer, the deeper you go.",
+    coords: "34.50°N 32.30°E",
+    date: "2026-10",
+    tended: "2026-10-14",
+    elevation: "ELEV −2,800 m · THE WRECK",
+    shape: 3,
+  },
+  {
     title: "Spanish Trainer",
     section: "language-routes",
     status: "ongoing",
