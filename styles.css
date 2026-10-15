@@ -12,6 +12,7 @@
    5. About + footer
    6. Small screens
    7. The bonsai (easter egg) and its pop-up
+   8. The field guide (opened by the compass)
    ========================================================= */
 
 /* ---------- 1. MAP COLOURS (read by script.js) ---------- */
@@ -60,7 +61,19 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  padding: 4px 6px 4px 4px;              /* it's a button: opens the field guide */
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: background 0.25s ease;
 }
+.compass:hover { background: var(--rule); }
+.compass:hover .compass-ring { opacity: 0.9; }
+.compass:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+.compass-ring { transition: opacity 0.25s ease; }
 .compass svg { width: 34px; height: 34px; overflow: visible; }
 .compass-ring { fill: none; stroke: var(--text); stroke-width: 1; opacity: 0.55; }
 .compass-ticks line { stroke: var(--text); stroke-width: 1.2; opacity: 0.55; }
@@ -627,4 +640,185 @@
 @media (prefers-reduced-motion: reduce) {
   .bonsai, .bonsai-tag { transition: none; }
   .bonsai-dialog[open] { animation: none; }
+}
+
+/* ---------- 8. THE FIELD GUIDE ----------
+   A field-guide page that opens from the compass. The needle in
+   the diagram swings and settles each time it opens. */
+.guide {
+  width: min(880px, calc(100vw - 32px));
+  max-height: min(88vh, 860px);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--bg-raised);
+  color: var(--text);
+  box-shadow: 0 24px 60px rgba(20, 18, 14, 0.3);
+  overflow: hidden;
+}
+.guide::backdrop { background: rgba(43, 42, 38, 0.42); backdrop-filter: blur(2px); }
+.guide[open] { animation: guide-in 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+@keyframes guide-in { from { opacity: 0; transform: translateY(14px) scale(0.985); } }
+.guide-page {
+  display: flex;
+  flex-direction: column;
+  max-height: inherit;
+  overflow-y: auto;
+  padding: 28px clamp(20px, 4vw, 40px) 22px;
+  /* faint ruled lines, like a field notebook */
+  background-image: repeating-linear-gradient(to bottom, transparent 0 31px, color-mix(in srgb, var(--text) 5%, transparent) 31px 32px);
+}
+.guide-head { position: relative; padding-right: 110px; }
+.guide-eyebrow {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font: 500 11px/1 var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.guide-title { font-size: clamp(28px, 4vw, 40px); line-height: 1.05; }
+.guide-close { position: absolute; top: 0; right: 0; }
+
+.guide-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 22px 0 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rule);
+}
+.guide-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: none;
+  color: var(--muted);
+  font: 500 11px/1 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+.guide-tab:hover { color: var(--text); border-color: var(--text); }
+.guide-tab[aria-selected="true"] { background: var(--text); border-color: var(--text); color: var(--bg); }
+.guide-tab:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+.guide-tab svg { width: 15px; height: 15px; flex: none; transition: transform 0.4s ease; }
+.guide-tab:hover svg { transform: rotate(-14deg); }
+.guide-tab[aria-selected="true"] svg { transform: none; }
+
+.guide-panel:focus-visible { outline: 2px dashed var(--link); outline-offset: 6px; border-radius: 6px; }
+.guide-panel[hidden] { display: none; }
+.guide-panel h3 { margin-bottom: 12px; font-size: 22px; }
+.guide-panel p { margin: 0 0 12px; line-height: 1.6; max-width: 58ch; }
+.guide-panel b { font-weight: 600; }
+.guide-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr); gap: clamp(20px, 4vw, 40px); align-items: start; }
+.guide-figure { margin: 0; }
+.guide-figure figcaption { margin-top: 8px; color: var(--muted); font-size: 13px; line-height: 1.45; }
+.guide-note { color: var(--muted); font-size: 14px; }
+
+/* The compass diagram */
+.guide-compass { display: block; width: 100%; max-width: 320px; margin: 0 auto; overflow: visible; }
+.gc-ring { fill: color-mix(in srgb, var(--bg) 70%, transparent); stroke: var(--text); stroke-width: 1.2; opacity: 0.9; }
+.gc-ring--inner { fill: none; opacity: 0.35; }
+.gc-ticks line { stroke: var(--text); stroke-width: 1; opacity: 0.45; }
+.gc-ticks line.major { stroke-width: 1.6; opacity: 0.8; }
+.gc-card { font: 600 13px var(--font-mono); fill: var(--text); text-anchor: middle; dominant-baseline: middle; }
+.gc-true { stroke: var(--text); stroke-width: 1.4; stroke-dasharray: 3 4; fill: none; }
+.gc-mag { stroke: var(--accent); stroke-width: 1.4; stroke-dasharray: 3 4; fill: none; }
+.gc-arc { stroke: var(--stamp); stroke-width: 2; fill: none; }
+.gc-needle { transform-box: view-box; transform-origin: 120px 132px; transform: rotate(20deg); }
+.gc-needle-n { fill: var(--accent); }
+.gc-needle-s { fill: var(--bg-raised); stroke: var(--text); stroke-width: 1.2; }
+.gc-pin { fill: var(--bg); stroke: var(--text); stroke-width: 1.4; }
+.gc-label { font: 500 10px var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; fill: var(--muted); }
+.gc-label--mag { fill: var(--accent-text, var(--accent)); }
+.gc-label--arc { fill: var(--stamp); text-transform: none; letter-spacing: 0; font-size: 11px; }
+.gc-star { fill: var(--stamp); }
+/* Swing and settle: a few overshoots, like a real needle finding north */
+.guide[open] .gc-needle.is-swinging { animation: needle-settle 2.6s cubic-bezier(0.25, 0.1, 0.25, 1) both; }
+@keyframes needle-settle {
+  0%   { transform: rotate(-150deg); }
+  30%  { transform: rotate(62deg); }
+  48%  { transform: rotate(-8deg); }
+  63%  { transform: rotate(38deg); }
+  76%  { transform: rotate(12deg); }
+  87%  { transform: rotate(25deg); }
+  100% { transform: rotate(20deg); }
+}
+.guide-figure:hover .gc-star { animation: twinkle 1.2s ease-in-out infinite alternate; }
+@keyframes twinkle { to { opacity: 0.35; } }
+
+/* The coordinates table */
+.guide-table { width: 100%; margin: 4px 0 8px; border-collapse: collapse; font: 13px/1.4 var(--font-mono); }
+.guide-table th { padding: 6px 8px 6px 0; border-bottom: 1px solid var(--rule); color: var(--muted); font-weight: 500; text-align: left; letter-spacing: 0.06em; text-transform: uppercase; font-size: 10px; }
+.guide-table td { padding: 8px 8px 8px 0; border-bottom: 1px dashed var(--rule); }
+
+/* The latitude/longitude grid */
+.guide-grid {
+  position: relative;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--link) 7%, var(--bg));
+  cursor: crosshair;
+  touch-action: none;
+}
+.guide-grid:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
+.guide-grid svg { display: block; width: 100%; height: auto; }
+.gg-land { fill: color-mix(in srgb, var(--secondary) 26%, var(--bg)); stroke: color-mix(in srgb, var(--secondary) 55%, transparent); stroke-width: 0.4; }
+.gg-line { stroke: var(--text); stroke-width: 0.35; opacity: 0.22; fill: none; }
+.gg-line--key { stroke: var(--link); stroke-width: 0.8; opacity: 0.7; }
+.gg-label { font: 6px var(--font-mono); fill: var(--muted); }
+.gg-label--key { fill: var(--link); }
+.gg-mark path { stroke: var(--accent); stroke-width: 1; fill: none; }
+.gg-mark text { font: 6.5px var(--font-mono); fill: var(--accent-text, var(--accent)); }
+.gg-cursor { pointer-events: none; transition: opacity 0.2s ease; }
+.gg-cursor line { stroke: var(--text); stroke-width: 0.5; stroke-dasharray: 2 2; opacity: 0.6; }
+.gg-cursor circle { fill: var(--accent); stroke: var(--bg); stroke-width: 1; }
+.guide-readout { display: inline-block; font: 13px/1.4 var(--font-mono); color: var(--text); font-variant-numeric: tabular-nums; }
+.guide-readout small { display: block; color: var(--muted); font-size: 11px; }
+
+/* Other ways: a small card for each, with its own little drawing */
+.guide-entries { columns: 3 240px; column-gap: 12px; }
+.guide-entries article { break-inside: avoid; margin-bottom: 12px; }
+.guide-entries article {
+  padding: 16px 16px 6px;
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  background: var(--bg);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.guide-entries article:hover { transform: translateY(-2px) rotate(-0.3deg); border-color: color-mix(in srgb, var(--text) 35%, transparent); }
+.guide-entries h4 { display: flex; align-items: center; gap: 8px; margin: 0 0 8px; font-family: var(--font-display); font-size: 18px; font-weight: 400; }
+.guide-entries h4 svg { width: 22px; height: 22px; flex: none; color: var(--accent); transition: transform 0.6s ease; }
+.guide-entries article:hover h4 svg { transform: rotate(18deg) scale(1.08); }
+.guide-entries p { font-size: 15px; line-height: 1.55; }
+.guide-link { padding: 0; border: 0; background: none; color: var(--link); font: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+
+.guide-sources {
+  margin: 20px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font: 11px/1.7 var(--font-mono);
+}
+.guide-sources a { color: var(--link); }
+
+/* Phones: a full-screen sheet */
+@media (max-width: 640px) {
+  .guide { width: 100%; max-width: none; height: 100dvh; max-height: 100dvh; margin: 0; border-radius: 0; }
+  .guide[open] { animation-name: guide-up; }
+  @keyframes guide-up { from { transform: translateY(24px); opacity: 0; } }
+  .guide-page { max-height: 100dvh; padding-top: 22px; }
+  .guide-head { padding-right: 96px; }
+  .guide-split { grid-template-columns: 1fr; }
+  .guide-tab { padding: 9px 11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .guide[open], .guide[open] .gc-needle.is-swinging, .guide-figure:hover .gc-star { animation: none; }
+  .guide-entries article, .guide-entries h4 svg, .guide-tab svg, .compass { transition: none; }
+  .guide-entries article:hover { transform: none; }
 }

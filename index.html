@@ -22,7 +22,7 @@
   <meta name="twitter:image:alt" content="A red-tailed hawk with a terracotta tail perched on a branch over faint contour lines, beside the words Field Notes and the coordinates 35.1°N 33.4°E.">
 
   <!-- Apply a saved Day/Dusk choice before the page draws, so it never flashes the wrong colours -->
-  <script src="shared/theme-init.js?v=2026-10-15.2"></script>
+  <script src="shared/theme-init.js?v=2026-10-15.3"></script>
 
   <!-- Fonts: Fraunces (headings), Instrument Sans (body), JetBrains Mono (labels), Caveat (margin notes) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,8 +33,8 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
   <!-- The shared design system first, then this page's own styles -->
-  <link rel="stylesheet" href="shared/field-notes.css?v=2026-10-15.2">
-  <link rel="stylesheet" href="styles.css?v=2026-10-15.2">
+  <link rel="stylesheet" href="shared/field-notes.css?v=2026-10-15.3">
+  <link rel="stylesheet" href="styles.css?v=2026-10-15.3">
 </head>
 <body>
 
@@ -106,9 +106,10 @@
     </nav>
 
     <div class="bar-tools">
-      <!-- Compass: the needle turns toward the bearing of the section on screen -->
-      <div class="compass" aria-hidden="true">
-        <svg viewBox="0 0 40 40">
+      <!-- Compass: the needle turns toward the bearing of the section on screen.
+           It's also a button that opens the field guide (script.js, section 6). -->
+      <button class="compass" id="compass" type="button" aria-label="How navigation works" aria-haspopup="dialog">
+        <svg viewBox="0 0 40 40" aria-hidden="true" focusable="false">
           <circle class="compass-ring" cx="20" cy="20" r="17" />
           <g class="compass-ticks">
             <line x1="20" y1="3" x2="20" y2="6.5" />
@@ -122,8 +123,8 @@
           </g>
           <circle class="compass-pin" cx="20" cy="20" r="1.6" />
         </svg>
-        <span class="compass-bearing" id="compass-bearing">N 000°</span>
-      </div>
+        <span class="compass-bearing" id="compass-bearing" aria-hidden="true">N 000°</span>
+      </button>
 
       <button class="theme-switch" id="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Dusk mode">
         <span class="theme-label" aria-hidden="true">Day</span>
@@ -373,8 +374,141 @@
     </div>
   </dialog>
 
-  <script src="shared/field-notes.js?v=2026-10-15.2"></script>
-  <script src="projects.js?v=2026-10-15.2"></script>
-  <script src="script.js?v=2026-10-15.2"></script>
+
+  <!-- ---------- FIELD GUIDE: HOW TO FIND YOUR WAY ----------
+       Opened by the compass in the top bar. Every fact is from
+       the sources listed at the bottom. -->
+  <dialog class="guide" id="guide" aria-labelledby="guide-title">
+    <div class="guide-page">
+      <header class="guide-head">
+        <p class="guide-eyebrow">Field guide · N 000°</p>
+        <h2 class="guide-title" id="guide-title">How to find your way</h2>
+        <button class="btn guide-close" type="button" data-close>Close <span aria-hidden="true">✕</span></button>
+      </header>
+
+      <div class="guide-tabs" role="tablist" aria-label="Field guide topics">
+        <button class="guide-tab" type="button" role="tab" id="gt-compass" aria-controls="gp-compass" aria-selected="true"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor"/><path d="M8 3.5 9.6 8 8 12.5 6.4 8Z" fill="currentColor"/></svg>The compass</button>
+        <button class="guide-tab" type="button" role="tab" id="gt-coords" aria-controls="gp-coords" aria-selected="false" tabindex="-1"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor"><circle cx="8" cy="8" r="6.5"/><ellipse cx="8" cy="8" rx="3" ry="6.5"/><path d="M1.5 8h13M2.6 4.6h10.8M2.6 11.4h10.8"/></svg>Coordinates</button>
+        <button class="guide-tab" type="button" role="tab" id="gt-other" aria-controls="gp-other" aria-selected="false" tabindex="-1"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5 9.6 6.4 14.6 6.5 10.6 9.5 12 14.4 8 11.5 4 14.4 5.4 9.5 1.4 6.5 6.4 6.4Z" fill="none" stroke="currentColor" stroke-linejoin="round"/></svg>Other ways</button>
+      </div>
+
+      <!-- 1. How a compass works -->
+      <section class="guide-panel" role="tabpanel" id="gp-compass" aria-labelledby="gt-compass" tabindex="0">
+        <div class="guide-split">
+          <div class="guide-text">
+            <h3>How a compass works</h3>
+            <p>A compass needle is a small magnet. It swings until it lines up with Earth's magnetic field where you're standing, so one end points toward magnetic north.</p>
+            <p>Magnetic north isn't the same as true north, the direction of the geographic North Pole that maps are drawn to. The angle between the two is called <b>declination</b>.</p>
+            <p>Declination changes from place to place, sometimes noticeably over a mile or two. It also drifts over the years, because Earth's magnetic field is slowly changing. So a compass reading needs a correction that depends on where you are, and when.</p>
+          </div>
+          <figure class="guide-figure">
+            <svg class="guide-compass" viewBox="0 0 240 240" role="img" aria-labelledby="gc-title">
+              <title id="gc-title">A compass. The true north line points straight up; the needle points a little to the right, toward magnetic north. The angle between them is the declination.</title>
+              <circle class="gc-ring" cx="120" cy="132" r="84"/>
+              <circle class="gc-ring gc-ring--inner" cx="120" cy="132" r="72"/>
+              <g class="gc-ticks"></g>
+              <text class="gc-card" x="120" y="74">N</text>
+              <text class="gc-card" x="182" y="136">E</text>
+              <text class="gc-card" x="120" y="198">S</text>
+              <text class="gc-card" x="58" y="136">W</text>
+              <path class="gc-true" d="M120 132 V14"/>
+              <path class="gc-mag" d="M120 132 L161 18"/>
+              <path class="gc-arc" d="M120 40 A92 92 0 0 1 151.5 45.5"/>
+              <path class="gc-star" d="M120 2 L122.4 8.6 L129.4 8.8 L123.9 13 L125.9 19.8 L120 15.8 L114.1 19.8 L116.1 13 L110.6 8.8 L117.6 8.6 Z"/>
+              <g class="gc-needle" id="guide-needle">
+                <path class="gc-needle-n" d="M120 70 L126 132 L114 132 Z"/>
+                <path class="gc-needle-s" d="M120 194 L126 132 L114 132 Z"/>
+              </g>
+              <circle class="gc-pin" cx="120" cy="132" r="4"/>
+              <text class="gc-label" x="108" y="13" text-anchor="end">True north</text>
+              <text class="gc-label gc-label--mag" x="166" y="14">Magnetic north</text>
+              <text class="gc-label gc-label--arc" x="157" y="52">declination</text>
+            </svg>
+            <figcaption>The angle here is for illustration only. The real one depends on the place and the year.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- 2. How coordinates work -->
+      <section class="guide-panel" role="tabpanel" id="gp-coords" aria-labelledby="gt-coords" tabindex="0" hidden>
+        <div class="guide-split">
+          <div class="guide-text">
+            <h3>How coordinates work</h3>
+            <p><b>Latitude</b> measures how far north or south of the equator you are: 0° at the equator, rising to 90° at each pole. Its lines, called parallels, run east to west.</p>
+            <p><b>Longitude</b> measures how far east or west of the prime meridian you are. That's the line through the Royal Observatory in Greenwich, chosen as 0° in 1884. It runs to 180° east and 180° west, which meet on the far side of the world. Its lines, called meridians, run from pole to pole.</p>
+            <p>Each degree splits into 60 minutes (′), and each minute into 60 seconds (″). Decimal degrees write the same thing as one number.</p>
+            <table class="guide-table">
+              <caption class="visually-hidden">Two coordinates in decimal degrees and in degrees, minutes and seconds</caption>
+              <thead><tr><th scope="col">Decimal</th><th scope="col">Degrees, minutes, seconds</th></tr></thead>
+              <tbody>
+                <tr><td>35.1°N 33.4°E</td><td>35° 6′ 0″ N · 33° 24′ 0″ E</td></tr>
+                <tr><td>40.4°N 80.0°W</td><td>40° 24′ 0″ N · 80° 0′ 0″ W</td></tr>
+              </tbody>
+            </table>
+            <p class="guide-note">The working: 0.1° × 60 = 6′, and 0.4° × 60 = 24′.</p>
+          </div>
+          <figure class="guide-figure">
+            <div class="guide-grid" id="guide-grid" tabindex="0" role="application" aria-label="Latitude and longitude grid. Use the arrow keys to move the marker." aria-describedby="guide-grid-readout"></div>
+            <figcaption><span class="guide-readout" id="guide-grid-readout" aria-live="polite">Move across the grid to read a position</span></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- 3. Other ways to navigate -->
+      <section class="guide-panel" role="tabpanel" id="gp-other" aria-labelledby="gt-other" tabindex="0" hidden>
+        <h3>Other ways to navigate</h3>
+        <div class="guide-entries">
+          <article>
+            <h4><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 13.9 8.6 20.3 8.7 15.2 12.5 17.1 18.6 12 15 6.9 18.6 8.8 12.5 3.7 8.7 10.1 8.6Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><circle cx="20" cy="3.5" r="1" fill="currentColor"/><circle cx="3.5" cy="20" r=".8" fill="currentColor"/></svg>The stars</h4>
+            <p>Polaris, the North Star, sits almost directly above the North Pole, so the other stars seem to wheel around it while it barely moves. The two stars at the end of the Big Dipper's cup point to it. Its height above the horizon gives your latitude: about 60° up means about 60° north.</p>
+            <p>The southern sky has no bright pole star. Navigators there use the Southern Cross to find due south.</p>
+          </article>
+          <article>
+            <h4><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="3.4" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 1.5v1.6M8 12.9v1.6M1.5 8h1.6M12.9 8h1.6M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M3.4 12.6l1.1-1.1M11.5 4.5l1.1-1.1" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M17 21V11M17 21l5 1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>The sun and shadows</h4>
+            <p>At midday, when the sun is highest, a stick's shadow points north in the northern middle latitudes and south in the southern ones. Near the equator it can point either way, depending on the season. Sun time isn't quite clock time, because a clock keeps one time across a whole time zone.</p>
+          </article>
+          <article>
+            <h4><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M12 6.5V12l3.6 2.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M12 1.5v1.6M9.6 1.5h4.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>The longitude problem</h4>
+            <p>Latitude can be read from the sky, but longitude needs time. Earth turns 15° an hour, so each hour between local noon and the time at Greenwich is 15° of longitude. At sea, that needed a clock that kept time on a rolling ship.</p>
+            <p>Britain's Longitude Act of 1714 offered a reward for a solution. John Harrison, a self-taught carpenter, built a series of sea clocks, H1 to H4. H4 was tested on voyages to Jamaica in 1761 and Barbados in 1764, and Parliament later rewarded him, though not as fully as he felt he was owed.</p>
+          </article>
+          <article>
+            <h4><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15c3 2.5 15 2.5 18 0M5 15l2.2-11 9.8 9.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 20c2-1.4 4-1.4 6 0s4 1.4 6 0 4-1.4 6 0" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Polynesian wayfinding</h4>
+            <p>Pacific navigators cross open ocean without instruments. The core idea is the star compass: stars rise and set at known points on the horizon. When the sky is hidden, navigators feel the ocean swells, read clouds piled up over islands, and watch seabirds that fly out to sea in the morning and home at dusk.</p>
+            <p>Nainoa Thompson, taught by Mau Piailug of Satawal in Micronesia, navigated the canoe Hōkūleʻa to Tahiti without instruments in 1980.</p>
+          </article>
+          <article>
+            <h4><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18c2-6 6-11 10-11s7 4 8 11" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M7 18c1.4-4 3.6-7 6-7s4.3 2.6 5 7M11 18c.6-1.8 1.4-3 2.4-3s1.7 1.2 2.1 3" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>Contour maps</h4>
+            <p>A contour line joins points of the same height. Where the lines crowd together the ground is steep; where they spread out it's gentle. The lines across the top of this page are drawn the same way, from made-up terrain. <button class="guide-link" type="button" data-to-map>See them ↑</button></p>
+          </article>
+          <article>
+            <h4><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="6" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1.4" transform="rotate(45 12 12)"/><path d="M3.5 3.5l5 5M15.5 15.5l5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M17 3.5a4 4 0 0 1 3.5 3.5M17 0.8a6.8 6.8 0 0 1 6.2 6.2" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>GPS</h4>
+            <p>The Global Positioning System is owned by the United States and run by the U.S. Space Force. Its satellites broadcast their position and the time; a receiver picks up those signals and works out where it is, in three dimensions, and what time it is.</p>
+          </article>
+          <article>
+            <h4><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="13" rx="6" ry="5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M12 8v10M6.5 11.5h11M7.5 16h9" stroke="currentColor" stroke-width="1" opacity=".7"/><circle cx="12" cy="5.6" r="2" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9.5 3.5 8M17.5 9.5l3-1.5M7 17l-2.5 2M17 17l2.5 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Animals</h4>
+            <p>Many animals use Earth's magnetic field. Migrating birds have a magnetic compass; one leading idea is that a light-sensitive protein in the eye, cryptochrome, lets birds such as European robins sense the field. Exactly how it works is still mostly a mystery.</p>
+            <p>Young loggerhead sea turtles combine two features of the field, the angle of its lines and its strength, to judge where they are in the ocean, east to west as well as north to south.</p>
+          </article>
+        </div>
+      </section>
+
+      <p class="guide-sources">Sources:
+        <a href="https://www.ncei.noaa.gov/products/geomagnetism-frequently-asked-questions">NOAA NCEI</a> ·
+        NOAA Ocean Service on <a href="https://oceanservice.noaa.gov/facts/latitude.html">latitude</a> and <a href="https://oceanservice.noaa.gov/facts/longitude.html">longitude</a> ·
+        <a href="https://www.rmg.co.uk/stories/topics/harrisons-clocks-longitude-problem">Royal Museums Greenwich</a> ·
+        NASA on <a href="https://science.nasa.gov/solar-system/what-is-the-north-star-and-how-do-you-find-it/">the North Star</a> and <a href="https://pwg.gsfc.nasa.gov/stargaze/Sundial.htm">sundials</a> ·
+        <a href="https://archive.hokulea.com/navigate/navigate.html">Polynesian Voyaging Society</a> ·
+        <a href="https://www.usgs.gov/faqs/what-a-topographic-map">USGS</a> ·
+        <a href="https://www.gps.gov/gps">GPS.gov</a> ·
+        <a href="https://uol.de/en/news/article/the-sixth-sense">University of Oldenburg</a> ·
+        <a href="https://www.sciencedaily.com/releases/2011/02/110224121855.htm">Cell Press, via ScienceDaily</a>
+      </p>
+    </div>
+  </dialog>
+
+  <script src="shared/field-notes.js?v=2026-10-15.3"></script>
+  <script src="projects.js?v=2026-10-15.3"></script>
+  <script src="script.js?v=2026-10-15.3"></script>
 </body>
 </html>

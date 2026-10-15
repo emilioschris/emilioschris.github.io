@@ -10,6 +10,7 @@
    3. Compass
    4. Contour map (the hero)
    5. The bonsai (easter egg that leads to The Greenhouse)
+   6. The field guide (the compass opens it)
    ========================================================= */
 (() => {
   "use strict";
@@ -739,5 +740,177 @@
     // Start once the cards and fonts are in, so it measures the real layout
     const ready = document.fonts ? document.fonts.ready : Promise.resolve();
     ready.then(() => setTimeout(begin, 1500));
+  })();
+
+  /* ---------------------------------------------------------
+     6. THE FIELD GUIDE
+     The compass in the top bar opens a field-guide page on
+     navigation: three tabs, a compass diagram whose needle
+     swings and settles each time it opens, and a latitude and
+     longitude grid that reads out the position under your
+     cursor or finger (or the arrow keys).
+     --------------------------------------------------------- */
+  (() => {
+    const button = document.getElementById("compass");
+    const guide = document.getElementById("guide");
+    if (!button || !guide || typeof guide.showModal !== "function") return;
+    const tabs = [...guide.querySelectorAll('[role="tab"]')];
+    const needleG = document.getElementById("guide-needle");
+
+    // Tick marks round the diagram's dial, every 10°
+    const ticks = guide.querySelector(".gc-ticks");
+    let t = "";
+    for (let a = 0; a < 360; a += 10) {
+      const major = a % 90 === 0, r1 = 84, r2 = major ? 74 : 79;
+      const rad = (a * Math.PI) / 180;
+      const p = (r) => `${(120 + Math.sin(rad) * r).toFixed(1)} ${(132 - Math.cos(rad) * r).toFixed(1)}`;
+      const [x1, y1] = p(r1).split(" "), [x2, y2] = p(r2).split(" ");
+      t += `<line${major ? ' class="major"' : ""} x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"/>`;
+    }
+    ticks.innerHTML = t;
+
+    function swing() {
+      if (reducedMotion.matches) return;
+      needleG.classList.remove("is-swinging");
+      void needleG.getBoundingClientRect();          // restart the animation
+      needleG.classList.add("is-swinging");
+    }
+
+    function select(tab, focus) {
+      tabs.forEach((x) => {
+        const on = x === tab;
+        x.setAttribute("aria-selected", on);
+        x.tabIndex = on ? 0 : -1;
+        document.getElementById(x.getAttribute("aria-controls")).hidden = !on;
+      });
+      if (focus) tab.focus();
+      if (tab.id === "gt-compass") swing();
+      if (tab.id === "gt-coords") drawGrid();
+    }
+    tabs.forEach((tab, i) => {
+      tab.addEventListener("click", () => select(tab));
+      tab.addEventListener("keydown", (e) => {
+        const n = tabs.length;
+        const to = { ArrowRight: (i + 1) % n, ArrowLeft: (i - 1 + n) % n, Home: 0, End: n - 1 }[e.key];
+        if (to === undefined) return;
+        e.preventDefault();
+        select(tabs[to], true);
+      });
+    });
+
+    button.addEventListener("click", () => {
+      guide.showModal();
+      tabs.find((x) => x.getAttribute("aria-selected") === "true").focus();
+      swing();
+    });
+    guide.querySelector("[data-close]").addEventListener("click", () => guide.close());
+    guide.addEventListener("click", (e) => { if (e.target === guide) guide.close(); });   // the backdrop
+    guide.addEventListener("close", () => button.focus({ preventScroll: true }));
+    guide.querySelector("[data-to-map]").addEventListener("click", () => {
+      guide.close();
+      document.getElementById("top").scrollIntoView({ behavior: reducedMotion.matches ? "auto" : "smooth" });
+    });
+
+    /* ---- The latitude and longitude grid ----
+       Plate carrée: x = longitude + 180, y = 90 − latitude, so one
+       unit is one degree. A faint coastline (Natural Earth, via the
+       world-atlas package) loads the first time the tab opens. */
+    const grid = document.getElementById("guide-grid");
+    const readout = document.getElementById("guide-grid-readout");
+    const POINTS = [[35.1, 33.4], [40.4, -80.0]];
+    let drawn = false, svg = null;
+    const fmt = (v, pos, neg) => `${Math.abs(v).toFixed(1)}°${v >= 0 ? pos : neg}`;
+    function dms(v, pos, neg) {
+      let a = Math.abs(v), d = Math.floor(a), m = Math.floor((a - d) * 60), sec = Math.round(((a - d) * 60 - m) * 60);
+      if (sec === 60) { sec = 0; m += 1; } if (m === 60) { m = 0; d += 1; }
+      return `${d}° ${m}′ ${sec}″ ${v >= 0 ? pos : neg}`;
+    }
+    const at = { lat: 0, lon: 0 };
+    function show(lat, lon) {
+      at.lat = Math.max(-90, Math.min(90, lat));
+      at.lon = Math.max(-180, Math.min(180, lon));
+      const c = svg.querySelector(".gg-cursor");
+      c.style.opacity = 1;
+      c.querySelector(".h").setAttribute("y1", 90 - at.lat); c.querySelector(".h").setAttribute("y2", 90 - at.lat);
+      c.querySelector(".v").setAttribute("x1", at.lon + 180); c.querySelector(".v").setAttribute("x2", at.lon + 180);
+      c.querySelector("circle").setAttribute("cx", at.lon + 180); c.querySelector("circle").setAttribute("cy", 90 - at.lat);
+      readout.innerHTML = `${fmt(at.lat, "N", "S")} ${fmt(at.lon, "E", "W")}<small>${dms(at.lat, "N", "S")} · ${dms(at.lon, "E", "W")}</small>`;
+    }
+    function drawGrid() {
+      if (drawn) return;
+      drawn = true;
+      let lines = "", labels = "";
+      for (let lat = -60; lat <= 60; lat += 30) {
+        lines += `<path class="gg-line${lat === 0 ? " gg-line--key" : ""}" d="M0 ${90 - lat}H360"/>`;
+        if (lat) labels += `<text class="gg-label" x="3" y="${88 - lat}">${Math.abs(lat)}°${lat > 0 ? "N" : "S"}</text>`;
+      }
+      for (let lon = -150; lon <= 150; lon += 30) {
+        lines += `<path class="gg-line${lon === 0 ? " gg-line--key" : ""}" d="M${lon + 180} 0V180"/>`;
+        if (lon) labels += `<text class="gg-label" x="${lon + 181.5}" y="176">${Math.abs(lon)}°${lon > 0 ? "E" : "W"}</text>`;
+      }
+      labels += `<text class="gg-label gg-label--key" x="3" y="88">Equator 0°</text><text class="gg-label gg-label--key" x="181.5" y="8">Prime meridian 0°</text>`;
+      const marks = POINTS.map(([lat, lon]) => {
+        const x = lon + 180, y = 90 - lat;
+        return `<g class="gg-mark"><path d="M${x - 4} ${y}h8M${x} ${y - 4}v8"/><text x="${x + 4}" y="${y - 4}">${fmt(lat, "N", "S")} ${fmt(lon, "E", "W")}</text></g>`;
+      }).join("");
+      grid.innerHTML = `<svg viewBox="0 0 360 180" aria-hidden="true" focusable="false">
+        <g class="gg-landmass"></g>${lines}${labels}${marks}
+        <g class="gg-cursor" style="opacity:0"><line class="h" x1="0" x2="360"/><line class="v" y1="0" y2="180"/><circle r="2.4"/></g>
+      </svg>`;
+      svg = grid.querySelector("svg");
+
+      // Pointer or finger: read the position under it
+      const move = (e) => {
+        const r = svg.getBoundingClientRect();
+        show(90 - ((e.clientY - r.top) / r.height) * 180, ((e.clientX - r.left) / r.width) * 360 - 180);
+      };
+      grid.addEventListener("pointermove", move);
+      grid.addEventListener("pointerdown", (e) => { grid.setPointerCapture(e.pointerId); move(e); });
+      // Keyboard: arrow keys move the marker 1° at a time (10° with Shift)
+      grid.addEventListener("keydown", (e) => {
+        const step = e.shiftKey ? 10 : 1;
+        const d = { ArrowUp: [step, 0], ArrowDown: [-step, 0], ArrowLeft: [0, -step], ArrowRight: [0, step] }[e.key];
+        if (!d) return;
+        e.preventDefault();
+        show(at.lat + d[0], at.lon + d[1]);
+      });
+      grid.addEventListener("focus", () => show(at.lat, at.lon));
+
+      // The coastline, decoded from TopoJSON by hand (no library needed)
+      fetch("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/land-110m.json")
+        .then((r) => r.json())
+        .then((topo) => {
+          const [sx, sy] = topo.transform.scale, [tx, ty] = topo.transform.translate;
+          const arcs = topo.arcs.map((arc) => { let x = 0, y = 0; return arc.map(([dx, dy]) => [(x += dx) * sx + tx, (y += dy) * sy + ty]); });
+          const ring = (ids) => ids.flatMap((id, k) => {
+            const a = id < 0 ? arcs[~id].slice().reverse() : arcs[id];
+            return k ? a.slice(1) : a;
+          });
+          let d = "";
+          topo.objects.land.geometries.forEach((g) => {
+            const polys = g.type === "Polygon" ? [g.arcs] : g.type === "MultiPolygon" ? g.arcs : [];
+            polys.forEach((poly) => poly.forEach((ids) => {
+              // Keep rings that cross the 180° line in one piece, then draw a
+              // copy shifted a full turn so both halves show
+              let prev = null;
+              const pts = ring(ids).map(([lon, lat]) => {
+                if (prev !== null) while (lon - prev > 180) lon -= 360;
+                if (prev !== null) while (prev - lon > 180) lon += 360;
+                prev = lon;
+                return [lon, lat];
+              });
+              const lons = pts.map((q) => q[0]);
+              const shifts = [0];
+              if (Math.max(...lons) > 180) shifts.push(-360);
+              if (Math.min(...lons) < -180) shifts.push(360);
+              shifts.forEach((sh) => {
+                d += pts.map(([lon, lat], k) => `${k ? "L" : "M"}${(lon + sh + 180).toFixed(1)} ${(90 - lat).toFixed(1)}`).join("") + "Z";
+              });
+            }));
+          });
+          svg.querySelector(".gg-landmass").innerHTML = `<path class="gg-land" d="${d}"/>`;
+        })
+        .catch(() => {});                                 // the grid works without it
+    }
   })();
 })();
