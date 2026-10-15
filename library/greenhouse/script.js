@@ -305,7 +305,7 @@
   };
   const ZZ_GLAZES = ["lime", "clay", "olive"];
 
-  // The plant laid flat on a herbarium sheet: no pot, a few roots, paper tape
+  // The plant laid flat on a herbarium sheet: no pot, a few roots
   function pressed(plant) {
     const kind = KIND[plant.sketch];
     const parts = SKETCH[kind.draw](seeded(hash(plant.id)), kind.small, plant.status === "struggling");
@@ -316,10 +316,8 @@
       const x = 70 + (r() - 0.5) * 14, len = 16 + r() * 22;
       roots += `<path class="sp-root" d="M70,${base} Q${r1(x + (r() - 0.5) * 20)},${r1(base + len * 0.5)} ${r1(x + (r() - 0.5) * 30)},${r1(base + len)}"/>`;
     }
-    const tape = [[70, base - 6, -4], [40 + r() * 15, 70 + r() * 20, 28], [92 + r() * 12, 50 + r() * 25, -22]]
-      .map(([x, y, a]) => `<rect class="sp-tape" x="${r1(x - 13)}" y="${r1(y - 3.5)}" width="26" height="7" transform="rotate(${a} ${r1(x)} ${r1(y)})"/>`).join("");
     return `<svg class="pressed" viewBox="-6 0 152 ${base + 44}" aria-hidden="true" focusable="false">
-      <g class="sp-flat">${roots}${parts.back}${parts.front}</g>${tape}
+      <g class="sp-flat">${roots}${parts.back}${parts.front}</g>
     </svg>`;
   }
 
@@ -347,14 +345,14 @@
     const kind = KIND[plant.sketch];
     const r = seeded(hash(plant.id + "tag"));
     const tilt = r1((r() - 0.5) * 7);
-    const delay = r1(-r() * 6);
+
     const marks = [];
     if (!plant.confirmed) marks.push(`<span class="tag-mark tag-mark--confirm">To confirm</span>`);
     if (plant.status === "struggling" || plant.status === "dormant") marks.push(`<span class="tag-mark tag-mark--${plant.status}">${STATUS[plant.status]}</span>`);
     const label = `${plant.name}, ${plant.species}${plant.confirmed ? "" : " (to confirm)"}. ${STATUS[plant.status]}. Open its herbarium sheet.`;
     return `<button class="plant plant--${kind.size} is-${plant.status}" type="button" data-id="${esc(plant.id)}" aria-label="${esc(label)}">
       ${plant.photo ? `<img class="specimen specimen--photo" src="${esc(plant.photo.src)}" alt="">` : specimen(plant)}
-      <span class="tag-wrap" style="--tilt:${tilt}deg; --delay:${delay}s; --string:${string}px" aria-hidden="true">
+      <span class="tag-wrap" style="--tilt:${tilt}deg; --string:${string}px" aria-hidden="true">
         <span class="tag-string"></span>
         <span class="tag">
           <span class="tag-name">${esc(plant.name)}</span>
@@ -401,9 +399,8 @@
      4. THE CONSERVATORY
      A tall glass nave seen from the front, drawn to fit the
      scene: a gabled glass roof on white iron with arched
-     trusses, a back wall of round-arched windows, a reflecting
-     pool running to a small stepped fountain, a hanging fern,
-     palms and layered planting, hazier the further back it is.
+     trusses, a back wall of round-arched windows, a palm and
+     some planting, kept quiet so the plants are the subject.
      Everything is placed in depth: t = 0 is the front of the
      scene, t = 1 the back wall.
      --------------------------------------------------------- */
@@ -487,21 +484,9 @@
     }
 
     /* --- Floor: planted beds either side of a long pool --- */
-    const pool = (t) => { const S = sec(t); const half = (S.r - S.l) * 0.11; return [cx - half, cx + half, S.floor]; };
-    const [pl0, pr0, py0] = pool(0.2), [pl1, pr1] = pool(1);
+    const pool = (t) => { const S = sec(t); const half = (S.r - S.l) * 0.11; return [cx - half, cx + half, S.floor]; };   // the central path
     s += `<path class="cv-ground" d="M${P(F.l, H)} L${P(B.l, B.floor)} L${P(B.r, B.floor)} L${P(F.r, H)}Z"/>`;
     s += `<path class="cv-ground-haze" d="M${P(F.l, H)} L${P(B.l, B.floor)} L${P(B.r, B.floor)} L${P(F.r, H)}Z"/>`;
-    s += `<path class="cv-water" d="M${P(pl0, py0)} L${P(pl1, B.floor)} L${P(pr1, B.floor)} L${P(pr0, py0)}Z"/>`;
-    for (let i = 0; i < 14; i++) {                   // light on the water
-      const t = 0.25 + r() * 0.73, [a, b, y] = pool(t), w = (b - a) * (0.2 + r() * 0.4), x = a + (b - a - w) * r();
-      s += `<path class="cv-glint" d="M${P(x, y)} h${r1(w)}"/>`;
-    }
-    s += `<path class="cv-kerb" d="M${P(pl0, py0)} L${P(pl1, B.floor)} M${P(pr0, py0)} L${P(pr1, B.floor)}"/>`;
-    // A little stepped fountain at the far end
-    const fw = (pr1 - pl1) * 1.3;
-    for (let i = 0; i < 3; i++) s += `<rect class="cv-step" x="${r1(cx - fw / 2 + i * fw * 0.12)}" y="${r1(B.floor - (i + 1) * Hv * 0.012)}" width="${r1(fw * (1 - i * 0.24))}" height="${r1(Hv * 0.012)}"/>`;
-    s += `<path class="cv-fall" d="M${P(cx - fw * 0.18, B.floor - Hv * 0.034)} v${r1(Hv * 0.034)} M${P(cx + fw * 0.18, B.floor - Hv * 0.034)} v${r1(Hv * 0.034)}"/>`;
-
     /* --- Planting, back to front --- */
     const blob = (x, y, rw, rh, cls) => `<path class="${cls}" d="M${P(x - rw, y)} C${P(x - rw, y - rh * 1.2)} ${P(x - rw * 0.2, y - rh * 1.35)} ${P(x + rw * 0.1, y - rh)} C${P(x + rw * 0.5, y - rh * 1.3)} ${P(x + rw * 1.05, y - rh * 0.9)} ${P(x + rw, y)}Z"/>`;
     const flowers = (x, y, rw, rh, n) => {
@@ -526,30 +511,17 @@
     }
     s += `<g class="cv-far">${far}</g>`;
 
-    // The hanging fern, from the third truss
-    const hS = sec(0.62), hy = hS.ridge + (hS.eave - hS.ridge) * 0.32 + 24 * hS.k, ball = 46 * hS.k * 2.3;
-    let fern = `<path class="cv-chain" d="M${P(cx, hy)} v${r1(ball * 1.1)}"/>`;
-    const by = hy + ball * 1.1 + ball * 0.6;
-    for (let i = 0; i < 60; i++) {
-      const a = -Math.PI * 0.95 + (Math.PI * 1.9) * (i / 59) + (r() - 0.5) * 0.2;
-      const len = ball * (0.9 + r() * 0.5);
-      const x2 = cx + Math.cos(a) * len * 0.75, y2 = by + Math.abs(Math.sin(a)) * len * 0.3 + len * 0.55;
-      fern += `<path class="fol-frond" style="stroke-width:${r1(2.6 * hS.k + 0.6)}" d="M${P(cx, by - ball * 0.3)} Q${P(cx + Math.cos(a) * len * 0.5, by - ball * 0.5)} ${P(x2, y2)}"/>`;
-    }
-    fern += `<ellipse class="fol-2" cx="${r1(cx)}" cy="${r1(by)}" rx="${r1(ball * 0.62)}" ry="${r1(ball * 0.5)}"/>`;
-    s += `<g class="cv-mid">${fern}</g>`;
-
     // Banks of planting up both side walls, as tall as a person and more
     let bank = "";
     for (const side of [-1, 1]) {
-      for (let i = 0; i < 18; i++) {
-        const t = 0.26 + i * 0.04;
+      for (let i = 0; i < 9; i++) {
+        const t = 0.3 + i * 0.075;
         const S = sec(Math.min(t, 0.97)), wall = side < 0 ? S.l : S.r, y = Math.min(S.floor, H) + 4;
         const rw = (S.r - S.l) * (0.06 + r() * 0.05), rh = (S.floor - S.eave) * (0.22 + r() * 0.26);
         const x = wall - side * rw * (0.3 + r() * 0.5);
         bank += blob(x, y, rw, Math.min(rh, H), i % 3 ? "fol-1" : "fol-2");
-        if (r() < 0.45) bank += flowers(x, y - rh * 0.3, rw * 0.9, rh * 0.8, 30);
-        for (let j = 0; j < 3; j++) {
+        if (r() < 0.3) bank += flowers(x, y - rh * 0.3, rw * 0.9, rh * 0.8, 20);
+        for (let j = 0; j < 1; j++) {
           bank += leaf(r() < 0.5 ? "arrow" : "heart", x + (r() - 0.5) * rw, y - rh * (0.6 + r() * 0.5), side < 0 ? -30 + r() * 60 : 150 + r() * 60, 70 * S.k * (0.8 + r() * 0.6), r() < 0.5 ? "fol-2" : "fol-3");
         }
       }
@@ -559,8 +531,8 @@
     // Middle beds along the pool: big leaves, spiky bromeliads, low shrubs
     let mid = "";
     for (const side of [-1, 1]) {
-      for (let i = 0; i < 14; i++) {
-        const t = 0.36 + i * 0.044 + r() * 0.03;
+      for (let i = 0; i < 6; i++) {
+        const t = 0.4 + i * 0.09 + r() * 0.03;
         const S = sec(t), [pa, pb] = pool(t), edge = side < 0 ? S.l : S.r;
         const x = mix(side < 0 ? pa : pb, edge, 0.05 + r() * 0.85), y = Math.min(S.floor, H) + 2, sz = 110 * S.k * (0.8 + r() * 0.6);
         const kind = r();
@@ -595,9 +567,8 @@
       }
       return o;
     };
-    const rS = sec(0.3), lS = sec(0.18);
+    const rS = sec(0.3);
     s += `<g class="cv-near">${palm(rS.r - (rS.r - rS.l) * 0.16, Math.min(rS.floor, H), Hv * 0.06, W * 0.2, -W * 0.03)}</g>`;
-    s += `<g class="cv-near">${palm(lS.l + (lS.r - lS.l) * 0.16, Math.min(lS.floor, H), Hv * 0.2, W * 0.14, W * 0.02)}</g>`;
 
     // Phones: a taller scene, so planting keeps going down both walls
     if (H > Hv * 1.1) {
@@ -608,13 +579,6 @@
         }
       }
       s += `<g class="cv-bank">${edge}</g>`;
-    }
-
-    // Condensation running down the side panes
-    for (let i = 0; i < 18; i++) {
-      const t = r() * 0.6, S = sec(t), side = r() < 0.5, x = side ? S.l + (sec(t + 0.08).l - S.l) * r() : S.r - (S.r - sec(t + 0.08).r) * r();
-      const y0 = mix(S.eave, Hv, 0.1 + r() * 0.3), len = 14 + r() * 60;
-      s += `<path class="gl-drip" d="M${P(x, y0)} q${r1((r() - 0.5) * 3)},${r1(len / 2)} ${r1((r() - 0.5) * 4)},${r1(len)}"/><circle class="gl-drop" cx="${r1(x)}" cy="${r1(y0 + len + 3)}" r="${r1(1.2 + r())}"/>`;
     }
 
     frame.setAttribute("viewBox", `0 0 ${W} ${H}`);

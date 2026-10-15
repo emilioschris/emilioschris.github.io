@@ -123,8 +123,6 @@
 .biner-ticks { font: 13px var(--font-mono); fill: var(--accent-text); letter-spacing: 0.08em; }
 
 .biner-body { transform-box: fill-box; transform-origin: 50% 0; }
-.biner:hover .biner-body,
-.biner:focus-visible .biner-body { animation: biner-swing 1.6s var(--ease-soft) both; }
 .biner:focus-visible .biner-line { stroke-width: 7.5; }
 .biner:focus-visible .biner-grade { fill: var(--link); text-decoration: underline; }
 @keyframes biner-swing {

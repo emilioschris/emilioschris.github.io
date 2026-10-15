@@ -248,56 +248,6 @@
 .fol-rib { fill: none; stroke: var(--fol-1); stroke-width: 1.4; }
 .fol-trunk { fill: none; stroke: var(--trunk); stroke-linecap: round; }
 .fol-ring { fill: none; stroke: rgba(43, 42, 38, 0.25); stroke-width: 1; }
-.gl-drip { fill: none; stroke: rgba(255, 255, 255, 0.55); stroke-width: 1.1; stroke-linecap: round; opacity: calc(var(--mist-o) * 1.6); }
-.gl-drop { fill: rgba(255, 255, 255, 0.6); opacity: calc(var(--mist-o) * 1.8); }
-
-/* Light beams falling through the roof */
-.gh-beams {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: var(--beam-o);
-  transition: opacity 3s var(--ease-soft);
-  mix-blend-mode: screen;
-}
-.gh-beams span {
-  position: absolute;
-  top: -25%;
-  height: 150%;
-  width: 11%;
-  background: linear-gradient(to bottom, var(--beam), color-mix(in srgb, var(--beam) 30%, transparent) 55%, transparent 88%);
-  filter: blur(14px);
-  transform: rotate(var(--tilt));
-  transform-origin: top center;
-  transition: transform 3s var(--ease-soft);
-  animation: beam-drift 26s ease-in-out infinite alternate;
-}
-.gh-beams span:nth-child(1) { left: 14%; width: 9%; }
-.gh-beams span:nth-child(2) { left: 34%; width: 14%; animation-delay: -7s; animation-duration: 31s; }
-.gh-beams span:nth-child(3) { left: 58%; width: 8%; animation-delay: -15s; }
-.gh-beams span:nth-child(4) { left: 76%; width: 12%; animation-delay: -4s; animation-duration: 34s; }
-@keyframes beam-drift {
-  from { translate: -2% 0; opacity: 0.75; }
-  to   { translate: 3% 0; opacity: 1; }
-}
-
-/* Condensation: a fine mist of droplets, heavier low on the glass */
-.gh-mist {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: var(--mist-o);
-  transition: opacity 3s;
-  background:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8) 0 0.6px, transparent 1.2px) 0 0 / 7px 9px,
-    radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.6) 0 0.9px, transparent 1.5px) 3px 5px / 13px 11px,
-    radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.7) 0 1.3px, transparent 2px) 8px 2px / 23px 29px,
-    linear-gradient(to top, rgba(255, 255, 255, 0.35), transparent 60%);
-  -webkit-mask-image: linear-gradient(to top, #000 10%, rgba(0, 0, 0, 0.35) 55%, rgba(0, 0, 0, 0.6) 100%);
-          mask-image: linear-gradient(to top, #000 10%, rgba(0, 0, 0, 0.35) 55%, rgba(0, 0, 0, 0.6) 100%);
-}
 
 /* Pendant lamps */
 .gh-lamps { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
@@ -331,9 +281,7 @@
   opacity: var(--lamp-o);
   transition: opacity 3s;
   mix-blend-mode: screen;
-  animation: lamp-breathe 7s ease-in-out infinite alternate;
 }
-@keyframes lamp-breathe { to { scale: 1.06; } }
 
 /* A faint warm or cool tint over the whole scene */
 .glasshouse::after {
@@ -346,12 +294,9 @@
   transition: background-color 3s;
 }
 
-.glasshouse[data-light="night"] .gh-beams { display: none; }
 .glasshouse:not(.is-lit) * { transition: none !important; }   /* no fade on first load */
 
-.is-paused .gh-beams span,
-.is-paused .lamp-glow,
-.is-paused .tag-wrap { animation-play-state: paused; }
+
 
 /* ---------- Furniture ---------- */
 .gh-floor {
@@ -556,14 +501,7 @@
   transform-origin: top center;
   translate: -50% 0;
   rotate: var(--tilt);
-  animation: tag-sway 7s ease-in-out infinite alternate;
-  animation-delay: var(--delay);
 }
-@keyframes tag-sway {
-  from { rotate: calc(var(--tilt) - 1.6deg); }
-  to   { rotate: calc(var(--tilt) + 1.6deg); }
-}
-.plant:hover .tag-wrap { animation-duration: 2.4s; }
 .tag-string {
   width: 1px;
   height: var(--string, 16px);
@@ -685,7 +623,7 @@
 
 /* ---------- Reduced motion: the light is still right, but nothing moves ---------- */
 @media (prefers-reduced-motion: reduce) {
-  .gh-beams span, .lamp-glow, .tag-wrap { animation: none; }
+  .specimen { transition: none; }
 }
 
 /* =========================================================
@@ -813,16 +751,13 @@
   margin-top: 22px;
   padding: 18px 18px 16px;
   border-radius: 4px;
-  background:
-    radial-gradient(120% 90% at 30% 20%, rgba(255, 255, 255, 0.5), transparent 60%),
-    #F5EEDC;
+  background: #F5EEDC;
   box-shadow: 0 1px 0 rgba(43, 42, 38, 0.08), 0 14px 30px -18px rgba(30, 18, 10, 0.5);
   color: #2B2A26;
 }
 .pressed { display: block; width: 72%; max-height: 380px; margin: 0 auto; overflow: visible; }
 .sp-flat { filter: sepia(0.28) saturate(0.85); }
 .sp-root { fill: none; stroke: #8A6A4E; stroke-width: 0.7; stroke-linecap: round; }
-.sp-tape { fill: rgba(236, 222, 186, 0.82); stroke: rgba(160, 130, 80, 0.25); stroke-width: 0.4; }
 .sheet-photo { display: block; width: 100%; height: auto; border-radius: 2px; }
 .sheet-label {
   display: grid;
@@ -1017,33 +952,13 @@
   border-radius: 50%;
   background: none;
   cursor: pointer;
-  translate: -160px 0;
-  animation: hawk-cross 46s linear infinite;
-  animation-delay: -6s;
+  left: 58%;
   -webkit-tap-highlight-color: transparent;
 }
-.hawk-bob { display: block; animation: hawk-bob 5.5s ease-in-out infinite alternate; }
+.hawk-bob { display: block; }
 .hawk-svg { display: block; width: 100%; height: auto; overflow: visible; filter: drop-shadow(0 10px 8px rgba(30, 18, 10, 0.18)); }
-.hawk-fly .hk2-wing { animation: hawk-flap 11s ease-in-out infinite; }
-@keyframes hawk-cross {
-  0%   { translate: -160px 0; }
-  64%  { translate: calc(100cqi + 20px) 0; }
-  100% { translate: calc(100cqi + 20px) 0; }
-}
-@keyframes hawk-bob {
-  from { translate: 0 -8px; rotate: -3deg; }
-  to   { translate: 0 10px; rotate: 2deg; }
-}
-@keyframes hawk-flap {             /* two slow beats, then a long glide */
-  0%, 30%, 100% { rotate: 0deg; }
-  8%  { rotate: 16deg; }
-  15% { rotate: -6deg; }
-  22% { rotate: 14deg; }
-}
-.hawk-fly:hover, .hawk-fly:focus-visible,
-.hawk-fly:hover *, .hawk-fly:focus-visible * { animation-play-state: paused; }
+
 .hawk-fly:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.is-paused .hawk-fly, .is-paused .hawk-fly * { animation-play-state: paused; }
 .glasshouse[data-light="night"] .hawk-svg { filter: brightness(0.85) drop-shadow(0 10px 8px rgba(0, 0, 0, 0.3)); }
 
 /* The notes card */
@@ -1070,7 +985,5 @@ ol.hawk-list li::marker { font-family: var(--font-mono); font-size: 11px; color:
 .btn--hawk img { margin: -2px 0; }
 
 @media (prefers-reduced-motion: reduce) {
-  /* The hawk holds still in the upper glass instead of flying */
-  .hawk-fly { animation: none; translate: none; left: 58%; }
-  .hawk-bob, .hawk-fly .hk2-wing, .hawk-head-bird { animation: none; }
+  .hawk-head-bird { animation: none; }
 }

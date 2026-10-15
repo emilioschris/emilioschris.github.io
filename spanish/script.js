@@ -680,7 +680,6 @@
     // Camp positions along the ridge, low on the left to the summit on the right
     const pts = [[90, 196], [230, 160], [370, 120], [510, 82], [640, 34]];
     const ridge = "M0 232C60 226 80 204 90 196C140 168 180 172 230 160C290 146 320 130 370 120C430 106 460 96 510 82C560 66 600 46 640 34C660 30 690 60 720 92";
-    const echoes = [10, 22, 36].map((dy, k) => `<path class="mtn-echo" d="${ridge}" transform="translate(0 ${dy})" style="opacity:${0.55 - k * 0.15}"/>`).join("");
     const camps = pts.map(([x, y], i) => `
       <g class="mtn-camp${counts[i] ? "" : " is-empty"}">
         ${i === 4 ? `<path class="mtn-flag" d="M${x} ${y}V${y - 26}L${x + 16} ${y - 20}L${x} ${y - 14}"/>` : ""}
@@ -693,7 +692,6 @@
       </g>`).join("");
     $("mountain").innerHTML = `
       <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Words by camp: ${CAMPS.map((c, i) => `${c} ${counts[i]}`).join(", ")}, and ${trailhead} not started.">
-        ${echoes}
         <path class="mtn-ridge" d="${ridge}"/>
         <path class="mtn-trail" d="M20 232L90 196"/>
         ${camps}
@@ -869,6 +867,18 @@
   }
   const tileKey = (t) => plain(t);
 
+  // Hearing a tile: the real recording if that word has one ("maleta" → la maleta)
+  const TILE_WORDS = new Map();
+  for (const w of WORDS) {
+    const k = plain(w.es).replace(ARTICLE, "");
+    if (!k.includes(" ") && (!TILE_WORDS.has(k) || RECORDINGS[w.id])) TILE_WORDS.set(k, w);
+  }
+  function sayTile(text) {
+    const w = TILE_WORDS.get(tileKey(text));
+    if (w && RECORDINGS[w.id]) sayWord(w);
+    else speak(text);
+  }
+
   function pickSentences() {
     const usable = (w) => w.ex && inDecks(w) && tilesOf(w.ex).length >= 3 && tilesOf(w.ex).length <= 10;
     const met = WORDS.filter((w) => usable(w) && state.words[w.id]);
@@ -966,6 +976,7 @@
     if (!t || build.dragged) return;
     const id = Number(t.dataset.id);
     const toLine = t.dataset.where === "bank";
+    if (toLine) sayTile(t.textContent);
     moveTile(id, toLine);
     // Keep the keyboard on the next free tile
     const next = $("build-bank").querySelector(".tile[data-id]") || $("build-check");
@@ -1009,6 +1020,7 @@
           const r = others[k].getBoundingClientRect();
           if (ev.clientY < r.top || (ev.clientY <= r.bottom && ev.clientX < r.left + r.width / 2)) { at = k; break; }
         }
+        sayTile(t.textContent);
         moveTile(id, true, at);
       } else if (over?.closest("#build-bank")) {
         moveTile(id, false);

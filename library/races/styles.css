@@ -219,8 +219,7 @@
   display: block;
   transform-origin: 84px 9px;   /* the point where the ribbon meets the rail */
 }
-.hang:hover .swing,
-.hang:focus-visible .swing { animation: swing 2.6s var(--ease-soft) both; }
+/* No swing on hover: motion only when it says something */
 
 /* A gentle swing that settles, like a medal you've just brushed past */
 @keyframes swing {
