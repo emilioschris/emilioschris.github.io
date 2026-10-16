@@ -49,8 +49,15 @@
     const p = reduced.matches ? 0 : Math.min(1, window.scrollY / (window.innerHeight * 1.2));
     document.documentElement.style.setProperty("--fr-p", p.toFixed(3));
     if (bot) bot.setProgress(Math.min(1, window.scrollY / window.innerHeight));
+    walls();
   }
-  addEventListener("scroll", () => requestAnimationFrame(onScroll), { passive: true });
+  // the chrome walls appear once you've scrolled past the hero
+  function walls() {
+    const hero = document.querySelector(".fr-x");
+    const past = hero ? hero.getBoundingClientRect().bottom < innerHeight * 0.5 : window.scrollY > 160;
+    document.documentElement.classList.toggle("has-walls", past);
+  }
+  addEventListener("scroll", () => { walls(); requestAnimationFrame(onScroll); }, { passive: true });
 
   // The starfield in the hero: a few hundred faint stars that twinkle slowly
   let starsStop = null;

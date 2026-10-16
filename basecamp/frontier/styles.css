@@ -620,41 +620,41 @@ a.fr-dtech:hover .fr-dtech-open span { transform: translateX(4px); }
   .fr-dossier:hover { transform: none; }
 }
 
-/* ---------- 13. THE WALLS: chrome and carbon fibre down both sides ----------
-   Drawn in CSS (no images): a woven carbon-fibre panel down the left
-   wall and brushed chrome down the right, each fading into the page. */
+/* ---------- 13. THE WALLS: brushed chrome down both sides ----------
+   Drawn in CSS (no images), mirrored left and right, each fading into
+   the page. Hidden at the top; they fade in once you scroll past the
+   hero (script.js adds .has-walls to <html>). */
 .fr-page::before, .fr-page::after {
-  content: ""; position: fixed; z-index: 0; top: 0; bottom: 0;
+  content: ""; position: fixed; z-index: 0; top: var(--bar-h); bottom: 0;
   width: max(14px, calc((100vw - 1240px) / 2 - 8px));
   pointer-events: none;
+  opacity: 0; transition: opacity 0.8s ease;
+  --grain: repeating-linear-gradient(0deg, rgba(255,255,255,0.08) 0 1px, rgba(0,0,0,0.05) 1px 2px, transparent 2px 3px);
+  --shade: linear-gradient(180deg, rgba(255,255,255,0.35), rgba(0,0,0,0.15));
+  background-blend-mode: normal, normal, overlay;
 }
-.fr-page::before {                       /* carbon fibre: a 2 x 2 twill weave with a soft sheen */
+.has-walls .fr-page::before, .has-walls .fr-page::after { opacity: 1; }
+.fr-page::before {                       /* the left wall: the right one, mirrored */
   left: 0;
-  background:
-    linear-gradient(90deg, rgba(255,255,255,0.0) 40%, rgba(255,255,255,0.10) 70%, rgba(255,255,255,0.0) 100%),
-    linear-gradient(27deg, #151618 5px, transparent 5px) 0 5px,
-    linear-gradient(207deg, #151618 5px, transparent 5px) 10px 0,
-    linear-gradient(27deg, #222326 5px, transparent 5px) 0 10px,
-    linear-gradient(207deg, #222326 5px, transparent 5px) 10px 5px,
-    linear-gradient(90deg, #1B1C1F 10px, transparent 10px),
-    linear-gradient(#1D1E21 25%, #1A1B1E 25%, #1A1B1E 50%, transparent 50%, transparent 75%, #242528 75%, #242528);
-  background-color: #131416;
-  background-size: 100% 100%, 20px 20px, 20px 20px, 20px 20px, 20px 20px, 20px 20px, 20px 20px;
+  background: var(--grain),
+    linear-gradient(270deg, #6F757B 0%, #D9DEE2 18%, #8C9298 34%, #F4F6F7 50%, #A3A9AE 64%, #E2E6E9 80%, #7A8086 100%),
+    var(--shade);
   -webkit-mask-image: linear-gradient(90deg, #000 55%, transparent);
           mask-image: linear-gradient(90deg, #000 55%, transparent);
 }
 .fr-page::after {                        /* brushed chrome: fine grain over a bright metallic gradient */
   right: 0;
-  background:
-    repeating-linear-gradient(0deg, rgba(255,255,255,0.08) 0 1px, rgba(0,0,0,0.05) 1px 2px, transparent 2px 3px),
+  background: var(--grain),
     linear-gradient(90deg, #6F757B 0%, #D9DEE2 18%, #8C9298 34%, #F4F6F7 50%, #A3A9AE 64%, #E2E6E9 80%, #7A8086 100%),
-    linear-gradient(180deg, rgba(255,255,255,0.35), rgba(0,0,0,0.15));
-  background-blend-mode: normal, normal, overlay;
+    var(--shade);
   -webkit-mask-image: linear-gradient(270deg, #000 55%, transparent);
           mask-image: linear-gradient(270deg, #000 55%, transparent);
 }
+@media (prefers-reduced-motion: reduce) { .fr-page::before, .fr-page::after { transition: none; } }
 .fr-page > * { position: relative; z-index: 1; }
 .fr-page > .bar { position: fixed; z-index: 50; }
+.fr-page > .skip-link { position: absolute; z-index: 100; }   /* keep it out of the flow (no gap above the ticker) */
+
 
 /* ---------- 14. THE HERO: one giant word, a robot falling through it ----------
    Like an editorial expedition poster. Layers, back to front:
