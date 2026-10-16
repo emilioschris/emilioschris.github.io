@@ -22,7 +22,7 @@
   <meta name="twitter:image:alt" content="A red-tailed hawk with a terracotta tail perched on a branch over faint contour lines, beside the words Field Notes and the coordinates 35.1°N 33.4°E.">
 
   <!-- Apply a saved Day/Dusk choice before the page draws, so it never flashes the wrong colours -->
-  <script src="shared/theme-init.js?v=2026-10-15.6"></script>
+  <script src="shared/theme-init.js?v=2026-10-16.2"></script>
 
   <!-- Fonts: Fraunces (headings), Instrument Sans (body), JetBrains Mono (labels), Caveat (margin notes) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,8 +33,8 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
   <!-- The shared design system first, then this page's own styles -->
-  <link rel="stylesheet" href="shared/field-notes.css?v=2026-10-15.6">
-  <link rel="stylesheet" href="styles.css?v=2026-10-15.6">
+  <link rel="stylesheet" href="shared/field-notes.css?v=2026-10-16.2">
+  <link rel="stylesheet" href="styles.css?v=2026-10-16.2">
 </head>
 <body>
 
@@ -102,6 +102,7 @@
         <li><a href="#training-ground">Training Ground</a></li>
         <li><a href="#language-routes">Language Routes</a></li>
         <li><a href="#the-wild">The Wild</a></li>
+        <li><a href="about.html">About</a></li>
       </ul>
     </nav>
 
@@ -186,8 +187,6 @@
       <header class="leg-head">
         <p class="leg-bearing"><span>01</span> N 012°</p>
         <h2 class="leg-title" id="base-camp-title">Base Camp</h2>
-        <p class="leg-kicker">History</p>
-        <p class="leg-desc">Where every route begins: Cyprus, the ancient Mediterranean, and the long stories underneath the places we live.</p>
         <p class="margin-note" aria-hidden="true">start here, everything else follows</p>
       </header>
       <div class="cards">
@@ -246,15 +245,6 @@
       </header>
       <div class="cards">
         <svg class="trail" aria-hidden="true"><path /></svg>
-      </div>
-    </section>
-
-    <!-- ---------- ABOUT ---------- -->
-    <section class="about reveal" id="about" aria-labelledby="about-title">
-      <h2 class="about-title" id="about-title">About</h2>
-      <div class="about-body">
-        <p>I'm from an island in the eastern Mediterranean, where the past sits close to the surface: ruins in the middle of fields, mosaics under village churches, stories older than the roads. Later, life stretched across the Atlantic to a city of rivers and bridges.</p>
-        <p>Somewhere between the two I picked up a habit of wondering how things came to be: places, languages, animals, whole civilisations. These field notes are where that curiosity goes. I build things with AI to understand the world a little better, and keep them here as I go. Some are finished. Most are still on the trail.</p>
       </div>
     </section>
 
@@ -353,6 +343,27 @@
       </g>
     </svg>
     <span class="bonsai-tag" aria-hidden="true">The Greenhouse</span>
+  </button>
+
+  <!-- The watering can: drifts like the bonsai; drag it onto the bonsai
+       (or press Enter) to water it. script.js, section 5c. -->
+  <button class="can" id="can" type="button" aria-label="Watering can: drag it onto the bonsai to water it, or press Enter" hidden>
+    <svg class="can-art" viewBox="0 0 96 72" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="canBody" x1="0" y1="0" x2="1" y2="1"><stop class="cs-lit" offset="0"/><stop class="cs-mid" offset=".55"/><stop class="cs-dk" offset="1"/></linearGradient>
+        <linearGradient id="canBrass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8C6420"/><stop offset=".5" stop-color="#F0D58C"/><stop offset="1" stop-color="#A8792C"/></linearGradient>
+      </defs>
+      <ellipse class="can-shadow" cx="38" cy="68" rx="26" ry="2.6"/>
+      <path class="can-handle" d="M18 26 C 16 6 52 4 54 24"/>
+      <path class="can-spout" d="M58 48 L 82 22"/>
+      <g transform="rotate(-48 84 20)"><rect x="78" y="12" width="12" height="16" rx="3" fill="url(#canBrass)"/><path class="can-holes" d="M81 16h.01M85 16h.01M83 20h.01M81 24h.01M85 24h.01M87 20h.01"/></g>
+      <path fill="url(#canBody)" d="M14 30 C 14 26 18 24 22 24 L 54 24 C 58 24 62 26 62 30 L 60 62 C 60 65 57 67 54 67 L 22 67 C 19 67 16 65 16 62 Z"/>
+      <path class="can-band" d="M15 38 L 61 38"/>
+      <path class="can-band" d="M16 58 L 60 58"/>
+      <path class="can-shine" d="M22 31 C 21 40 21 50 22 60"/>
+      <ellipse cx="38" cy="25" rx="16" ry="3" fill="url(#canBrass)"/>
+    </svg>
+    <span class="can-tag" aria-live="polite"></span>
   </button>
 
   <dialog class="bonsai-dialog" id="bonsai-dialog" aria-labelledby="bonsai-dialog-title">
@@ -499,8 +510,8 @@
     </div>
   </dialog>
 
-  <script src="shared/field-notes.js?v=2026-10-15.6"></script>
-  <script src="projects.js?v=2026-10-15.6"></script>
-  <script src="script.js?v=2026-10-15.6"></script>
+  <script src="shared/field-notes.js?v=2026-10-16.2"></script>
+  <script src="projects.js?v=2026-10-16.2"></script>
+  <script src="script.js?v=2026-10-16.2"></script>
 </body>
 </html>

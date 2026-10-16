@@ -10,6 +10,7 @@
    3. Compass
    4. Contour map (the hero)
    5. The bonsai (easter egg that leads to The Greenhouse)
+      and the watering can you can drag onto it
    6. The field guide (the compass opens it)
    ========================================================= */
 (() => {
@@ -107,6 +108,7 @@
     } else {
       title.textContent = project.title;
     }
+    if (project.meaning) title.append(el("span", "card-meaning", project.meaning));   // what a Greek title means
     card.append(title);
     card.append(el("p", "card-desc", project.description || ""));
 
@@ -542,7 +544,7 @@
   document.addEventListener("fieldnotes:themechange", () => terrain.refreshColours());
 
   /* ---------------------------------------------------------
-     5. THE BONSAI
+     5. THE DRIFT ENGINE (the bonsai and the watering can)
      A small bonsai drifts slowly through the page's empty
      margins and gaps, bobbing like a leaf on still water.
      It never crosses text, cards, links or buttons: before
@@ -555,10 +557,9 @@
      in a clear corner of the hero.
      Clicking it opens a small pop-up offering The Greenhouse.
      --------------------------------------------------------- */
-  (() => {
-    const tree = document.getElementById("bonsai");
-    const dialog = document.getElementById("bonsai-dialog");
-    if (!tree || !dialog || typeof dialog.showModal !== "function") return;
+  // The drift engine, shared by the bonsai and the watering can.
+  // opts: ignore(node), alsoAvoid() -> [elements], paused() -> bool, corner: "left" | "right"
+  function drifter(tree, opts = {}) {
 
     const PAD = 14;          // breathing room kept around everything it avoids
     const EDGE = 8;          // distance kept from the window edges
@@ -581,10 +582,14 @@
       const sx = scrollX, sy = scrollY;
       blocks = [];
       document.querySelectorAll(AVOID).forEach((node) => {
-        if (tree.contains(node) || dialog.contains(node)) return;
+        if (tree.contains(node) || (opts.ignore && opts.ignore(node))) return;
         const r = node.getBoundingClientRect();
         if (!r.width || !r.height) return;
         blocks.push({ l: r.left + sx - PAD, t: r.top + sy - PAD, r: r.right + sx + PAD, b: r.bottom + sy + PAD });
+      });
+      (opts.alsoAvoid ? opts.alsoAvoid() : []).forEach((node) => {   // the other floater
+        const r = node.getBoundingClientRect();
+        if (r.width) blocks.push({ l: r.left + sx - 30, t: r.top + sy - 30, r: r.right + sx + 30, b: r.bottom + sy + 30 });
       });
     }
     const clearAt = (x, y) => !blocks.some((k) => x < k.r && x + w > k.l && y < k.b && y + h > k.t);
@@ -666,11 +671,12 @@
       measure();
       const hero = document.querySelector(".hero").getBoundingClientRect();
       const v = { l: scrollX + EDGE, r: scrollX + root.clientWidth - w - EDGE, t: hero.top + scrollY + 80, b: hero.bottom + scrollY - h - EDGE };
-      const corner = { x: v.r, y: v.b };
+      const corner = { x: opts.corner === "left" ? v.l : v.r, y: v.b };
       show(findSpot(v, (p) => Math.hypot(p.x - corner.x, p.y - corner.y)) || findSpot(view()));
     }
 
-    const paused = () => hovered || focused || dialog.open || document.hidden;
+    let held = false;
+    const paused = () => held || hovered || focused || document.hidden || (opts.paused && opts.paused());
 
     function tick(now) {
       raf = requestAnimationFrame(tick);
@@ -717,15 +723,142 @@
     addEventListener("resize", () => { if (reducedMotion.matches) settle(); else placed = false; });
     if (reducedMotion.matches) addEventListener("scroll", () => { if (!tree.classList.contains("is-shown")) settle(); }, { passive: true });
 
-    // The pop-up
+    // Start once the cards and fonts are in, so it measures the real layout
+    const ready = document.fonts ? document.fonts.ready : Promise.resolve();
+    ready.then(() => setTimeout(begin, opts.delay || 1500));
+
+    return {
+      get pos() { return { x: pos.x, y: pos.y }; },
+      size: () => ({ w, h }),
+      hold() { held = true; leg = null; },
+      moveTo(x, y) { pos.x = x; pos.y = y; draw(clock); },
+      release() {                                  // back to drifting; fade elsewhere if it was dropped on something
+        held = false; leg = null; restUntil = clock + 2000;
+        measure();
+        if (!clearAt(pos.x, pos.y)) relocate();
+      },
+    };
+  }
+
+  /* ---------------------------------------------------------
+     5b. THE BONSAI'S OWN BEHAVIOUR: its pop-up
+     --------------------------------------------------------- */
+  const bonsai = (() => {
+    const tree = document.getElementById("bonsai");
+    const dialog = document.getElementById("bonsai-dialog");
+    if (!tree || !dialog || typeof dialog.showModal !== "function") return null;
+    const can = document.getElementById("can");
+    const d = drifter(tree, {
+      ignore: (node) => dialog.contains(node),
+      alsoAvoid: () => (can && !can.hidden ? [can] : []),
+      paused: () => dialog.open || tree.classList.contains("is-watered"),
+      corner: "right",
+    });
     tree.addEventListener("click", () => dialog.showModal());
     dialog.querySelector("[data-close]").addEventListener("click", () => dialog.close());
     dialog.addEventListener("click", (e) => { if (e.target === dialog) dialog.close(); });   // the backdrop
     dialog.addEventListener("close", () => tree.focus({ preventScroll: true }));
+    return { el: tree, d };
+  })();
 
-    // Start once the cards and fonts are in, so it measures the real layout
-    const ready = document.fonts ? document.fonts.ready : Promise.resolve();
-    ready.then(() => setTimeout(begin, 1500));
+  /* ---------------------------------------------------------
+     5c. THE WATERING CAN
+     Drifts like the bonsai. Drag it onto the bonsai (mouse or
+     finger) and it tips and waters it; or focus it and press
+     Enter to send it over. Just for fun.
+     --------------------------------------------------------- */
+  (() => {
+    const can = document.getElementById("can");
+    if (!can || !bonsai) return;
+    can.hidden = false;
+    let watering = false;
+    const d = drifter(can, { alsoAvoid: () => [bonsai.el], paused: () => watering, corner: "left", delay: 2600 });
+    const KEY = "fieldnotes-bonsai-watered";
+    let count = 0;
+    try { count = Number(localStorage.getItem(KEY)) || 0; } catch (e) { /* private mode */ }
+    const tag = can.querySelector(".can-tag");
+
+    const rectOf = (el) => { const r = el.getBoundingClientRect(); return { l: r.left + scrollX, t: r.top + scrollY, r: r.right + scrollX, b: r.bottom + scrollY }; };
+    const overBonsai = () => {
+      const c = rectOf(can), b = rectOf(bonsai.el);
+      return c.r > b.l - 30 && c.l < b.r + 30 && c.b > b.t - 50 && c.t < b.b + 10;
+    };
+
+    function water() {
+      watering = true;
+      const b = rectOf(bonsai.el), c = rectOf(can);
+      can.classList.add("is-pouring");
+      bonsai.el.classList.add("is-watered");
+      const still = reducedMotion.matches;
+      // A few drops fall from the spout onto the tree
+      const spoutX = c.r - 8, spoutY = c.t + 16;
+      for (let i = 0; i < (still ? 0 : 14); i++) {
+        const drop = document.createElement("span");
+        drop.className = "can-drop";
+        drop.style.left = `${spoutX + Math.random() * 10 - 5}px`;
+        drop.style.top = `${spoutY}px`;
+        drop.style.setProperty("--fall", `${Math.max(30, b.t + 20 - spoutY + Math.random() * 25)}px`);
+        drop.style.animationDelay = `${i * 70}ms`;
+        document.body.append(drop);
+        drop.addEventListener("animationend", () => drop.remove());
+      }
+      count += 1;
+      try { localStorage.setItem(KEY, String(count)); } catch (e) { /* fine */ }
+      tag.textContent = count === 1 ? "Watered!" : `Watered ${count} times`;
+      can.classList.add("show-tag");
+      setTimeout(() => {
+        can.classList.remove("is-pouring", "show-tag");
+        bonsai.el.classList.remove("is-watered");
+        watering = false;
+        d.release();
+      }, still ? 1400 : 2200);
+    }
+
+    // Enter or a tap without dragging: fly over to the bonsai and water it
+    function flyAndWater() {
+      if (watering) return;
+      d.hold();
+      const b = rectOf(bonsai.el), { w, h } = d.size();
+      const to = { x: b.l - w + 8, y: b.t - h + 6 };
+      if (reducedMotion.matches) { d.moveTo(to.x, to.y); water(); return; }
+      const from = d.pos, t0 = performance.now(), dur = 1100;
+      const step = (now) => {
+        const k = Math.min(1, (now - t0) / dur), e = k * k * (3 - 2 * k);
+        d.moveTo(from.x + (to.x - from.x) * e, from.y + (to.y - from.y) * e - Math.sin(Math.PI * k) * 40);
+        if (k < 1) requestAnimationFrame(step); else water();
+      };
+      requestAnimationFrame(step);
+    }
+
+    // Dragging
+    let drag = null;
+    can.addEventListener("pointerdown", (e) => {
+      if (watering || e.button > 0) return;
+      const p = d.pos;
+      drag = { id: e.pointerId, dx: e.clientX + scrollX - p.x, dy: e.clientY + scrollY - p.y, sx: e.clientX, sy: e.clientY, moved: false };
+      can.setPointerCapture(e.pointerId);
+      d.hold();
+      can.classList.add("is-held");
+    });
+    can.addEventListener("pointermove", (e) => {
+      if (!drag || e.pointerId !== drag.id) return;
+      if (Math.hypot(e.clientX - drag.sx, e.clientY - drag.sy) > 5) drag.moved = true;
+      d.moveTo(e.clientX + scrollX - drag.dx, e.clientY + scrollY - drag.dy);
+      can.classList.toggle("is-near", overBonsai());
+    });
+    const drop = (e) => {
+      if (!drag || e.pointerId !== drag.id) return;
+      const moved = drag.moved;
+      drag = null;
+      can.classList.remove("is-held", "is-near");
+      if (!moved) { flyAndWater(); return; }
+      if (overBonsai()) water(); else d.release();
+    };
+    can.addEventListener("pointerup", drop);
+    can.addEventListener("pointercancel", drop);
+    can.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flyAndWater(); }
+    });
   })();
 
   /* ---------------------------------------------------------

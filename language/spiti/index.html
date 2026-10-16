@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Σπίτι (Spíti) · learn Greek, room by room</title>
+  <meta name="description" content="A picture game for learning Greek: explore the rooms of a real 18th-century mansion in Nicosia, Cyprus, and learn the word for everything in it.">
+  <meta name="theme-color" content="#2A1E16">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emilioschris.github.io/language/spiti/">
+  <meta property="og:title" content="Σπίτι (Spíti) · learn Greek, room by room">
+  <meta property="og:description" content="Explore a real 18th-century Cypriot mansion and learn the Greek word for everything in it.">
+  <meta property="og:image" content="https://emilioschris.github.io/og-image.png">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=2026-10-16.2">
+</head>
+<body>
+  <!-- Σπίτι (Spíti) has its own look: the room fills the screen, with only
+       four small controls in the corners. The rooms are real photographs (rooms/). -->
+  <main class="vl is-quiz" id="vl">
+    <div class="vl-viewport" id="viewport">
+      <div class="vl-stage" id="stage">
+        <div class="vl-room" id="room" aria-hidden="true"></div>
+        <div class="vl-hotspots" id="hotspots" role="group" aria-label="Objects in the room"></div>
+      </div>
+    </div>
+
+    <a class="vl-chip vl-home" href="../../index.html#language-routes" aria-label="Back to Field Notes">←<span> Field Notes</span></a>
+
+    <div class="vl-top-right">
+      <div class="vl-modes" role="radiogroup" aria-label="Mode">
+        <button type="button" role="radio" data-mode="explore" aria-checked="false">Explore</button>
+        <button type="button" role="radio" data-mode="easy" aria-checked="true">Easy</button>
+        <button type="button" role="radio" data-mode="hard" aria-checked="false">Hard</button>
+      </div>
+      <span class="vl-chip vl-score" id="score" aria-live="polite" title="Play money">$0</span>
+      <button class="vl-chip vl-sound" id="sound" type="button" aria-pressed="true" aria-label="Sound on">♪</button>
+    </div>
+
+    <div class="vl-bottom">
+      <button class="vl-arrow" type="button" data-go="-1" aria-label="Previous room">‹</button>
+      <p class="vl-room-name" id="room-name"></p>
+      <button class="vl-arrow" type="button" data-go="1" aria-label="Next room">›</button>
+    </div>
+    <p class="vl-credit"><b id="house"></b><span id="credit"></span></p>
+    <button class="vl-chip vl-end" id="end" type="button">End tour</button>
+    <p class="vl-hint" id="hint"></p>
+
+    <!-- The card for an object: the word, or the question -->
+    <div class="vl-card" id="card" role="dialog" aria-modal="false" aria-labelledby="card-title" hidden>
+      <button class="vl-card-close" type="button" data-close aria-label="Close">×</button>
+      <div id="card-body"></div>
+    </div>
+
+    <!-- The money tree, at the end of a tour -->
+    <dialog class="vl-tree" id="tree" aria-labelledby="tree-title">
+      <div class="vl-tree-inner">
+        <p class="vl-tree-kicker">Tour complete</p>
+        <h2 class="vl-tree-title" id="tree-title">Your money tree</h2>
+        <svg class="vl-tree-svg" id="tree-svg" viewBox="0 0 600 520" role="img" aria-label="A money tree with dollar-note leaves"></svg>
+        <div class="vl-tree-totals">
+          <p><span>This tour</span><b id="tree-session">$0</b></p>
+          <p><span>All time</span><b id="tree-life">$0</b></p>
+        </div>
+        <p class="vl-tree-small">Play money, obviously. Every right answer grows a $10 leaf.</p>
+        <div class="vl-tree-actions">
+          <button class="vl-btn vl-btn--gold" type="button" id="share">Share card</button>
+          <button class="vl-btn" type="button" id="again">Keep exploring</button>
+          <button class="vl-btn vl-btn--quiet" type="button" id="reset">Reset all</button>
+        </div>
+      </div>
+    </dialog>
+  </main>
+
+  <script src="data.js?v=2026-10-16.2"></script>
+  <script src="script.js?v=2026-10-16.2"></script>
+</body>
+</html>

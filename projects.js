@@ -15,6 +15,8 @@
                   "finished" → no stamp
      link         Where the card goes, e.g. "atlas/index.html".
                   Leave it out until the project exists.
+     meaning      Optional. For a Greek title: its English meaning, shown
+                  small beside the title on the card.
      description  One line about it.
      coords       A place it relates to, e.g. "35.17°N 33.36°E".
      date         When it started, as "YYYY-MM".
@@ -25,7 +27,8 @@
                     {
                       src:  "assets/cards/kypriaka.webp",   ← swap in your own photo here
                       alt:  "What the picture shows",
-                      tone: "terracotta" or "olive",        (the colour tint)
+                      tone: "terracotta" or "olive",        (the colour tint;
+                                                  "natural" = no tint, for logos)
                       credit: { … }                          (leave out for your own photos)
                     }
                   Card images are 1000 × 800 (5:4). Ask Claude to resize,
@@ -40,6 +43,7 @@
 const PROJECTS = [
   {
     title: "Κυπριακά (Kypriaka)",
+    meaning: "Cypriot things",          // neuter plural of κυπριακός, "Cypriot" (Wiktionary)
     section: "base-camp",
     status: "ongoing",
     link: "kypriaka/index.html",
@@ -69,6 +73,7 @@ const PROJECTS = [
   },
   {
     title: "Ακαδημία (Akadimia)",
+    meaning: "Academy",                 // after Plato's Academy (Wiktionary: Ακαδημία)
     section: "base-camp",
     status: "ongoing",
     link: "basecamp/akadimia/index.html",
@@ -93,6 +98,35 @@ const PROJECTS = [
         sources: [
           { label: "Wikimedia Commons: Raffael 058.jpg", url: "https://commons.wikimedia.org/wiki/File:Raffael_058.jpg" },
           { label: "Wikipedia: Platonic Academy (coordinates)", url: "https://en.wikipedia.org/w/index.php?title=Platonic_Academy&oldid=1376650076" },
+        ],
+      },
+    },
+  },
+  {
+    title: "Frontier",
+    section: "base-camp",
+    status: "ongoing",
+    link: "basecamp/frontier/index.html",
+    description: "The most exciting breakthrough technologies, explained, compared and argued over. Cyprus gave copper its name.",
+    coords: "35.1°N 33.4°E",
+    date: "2026-10",
+    tended: "2026-10-15",
+    elevation: "TRL 1 TO 9",
+    image: {
+      src: "assets/cards/frontier.webp",
+      alt: "A painting of the inside of a giant rotating space colony: green farmland and a river curving up and overhead, a column of sunlight down the middle, stars and a moon beyond.",
+      tone: "natural",
+      credit: {
+        title: "Space colony interior (O'Neill cylinder)",
+        author: "Rick Guidice, for NASA Ames Research Center",
+        date: "1970s",
+        source: "NASA Ames Research Center, via Wikimedia Commons",
+        url: "https://commons.wikimedia.org/wiki/File:Spacecolony3edit.jpeg",
+        licence: "Public domain (NASA)",
+        licenceUrl: "https://commons.wikimedia.org/wiki/File:Spacecolony3edit.jpeg",
+        note: "One of the paintings NASA commissioned in the 1970s to imagine large space settlements: here the inside of a rotating cylinder, with land curving up the walls and sunlight brought in down the middle.",
+        sources: [
+          { label: "Wikimedia Commons: Spacecolony3edit.jpeg", url: "https://commons.wikimedia.org/wiki/File:Spacecolony3edit.jpeg" },
         ],
       },
     },
@@ -205,6 +239,32 @@ const PROJECTS = [
         url: "https://commons.wikimedia.org/wiki/File:%E2%80%9CArtesan%C3%ADas_de_papel_picado_en_la_Hacienda_de_Cort%C3%A9s,_Coyoac%C3%A1n%E2%80%9D.jpg",
         licence: "CC BY-SA 4.0",
         licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+      },
+    },
+  },
+  {
+    title: "Σπίτι (Spíti)",
+    meaning: "Home",
+    section: "language-routes",
+    status: "ongoing",
+    link: "language/spiti/index.html",
+    description: "Learn Greek room by room, in a real 18th-century mansion in old Nicosia.",
+    coords: "35.17°N 33.37°E",
+    date: "2026-10",
+    tended: "2026-10-15",
+    elevation: "ROOM 3 OF 5",
+    image: {
+      src: "assets/cards/spiti.webp",
+      alt: "The reception room of the Hadjigeorgakis Kornesios mansion in Nicosia: low red divans with gold and blue cushions along the walls, tall curtained windows, painted panels and portraits, a striped kilim on the floor.",
+      tone: "natural",
+      credit: {
+        title: "Diwan Kornessios (the reception room of the Hadjigeorgakis Kornesios mansion, Nicosia)",
+        author: "Hermann Junghans",
+        date: "2016",
+        source: "Wikimedia Commons",
+        url: "https://commons.wikimedia.org/wiki/File:Diwan_Kornessios.JPG",
+        licence: "CC BY-SA 3.0 DE (cropped)",
+        licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en",
       },
     },
   },

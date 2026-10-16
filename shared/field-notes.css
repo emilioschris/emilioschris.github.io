@@ -630,6 +630,11 @@ a { color: var(--link); }
   transition: border-radius 1.8s cubic-bezier(0.45, 0, 0.2, 1), background-color 0.9s var(--ease-soft);
 }
 .pebble--photo[data-tone="olive"] { --duo-hi: color-mix(in srgb, var(--olive) 62%, var(--limestone)); }
+/* tone: "natural" shows artwork in its own colours (e.g. a project logo) */
+.pebble--photo[data-tone="natural"] { background-color: #23272B; }
+.pebble--photo[data-tone="natural"] img { filter: none; mix-blend-mode: normal; }
+.pebble--photo[data-tone="natural"]::before { opacity: 0; }
+.card:hover .pebble--photo[data-tone="natural"] { background-color: #23272B; }
 .pebble--photo img {
   filter: grayscale(1) contrast(1.1);
   mix-blend-mode: multiply;

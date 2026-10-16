@@ -253,6 +253,17 @@
   color: var(--muted);
 }
 
+/* A Greek title's meaning, small beside it on the card */
+.card-meaning {
+  display: block;
+  margin-top: 4px;
+  font: italic 400 0.62em/1.2 var(--font-display);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.card-meaning::before { content: "“"; }
+.card-meaning::after { content: "”"; }
+
 /* ---------- 4. SECTIONS ON THE GRID ("legs" of the route) ---------- */
 .leg {
   position: relative;
@@ -314,43 +325,7 @@
 .atlas-route { fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-linecap: round; stroke-dasharray: 0 5; }
 .atlas-cross path { stroke: var(--text); stroke-width: 1.2; }
 
-/* ---------- 5. ABOUT + FOOTER ---------- */
-.about {
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: clamp(88px, 14vh, 160px) var(--gutter);
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: 24px;
-  position: relative;
-}
-.about::before {
-  content: "";
-  position: absolute;
-  left: var(--gutter); right: var(--gutter); top: 0;
-  height: 1px;
-  background: var(--rule);
-}
-.about-title {
-  grid-column: 1 / span 4;
-  font-size: clamp(2.5rem, 4.6vw, 4rem);
-  font-weight: 360;
-  font-style: italic;
-  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
-  letter-spacing: -0.03em;
-  color: var(--accent);
-}
-.about-body {
-  grid-column: 6 / span 7;
-  display: grid;
-  gap: 1.1em;
-  font-family: var(--font-display);
-  font-size: clamp(1.25rem, 1.9vw, 1.6rem);
-  font-weight: 340;
-  font-variation-settings: "opsz" 36, "SOFT" 50;
-  line-height: 1.45;
-}
-
+/* ---------- 5. FOOTER (the About text now has its own page, about.html) ---------- */
 .colophon {
   max-width: var(--max);
   margin: 0 auto;
@@ -421,10 +396,9 @@
 }
 
 @media (max-width: 900px) {
-  .leg, .about { row-gap: 40px; }
+  .leg { row-gap: 40px; }
   .leg-head { grid-column: 1 / -1; position: static; }
   .leg .cards { grid-column: 1 / -1; }
-  .about-title, .about-body { grid-column: 1 / -1; }
 }
 
 @media (max-width: 640px) {
@@ -768,4 +742,66 @@
   .guide[open], .guide[open] .gc-needle.is-swinging, .guide-figure:hover .gc-star { animation: none; }
   .guide-entries article, .guide-entries h4 svg, .guide-tab svg, .compass { transition: none; }
   .guide-entries article:hover { transform: none; }
+}
+
+/* ---------- 7b. THE WATERING CAN ----------
+   Drifts like the bonsai (script.js, section 5c); drag it onto
+   the bonsai to water it. Enamelled olive with brass trim. */
+:root { --can-lit: #A3A25E; --can-mid: #6B6A3A; --can-dk: #45441F; }
+:root[data-theme="dusk"] { --can-lit: #BDB867; --can-mid: #868544; --can-dk: #5A5A2C; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="day"]) { --can-lit: #BDB867; --can-mid: #868544; --can-dk: #5A5A2C; } }
+.can {
+  --bz-size: 58px;
+  position: absolute; top: 0; left: 0;
+  z-index: 41;
+  width: var(--bz-size);
+  height: calc(var(--bz-size) * 0.75);
+  padding: 0; border: 0; background: none;
+  cursor: grab;
+  touch-action: none;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  will-change: transform;
+  -webkit-tap-highlight-color: transparent;
+}
+.can.is-shown { opacity: 1; }
+.can:not(.is-shown) { pointer-events: none; }
+.can[hidden] { display: none; }
+.can.is-held { cursor: grabbing; }
+.can:focus-visible { outline: 2px solid var(--link); outline-offset: 6px; border-radius: 12px; }
+.can-art { display: block; width: 100%; height: 100%; overflow: visible; transform-origin: 40% 70%; transition: transform 0.35s cubic-bezier(0.3, 0.7, 0.2, 1.4); }
+.cs-lit { stop-color: var(--can-lit); } .cs-mid { stop-color: var(--can-mid); } .cs-dk { stop-color: var(--can-dk); }
+.can-shadow { fill: rgba(30, 20, 10, 0.18); }
+.can-handle { fill: none; stroke: var(--can-dk); stroke-width: 4.5; stroke-linecap: round; }
+.can-spout { fill: none; stroke: var(--can-mid); stroke-width: 6; stroke-linecap: round; }
+.can-holes { stroke: #5A4318; stroke-width: 1.6; stroke-linecap: round; }
+.can-band { stroke: rgba(240, 213, 140, 0.55); stroke-width: 1.4; }
+.can-shine { fill: none; stroke: rgba(255, 255, 255, 0.35); stroke-width: 2.4; stroke-linecap: round; }
+.can.is-held .can-art { transform: scale(1.08) rotate(-4deg); }
+.can.is-near .can-art, .can.is-pouring .can-art { transform: rotate(28deg); }
+.can-tag {
+  position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+  padding: 4px 8px; border: 1px solid var(--rule); border-radius: 999px;
+  background: var(--bg-raised); color: var(--text);
+  font: 500 10px/1 var(--font-mono); letter-spacing: 0.06em; white-space: nowrap;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+}
+.can.show-tag .can-tag { opacity: 1; }
+.can-drop {
+  position: absolute; z-index: 42;
+  width: 4px; height: 7px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background: #7FB0BF;
+  pointer-events: none;
+  animation: can-fall 0.8s cubic-bezier(0.5, 0, 0.9, 0.6) both;
+}
+@keyframes can-fall { from { transform: translateY(0); opacity: 0.9; } to { transform: translateY(var(--fall)); opacity: 0; } }
+/* The bonsai, being watered: a happy little lift and greener leaves */
+.bonsai.is-watered .bonsai-art { animation: bonsai-perk 1.6s ease-out; }
+.bonsai.is-watered .bz-pad > * { filter: saturate(1.4) brightness(1.08); transition: filter 0.6s ease; }
+@keyframes bonsai-perk { 30% { transform: translateY(-4px) scale(1.04); } 60% { transform: translateY(0) scale(1); } }
+@media (max-width: 640px) { .can { --bz-size: 48px; } }
+@media (prefers-reduced-motion: reduce) {
+  .can, .can-art, .can-tag { transition: none; }
+  .bonsai.is-watered .bonsai-art { animation: none; }
 }
