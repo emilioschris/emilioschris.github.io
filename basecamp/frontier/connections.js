@@ -43,6 +43,7 @@ window.CONNECTIONS = {
     "kypriaka:kornesios":     { label: "Kypriaka: Hadjigeorgakis Kornesios", href: "kypriaka/index.html#/e/kornesios" },
     "kypriaka:ottoman":       { label: "Kypriaka: the Ottoman layer", href: "kypriaka/index.html#/layer/ottoman" },
     "spiti":                  { label: "Σπίτι (Spíti)", href: "language/spiti/index.html" },
+    "frontier#metals":        { label: "Frontier: the metals of the energy transition", href: "basecamp/frontier/index.html" },
   },
 
   links: [
@@ -68,5 +69,13 @@ window.CONNECTIONS = {
       reason: "Spíti's rooms are his house: the mansion Hadjigeorgakis Kornesios built in Nicosia in 1793." },
     { from: "spiti", to: "kypriaka:ottoman", status: "approved",
       reason: "The mansion is the finest surviving town house from the last century of Ottoman rule in Nicosia." },
+    { from: "frontier:vertical-farming", to: "frontier:fusion", status: "suggested",
+      reason: "Light is a vertical farm's biggest cost, so both depend on cheap, clean electricity." },
+    { from: "frontier:crispr", to: "frontier:vertical-farming", status: "suggested",
+      reason: "Two ways to change how crops grow: one edits the plant, the other its surroundings." },
+    { from: "frontier:humanoid-robots", to: "frontier#metals", status: "suggested",
+      reason: "The electric Atlas moves with high-density neodymium magnets, one of the magnet rare earths in Frontier's metals panel." },
+    { from: "frontier:humanoid-robots", to: "akadimia#stream", status: "suggested",
+      reason: "Who gains when robots do manual work is a question of inequality, one of Akadimia's topics." },
   ],
 };

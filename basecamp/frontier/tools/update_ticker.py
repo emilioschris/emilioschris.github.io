@@ -27,7 +27,11 @@ KEY = os.environ.get("FINNHUB_KEY", "").strip()
 if not KEY:
     sys.exit("FINNHUB_KEY is not set: add it as a repository secret on GitHub.")
 
-symbols = re.findall(r'symbol:\s*"([A-Z.]+)"', (HERE / "data.js").read_text())
+# only the FRONTIER.stocks list (data.js also has chemical symbols, such as C for graphite)
+block = re.search(r"FRONTIER\.stocks\s*=\s*\[(.*?)\];", (HERE / "data.js").read_text(), re.S)
+symbols = re.findall(r'symbol:\s*"([A-Z.]+)"', block.group(1)) if block else []
+if not symbols:
+    sys.exit("No symbols found in FRONTIER.stocks in data.js.")
 quotes = {}
 for sym in symbols:
     url = "https://finnhub.io/api/v1/quote?" + urllib.parse.urlencode({"symbol": sym, "token": KEY})
@@ -41,6 +45,8 @@ for sym in symbols:
         print(f"! {sym}: {e}", file=sys.stderr)
     time.sleep(1.1)                              # stay well inside the free limit
 
+if not quotes:                                   # a bad key or an outage: keep the last good file
+    sys.exit("No prices came back from Finnhub; ticker-data.js left unchanged.")
 old = OUT.read_text() if OUT.exists() else ""
 m = re.search(r"=\s*(\{.*\});", old, re.S)
 if m and json.loads(m.group(1)).get("quotes") == quotes:

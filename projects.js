@@ -107,10 +107,10 @@ const PROJECTS = [
     section: "base-camp",
     status: "ongoing",
     link: "basecamp/frontier/index.html",
-    description: "The most exciting breakthrough technologies, explained, compared and argued over. Cyprus gave copper its name.",
+    description: "Four breakthrough technologies, explained, compared and argued over, and the metals they are built from.",
     coords: "35.1°N 33.4°E",
     date: "2026-10",
-    tended: "2026-10-15",
+    tended: "2026-10-16",
     elevation: "TRL 1 TO 9",
     image: {
       src: "assets/cards/frontier.webp",

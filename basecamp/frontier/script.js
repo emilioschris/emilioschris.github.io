@@ -6,7 +6,7 @@
    1. Helpers and citations
    2. The edge of the map (scroll motion)
    3. Diagrams (one original drawing per technology)
-   4. The overview: Eschatia, families, compare (#/)
+   4. The overview: the hero, the metals, families, compare (#/)
    5. A technology page (#/fusion …)
    6. Routing
    ========================================================= */
@@ -228,6 +228,104 @@
         <text class="dg-tag dg-tag--blanket" x="0" y="128">lithium blanket</text>
       </g>
     </svg>`,
+    crispr: () => {
+      const helix = (y, cls) => { let d = ""; for (let x = 20; x <= 330; x += 4) d += `${x === 20 ? "M" : "L"}${x} ${(y + Math.sin(x / 18) * 10).toFixed(1)} `; return `<path d="${d}" style="fill:none;stroke:${cls};stroke-width:2.2"/>`; };
+      const rungs = Array.from({ length: 26 }, (_, k) => { const x = 24 + k * 12; return `<path d="M${x} ${(118 + Math.sin(x / 18) * 10).toFixed(1)} L${x} ${(150 - Math.sin(x / 18) * 10).toFixed(1)}" style="stroke:var(--rule);stroke-width:1.5"/>`; }).join("");
+      const letters = (y, seq, hi = -1, hiCls = "") => [...seq].map((c, k) => `<g transform="translate(${385 + k * 19} ${y})"><rect width="16" height="18" rx="3" style="fill:${k === hi ? hiCls : "var(--bg-raised)"};stroke:var(--text);stroke-width:1"/><text class="dg-tag" x="8" y="9.5" style="fill:var(--text)">${c}</text></g>`).join("");
+      return `<svg class="fr-diagram" viewBox="0 0 640 300" role="img" aria-labelledby="dg-t dg-d">
+      <title id="dg-t">How CRISPR gene editing works</title>
+      <desc id="dg-d">Left: a strand of DNA with the Cas9 protein sitting on it. A guide RNA inside Cas9 matches one stretch of the DNA, and Cas9 cuts both strands there. Right: three kinds of change: a cut, which the cell repairs in a way that usually switches the gene off; a base edit, which changes one DNA letter without a full cut; and a prime edit, which writes a short new sequence. Underneath: the editor can be used on cells taken out of the body and put back, or sent into the body in tiny fat bubbles that reach the liver.</desc>
+      <text class="dg-head" x="175" y="28">Cas9 finds and cuts</text>
+      ${rungs}${helix(118, "var(--link)")}${helix(150, "var(--secondary)")}
+      <path d="M120 104 C 112 66 170 52 205 62 C 246 74 250 118 236 162 C 226 192 150 192 130 168 C 114 150 126 128 120 104 Z" style="fill:color-mix(in srgb, var(--tone) 22%, var(--bg));stroke:var(--tone);stroke-width:2;opacity:.95"/>
+      <path d="M140 132 h 70" style="stroke:var(--accent);stroke-width:4;stroke-linecap:round"/>
+      <path d="M178 112 l 8 12 l -8 12 M190 112 l -8 12 l 8 12" style="fill:none;stroke:var(--text);stroke-width:1.8"/>
+      <text class="dg-tag" x="200" y="78" style="fill:var(--text)">Cas9 protein</text>
+      <text class="dg-tag dg-tag--hot" x="120" y="214" style="text-anchor:start">guide RNA: matches the target</text>
+      <path d="M150 208 L 160 138" style="stroke:var(--muted);stroke-width:1"/>
+      <text class="dg-tag" x="262" y="92" style="text-anchor:start">cuts both strands</text><path d="M260 94 L 192 118" style="stroke:var(--muted);stroke-width:1"/>
+      <text class="dg-label" x="175" y="250">DNA</text>
+      <text class="dg-head" x="480" y="28">Three kinds of edit</text>
+      <text class="dg-label" x="385" y="58" style="text-anchor:start">Cut: the repair switches the gene off</text>
+      ${letters(66, "GATTA")}<path d="M482 66 l6 9 l-6 9" style="fill:none;stroke:var(--accent);stroke-width:2"/>${[...("CAGT")].map((c, k) => `<g transform="translate(${494 + k * 19} 66)"><rect width="16" height="18" rx="3" style="fill:var(--bg-raised);stroke:var(--text);stroke-width:1"/><text class="dg-tag" x="8" y="9.5" style="fill:var(--text)">${c}</text></g>`).join("")}
+      <text class="dg-label" x="385" y="116" style="text-anchor:start">Base edit: change one letter</text>
+      ${letters(124, "GATTACAGT", 4, "color-mix(in srgb, var(--tone) 55%, var(--bg))")}
+      <text class="dg-label" x="385" y="174" style="text-anchor:start">Prime edit: write a short new piece</text>
+      ${letters(182, "GATT")}<g transform="translate(461 179)"><rect width="54" height="24" rx="4" style="fill:color-mix(in srgb, var(--accent) 25%, var(--bg));stroke:var(--accent);stroke-width:1.5"/><text class="dg-tag" x="27" y="12" style="fill:var(--text)">new</text></g>${[...("CAGT")].map((c, k) => `<g transform="translate(${520 + k * 19} 182)"><rect width="16" height="18" rx="3" style="fill:var(--bg-raised);stroke:var(--text);stroke-width:1"/><text class="dg-tag" x="8" y="9.5" style="fill:var(--text)">${c}</text></g>`).join("")}
+      <text class="dg-note" x="385" y="240">Delivery: edit cells outside the body</text>
+      <text class="dg-note" x="385" y="255">and put them back (Casgevy), or send</text>
+      <text class="dg-note" x="385" y="270">the editor in tiny fat bubbles that</text>
+      <text class="dg-note" x="385" y="285">reach the liver.</text>
+    </svg>`;
+    },
+    "humanoid-robots": () => {
+      const joint = (x, y) => `<circle cx="${x}" cy="${y}" r="5.5" style="fill:var(--bg);stroke:var(--link);stroke-width:2"/>`;
+      const call = (x1, y1, x2, y2, label, anchor = "start") => `<path d="M${x1} ${y1} L${x2} ${y2}" style="stroke:var(--muted);stroke-width:1;fill:none"/><text class="dg-tag" x="${x2 + (anchor === "start" ? 4 : -4)}" y="${y2}" style="text-anchor:${anchor}">${label}</text>`;
+      const node = (x, y, word, sub) => `<g><circle cx="${x}" cy="${y}" r="30" style="fill:var(--bg-raised);stroke:var(--tone);stroke-width:2"/><text class="dg-label" x="${x}" y="${y - 3}" style="fill:var(--text)">${word}</text><text class="dg-tag" x="${x}" y="${y + 11}">${sub}</text></g>`;
+      return `<svg class="fr-diagram" viewBox="0 0 640 300" role="img" aria-labelledby="dg-t dg-d">
+      <title id="dg-t">How a humanoid robot works</title>
+      <desc id="dg-d">Left: a generic humanoid robot seen from the front, with labels: cameras in the head, an AI computer and battery in the torso, a balance sensor, electric actuators at every joint, touch sensors in the fingertips and force sensors in the feet. Right: the loop it runs many times a second: see with cameras, decide with an AI model, move with actuators, feel through force and balance sensors, and see again.</desc>
+      <text class="dg-head" x="150" y="28">The body</text>
+      <g style="fill:var(--bg-raised);stroke:var(--text);stroke-width:1.4">
+        <rect x="132" y="44" width="36" height="40" rx="14"/>
+        <path d="M118 96 h64 l-6 74 h-52 Z"/>
+        <rect x="128" y="172" width="44" height="18" rx="5"/>
+        <path d="M118 100 l-26 52 l-6 46" style="fill:none;stroke-width:9;stroke-linecap:round;stroke:var(--text)"/>
+        <path d="M182 100 l26 52 l6 46" style="fill:none;stroke-width:9;stroke-linecap:round;stroke:var(--text)"/>
+        <path d="M138 192 l-6 46 l-2 40" style="fill:none;stroke-width:11;stroke-linecap:round;stroke:var(--text)"/>
+        <path d="M162 192 l6 46 l2 40" style="fill:none;stroke-width:11;stroke-linecap:round;stroke:var(--text)"/>
+      </g>
+      <rect x="138" y="58" width="24" height="9" rx="4" style="fill:var(--tone)"/>
+      <rect x="136" y="112" width="28" height="18" rx="3" class="dg-p"/><rect x="138" y="138" width="24" height="22" rx="3" style="fill:color-mix(in srgb, var(--secondary) 55%, var(--bg))"/>
+      <path d="M118 282 h24 M158 282 h24" style="stroke:var(--text);stroke-width:5;stroke-linecap:round"/>
+      ${joint(118, 100)}${joint(182, 100)}${joint(92, 152)}${joint(208, 152)}${joint(138, 192)}${joint(162, 192)}${joint(132, 238)}${joint(168, 238)}${joint(150, 90)}
+      <circle cx="86" cy="202" r="4" style="fill:var(--tone)"/><circle cx="214" cy="202" r="4" style="fill:var(--tone)"/>
+      ${call(162, 62, 214, 50, "cameras")}
+      ${call(164, 120, 236, 98, "AI computer")}
+      ${call(162, 150, 236, 124, "battery")}
+      ${call(208, 152, 250, 158, "actuator (every joint)")}
+      ${call(214, 202, 248, 210, "touch sensors")}
+      ${call(150, 182, 250, 236, "balance sensor")}
+      ${call(178, 282, 250, 276, "force sensors (feet)")}
+      <text class="dg-head" x="490" y="28">The loop</text>
+      <path class="dg-arrow" d="M455 78 Q 490 60 525 78"/><path class="dg-arrow" d="M560 112 Q 578 150 560 188"/><path class="dg-arrow" d="M525 222 Q 490 240 455 222"/><path class="dg-arrow" d="M420 188 Q 402 150 420 112"/>
+      ${node(425, 92, "See", "cameras")}${node(555, 92, "Decide", "AI model")}${node(555, 208, "Move", "motors")}${node(425, 208, "Feel", "sensors")}
+      <text class="dg-note" x="380" y="276">Many times a second. In many demos, a remote</text>
+      <text class="dg-note" x="380" y="291">human operator still does the deciding.</text>
+    </svg>`;
+    },
+    "vertical-farming": () => {
+      const tier = (ty) => `
+        <polygon points="50,${ty + 5} 240,${ty + 5} 250,${ty + 40} 40,${ty + 40}" style="fill:var(--tone);opacity:.1"/>
+        <rect class="dg-p" x="50" y="${ty}" width="190" height="5" rx="2"/>
+        ${Array.from({ length: 6 }, (_, k) => { const x = 66 + k * 32; return `<path d="M${x} ${ty + 42} q -12 -6 -9 -16 q 7 1 9 9 q 2 -12 10 -15 q 4 11 -10 22 Z" style="fill:var(--secondary)"/><path d="M${x} ${ty + 50} v8 M${x - 3} ${ty + 50} l-3 7 M${x + 3} ${ty + 50} l3 7" style="stroke:var(--secondary);stroke-width:1;fill:none"/>`; }).join("")}
+        <rect x="46" y="${ty + 42}" width="198" height="8" rx="2" style="fill:color-mix(in srgb, var(--link) 35%, var(--bg));stroke:var(--link);stroke-width:1"/>
+        <rect class="dg-wall" x="40" y="${ty + 60}" width="210" height="4"/>`;
+      const row = (y, label, a, b, av, bv) => `
+        <text class="dg-label" x="390" y="${y}" style="text-anchor:start">${label}</text>
+        <rect x="390" y="${y + 7}" width="${Math.max(2, a)}" height="9" rx="2" style="fill:var(--secondary)"/><text class="dg-tag" x="${394 + Math.max(2, a)}" y="${y + 12}" style="text-anchor:start">field ${av}</text>
+        <rect x="390" y="${y + 20}" width="${Math.max(2, b)}" height="9" rx="2" class="dg-p"/><text class="dg-tag" x="${394 + Math.max(2, b)}" y="${y + 25}" style="text-anchor:start">indoor ${bv}</text>`;
+      return `<svg class="fr-diagram" viewBox="0 0 640 300" role="img" aria-labelledby="dg-t dg-d">
+      <title id="dg-t">How a vertical farm works</title>
+      <desc id="dg-d">Left: a rack seen from the side, with three layers of plants. Each layer has an LED light above it, and the plants' bare roots hang into a channel of flowing nutrient solution; a pump returns the solution from a tank at the bottom to the top layer, so the water goes round in a loop. Right: lettuce per kilogram in a modelling study for Arizona: a field uses about 250 litres of water and an indoor hydroponic farm about 20; a field yields 3.9 kilograms per square metre a year and the indoor farm 41; the indoor farm uses about 82 times the energy.</desc>
+      <text class="dg-head" x="150" y="28">A vertical farm, side on</text>
+      <rect class="dg-wall" x="36" y="46" width="4" height="226"/><rect class="dg-wall" x="250" y="46" width="4" height="226"/>
+      ${tier(52)}${tier(122)}${tier(192)}
+      <rect x="262" y="258" width="58" height="26" rx="4" style="fill:color-mix(in srgb, var(--link) 25%, var(--bg));stroke:var(--link);stroke-width:1.5"/>
+      <text class="dg-tag" x="291" y="272">tank</text>
+      <path class="dg-arrow" d="M244 98 H 300 V 254"/><path class="dg-arrow" d="M244 168 H 300"/><path class="dg-arrow" d="M244 238 H 300"/>
+      <path class="dg-arrow" d="M262 278 H 22 V 96 H 40"/>
+      <circle cx="22" cy="190" r="9" style="fill:var(--bg);stroke:var(--link);stroke-width:1.5"/><text class="dg-tag" x="22" y="190">P</text>
+      <text class="dg-tag dg-tag--hot" x="145" y="45">LED light</text>
+      <text class="dg-tag" x="145" y="290">nutrient solution goes round in a loop</text>
+      <text class="dg-head" x="505" y="28">Lettuce, per kilogram</text>
+      ${row(62, "Water per kg", 150, 12, "≈250 L", "≈20 L")}
+      ${row(128, "Yield per m² a year", 14, 150, "3.9 kg", "41 kg")}
+      ${row(194, "Energy per kg", 2, 150, "1×", "≈82×")}
+      <text class="dg-note" x="390" y="262">A modelling study for Yuma, Arizona</text>
+      <text class="dg-note" x="390" y="278">(Barbosa et al., 2015).</text>
+    </svg>`;
+    },
   };
 
   /* ---------------------------------------------------------
@@ -258,34 +356,81 @@
     return `<fieldset class="fr-picks"><legend>Choose up to three</legend>${picks}</fieldset>${note}${table}`;
   }
 
-  // The rare earth supply chain: four stages, each with China's share
+  // The metals of the energy transition: a tile for each metal; each
+  // opens its own path from mine to machine, and its demand in 2025
+  // against the IEA's projection for 2040. All panels are drawn at once
+  // (so the source numbers stay fixed) and the tiles switch between them.
   const STAGE_ICON = {
     mine: '<path d="M4 20h16M6 20l4-9 3 5 2-3 3 7"/><path d="M15 6l3-3M16 3l2 2"/>',
     refine: '<path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/><path d="M7.5 15h9"/>',
-    magnet: '<path d="M6 4v8a6 6 0 0 0 12 0V4h-4v8a2 2 0 0 1-4 0V4Z"/><path d="M6 7h4M14 7h4"/>',
+    make: '<path d="M6 4v8a6 6 0 0 0 12 0V4h-4v8a2 2 0 0 1-4 0V4Z"/><path d="M6 7h4M14 7h4"/>',
     build: '<circle cx="12" cy="12" r="3"/><path d="M12 9V3M12 15v6M9 12H3M15 12h6"/><path d="M8 8 5.5 5.5M16 16l2.5 2.5"/>',
   };
-  function supplyBlock(cite) {
-    const S = F.supply;
-    return `<section class="fr-chain" aria-labelledby="chain-title">
-      <h2 class="fr-chain-title" id="chain-title">${esc(S.title)}</h2>
-      <p class="fr-chain-intro">${esc(S.intro)}${cite(["aa-iea-rare-earths-2026"])}</p>
-      <ol class="fr-chain-steps">${S.stages.map((st, i) => `<li class="fr-step" style="--i:${i}">
-        <span class="fr-step-icon"><svg viewBox="0 0 24 24" aria-hidden="true">${STAGE_ICON[st.id]}</svg></span>
-        <span class="fr-step-body">
-          <b>${esc(st.label)}</b>
-          <span class="fr-step-detail">${esc(st.detail)}${cite(st.sources)}</span>
-          ${st.china != null ? `<span class="fr-share" role="img" aria-label="China: ${esc(st.chinaLabel)} ${esc(st.chinaNote)}"><span class="fr-share-bar"><span style="width:${st.china}%"></span></span><span class="fr-share-num">China ${esc(st.chinaLabel)}</span></span>` : ""}
-        </span>
-      </li>`).join("")}</ol>
-      <p class="fr-chain-note">${esc(S.note)}${cite(S.noteSources)}</p>
+  // kt (thousand tonnes) in words: 275 -> "275,000 tonnes", 27775 -> "27.8 million tonnes"
+  const tonnes = (kt) => kt >= 1000 ? `${(kt / 1000).toFixed(kt >= 10000 ? 1 : 2).replace(/\.?0+$/, "")} million tonnes` : `${(kt * 1000).toLocaleString("en-GB")} tonnes`;
+  const pct = (a, b) => Math.round((a / b) * 100);
+  const growth = ([a, b]) => b / a >= 2 ? `×${(b / a).toFixed(1)}` : `+${Math.round((b / a - 1) * 100)}%`;
+  function metalsBlock(cite) {
+    const M = F.minerals;
+    const src = cite(M.sources);
+    const share = (who, n, label) => `<span class="fr-share" role="img" aria-label="${esc(who)}: ${n}%"><span class="fr-share-bar"><span style="width:${n}%"></span></span><span class="fr-share-num">${esc(who)} ${esc(label || n + "%")}</span></span>`;
+    const step = (id, i, title, detail, extra = "") => `<li class="fr-step" style="--i:${i}">
+        <span class="fr-step-icon"><svg viewBox="0 0 24 24" aria-hidden="true">${STAGE_ICON[id]}</svg></span>
+        <span class="fr-step-body"><b>${title}</b><span class="fr-step-detail">${detail}</span>${extra}</span>
+      </li>`;
+    const panel = (m, k) => {
+      const [d0, d1] = m.demand, max = Math.max(d0, d1);
+      const mineShare = pct(m.mine.kt, m.mine.world), refShare = pct(m.refine.kt, m.refine.world);
+      return `<div class="fr-metal-panel fr-tone--${m.tone}" id="metal-${m.id}" role="tabpanel" aria-labelledby="tab-${m.id}" ${k ? "hidden" : ""}>
+        <div class="fr-metal-need">
+          <p class="fr-metal-name"><span class="fr-metal-sym">${esc(m.symbol)}</span>${esc(m.name)}</p>
+          <p class="fr-metal-use">${esc(m.use)}</p>
+          <p class="fr-metal-k">How much the world uses in a year${m.unit ? `, ${esc(m.unit)}` : ""}</p>
+          <div class="fr-need-bars">
+            <p class="fr-need"><span class="fr-need-year">2025</span><span class="fr-need-bar"><span style="width:${(d0 / max) * 100}%"></span></span><span class="fr-need-val">${tonnes(d0)}</span></p>
+            <p class="fr-need is-proj"><span class="fr-need-year">2040<em>projected</em></span><span class="fr-need-bar"><span style="width:${(d1 / max) * 100}%"></span></span><span class="fr-need-val">${tonnes(d1)}</span></p>
+          </div>
+          <p class="fr-need-growth"><b>${growth(m.demand)}</b> by 2040 in the IEA's projection${src}</p>
+          <p class="fr-need-clean">Clean energy's share of that demand: <b>${m.clean[0]}%</b> in 2025, <b>${m.clean[1]}%</b> projected for 2040.</p>
+          <p class="fr-metal-fact">${esc(m.fact)}${src}</p>
+        </div>
+        <ol class="fr-chain-steps" aria-label="${esc(m.name)}: from the ground to the machine">
+          ${step("mine", 0, "Mine", `${esc(tonnes(m.mine.world))} ${m.mine.what ? esc("of " + m.mine.what) + " " : ""}mined in 2025.${src}`, share(m.mine.top, mineShare))}
+          ${step("refine", 1, "Refine", `Purified${m.refine.what ? " " + esc(m.refine.what) : ""}: ${esc(tonnes(m.refine.world))} in 2025.${src}`, share(m.refine.top, refShare))}
+          ${step("make", 2, "Make", `${esc(m.make.what)}.${m.make.sources ? cite(m.make.sources) : ""}`, m.make.share ? share(m.make.top, m.make.share, m.make.shareLabel) : "")}
+          ${step("build", 3, "Build the future", `${esc(m.build)}.`)}
+        </ol>
+      </div>`;
+    };
+    return `<section class="fr-chain fr-metals" aria-labelledby="chain-title">
+      <h2 class="fr-chain-title" id="chain-title">${esc(M.title)}</h2>
+      <p class="fr-chain-intro">${esc(M.intro)}</p>
+      <div class="fr-metal-tiles" role="tablist" aria-label="Metals">
+        ${M.metals.map((m, k) => `<button type="button" class="fr-metal-tile fr-tone--${m.tone}" role="tab" id="tab-${m.id}" aria-controls="metal-${m.id}" aria-selected="${k === 0}" tabindex="${k === 0 ? 0 : -1}" data-metal="${m.id}">
+          <span class="fr-tile-num">${m.number}</span><span class="fr-tile-sym">${esc(m.symbol)}</span><span class="fr-tile-name">${esc(m.name)}</span><span class="fr-tile-growth">${growth(m.demand)} <small>by 2040</small></span>
+        </button>`).join("")}
+      </div>
+      ${M.metals.map(panel).join("")}
+      <p class="fr-chain-note"><b>A projection, not a fact.</b> ${esc(M.projection)}${src}</p>
     </section>`;
   }
+  function pickMetal(btn, focus) {
+    const tiles = [...document.querySelectorAll(".fr-metal-tile")];
+    tiles.forEach((t) => { const on = t === btn; t.setAttribute("aria-selected", on); t.tabIndex = on ? 0 : -1; document.getElementById(t.getAttribute("aria-controls")).hidden = !on; });
+    if (focus) btn.focus();
+  }
+  main.addEventListener("click", (e) => { const b = e.target.closest(".fr-metal-tile"); if (b) pickMetal(b); });
+  main.addEventListener("keydown", (e) => {
+    const b = e.target.closest(".fr-metal-tile"); if (!b) return;
+    const tiles = [...document.querySelectorAll(".fr-metal-tile")], i = tiles.indexOf(b);
+    const to = { ArrowRight: i + 1, ArrowDown: i + 1, ArrowLeft: i - 1, ArrowUp: i - 1, Home: 0, End: tiles.length - 1 }[e.key];
+    if (to === undefined) return;
+    e.preventDefault(); pickMetal(tiles[(to + tiles.length) % tiles.length], true);
+  });
 
   function overview() {
     document.title = "Frontier · Field Notes";
     const { cite, list } = citer();
-    const E = F.eschatia;
     return `
       <section class="fr-x" aria-labelledby="fr-title">
         <canvas class="fr-dc" aria-hidden="true"></canvas>
@@ -308,17 +453,7 @@
           <span class="fr-ring"></span>
         </div>
         <p class="fr-telemetry" aria-hidden="true"><span>Mission log</span><span>Sector 01 · The edge</span><span class="fr-blink">● Signal</span></p>
-        ${supplyBlock(cite)}
-        <div class="fr-blurb">
-        <div class="fr-eschatia">
-          <p class="fr-greek" lang="grc">ἐσχατιά <span lang="en">eschatia · the edge, the borderland</span></p>
-          ${E.text.map((t, i) => `<p>${esc(t)}${i === E.text.length - 2 ? cite(E.sources) : ""}</p>`).join("")}
-        </div>
-        <aside class="fr-copper">
-          <svg class="fr-ingot" viewBox="0 0 120 80" aria-hidden="true"><defs><linearGradient id="cu" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7E3F22"/><stop offset=".45" stop-color="#EFB08A"/><stop offset=".6" stop-color="#C9774A"/><stop offset="1" stop-color="#7E3F22"/></linearGradient></defs><path fill="url(#cu)" d="M14 8 C40 16 80 16 106 8 C98 28 98 52 106 72 C80 64 40 64 14 72 C22 52 22 28 14 8Z"/></svg>
-          <div><p class="fr-copper-cap">${esc(F.copper.caption)}</p><p>${esc(F.copper.text)}${cite(F.copper.sources)}</p></div>
-        </aside>
-        </div>
+        ${metalsBlock(cite)}
       </section>
 
       <section class="fr-section fr-wrap" aria-labelledby="fam-title">
@@ -382,7 +517,7 @@
     </div>`;
   }
 
-  const photoBlock = (t) => t.photo ? `<figure class="fr-photo"><img src="${esc(t.photo.src)}" alt="${esc(t.photo.alt)}"><figcaption><a href="${esc(t.photo.url)}" rel="noopener" target="_blank">${esc(t.photo.credit)}</a></figcaption></figure>` : "";
+  const photoBlock = (t) => t.photo ? `<figure class="fr-photo"><img src="${esc(t.photo.src)}" alt="${esc(t.photo.alt)}"${t.photo.focus ? ` style="object-position:${esc(t.photo.focus)}"` : ""}><figcaption><a href="${esc(t.photo.url)}" rel="noopener" target="_blank">${esc(t.photo.credit)}</a></figcaption></figure>` : "";
 
   function techPage(t) {
     const f = FAM[t.family];
@@ -479,6 +614,8 @@
   // 30 minutes on market days by a GitHub Action)
   function ticker() {
     const T = window.FRONTIER_TICKER || { quotes: {} };
+    // no prices yet (the FINNHUB_KEY secret isn't set): hide the bar altogether
+    if (!T.updated || !Object.keys(T.quotes || {}).length) return "";
     const items = F.stocks.map((st) => {
       const t = TECH[st.tech], f = FAM[t.family], q = T.quotes[st.symbol];
       const move = q ? (q.change > 0 ? "is-up" : q.change < 0 ? "is-down" : "is-flat") : "is-none";
@@ -487,12 +624,13 @@
         : `<span class="fr-px is-pending">price pending</span>`;
       return `<a class="fr-tick fr-tone--${f.tone}" href="#/${t.id}" title="${esc(st.name)}: ${esc(st.why)}"><b class="fr-sym">${st.symbol}</b>${quote}<span class="fr-tick-tech">${esc(t.name)}</span></a>`;
     }).join("");
-    const when = T.updated ? `Prices as of ${new Date(T.updated).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZoneName: "short" })}` : "Prices connect once the data feed is set up";
+    const when = T.updated ? `Prices as of ${new Date(T.updated).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZoneName: "short" })}` : "";
     return `<nav class="fr-ticker" aria-label="Stock ticker: companies involved in these technologies">
       <span class="fr-ticker-label">Frontier index</span>
       <div class="fr-ticker-window"><div class="fr-ticker-track">${items}<span aria-hidden="true" class="fr-ticker-dup">${items.replaceAll("<a ", '<a tabindex="-1" ')}</span></div></div>
-      <span class="fr-ticker-when">${when} · delayed · not investment advice</span>
-    </nav>`;
+      <span class="fr-ticker-when">${when} · delayed · for information, not investment advice</span>
+    </nav>
+    <p class="fr-ticker-note">${when} · delayed · for information, not investment advice</p>`;
   }
 
   /* ---------------------------------------------------------
