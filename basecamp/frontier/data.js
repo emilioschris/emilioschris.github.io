@@ -560,6 +560,26 @@ FRONTIER.stocks = [
   { symbol: "NTLA", name: "Intellia Therapeutics", tech: "crispr", why: "CRISPR therapies given directly into the body", sources: ["wikipedia-intellia"] },
 ];
 
+/* The commodities ticker: the second list in the ticker.
+   Prices come from commodity-data.js, written by a scheduled job.
+   unit is how the price is quoted; tech links an item to a page
+   ("metals" scrolls to the metals panel) only where it fits. */
+FRONTIER.commodities = [
+  { id: "brent", name: "Brent crude", unit: "$/barrel", tech: "fusion" },
+  { id: "wti", name: "WTI crude", unit: "$/barrel", tech: "fusion" },
+  { id: "natgas", name: "Natural gas (US)", unit: "$/MMBtu", tech: "fusion" },
+  { id: "gold", name: "Gold", unit: "$/troy oz" },
+  { id: "silver", name: "Silver", unit: "$/troy oz" },
+  { id: "copper", name: "Copper", unit: "$/tonne", tech: "metals" },
+  { id: "aluminium", name: "Aluminium", unit: "$/tonne" },
+  { id: "wheat", name: "Wheat", unit: "$/tonne", tech: "vertical-farming" },
+  { id: "maize", name: "Corn", unit: "$/tonne", tech: "vertical-farming" },
+  { id: "soybeans", name: "Soybeans", unit: "$/tonne", tech: "vertical-farming" },
+  { id: "coffee", name: "Coffee (arabica)", unit: "$/kg" },
+  { id: "cocoa", name: "Cocoa", unit: "$/kg" },
+  { id: "sugar", name: "Sugar", unit: "$/kg" },
+];
+
 FRONTIER.sources = {
   "doe-fusion": { title: "DOE Explains: Nuclear Fusion Reactions", publisher: "US Department of Energy, Office of Science", url: "https://www.energy.gov/science/doe-explainsnuclear-fusion-reactions" },
   "wikipedia-fusion-power": { title: "Fusion power, revision 1378635800", publisher: "Wikipedia", url: "https://en.wikipedia.org/w/index.php?title=Fusion_power&oldid=1378635800" },

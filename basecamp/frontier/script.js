@@ -6,7 +6,7 @@
    1. Helpers and citations
    2. The edge of the map (scroll motion)
    3. Diagrams (one original drawing per technology)
-   4. The overview: the hero, the metals, families, compare (#/)
+   4. The overview: the hero, mission logs, families, compare (#/)
    5. A technology page (#/fusion …)
    6. Routing
    ========================================================= */
@@ -37,13 +37,13 @@
       const s = F.sources[id];
       return `<li id="src-${i + 1}"><a href="${esc(s.url)}" rel="noopener" target="_blank">${esc(s.title)}</a> <span>${esc(s.publisher)}</span></li>`;
     }).join("")}</ol>`;
-    return { cite, list };
+    return { cite, list, cited: () => order.length };
   }
 
   /* ---------------------------------------------------------
      2. SCROLL MOTION
-     As you scroll, the metal tiles in the hero drift apart
-     at slightly different speeds.
+     As you scroll, the robot falls further and the chrome
+     walls appear.
      --------------------------------------------------------- */
   function onScroll() {
     const p = reduced.matches ? 0 : Math.min(1, window.scrollY / (window.innerHeight * 1.2));
@@ -59,36 +59,6 @@
   }
   addEventListener("scroll", () => { walls(); requestAnimationFrame(onScroll); }, { passive: true });
 
-  // The starfield in the hero: a few hundred faint stars that twinkle slowly
-  let starsStop = null;
-  function stars() {
-    if (starsStop) starsStop();
-    const cv = document.querySelector(".fr-stars");
-    if (!cv) return;
-    const ctx = cv.getContext("2d");
-    const dpr = Math.min(2, devicePixelRatio || 1);
-    const box = cv.getBoundingClientRect();
-    cv.width = box.width * dpr; cv.height = box.height * dpr;
-    let seed = 7;
-    const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
-    const list = Array.from({ length: Math.round(box.width * box.height / 2600) }, () => ({
-      x: rnd() * cv.width, y: rnd() * cv.height * 0.75, r: (rnd() * 1.1 + 0.2) * dpr, p: rnd() * 6.28, s: 0.4 + rnd() * 1.2,
-    }));
-    let raf = 0;
-    const draw = (t) => {
-      ctx.clearRect(0, 0, cv.width, cv.height);
-      for (const st of list) {
-        const a = reduced.matches ? 0.6 : 0.35 + 0.35 * Math.sin(st.p + t / 1000 * st.s);
-        ctx.globalAlpha = a;
-        ctx.fillStyle = "#F2EBDD";
-        ctx.beginPath(); ctx.arc(st.x, st.y, st.r, 0, 6.283); ctx.fill();
-      }
-      if (!reduced.matches) raf = requestAnimationFrame(draw);
-    };
-    raf = requestAnimationFrame(draw);
-    starsStop = () => cancelAnimationFrame(raf);
-  }
-  addEventListener("resize", () => { if (document.querySelector(".fr-stars")) stars(); });
 
   /* The hero's data centre: endless rows of server racks receding
      to one point, cold blue light, blinking status LEDs, haze, and a
@@ -347,8 +317,8 @@
       ["Main cost or barrier", (t) => esc(t.compare.barrier)], ["Potential impact", (t) => esc(t.compare.impact)], ["Biggest debate", (t) => esc(t.compare.debate)]];
     const table = cols.length
       ? `<div class="fr-compare-table" style="--cols:${cols.length}">
-          <div class="fr-ct-head"></div>${cols.map((t) => `<div class="fr-ct-head fr-tone--${FAM[t.family].tone}"><a href="#/${t.id}">${esc(t.name)}</a></div>`).join("")}
-          ${rows.map(([label, fn]) => `<div class="fr-ct-label">${label}</div>${cols.map((t) => `<div class="fr-ct-cell" data-label="${label}">${fn(t)}</div>`).join("")}`).join("")}
+          <div class="fr-ct-head"></div>${cols.map((t, c) => `<div class="fr-ct-head fr-tone--${FAM[t.family].tone}" data-col="${c}"><a href="#/${t.id}">${esc(t.name)}</a></div>`).join("")}
+          ${rows.map(([label, fn]) => `<div class="fr-ct-label">${label}</div>${cols.map((t, c) => `<div class="fr-ct-cell" data-label="${label}" data-col="${c}">${fn(t)}</div>`).join("")}`).join("")}
         </div>`
       : "";
     const note = charted().length < 2
@@ -356,81 +326,58 @@
     return `<fieldset class="fr-picks"><legend>Choose up to three</legend>${picks}</fieldset>${note}${table}`;
   }
 
-  // The metals of the energy transition: a tile for each metal; each
-  // opens its own path from mine to machine, and its demand in 2025
-  // against the IEA's projection for 2040. All panels are drawn at once
-  // (so the source numbers stay fixed) and the tiles switch between them.
-  const STAGE_ICON = {
-    mine: '<path d="M4 20h16M6 20l4-9 3 5 2-3 3 7"/><path d="M15 6l3-3M16 3l2 2"/>',
-    refine: '<path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/><path d="M7.5 15h9"/>',
-    make: '<path d="M6 4v8a6 6 0 0 0 12 0V4h-4v8a2 2 0 0 1-4 0V4Z"/><path d="M6 7h4M14 7h4"/>',
-    build: '<circle cx="12" cy="12" r="3"/><path d="M12 9V3M12 15v6M9 12H3M15 12h6"/><path d="M8 8 5.5 5.5M16 16l2.5 2.5"/>',
+
+  // Mission logs: my investigations, each on its own page in logs/.
+  // The overview shows the three newest, with a link to them all.
+  const LOGS = window.MISSION_LOGS || [];
+  const STATUS = { open: "Open", ongoing: "Ongoing", closed: "Closed" };
+  // Small monochrome glyphs that tell the families apart
+  const GLYPH = {
+    food: '<path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14Z"/><path d="M5 19 13 11"/>',
+    energy: '<circle cx="12" cy="12" r="1.6"/><ellipse cx="12" cy="12" rx="9" ry="3.6"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(120 12 12)"/>',
+    ai: '<rect x="6" y="6" width="12" height="12" rx="1"/><rect x="9.5" y="9.5" width="5" height="5"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/>',
+    bio: '<path d="M7 3c0 6 10 6 10 12s-10 6-10 6M17 3c0 6-10 6-10 12"/><path d="M8.5 6.5h7M8.5 17.5h7M10 9.5h4"/>',
   };
-  // kt (thousand tonnes) in words: 275 -> "275,000 tonnes", 27775 -> "27.8 million tonnes"
-  const tonnes = (kt) => kt >= 1000 ? `${(kt / 1000).toFixed(kt >= 10000 ? 1 : 2).replace(/\.?0+$/, "")} million tonnes` : `${(kt * 1000).toLocaleString("en-GB")} tonnes`;
-  const pct = (a, b) => Math.round((a / b) * 100);
-  const growth = ([a, b]) => b / a >= 2 ? `×${(b / a).toFixed(1)}` : `+${Math.round((b / a - 1) * 100)}%`;
-  function metalsBlock(cite) {
-    const M = F.minerals;
-    const src = cite(M.sources);
-    const share = (who, n, label) => `<span class="fr-share" role="img" aria-label="${esc(who)}: ${n}%"><span class="fr-share-bar"><span style="width:${n}%"></span></span><span class="fr-share-num">${esc(who)} ${esc(label || n + "%")}</span></span>`;
-    const step = (id, i, title, detail, extra = "") => `<li class="fr-step" style="--i:${i}">
-        <span class="fr-step-icon"><svg viewBox="0 0 24 24" aria-hidden="true">${STAGE_ICON[id]}</svg></span>
-        <span class="fr-step-body"><b>${title}</b><span class="fr-step-detail">${detail}</span>${extra}</span>
-      </li>`;
-    const panel = (m, k) => {
-      const [d0, d1] = m.demand, max = Math.max(d0, d1);
-      const mineShare = pct(m.mine.kt, m.mine.world), refShare = pct(m.refine.kt, m.refine.world);
-      return `<div class="fr-metal-panel fr-tone--${m.tone}" id="metal-${m.id}" role="tabpanel" aria-labelledby="tab-${m.id}" ${k ? "hidden" : ""}>
-        <div class="fr-metal-need">
-          <p class="fr-metal-name"><span class="fr-metal-sym">${esc(m.symbol)}</span>${esc(m.name)}</p>
-          <p class="fr-metal-use">${esc(m.use)}</p>
-          <p class="fr-metal-k">How much the world uses in a year${m.unit ? `, ${esc(m.unit)}` : ""}</p>
-          <div class="fr-need-bars">
-            <p class="fr-need"><span class="fr-need-year">2025</span><span class="fr-need-bar"><span style="width:${(d0 / max) * 100}%"></span></span><span class="fr-need-val">${tonnes(d0)}</span></p>
-            <p class="fr-need is-proj"><span class="fr-need-year">2040<em>projected</em></span><span class="fr-need-bar"><span style="width:${(d1 / max) * 100}%"></span></span><span class="fr-need-val">${tonnes(d1)}</span></p>
-          </div>
-          <p class="fr-need-growth"><b>${growth(m.demand)}</b> by 2040 in the IEA's projection${src}</p>
-          <p class="fr-need-clean">Clean energy's share of that demand: <b>${m.clean[0]}%</b> in 2025, <b>${m.clean[1]}%</b> projected for 2040.</p>
-          <p class="fr-metal-fact">${esc(m.fact)}${src}</p>
+  const glyph = (id) => `<svg class="fr-glyph" viewBox="0 0 24 24" aria-hidden="true">${GLYPH[id] || ""}</svg>`;
+  // Where a technology stands, read from its readiness level (1 to 9)
+  const stage = (lvl) => lvl >= 8 ? "Commercial" : lvl >= 5 ? "Pilot" : "Lab";
+  const shortDate = (d) => new Date(d + "T12:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" }).toUpperCase();
+
+  // The market strip under the hero: a few headline counts
+  function marketStrip() {
+    const done = charted().length;
+    const open = LOGS.filter((l) => l.status !== "closed").length;
+    const dates = [...F.techs.map((t) => t.asOf), ...LOGS.map((l) => l.updated)].filter(Boolean).sort();
+    const last = dates[dates.length - 1];
+    return `<section class="fr-market fr-wrap" aria-label="Frontier at a glance">
+        <dl class="fr-market-row">
+          <div class="fr-stat"><dt>Technologies charted</dt><dd class="is-key"><span data-count="${done}">${done}</span><small> / ${F.techs.length}</small></dd></div>
+          <div class="fr-stat"><dt>Mission logs open</dt><dd><span data-count="${open}">${open}</span></dd></div>
+          <div class="fr-stat"><dt>Commodities tracked</dt><dd><span data-count="${F.commodities.length}">${F.commodities.length}</span></dd></div>
+          <div class="fr-stat"><dt>Last updated</dt><dd>${last ? `<time datetime="${last}">${shortDate(last)}</time>` : "None yet"}</dd></div>
+        </dl>
+      </section>`;
+  }
+
+  function logStrip() {
+    const latest = [...LOGS].sort((a, b) => b.number.localeCompare(a.number)).slice(0, 3);
+    return `<section class="fr-section fr-wrap fr-logs" id="mission-log" aria-labelledby="logs-title">
+        <div class="fr-logs-head">
+          <p class="fr-eyebrow">Mission logs</p>
+          <h2 class="fr-logs-title" id="logs-title">My investigations into what's coming</h2>
+          <a class="fr-logs-all" href="logs/">All mission logs <span aria-hidden="true">→</span></a>
         </div>
-        <ol class="fr-chain-steps" aria-label="${esc(m.name)}: from the ground to the machine">
-          ${step("mine", 0, "Mine", `${esc(tonnes(m.mine.world))} ${m.mine.what ? esc("of " + m.mine.what) + " " : ""}mined in 2025.${src}`, share(m.mine.top, mineShare))}
-          ${step("refine", 1, "Refine", `Purified${m.refine.what ? " " + esc(m.refine.what) : ""}: ${esc(tonnes(m.refine.world))} in 2025.${src}`, share(m.refine.top, refShare))}
-          ${step("make", 2, "Make", `${esc(m.make.what)}.${m.make.sources ? cite(m.make.sources) : ""}`, m.make.share ? share(m.make.top, m.make.share, m.make.shareLabel) : "")}
-          ${step("build", 3, "Build the future", `${esc(m.build)}.`)}
-        </ol>
-      </div>`;
-    };
-    return `<section class="fr-chain fr-metals" aria-labelledby="chain-title">
-      <h2 class="fr-chain-title" id="chain-title">${esc(M.title)}</h2>
-      <p class="fr-chain-intro">${esc(M.intro)}</p>
-      <div class="fr-metal-tiles" role="tablist" aria-label="Metals">
-        ${M.metals.map((m, k) => `<button type="button" class="fr-metal-tile fr-tone--${m.tone}" role="tab" id="tab-${m.id}" aria-controls="metal-${m.id}" aria-selected="${k === 0}" tabindex="${k === 0 ? 0 : -1}" data-metal="${m.id}">
-          <span class="fr-tile-num">${m.number}</span><span class="fr-tile-sym">${esc(m.symbol)}</span><span class="fr-tile-name">${esc(m.name)}</span><span class="fr-tile-growth">${growth(m.demand)} <small>by 2040</small></span>
-        </button>`).join("")}
-      </div>
-      ${M.metals.map(panel).join("")}
-      <p class="fr-chain-note"><b>A projection, not a fact.</b> ${esc(M.projection)}${src}</p>
-    </section>`;
+        ${latest.length ? `<ol class="fr-logs-list">${latest.map((l) => `<li><a class="fr-log-card" href="logs/#/${l.number}">
+          <span class="fr-log-meta"><b>Log ${l.number}</b><i aria-hidden="true">·</i><span class="fr-log-status is-${l.status}">${STATUS[l.status]}</span><i aria-hidden="true">·</i><span>Opened <time datetime="${l.opened}">${shortDate(l.opened)}</time></span></span>
+          <span class="fr-log-name">${esc(l.title)}</span>
+          <span class="fr-log-q">${esc(l.question)}</span>
+        </a></li>`).join("")}</ol>` : `<p class="fr-intro">The first log is being written.</p>`}
+      </section>`;
   }
-  function pickMetal(btn, focus) {
-    const tiles = [...document.querySelectorAll(".fr-metal-tile")];
-    tiles.forEach((t) => { const on = t === btn; t.setAttribute("aria-selected", on); t.tabIndex = on ? 0 : -1; document.getElementById(t.getAttribute("aria-controls")).hidden = !on; });
-    if (focus) btn.focus();
-  }
-  main.addEventListener("click", (e) => { const b = e.target.closest(".fr-metal-tile"); if (b) pickMetal(b); });
-  main.addEventListener("keydown", (e) => {
-    const b = e.target.closest(".fr-metal-tile"); if (!b) return;
-    const tiles = [...document.querySelectorAll(".fr-metal-tile")], i = tiles.indexOf(b);
-    const to = { ArrowRight: i + 1, ArrowDown: i + 1, ArrowLeft: i - 1, ArrowUp: i - 1, Home: 0, End: tiles.length - 1 }[e.key];
-    if (to === undefined) return;
-    e.preventDefault(); pickMetal(tiles[(to + tiles.length) % tiles.length], true);
-  });
 
   function overview() {
     document.title = "Frontier · Field Notes";
-    const { cite, list } = citer();
+    const { list, cited } = citer();
     return `
       <section class="fr-x" aria-labelledby="fr-title">
         <canvas class="fr-dc" aria-hidden="true"></canvas>
@@ -445,18 +392,11 @@
         <p class="fr-x-scroll" aria-hidden="true">Scroll <span>↓</span></p>
       </section>
 
-      <section class="fr-hero fr-wrap" aria-label="The edge">
-        <p class="fr-eyebrow">Base Camp · Breakthrough technologies</p>
-        <div class="fr-space" aria-hidden="true">
-          <img class="fr-space-img" src="img/space-colony.webp" alt="" width="2400" height="1891" fetchpriority="high">
-          <canvas class="fr-stars"></canvas>
-          <span class="fr-ring"></span>
-        </div>
-        <p class="fr-telemetry" aria-hidden="true"><span>Mission log</span><span>Sector 01 · The edge</span><span class="fr-blink">● Signal</span></p>
-        ${metalsBlock(cite)}
-      </section>
+      ${marketStrip()}
 
-      <section class="fr-section fr-wrap" aria-labelledby="fam-title">
+      ${logStrip()}
+
+      <section class="fr-section fr-wrap" id="edge-of-the-map" aria-labelledby="fam-title">
         <p class="fr-eyebrow">Four families</p>
         <h2 class="fr-h2" id="fam-title">On the edge of the map</h2>
         <p class="fr-intro">Four families of technology. Open a charted dossier to see how it works, how close it is, who pays and who argues about it.</p>
@@ -464,14 +404,13 @@
           ${F.families.map((f, fi) => {
             const techs = F.techs.filter((t) => t.family === f.id);
             const lead = techs[0];
-            const done = techs.filter((t) => t.status === "charted").length;
             return `<article class="fr-dossier fr-tone--${f.tone}" style="--fi:${fi}">
               <div class="fr-dossier-media">
                 ${lead && lead.photo ? `<img src="${esc(lead.photo.src)}" alt="" loading="lazy" style="object-position:${esc(lead.photo.focus || "50% 50%")}">` : ""}
                 <span class="fr-dossier-index">0${fi + 1} / 0${F.families.length}</span>
               </div>
               <div class="fr-dossier-body">
-                <h3 class="fr-dossier-family">${esc(f.name)}</h3>
+                <h3 class="fr-dossier-family">${glyph(f.id)}${esc(f.name)}</h3>
                 <p class="fr-dossier-q">${esc(f.question)}</p>
                 <ul class="fr-dossier-techs">${techs.map((t) => t.status === "charted" ? `<li>
                   <a class="fr-dtech" href="#/${t.id}">
@@ -482,7 +421,7 @@
                       <span class="fr-dtech-trl">TRL ${t.readiness.level}/9</span>
                       ${t.metrics && t.metrics[0] ? `<span class="fr-dtech-metric"><b>${esc(t.metrics[0].value)}</b> ${esc(t.metrics[0].label.split(",")[0])}</span>` : ""}
                     </span>
-                    <span class="fr-dtech-open">Open dossier <span aria-hidden="true">→</span></span>
+                    <span class="fr-dtech-foot"><span class="fr-chip">${stage(t.readiness.level)}</span><span class="fr-dtech-open">Open dossier <span aria-hidden="true">→</span></span></span>
                   </a></li>` : `<li>
                   <span class="fr-dtech is-uncharted">
                     <span class="fr-dtech-name">${esc(t.name)}</span>
@@ -490,7 +429,6 @@
                     <span class="fr-dtech-stats"><span class="fr-mini-trl is-unknown" aria-hidden="true">${"<i></i>".repeat(9)}</span><span class="fr-dtech-trl">Coordinates unknown</span></span>
                     <span class="fr-stamp">Uncharted · charting next</span>
                   </span></li>`).join("")}</ul>
-                <p class="fr-dossier-count">${done} of ${techs.length} charted</p>
               </div>
             </article>`;
           }).join("")}
@@ -502,9 +440,9 @@
         <div class="fr-compare" id="fr-compare">${compareBlock(charted().slice(0, 3).map((t) => t.id))}</div>
       </section>
 
-      <section class="fr-section fr-wrap fr-section--sources" aria-label="Sources">
+      ${cited() ? `<section class="fr-section fr-wrap fr-section--sources" aria-label="Sources">
         <p class="fr-eyebrow">Sources</p>${list()}
-      </section>`;
+      </section>` : ""}`;
   }
 
   /* ---------------------------------------------------------
@@ -612,26 +550,92 @@
   // The ticker: listed companies involved in each technology, with the
   // latest price and change on the day (ticker-data.js, refreshed every
   // 30 minutes on market days by a GitHub Action)
-  function ticker() {
+  // The ticker's two lists, Frontier stocks and commodities, and whether
+  // it's showing at all; both choices are remembered in this browser.
+  const TKEY = "frontier-ticker-v1";
+  let tpref = { on: true, mode: "stocks" };
+  try { tpref = Object.assign(tpref, JSON.parse(localStorage.getItem(TKEY) || "{}")); } catch (e) { /* private mode */ }
+  const saveT = () => { try { localStorage.setItem(TKEY, JSON.stringify(tpref)); } catch (e) { /* private mode */ } };
+  const asOf = (iso) => new Date(iso).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZoneName: "short" });
+  const chg = (c, vs) => `<span class="fr-chg ${c > 0 ? "is-up" : c < 0 ? "is-down" : "is-flat"}">${c > 0 ? "▲" : c < 0 ? "▼" : "•"} ${Math.abs(c).toFixed(2)}%${vs ? ` <small>${esc(vs)}</small>` : ""}</span>`;
+  function stockItems() {
     const T = window.FRONTIER_TICKER || { quotes: {} };
-    // no prices yet (the FINNHUB_KEY secret isn't set): hide the bar altogether
-    if (!T.updated || !Object.keys(T.quotes || {}).length) return "";
+    if (!T.updated || !Object.keys(T.quotes || {}).length) return null;
     const items = F.stocks.map((st) => {
       const t = TECH[st.tech], f = FAM[t.family], q = T.quotes[st.symbol];
-      const move = q ? (q.change > 0 ? "is-up" : q.change < 0 ? "is-down" : "is-flat") : "is-none";
-      const quote = q
-        ? `<span class="fr-px">$${q.price.toFixed(2)}</span><span class="fr-chg ${move}">${q.change > 0 ? "▲" : q.change < 0 ? "▼" : "•"} ${Math.abs(q.change).toFixed(2)}%</span>`
-        : `<span class="fr-px is-pending">price pending</span>`;
+      const quote = q ? `<span class="fr-px">$${q.price.toFixed(2)}</span>${chg(q.change)}` : `<span class="fr-px is-pending">price pending</span>`;
       return `<a class="fr-tick fr-tone--${f.tone}" href="#/${t.id}" title="${esc(st.name)}: ${esc(st.why)}"><b class="fr-sym">${st.symbol}</b>${quote}<span class="fr-tick-tech">${esc(t.name)}</span></a>`;
     }).join("");
-    const when = T.updated ? `Prices as of ${new Date(T.updated).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZoneName: "short" })}` : "";
-    return `<nav class="fr-ticker" aria-label="Stock ticker: companies involved in these technologies">
-      <span class="fr-ticker-label">Frontier index</span>
-      <div class="fr-ticker-window"><div class="fr-ticker-track">${items}<span aria-hidden="true" class="fr-ticker-dup">${items.replaceAll("<a ", '<a tabindex="-1" ')}</span></div></div>
-      <span class="fr-ticker-when">${when} · delayed · for information, not investment advice</span>
-    </nav>
-    <p class="fr-ticker-note">${when} · delayed · for information, not investment advice</p>`;
+    return { items, when: `Prices as of ${asOf(T.updated)} · delayed` };
   }
+  function commodityItems() {
+    const D = window.FRONTIER_COMMODITIES || { items: {} };
+    if (!D.updated || !Object.keys(D.items || {}).length) return null;
+    const items = F.commodities.map((c) => {
+      const q = D.items[c.id];
+      if (!q) return "";
+      const t = c.tech && TECH[c.tech], tone = t ? FAM[t.family].tone : c.tech === "metals" ? "copper" : "platinum";
+      const tag = t ? `<a class="fr-tick-tag" href="#/${t.id}">${esc(t.name)}</a>` : c.tech === "metals" ? `<a class="fr-tick-tag" href="logs/#/001">The metals</a>` : "";
+      return `<span class="fr-tick fr-tone--${tone}" title="${esc(c.name)}${q.period ? `, ${esc(q.period)}` : ""}"><b class="fr-sym">${esc(c.name)}</b><span class="fr-px">${q.price.toLocaleString("en-US", { maximumFractionDigits: 2 })} <small>${esc(c.unit)}</small></span>${q.change != null ? chg(q.change, q.vs) : ""}${tag}</span>`;
+    }).join("");
+    return { items, when: `${D.asOfLabel ? esc(D.asOfLabel) : `Prices as of ${asOf(D.updated)}`}${D.source ? ` · ${esc(D.source)}` : ""}` };
+  }
+  // The ticker: a quiet "coming soon" line until a list has prices
+  function ticker() {
+    if (!tpref.on) return `<div class="fr-ticker-wrap" id="fr-ticker-wrap" hidden></div>`;
+    const mode = tpref.mode === "commodities" ? "commodities" : "stocks";
+    const data = mode === "stocks" ? stockItems() : commodityItems();
+    const label = mode === "stocks" ? "Frontier stocks" : "Commodities";
+    const toggle = `<span class="fr-ticker-label fr-ticker-modes" role="group" aria-label="Ticker list">
+        <button type="button" data-tmode="stocks" aria-pressed="${mode === "stocks"}">Stocks</button>
+        <button type="button" data-tmode="commodities" aria-pressed="${mode === "commodities"}">Commodities</button>
+      </span>`;
+    if (!data) return `<div class="fr-ticker-wrap" id="fr-ticker-wrap"><nav class="fr-ticker is-quiet" aria-label="Ticker: ${label}">${toggle}
+      <span class="fr-ticker-soon">${label}: prices coming soon</span></nav></div>`;
+    const small = `${data.when} · for information, not investment advice`;
+    return `<div class="fr-ticker-wrap" id="fr-ticker-wrap"><nav class="fr-ticker" aria-label="Ticker: ${label}">${toggle}
+      <div class="fr-ticker-window"><div class="fr-ticker-track">${data.items}<span aria-hidden="true" class="fr-ticker-dup">${data.items.replaceAll("<a ", '<a tabindex="-1" ')}</span></div></div>
+      <span class="fr-ticker-when">${small}</span>
+    </nav>
+    <p class="fr-ticker-note">${small}</p></div>`;
+  }
+  function refreshTicker() {
+    const w = document.getElementById("fr-ticker-wrap");
+    if (w) w.outerHTML = ticker();
+    const sw = document.getElementById("fr-ticker-toggle");
+    if (sw) sw.setAttribute("aria-checked", tpref.on);
+  }
+  document.getElementById("fr-ticker-toggle")?.addEventListener("click", () => { tpref.on = !tpref.on; saveT(); refreshTicker(); });
+  main.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-tmode]");
+    if (!b) return;
+    tpref.mode = b.dataset.tmode; saveT(); refreshTicker();
+    document.querySelector(`[data-tmode="${tpref.mode}"]`)?.focus();
+  });
+
+  // Jump buttons in the top bar: smooth-scroll to a section of the
+  // overview (from a technology page, go to the overview first)
+  function jumpTo(id) {
+    const go = () => { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: reduced.matches ? "auto" : "smooth", block: "start" }); };
+    if (TECH[location.hash.replace(/^#\/?/, "")]) { location.hash = "#/"; setTimeout(go, 60); } else go();
+  }
+  document.addEventListener("click", (e) => { const b = e.target.closest("[data-jump]"); if (b) jumpTo(b.dataset.jump); });
+  // highlight the button for the section in view
+  let jumpObs = null;
+  function watchJumps() {
+    if (jumpObs) jumpObs.disconnect();
+    const btns = [...document.querySelectorAll(".fr-jump [data-jump]")];
+    btns.forEach((b) => b.removeAttribute("aria-current"));
+    const secs = btns.map((b) => document.getElementById(b.dataset.jump)).filter(Boolean);
+    if (!secs.length || !("IntersectionObserver" in window)) return;
+    jumpObs = new IntersectionObserver((entries) => entries.forEach((en) => {
+      const b = btns.find((x) => x.dataset.jump === en.target.id);
+      if (b) b.toggleAttribute("aria-current", en.isIntersecting);
+      if (en.isIntersecting) btns.filter((x) => x !== b).forEach((x) => x.removeAttribute("aria-current"));
+    }), { rootMargin: "-45% 0px -50% 0px" });
+    secs.forEach((x) => jumpObs.observe(x));
+  }
+
 
   /* ---------------------------------------------------------
      6. ROUTING
@@ -641,13 +645,14 @@
     const id = location.hash.replace(/^#\/?/, "");
     const t = TECH[id];
     main.innerHTML = ticker() + (t ? techPage(t) : overview());
-    stars();
     if (dcStop) { dcStop(); dcStop = null; }
     if (bot) { bot.stop(); bot = null; }
     if (!t) { dataCentre(); robot(); }
     document.body.classList.toggle("is-tech", !!t);
     window.scrollTo(0, 0);
     onScroll();
+    watchJumps();
+    countUp();
     selected = charted().slice(0, 3).map((x) => x.id);
   }
   main.addEventListener("change", (e) => {
@@ -663,9 +668,58 @@
     const done = () => { const s = b.querySelector(".fr-copied"); s.textContent = " copied"; setTimeout(() => (s.textContent = ""), 1600); };
     if (navigator.clipboard) navigator.clipboard.writeText(b.dataset.copy).then(done, () => {});
   });
+  // Compare: light up the column under the pointer
+  main.addEventListener("mouseover", (e) => {
+    const cell = e.target.closest(".fr-compare-table [data-col]");
+    const table = e.target.closest(".fr-compare-table");
+    if (!table) return;
+    const col = cell ? cell.dataset.col : null;
+    table.querySelectorAll("[data-col]").forEach((x) => x.classList.toggle("is-col", x.dataset.col === col));
+  });
+  main.addEventListener("mouseout", (e) => {
+    const table = e.target.closest(".fr-compare-table");
+    if (table && !table.contains(e.relatedTarget)) table.querySelectorAll(".is-col").forEach((x) => x.classList.remove("is-col"));
+  });
+
+  // Numbers in the market strip count up once when they come into view
+  function countUp() {
+    const els = document.querySelectorAll("[data-count]");
+    if (reduced.matches || !("IntersectionObserver" in window)) return;
+    const io = new IntersectionObserver((es) => es.forEach((en) => {
+      if (!en.isIntersecting) return;
+      io.unobserve(en.target);
+      const el = en.target, to = +el.dataset.count, t0 = performance.now();
+      const step = (t) => { const p = Math.min(1, (t - t0) / 700); el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(step); };
+      requestAnimationFrame(step);
+    }), { threshold: 0.6 });
+    els.forEach((el) => io.observe(el));
+  }
+
+  // Keys 1, 2, 3 press the F1 to F3 buttons (never while typing in a field)
+  addEventListener("keydown", (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey || e.target.closest("input, textarea, select, [contenteditable]")) return;
+    const b = document.querySelector(`.fr-jump [aria-keyshortcuts="${e.key}"]`);
+    if (b) { e.preventDefault(); b.click(); }
+  });
+
   // Credits, in the footer
   const credits = document.getElementById("fr-credits");
-  if (credits) credits.innerHTML = 'Background: space colony interior by Rick Guidice for NASA Ames Research Center, 1970s. Public domain, via <a href="https://commons.wikimedia.org/wiki/File:Spacecolony3edit.jpeg" rel="noopener" target="_blank">Wikimedia Commons</a>. The falling robot (made with <a href="https://threejs.org" rel="noopener" target="_blank">three.js</a>) and the data centre are drawn in code. Prices in the ticker are delayed and are not investment advice.';
+  if (credits) credits.innerHTML = 'The falling robot (made with <a href="https://threejs.org" rel="noopener" target="_blank">three.js</a>) and the data centre are drawn in code. Prices in the ticker are delayed and are not investment advice.';
+
+  // Citation numbers jump to their source in the list. They are handled
+  // here because a plain "#src-3" link would change the page's route.
+  main.addEventListener("click", (e) => {
+    const a = e.target.closest('a[href^="#src-"]');
+    if (!a) return;
+    const li = document.getElementById(a.getAttribute("href").slice(1));
+    if (!li) return;
+    e.preventDefault();
+    document.querySelectorAll(".fr-sources li.is-target").forEach((x) => x.classList.remove("is-target"));
+    li.classList.add("is-target");
+    li.scrollIntoView({ behavior: reduced.matches ? "auto" : "smooth", block: "center" });
+    const link = li.querySelector("a");
+    if (link) link.focus({ preventScroll: true });
+  });
 
   addEventListener("hashchange", () => { render(); main.focus({ preventScroll: true }); });
 

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Frontier · Field Notes</title>
   <meta name="description" content="Frontier: the most exciting breakthrough technologies, grouped into families, explained, compared and argued over.">
-  <meta name="theme-color" content="#F2EBDD">
+  <meta name="theme-color" content="#121316">
 
   <!-- Link preview (WhatsApp, iMessage, social apps) -->
   <meta property="og:type" content="website">
@@ -21,19 +21,24 @@
   <meta name="twitter:image:alt" content="A red-tailed hawk with a terracotta tail perched on a branch over faint contour lines, beside the words Field Notes and the coordinates 35.1°N 33.4°E.">
 
   <!-- Same Day/Dusk choice as the homepage, applied before the page draws -->
-  <script src="../../shared/theme-init.js?v=2026-10-17.1"></script>
+  <script src="../../shared/theme-init.js?v=2026-10-17.6"></script>
+  <!-- Frontier is always dark, whatever the site's Day/Dusk choice (not saved) -->
+  <script>document.documentElement.dataset.theme = "dusk";</script>
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..600&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Instrument+Sans:wght@400..600&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="../../shared/field-notes.css?v=2026-10-17.1">
-  <link rel="stylesheet" href="styles.css?v=2026-10-17.1">
+  <link rel="stylesheet" href="../../shared/field-notes.css?v=2026-10-17.6">
+  <link rel="stylesheet" href="styles.css?v=2026-10-17.6">
 </head>
 <body class="fr-page">
 
   <a class="skip-link" href="#main">Skip to the technologies</a>
+
+  <!-- One quick scanline sweep when the page opens (styles.css, section 17) -->
+  <div class="fr-scan" aria-hidden="true"></div>
 
   <!-- ================= TOP BAR ================= -->
   <header class="bar is-scrolled">
@@ -44,11 +49,16 @@
         <span class="wordmark-owner">Back to the homepage</span>
       </span>
     </a>
+    <!-- Jump to the overview's sections, like a terminal's function keys (keys 1, 2, 3) -->
+    <nav class="fr-jump" aria-label="Jump to a section">
+      <button type="button" data-jump="mission-log" aria-keyshortcuts="1"><b>F1</b><span class="fr-jump-word"> Log</span></button>
+      <button type="button" data-jump="edge-of-the-map" aria-keyshortcuts="2"><b>F2</b><span class="fr-jump-word"> Map</span></button>
+      <button type="button" data-jump="compare" aria-keyshortcuts="3"><b>F3</b><span class="fr-jump-word"> Compare</span></button>
+    </nav>
     <div class="bar-tools">
-      <button class="theme-switch" id="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Dusk mode">
-        <span class="theme-label" aria-hidden="true">Day</span>
+      <button class="theme-switch fr-ticker-switch" id="fr-ticker-toggle" type="button" role="switch" aria-checked="true" aria-label="Show the ticker">
+        <span class="theme-label" aria-hidden="true">Ticker</span>
         <span class="theme-track" aria-hidden="true"><span class="theme-dot"></span></span>
-        <span class="theme-label" aria-hidden="true">Dusk</span>
       </button>
     </div>
   </header>
@@ -77,11 +87,12 @@
 
   <!-- Three.js for the falling robot (loaded on demand by robot.js) -->
   <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }</script>
-  <script src="../../shared/field-notes.js?v=2026-10-17.1"></script>
-  <script src="data.js?v=2026-10-17.1"></script>
-  <script src="connections.js?v=2026-10-17.1"></script>
+  <script src="../../shared/field-notes.js?v=2026-10-17.6"></script>
+  <script src="data.js?v=2026-10-17.6"></script>
+  <script src="connections.js?v=2026-10-17.6"></script>
   <!-- Ticker prices: rewritten every 30 minutes on market days, so asked for by the hour -->
-  <script>document.write('<script src="ticker-data.js?h=' + new Date().toISOString().slice(0, 13) + '"><\/script>');</script>
-  <script src="script.js?v=2026-10-17.1"></script>
+  <script>document.write('<script src="ticker-data.js?h=' + new Date().toISOString().slice(0, 13) + '"><\/script><script src="commodity-data.js?h=' + new Date().toISOString().slice(0, 13) + '"><\/script>');</script>
+  <script src="logs/logs.js?v=2026-10-17.6"></script>
+  <script src="script.js?v=2026-10-17.6"></script>
 </body>
 </html>

@@ -1,0 +1,54 @@
+/* =========================================================
+   MISSION LOGS · styles
+   ---------------------------------------------------------
+   Built on Frontier's styles (../styles.css): the same metals,
+   type and dark-glass panels. The look: an expedition logbook,
+   ruled rows with a log number, title, date and status.
+
+   1. Header
+   2. The logbook
+   3. A log
+   4. Small screens
+   ========================================================= */
+
+/* ---------- 1. HEADER ---------- */
+.lg-head { padding-bottom: clamp(24px, 4vh, 40px); }
+.lg-head .fr-telemetry { color: var(--fx-label); }
+.lg-head .fr-telemetry span + span::before { color: var(--rule); }
+.lg-label { margin: 26px 0 0; color: var(--muted); font: 500 11px var(--font-mono); letter-spacing: 0.18em; text-transform: uppercase; }
+.lg-question { max-width: 40ch; margin-top: 8px; }
+/* ---------- 2. THE LOGBOOK: terminal log lines in panels ---------- */
+.lg-book { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.lg-entry {
+  display: grid; gap: 8px;
+  padding: 14px 18px 16px;
+  border: 1px solid var(--rule); border-radius: 4px;
+  background: var(--bg-raised); color: inherit; text-decoration: none;
+}
+.lg-entry:hover { border-color: var(--fx-gold-dim); background: var(--fx-raised); }
+.lg-entry:focus-visible { outline: 1px solid var(--fx-gold); outline-offset: 2px; }
+.lg-line { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 8px; margin: 0; color: var(--muted); font: 500 11.5px/1.4 var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; font-variant-numeric: tabular-nums; }
+.lg-line b { color: var(--fx-gold); font-weight: 600; }
+.lg-line i { font-style: normal; color: var(--fx-faint); }
+.lg-line .fr-log-status { padding: 0; border: 0; font: inherit; letter-spacing: inherit; color: var(--text); }
+.lg-line .fr-log-status.is-closed { color: var(--fx-label); }
+.lg-upd { margin-left: auto; color: var(--fx-label); }
+.lg-title { font-family: var(--font-display); font-size: clamp(21px, 2.2vw, 26px); font-weight: 600; letter-spacing: -0.01em; line-height: 1.15; }
+.lg-q { color: var(--muted); font-size: 15.5px; line-height: 1.5; }
+
+/* ---------- 3. A LOG ---------- */
+/* the exhibit: the space-colony backdrop with its panel full width */
+.lg-exhibit.fr-hero:not(.fr-hero--tech) { min-height: 0; display: block; }
+.lg-exhibit .fr-chain { margin: 0; }
+.lg-findings { display: grid; gap: 14px; max-width: 72ch; margin: 0; padding-left: 26px; font-size: 17px; line-height: 1.6; }
+.lg-findings li::marker { color: var(--fx-gold); font: 600 13px var(--font-mono); }
+.lg-open { display: grid; gap: 10px; max-width: 72ch; margin: 0; padding: 0; list-style: none; }
+.lg-open li { position: relative; padding: 12px 16px 12px 40px; border: 1px solid var(--rule); border-radius: 4px; background: var(--bg-raised); font-size: 16px; line-height: 1.5; }
+.lg-open li::before { content: "?"; position: absolute; left: 14px; top: 11px; color: var(--stamp-text); font: 600 15px var(--font-mono); }
+.lg-updated { margin: 22px 0 0; color: var(--muted); font: 12px var(--font-mono); }
+.lg-pager { display: flex; justify-content: space-between; gap: 12px; margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--rule); font: 500 12px var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; }
+.lg-pager a { color: var(--link); text-decoration: none; }
+.lg-pager a:hover { text-decoration: underline; }
+
+/* ---------- 4. SMALL SCREENS ---------- */
+@media (max-width: 560px) { .lg-upd { margin-left: 0; flex-basis: 100%; } }

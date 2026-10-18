@@ -65,6 +65,27 @@
 }
 .fr-ticker-label { background: var(--gold-sheen); color: #23272B; font-weight: 700; }
 .fr-ticker-note { display: none; }   /* phones only (section 7): the small print the bar hides */
+/* the label doubles as the list toggle: Stocks | Commodities */
+.fr-ticker-modes { gap: 2px; padding: 0 6px; }
+.fr-ticker-modes button { border: 0; border-radius: 6px; padding: 5px 8px; background: transparent; color: rgba(35, 39, 43, 0.6); font: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer; }
+.fr-ticker-modes button[aria-pressed="true"] { background: rgba(35, 39, 43, 0.88); color: #F3DE9C; }
+.fr-ticker-modes button:focus-visible { outline: 2px solid #23272B; outline-offset: 1px; }
+/* no prices yet: a quiet line instead of an empty bar */
+.fr-ticker.is-quiet { align-items: stretch; }
+.fr-ticker-soon { display: flex; align-items: center; padding: 11px 16px; color: #8C887F; font-style: italic; }
+.fr-px small, .fr-chg small { font-size: 9.5px; color: #8C887F; font-style: normal; }
+.fr-tick-tag { margin-left: 2px; padding: 2px 7px; border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 999px; background: none; color: #A9A49A; font: 500 10px/1.4 var(--font-mono); letter-spacing: 0.04em; text-decoration: none; cursor: pointer; }
+.fr-tick-tag:hover { color: #F3DE9C; border-color: rgba(243, 222, 156, 0.5); }
+
+/* jump buttons in the top bar, and the ticker on/off switch */
+.fr-jump { display: flex; gap: 6px; margin: 0 auto; }
+.fr-jump button { padding: 7px 12px; border: 1px solid color-mix(in srgb, var(--text) 18%, transparent); border-radius: 999px; background: none; color: var(--muted); font: 500 11px/1 var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease; }
+.fr-jump button:hover { color: var(--text); border-color: var(--gold); }
+.fr-jump button[aria-current] { background: var(--gunmetal); border-color: var(--gunmetal); color: #F3DE9C; }
+.fr-jump button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.fr-jump-short { display: none; }
+.fr-jump + .bar-tools { margin-left: 0; }
+.fr-ticker-switch[aria-checked="true"] .theme-label { color: var(--text); }
 .fr-ticker-when { color: #A9A49A; border-left: 1px solid rgba(255,255,255,0.1); letter-spacing: 0.04em; text-transform: none; }
 .fr-ticker-window { flex: 1; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent); mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent); }
 .fr-ticker-track { display: flex; width: max-content; animation: fr-tick 46s linear infinite; }
@@ -288,7 +309,7 @@ a.fr-tech:hover .fr-go { transform: rotate(-45deg); }
 .fr-sources { margin: 0; padding-left: 26px; display: grid; gap: 8px; font-size: 14px; line-height: 1.5; }
 .fr-sources a { color: var(--text); }
 .fr-sources span { color: var(--muted); font: 11.5px var(--font-mono); }
-.fr-sources li:target { background: color-mix(in srgb, var(--stamp) 22%, transparent); border-radius: 6px; }
+.fr-sources li:target, .fr-sources li.is-target { background: color-mix(in srgb, var(--stamp) 22%, transparent); border-radius: 6px; }
 .fr-flags { margin-top: 26px; padding: 16px 20px; border-radius: 14px; border: 1px dashed var(--stamp); background: color-mix(in srgb, var(--stamp) 7%, transparent); }
 .fr-flags-head { margin: 0 0 8px; color: var(--stamp); font: 600 11px var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; }
 .fr-flags ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 14px; line-height: 1.5; }
@@ -328,6 +349,8 @@ a.fr-tech:hover .fr-go { transform: rotate(-45deg); }
   .fr-ticker-when { display: none; }
   .fr-ticker-note { display: block; margin: 0; padding: 5px 12px; background: var(--gunmetal); color: #A9A49A; font: 500 10px/1.3 var(--font-mono); letter-spacing: 0.04em; border-bottom: 1px solid rgba(217, 180, 92, 0.35); }
   .fr-ticker-label { padding: 0 10px; }
+  .fr-ticker-modes { padding: 0 4px; }
+  .fr-ticker-modes button { padding: 5px 6px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .fr-h1 { animation: none; }
@@ -759,3 +782,195 @@ a.fr-dtech:hover .fr-dtech-open span { transform: translateX(4px); }
 @media (prefers-reduced-motion: reduce) {
   .fr-word, .fr-x-scroll span { animation: none; }
 }
+
+/* ---------- 15. SMALL SCREENS: the bar's new controls ---------- */
+@media (max-width: 640px) {
+  .fr-page .bar { gap: 8px; }
+  .fr-page .back-link .wordmark-owner { display: none; }
+  .fr-jump { gap: 4px; }
+  .fr-jump button { padding: 6px 7px; letter-spacing: 0.06em; font-size: 10px; }
+  .fr-page .back-link { gap: 6px; }
+  .fr-page .back-hawk { width: 24px; height: 24px; }
+  .fr-page .back-link .wordmark-title { white-space: nowrap; font-size: 15px; }
+  .fr-page .bar-tools { gap: 8px; }
+  .fr-jump-long { display: none; }
+  .fr-jump-short { display: inline; }
+  .fr-ticker-switch .theme-label { display: inline; font-size: 9px; letter-spacing: 0.06em; }
+  .fr-ticker-switch { gap: 5px; }
+}
+@media (prefers-reduced-motion: reduce) { .fr-jump button { transition: none; } }
+@media (max-width: 379px) { .fr-ticker-switch .theme-label { display: none; } }
+
+/* ---------- 16. MISSION LOGS STRIP: the three newest logs ----------
+   Also used on logs/ for the status chip. */
+.fr-logs { padding-block: clamp(36px, 6vh, 64px); }
+.fr-logs-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 18px; margin-bottom: 18px; }
+.fr-logs-head .fr-eyebrow { flex-basis: 100%; margin: 0; }
+.fr-logs-title { margin: 0; font-family: var(--font-display); font-size: clamp(24px, 2.8vw, 34px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; }
+.fr-logs-all { margin-left: auto; color: var(--link); font: 500 12px var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; white-space: nowrap; }
+.fr-logs-all:hover { text-decoration: underline; }
+.fr-logs-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+.fr-log-card {
+  display: grid; gap: 8px; height: 100%; box-sizing: border-box;
+  padding: 16px 18px 14px;
+  border: 1px solid rgba(217, 180, 92, 0.3); border-radius: 16px;
+  background: var(--gunmetal); color: #ECE9E2;
+  text-decoration: none;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.fr-log-card:hover { transform: translateY(-2px); border-color: rgba(217, 180, 92, 0.7); }
+.fr-log-card:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.fr-log-meta { display: flex; align-items: center; justify-content: space-between; gap: 10px; font: 500 11px/1 var(--font-mono); letter-spacing: 0.18em; text-transform: uppercase; }
+.fr-log-meta b { color: #F3DE9C; font-weight: 600; }
+.fr-log-name { font-family: var(--font-display); font-size: 22px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.15; }
+.fr-log-q { color: rgba(236, 233, 226, 0.72); font-size: 14px; line-height: 1.45; }
+.fr-log-date { color: rgba(236, 233, 226, 0.5); font: 11px var(--font-mono); letter-spacing: 0.06em; }
+.fr-log-status { padding: 4px 8px; border: 1px solid currentColor; border-radius: 999px; font: 500 10px/1 var(--font-mono); letter-spacing: 0.14em; text-transform: uppercase; }
+.fr-log-status.is-open { color: #9CC6D4; }
+.fr-log-status.is-ongoing { color: #E0A070; }
+.fr-log-status.is-closed { color: #A9A49A; border-style: dashed; }
+@media (prefers-reduced-motion: reduce) { .fr-log-card { transition: none; } .fr-log-card:hover { transform: none; } }
+
+/* ---------- 17. ALWAYS DARK: a deep-space terminal (17 Oct 2026) ----------
+   Frontier is always dark (index.html sets Dusk without saving it, and
+   the Day/Dusk switch is left out). These tokens are the one place its
+   colours live: charcoal and warm grey, with soft gold as the accent.
+   This file only loads on Frontier pages, so the rest of the site
+   keeps its own Dusk. */
+:root[data-theme="dusk"] {
+  --bg: #121316;          /* page */
+  --bg-raised: #191A1D;   /* panel */
+  --fx-raised: #202226;   /* hover, selected */
+  --rule: #2A2C30;        /* hairlines */
+  --text: #E6E2D8;
+  --muted: #9B988F;       /* secondary text */
+  --fx-label: #8E8B83;    /* small labels (4.5:1 or more on every base) */
+  --fx-faint: #6E6C67;    /* not for text: glyph lines, empty bars */
+  --fx-gold: #C9A96E;     /* highlights, active states, key numbers */
+  --fx-gold-dim: #6F5F42; /* hairlines framing important panels */
+  --fx-up: #8FAF8A;
+  --fx-down: #BD7B6F;
+  --link: #C9A96E;
+  --stamp: #C9A96E;
+  --stamp-text: #C9A96E;
+  --accent: #C9A96E;
+  --accent-text: #C9A96E;
+  color-scheme: dark;
+}
+:root[data-theme="dusk"] .fr-page { --gunmetal: #191A1D; font-variant-numeric: tabular-nums; }
+:root[data-theme="dusk"] .fr-page .bar { background: rgba(18, 19, 22, 0.94); border-bottom: 1px solid var(--rule); }
+
+/* the hero fades into the charcoal below it */
+.fr-x::after { content: ""; position: absolute; inset: auto 0 0; z-index: 4; height: 140px; background: linear-gradient(180deg, transparent, var(--bg)); pointer-events: none; }
+
+/* a very faint starfield and the data centre's perspective lines, carried
+   down the page: fixed, static CSS, nothing redrawn while you scroll */
+.fr::before {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(1px 1px at 12% 18%, rgba(230,226,216,.2), transparent 60%),
+    radial-gradient(1px 1px at 67% 9%, rgba(230,226,216,.14), transparent 60%),
+    radial-gradient(1px 1px at 84% 41%, rgba(230,226,216,.18), transparent 60%),
+    radial-gradient(1px 1px at 31% 63%, rgba(230,226,216,.12), transparent 60%),
+    radial-gradient(1px 1px at 52% 86%, rgba(230,226,216,.16), transparent 60%),
+    radial-gradient(1px 1px at 93% 77%, rgba(230,226,216,.12), transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cg stroke='%23E6E2D8' stroke-opacity='.035' stroke-width='1' vector-effect='non-scaling-stroke' fill='none'%3E%3Cpath d='M0 0L50 34L100 0M0 100L50 34L100 100M0 50L50 34L100 50M25 100L50 34L75 100' vector-effect='non-scaling-stroke'/%3E%3C/g%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  background-size: 520px 520px, 520px 520px, 520px 520px, 520px 520px, 520px 520px, 520px 520px, 100% 100%;
+}
+
+/* sections: generous space, the tilted grid kept inside the page (it
+   used to stick out past the right edge on phones) */
+.fr-section { overflow-x: clip; }
+.fr-section .fr-eyebrow { color: var(--fx-label); }
+.fr-section .fr-eyebrow::before { color: var(--fx-gold); }
+.fr-section .fr-eyebrow::after { content: "_"; margin-left: 3px; color: var(--fx-gold); animation: fr-cursor 1.1s steps(1) infinite; }
+@keyframes fr-cursor { 50% { opacity: 0; } }
+
+/* top bar: function keys */
+.fr-jump { gap: 4px; }
+.fr-jump button { border-radius: 4px; border-color: var(--rule); background: var(--bg-raised); color: var(--muted); }
+.fr-jump button b { margin-right: 4px; color: var(--fx-label); font-weight: 500; }
+.fr-jump button:hover { color: var(--text); background: var(--fx-raised); border-color: var(--rule); }
+.fr-jump button[aria-current] { background: var(--bg-raised); border-color: var(--fx-gold-dim); color: var(--fx-gold); }
+.fr-jump button[aria-current] b { color: var(--fx-gold); }
+.fr-jump button:focus-visible { outline: 1px solid var(--fx-gold); }
+
+/* the ticker: terminal style */
+.fr-ticker { border-bottom: 1px solid var(--rule); color: var(--text); }
+.fr-ticker-label { background: none; color: var(--fx-label); border-right: 1px solid var(--rule); font-weight: 500; }
+.fr-ticker-modes button { border-radius: 0; color: var(--fx-label); }
+.fr-ticker-modes button[aria-pressed="true"] { background: none; color: var(--fx-gold); box-shadow: inset 0 -1px 0 var(--fx-gold); }
+.fr-ticker-modes button:focus-visible { outline: 1px solid var(--fx-gold); }
+.fr-sym { background: none; color: var(--text); }
+.fr-chg.is-up { color: var(--fx-up); }
+.fr-chg.is-down { color: var(--fx-down); }
+.fr-tick:hover { background: var(--fx-raised); }
+
+/* the market strip, just under the hero */
+.fr-market { padding-block: 22px 6px; }
+.fr-market-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; border: 1px solid var(--rule); border-radius: 4px; background: var(--bg-raised); }
+.fr-stat { padding: 12px 16px; border-left: 1px solid var(--rule); min-width: 0; }
+.fr-stat:first-child { border-left: 0; }
+.fr-stat dt { color: var(--fx-label); font: 500 10.5px/1.3 var(--font-mono); letter-spacing: 0.14em; text-transform: uppercase; }
+.fr-stat dd { margin: 6px 0 0; font: 500 22px/1.1 var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.fr-stat dd.is-key { color: var(--fx-gold); }
+.fr-stat dd small { color: var(--muted); font-size: 13px; }
+@media (max-width: 700px) {
+  .fr-market-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fr-stat:nth-child(3) { border-left: 0; }
+  .fr-stat:nth-child(n+3) { border-top: 1px solid var(--rule); }
+  .fr-stat dd { font-size: 18px; }
+}
+
+/* mission logs strip: log lines in panels */
+.fr-log-card { border-radius: 4px; border-color: var(--rule); background: var(--bg-raised); }
+.fr-log-card:hover { border-color: var(--fx-gold-dim); background: var(--fx-raised); transform: none; }
+.fr-log-meta { justify-content: flex-start; flex-wrap: wrap; gap: 6px 8px; letter-spacing: 0.12em; color: var(--muted); }
+.fr-log-meta b { color: var(--fx-gold); }
+.fr-log-meta i { font-style: normal; color: var(--fx-faint); }
+.fr-log-status { padding: 0; border: 0; font-size: inherit; letter-spacing: inherit; }
+.fr-log-status.is-open, .fr-log-status.is-ongoing { color: var(--text); }
+.fr-log-status.is-closed { color: var(--fx-label); }
+.fr-log-q { color: var(--muted); }
+
+/* family cards and their technologies ("positions") */
+.fr-dossier { border-radius: 8px; }
+.fr-dossier:hover { box-shadow: none; border-color: var(--fx-gold-dim); }
+.fr-dossier-media img { opacity: 0.75; filter: saturate(0.75); }
+.fr-dossier:hover .fr-dossier-media img { opacity: 0.9; }
+.fr-dossier-family { display: flex; align-items: center; gap: 8px; color: var(--fx-label); }
+.fr-glyph { flex: none; width: 18px; height: 18px; fill: none; stroke: var(--muted); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.fr-dtech { border-radius: 4px; background: var(--bg); border-color: var(--rule); }
+a.fr-dtech:hover, a.fr-dtech:focus-visible { border-color: var(--fx-gold-dim); background: var(--fx-raised); }
+.fr-dtech-trl { color: var(--fx-gold); }
+.fr-mini-trl i { background: var(--rule); }
+.fr-mini-trl i.on { background: var(--fx-gold); }
+.fr-dtech-metric b { font: 500 14px var(--font-mono); }
+.fr-dtech-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 4px; }
+.fr-dtech-foot .fr-dtech-open { margin: 0; color: var(--fx-gold); }
+.fr-chip { padding: 3px 7px; border: 1px solid var(--rule); border-radius: 2px; color: var(--muted); font: 500 10.5px/1 var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; }
+
+/* compare: a terminal grid with a header row that stays put */
+.fr-compare-table { border-radius: 4px; overflow: clip; background: var(--bg-raised); }
+.fr-ct-head { background: var(--fx-raised); border-bottom: 1px solid var(--rule) !important; font: 500 12px/1.3 var(--font-mono) !important; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text); }
+.fr-ct-cell { color: var(--muted); }
+.fr-compare-table .is-col { background: color-mix(in srgb, var(--fx-gold) 6%, var(--bg-raised)); color: var(--text); }
+.fr-compare-table .fr-ct-head.is-col { color: var(--fx-gold); background: color-mix(in srgb, var(--fx-gold) 8%, var(--fx-raised)); }
+@media (min-width: 861px) { .fr-ct-head { position: sticky; top: var(--bar-h); z-index: 2; } }
+
+/* compare picker: quiet chips, gold when chosen */
+.fr-pick span { border-radius: 4px; color: var(--muted); }
+.fr-pick:hover span { background: var(--fx-raised); }
+.fr-pick input:checked + span { background: var(--bg-raised); color: var(--fx-gold); border-color: var(--fx-gold-dim); }
+.fr-pick input:focus-visible + span { outline: 1px solid var(--fx-gold); }
+
+/* one quick scanline sweep when the page opens */
+.fr-scan { position: fixed; inset: 0; z-index: 200; pointer-events: none; background: linear-gradient(180deg, transparent 0, rgba(201,169,110,.04) 48%, rgba(201,169,110,.08) 50%, transparent 52%); background-size: 100% 300%; animation: fr-scan 0.9s ease-out 1 forwards; }
+@keyframes fr-scan { from { background-position: 0 100%; } to { background-position: 0 0; opacity: 0; visibility: hidden; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .fr-section .fr-eyebrow::after { animation: none; }
+  .fr-scan, .fr::before { display: none; }
+}
+@media (max-width: 640px) { .fr-jump button b { margin-right: 0; } }
+@media (max-width: 520px) { .fr-jump-word { display: none; } .fr-jump button { padding: 6px 8px; } }

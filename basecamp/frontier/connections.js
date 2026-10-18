@@ -6,7 +6,7 @@
 
    tags         The shared topic tags for every project.
    links        { from, to, reason, status }
-                  from / to   "frontier:fusion", "greenhouse",
+                  from / to   "frontier:fusion", "frontier:log-001", "greenhouse",
                               "akadimia#faculty", "atlas:FRA" …
                   status      "suggested" | "approved" | "rejected"
    places       Where each id points to (from the site root).
@@ -43,7 +43,8 @@ window.CONNECTIONS = {
     "kypriaka:kornesios":     { label: "Kypriaka: Hadjigeorgakis Kornesios", href: "kypriaka/index.html#/e/kornesios" },
     "kypriaka:ottoman":       { label: "Kypriaka: the Ottoman layer", href: "kypriaka/index.html#/layer/ottoman" },
     "spiti":                  { label: "Σπίτι (Spíti)", href: "language/spiti/index.html" },
-    "frontier#metals":        { label: "Frontier: the metals of the energy transition", href: "basecamp/frontier/index.html" },
+    "frontier:logs":          { label: "Frontier: Mission logs", href: "basecamp/frontier/logs/index.html" },
+    "frontier:log-001":       { label: "Mission log 001: The metals of the frontier", href: "basecamp/frontier/logs/index.html#/001" },
   },
 
   links: [
@@ -59,9 +60,9 @@ window.CONNECTIONS = {
       reason: "ITER, the international fusion tokamak, is being built in southern France." },
     { from: "frontier:fusion", to: "atlas:GBR", status: "approved",
       reason: "JET, the European tokamak, ran at Culham in Oxfordshire until 2023." },
-    { from: "frontier", to: "kypriaka:late-cypriot", status: "approved",
+    { from: "frontier:log-001", to: "kypriaka:late-cypriot", status: "approved",
       reason: "Copper made Late Bronze Age Cyprus; Cyprus gave copper its name." },
-    { from: "frontier", to: "kypriaka:oxhide-ingots", status: "approved",
+    { from: "frontier:log-001", to: "kypriaka:oxhide-ingots", status: "approved",
       reason: "Copper crossed the Bronze Age Mediterranean as oxhide ingots, slabs of 20 to 30 kilograms." },
     { from: "frontier:crispr", to: "akadimia#stream", status: "approved",
       reason: "Gene-edited crops and how they are regulated are food systems questions." },
@@ -73,9 +74,11 @@ window.CONNECTIONS = {
       reason: "Light is a vertical farm's biggest cost, so both depend on cheap, clean electricity." },
     { from: "frontier:crispr", to: "frontier:vertical-farming", status: "suggested",
       reason: "Two ways to change how crops grow: one edits the plant, the other its surroundings." },
-    { from: "frontier:humanoid-robots", to: "frontier#metals", status: "suggested",
-      reason: "The electric Atlas moves with high-density neodymium magnets, one of the magnet rare earths in Frontier's metals panel." },
+    { from: "frontier:humanoid-robots", to: "frontier:log-001", status: "suggested",
+      reason: "The electric Atlas moves with high-density neodymium magnets, one of the magnet rare earths followed in Mission log 001." },
     { from: "frontier:humanoid-robots", to: "akadimia#stream", status: "suggested",
       reason: "Who gains when robots do manual work is a question of inequality, one of Akadimia's topics." },
+    { from: "frontier:fusion", to: "frontier:log-001", status: "suggested",
+      reason: "A fusion power plant would breed its tritium fuel in a blanket of lithium, one of the metals followed in Mission log 001." },
   ],
 };
