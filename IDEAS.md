@@ -44,3 +44,19 @@ When I pick it back up: ask Claude Code for a plan only (diagram, tables, securi
 - Library sections: Readings from my courses, Lectures and talks, Concepts (short notes on big ideas), more Professors.
 - Permanent saving via a "GitHub inbox": a Save button opens a pre-filled GitHub issue; an Action files it into the library (data.js) and closes the issue. Only issues opened by my account count; anything else is ignored.
 - Look again for official IMF blog and FAO newsroom feeds (none verified on 15 Oct 2026).
+
+## Frontier: where I left off (paused 22 Oct 2026)
+
+Done and live: all four technologies charted, the stock ticker (Stocks | Commodities), F1/F2/F3 jump keys, Mission Logs with Log 001 "The metals of the frontier", working source links, the always-dark terminal look, and no sideways scroll on phones.
+
+Half-done:
+- The two workflow files (Akadimia daily feed, Frontier ticker prices) are committed locally but not pushed: my GitHub token lacks the `workflow` scope. Until they're up, ticker prices never refresh.
+- Commodity prices are empty: I haven't chosen a source (World Bank Pink Sheet monthly alone, or plus daily EIA oil and gas and gold and silver).
+- Log 001's open questions are Claude's drafts; I should rewrite them in my own words.
+- Suggested connections waiting for review in connections.js (fusion and humanoid robots to Log 001). Vertical farming's field note is still a placeholder.
+- The work-in-progress notice still shows. `basecamp/frontier/styletile.html` is a local design reference, deliberately not committed.
+
+Next steps:
+1. Make a GitHub token with the `workflow` scope (or add the two files on github.com), push, then run akadimia-feed once by hand.
+2. Pick the commodity source so Claude can write the price job.
+3. Rewrite Log 001's open questions, review the connections, then remove the work-in-progress notice.
