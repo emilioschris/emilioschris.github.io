@@ -21,7 +21,7 @@
   <meta name="twitter:image:alt" content="A red-tailed hawk with a terracotta tail perched on a branch over faint contour lines, beside the words Field Notes and the coordinates 35.1°N 33.4°E.">
 
   <!-- Same Day/Dusk choice as the homepage, applied before the page draws -->
-  <script src="../../shared/theme-init.js?v=2026-11-02.1"></script>
+  <script src="../../shared/theme-init.js?v=2026-11-02.2"></script>
 
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
@@ -34,8 +34,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 
   <!-- The shared design system, then Paratiritirio's own styles -->
-  <link rel="stylesheet" href="../../shared/field-notes.css?v=2026-11-02.1">
-  <link rel="stylesheet" href="styles.css?v=2026-11-02.1">
+  <link rel="stylesheet" href="../../shared/field-notes.css?v=2026-11-02.2">
+  <link rel="stylesheet" href="styles.css?v=2026-11-02.2">
 </head>
 <body class="obs-page">
 
@@ -70,7 +70,7 @@
       <p class="obs-lede">Where Cyprus's economy is heading: the big projects, the companies and the money behind them, district by district. Pick a district or a pin. Every entry shows its sources and the date it was last checked.</p>
       <dl class="obs-strip" id="strip"></dl>
       <nav class="obs-nav" aria-label="Sections">
-        <a href="#atlas-title">Map</a><a href="#pulse">The Pulse</a><a href="#who">Who benefits</a><a href="#companies">Companies</a><a href="#entries">Every entry</a>
+        <a href="#atlas-title">Map</a><a href="#watch">Watchlist</a><a href="#pulse">The Pulse</a><a href="#who">Who benefits</a><a href="#companies">Companies</a><a href="#entries">Every entry</a>
       </nav>
     </header>
 
@@ -81,6 +81,8 @@
         <p class="pipeline-lede">From a call for investors to a finished project. Pick a stage to show only its pins.</p>
       </div>
       <div class="funnel" id="funnel"></div>
+      <div class="filters" id="filters" role="group" aria-label="Filter the map and the list"></div>
+      <p class="book-note" id="book-note" hidden>Showing entries tagged for <em>A Slice of the Sun</em>: foreign property buying and what it means for local Cypriots, especially in Paphos. Each source in these entries has a "Copy citation" button.</p>
     </section>
 
     <!-- ================= THE MAP ================= -->
@@ -93,6 +95,20 @@
       <div class="atlas-under">
         <div class="atlas-legend" id="legend"></div>
         <p class="atlas-credit">District outlines: <a href="https://www.geoboundaries.org/">geoBoundaries</a>, from © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors (<a href="https://opendatacommons.org/licenses/odbl/1-0/">ODbL</a>). Drawn with <a href="https://leafletjs.com/">Leaflet</a>. <button class="linkish" id="about-open" type="button">About this map and the north</button></p>
+      </div>
+    </section>
+
+    <!-- ================= WATCHLIST ================= -->
+    <section class="watch" id="watch" aria-labelledby="watch-title" tabindex="-1">
+      <div class="watch-head">
+        <h2 class="pipeline-title" id="watch-title">★ Your watchlist</h2>
+        <p class="pipeline-lede">Saved in this browser only. Back it up to move it to another device.</p>
+      </div>
+      <ul class="watch-list" id="watch-list"></ul>
+      <div class="watch-tools">
+        <button type="button" class="btn" id="watch-export">Export backup</button>
+        <label class="btn watch-import">Import backup<input type="file" id="watch-import" accept="application/json,.json" class="visually-hidden"></label>
+        <p class="watch-msg" id="watch-msg" role="status"></p>
       </div>
     </section>
 
@@ -160,12 +176,12 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
   <!-- The shared script, the data, then the page itself -->
-  <script src="../../shared/field-notes.js?v=2026-11-02.1"></script>
-  <script src="geo.js?v=2026-11-02.1"></script>
-  <script src="data.js?v=2026-11-02.1"></script>
-  <script src="pulse-data.js?v=2026-11-02.1"></script>
-  <script src="pulse-snapshot.js?v=2026-11-02.1"></script>
-  <script src="script.js?v=2026-11-02.1"></script>
-  <script src="panels.js?v=2026-11-02.1"></script>
+  <script src="../../shared/field-notes.js?v=2026-11-02.2"></script>
+  <script src="geo.js?v=2026-11-02.2"></script>
+  <script src="data.js?v=2026-11-02.2"></script>
+  <script src="pulse-data.js?v=2026-11-02.2"></script>
+  <script src="pulse-snapshot.js?v=2026-11-02.2"></script>
+  <script src="script.js?v=2026-11-02.2"></script>
+  <script src="panels.js?v=2026-11-02.2"></script>
 </body>
 </html>

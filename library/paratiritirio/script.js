@@ -18,6 +18,20 @@
   const statusById = Object.fromEntries(P.statuses.map((s) => [s.id, s]));
   const sectorById = Object.fromEntries(P.sectors.map((s) => [s.id, s]));
 
+  /* Filters, the watchlist and book mode (see 5b and 5c) */
+  const filters = { type: "", sector: "", band: "", watch: false };
+  let bookMode = false;
+  const STORE = "paratiritirio-v1";
+  const watchlist = new Set();
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORE) || "{}");
+    (saved.watchlist || []).forEach((id) => { if (byId[id]) watchlist.add(id); });
+  } catch (e) { /* storage blocked: the watchlist lasts for this visit only */ }
+  const isWatched = (id) => watchlist.has(id);
+  function saveWatch() {
+    try { localStorage.setItem(STORE, JSON.stringify({ watchlist: [...watchlist] })); } catch (e) {}
+  }
+
   /* ---------- 1. HELPERS ---------- */
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
@@ -92,10 +106,16 @@
   }
   const analysisChip = `<span class="ev ev--analysis" title="My reading of the sources, not a fact from them.">Analysis</span>`;
 
-  function sourceList(sources) {
-    return `<ol class="o-sources">${sources.map((s) => `
+  /* A citation for the book: Publisher. "Title." Date. URL (accessed …). */
+  function citation(s, asOf) {
+    return `${s.publisher}. "${s.title}."${s.date ? " " + fmtDate(s.date) + "." : ""} ${s.url} (accessed ${fmtDate(asOf || P.asOf)}).`;
+  }
+
+  function sourceList(sources, { cite = false, asOf } = {}) {
+    return `<ol class="o-sources">${sources.map((s, i) => `
       <li><a href="${esc(s.url)}" rel="noopener">${esc(s.title)}</a>
-        <span class="o-src-meta">${kindChip(s.kind)} ${esc(s.publisher)}${s.date ? " · " + esc(fmtDate(s.date)) : ""}</span></li>`).join("")}
+        <span class="o-src-meta">${kindChip(s.kind)} ${esc(s.publisher)}${s.date ? " · " + esc(fmtDate(s.date)) : ""}</span>
+        ${cite ? `<button type="button" class="cite-btn" data-cite="${esc(citation(s, asOf))}">Copy citation</button>` : ""}</li>`).join("")}
     </ol>`;
   }
 
@@ -114,7 +134,10 @@
       <p class="p-coords">${esc(fmtCoords(e.coords))} · ${esc(d.name)}${e.north ? " · north" : ""}</p>
       <p class="o-kind">${glyph(e.type, 14)} ${esc(t.label)} · ${e.sectors.map((s) => esc(sectorById[s].label)).join(", ")}</p>
       <h2 class="p-title" id="panel-title">${esc(e.name)}</h2>
-      <div class="o-stamprow">${stamp(e.status)}</div>
+      <div class="o-stamprow">${stamp(e.status)}
+        <button type="button" class="star-btn" data-star="${esc(e.id)}" aria-pressed="${isWatched(e.id)}">${isWatched(e.id) ? "★ On your watchlist" : "☆ Add to watchlist"}</button>
+        ${e.book ? `<span class="book-tag" title="Relevant to A Slice of the Sun">A Slice of the Sun</span>` : ""}
+      </div>
       ${e.coordsNote ? `<p class="o-fine">${esc(e.coordsNote)}</p>` : ""}
 
       <section class="o-value" aria-label="Value">
@@ -158,7 +181,7 @@
         <ul>${e.flags.map((f) => `<li>${esc(f)}</li>`).join("")}</ul>
       </section>` : ""}
 
-      <section class="p-section"><p class="p-label">Sources</p>${sourceList(e.sources)}
+      <section class="p-section"><p class="p-label">Sources</p>${sourceList(e.sources, { cite: e.book || bookMode, asOf: e.asOf })}
         <p class="o-asof">As of ${esc(fmtDate(e.asOf))}</p>
       </section>
       ${e.tags && e.tags.length ? `<p class="o-tags">${e.tags.map((t) => `<span>${esc(t)}</span>`).join("")}</p>` : ""}`;
@@ -244,6 +267,10 @@
   }
 
   panelBody.addEventListener("click", (ev) => {
+    const star = ev.target.closest("[data-star]");
+    if (star) { toggleWatch(star.dataset.star); star.setAttribute("aria-pressed", String(isWatched(star.dataset.star))); star.textContent = isWatched(star.dataset.star) ? "★ On your watchlist" : "☆ Add to watchlist"; return; }
+    const cite = ev.target.closest("[data-cite]");
+    if (cite) { copyText(cite.dataset.cite, cite); return; }
     const b = ev.target.closest("[data-entry]");
     if (b) { openEntry(b.dataset.entry); panelEl.querySelector(".panel-scroll").scrollTop = 0; }
   });
@@ -461,7 +488,7 @@
           <ul class="ledger-list">${list.map((e) => `
             <li><button type="button" class="ledger-row" data-entry="${esc(e.id)}">
               <span class="ledger-glyph pin pin--${e.type} pin--${e.status} pin--legend">${glyph(e.type, 12)}</span>
-              <span class="ledger-name">${esc(e.name)}${e.north ? ' <span class="ledger-north">north</span>' : ""}</span>
+              <span class="ledger-name"><span class="ledger-star" data-star-mark="${esc(e.id)}" aria-hidden="true">${isWatched(e.id) ? "★" : ""}</span>${esc(e.name)}${e.north ? ' <span class="ledger-north">north</span>' : ""}${e.book ? ' <span class="ledger-book" title="A Slice of the Sun">book</span>' : ""}</span>
               <span class="ledger-meta"><span>${esc(statusById[e.status].label)}</span><span class="ledger-eur">${e.value.eur !== null ? esc(fmtEur(e.value.eur)) : "n/a"}</span></span>
             </button></li>`).join("")}
           </ul>
@@ -484,18 +511,74 @@
 
   function applyStage(stage) {
     stageFilter = stageFilter === stage ? null : stage;
-    const keep = (e) => !stageFilter || e.status === stageFilter;
+    applyFilters();
+  }
+
+  /* All filters together: pipeline stage, type, sector, value band,
+     the book and the watchlist. Pins and list rows that don't match
+     are dimmed, not removed, so the map keeps its shape. */
+  function matches(e) {
+    const f = filters;
+    if (stageFilter && e.status !== stageFilter) return false;
+    if (f.type && e.type !== f.type) return false;
+    if (f.sector && !e.sectors.includes(f.sector)) return false;
+    if (f.band && band(e).id !== f.band) return false;
+    if (bookMode && !e.book) return false;
+    if (f.watch && !isWatched(e.id)) return false;
+    return true;
+  }
+
+  function applyFilters() {
+    let shown = 0;
     P.entries.forEach((e) => {
+      const keep = matches(e);
+      if (keep) shown++;
       const m = markers[e.id];
       const el = m && m.getElement();
-      if (el) el.classList.toggle("is-filtered", !keep(e));
+      if (el) el.classList.toggle("is-filtered", !keep);
       const row = document.querySelector(`.ledger-row[data-entry="${e.id}"]`);
-      if (row) row.closest("li").classList.toggle("is-filtered", !keep(e));
+      if (row) row.closest("li").classList.toggle("is-filtered", !keep);
     });
     document.querySelectorAll(".funnel-stage").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.stage === stageFilter)));
+    const any = stageFilter || filters.type || filters.sector || filters.band || filters.watch || bookMode;
     const status = document.getElementById("funnel-status");
-    status.textContent = stageFilter ? `Showing ${statusById[stageFilter].label.toLowerCase()} only.` : "Showing everything.";
-    document.getElementById("funnel-clear").hidden = !stageFilter;
+    if (status) status.textContent = any ? `Showing ${shown} of ${P.entries.length} entries.` : "Showing everything.";
+    const clear = document.getElementById("funnel-clear");
+    if (clear) clear.hidden = !any;
+    document.body.classList.toggle("is-book-mode", bookMode);
+  }
+
+  function clearFilters() {
+    stageFilter = null;
+    filters.type = filters.sector = filters.band = "";
+    filters.watch = false;
+    bookMode = false;
+    ["f-type", "f-sector", "f-band"].forEach((id) => { const el = document.getElementById(id); if (el) el.value = ""; });
+    ["f-watch", "f-book"].forEach((id) => { const el = document.getElementById(id); if (el) el.setAttribute("aria-pressed", "false"); });
+    applyFilters();
+  }
+
+  function buildFilters() {
+    const el = document.getElementById("filters");
+    if (!el) return;
+    const opt = (list, label) => `<option value="">${label}</option>` + list.map((x) => `<option value="${esc(x.id)}">${esc(x.label)}</option>`).join("");
+    el.innerHTML = `
+      <label class="f-field"><span>Type</span><select id="f-type">${opt(P.types, "All types")}</select></label>
+      <label class="f-field"><span>Sector</span><select id="f-sector">${opt(P.sectors, "All sectors")}</select></label>
+      <label class="f-field"><span>Value</span><select id="f-band">${opt(P.valueBands, "Any value")}</select></label>
+      <button type="button" class="f-toggle" id="f-watch" aria-pressed="false">★ Watchlist <span id="watch-count"></span></button>
+      <button type="button" class="f-toggle f-toggle--book" id="f-book" aria-pressed="false">A Slice of the Sun</button>`;
+    [["f-type", "type"], ["f-sector", "sector"], ["f-band", "band"]].forEach(([id, key]) =>
+      document.getElementById(id).addEventListener("change", (ev) => { filters[key] = ev.target.value; applyFilters(); }));
+    document.getElementById("f-watch").addEventListener("click", (ev) => {
+      filters.watch = !filters.watch; ev.currentTarget.setAttribute("aria-pressed", String(filters.watch)); applyFilters();
+    });
+    document.getElementById("f-book").addEventListener("click", (ev) => {
+      bookMode = !bookMode; ev.currentTarget.setAttribute("aria-pressed", String(bookMode)); applyFilters();
+      const note = document.getElementById("book-note");
+      if (note) note.hidden = !bookMode;
+    });
+    updateWatchCount();
   }
 
   function buildFunnel() {
@@ -524,7 +607,79 @@
       const b = ev.target.closest("[data-stage]");
       if (b) applyStage(b.dataset.stage);
     });
-    document.getElementById("funnel-clear").addEventListener("click", () => applyStage(stageFilter));
+    document.getElementById("funnel-clear").addEventListener("click", clearFilters);
+  }
+
+  /* ---------- 5c. THE WATCHLIST ----------
+     Starred entries, saved in this browser only ("paratiritirio-v1"),
+     with export and import as a JSON file so they can move between
+     devices. Ids never change, so a backup always lines up. */
+  function updateWatchCount() {
+    const n = watchlist.size;
+    const c = document.getElementById("watch-count");
+    if (c) c.textContent = n ? `(${n})` : "";
+    document.querySelectorAll("[data-star-mark]").forEach((m) => { m.textContent = isWatched(m.dataset.starMark) ? "★" : ""; });
+    const list = document.getElementById("watch-list");
+    if (list) {
+      const items = P.entries.filter((e) => watchlist.has(e.id));
+      list.innerHTML = items.length
+        ? items.map((e) => `<li><button type="button" class="linkish" data-entry="${esc(e.id)}">${esc(e.name)}</button> <span>${esc(districtById[e.district].name)} · ${esc(statusById[e.status].label)}</span></li>`).join("")
+        : `<li class="watch-empty">Nothing starred yet. Open any entry and choose "Add to watchlist".</li>`;
+    }
+  }
+
+  function toggleWatch(id) {
+    if (watchlist.has(id)) watchlist.delete(id); else watchlist.add(id);
+    saveWatch();
+    updateWatchCount();
+    if (filters.watch) applyFilters();
+  }
+
+  function buildWatchTools() {
+    const el = document.getElementById("watch");
+    if (!el) return;
+    el.addEventListener("click", (ev) => {
+      const b = ev.target.closest("[data-entry]");
+      if (b) openEntry(b.dataset.entry, b);
+    });
+    document.getElementById("watch-export").addEventListener("click", () => {
+      const data = { app: "paratiritirio", version: 1, saved: new Date().toISOString().slice(0, 10), watchlist: [...watchlist] };
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: "application/json" }));
+      a.download = `paratiritirio-watchlist-${data.saved}.json`;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    });
+    const input = document.getElementById("watch-import");
+    input.addEventListener("change", () => {
+      const file = input.files && input.files[0];
+      const msg = document.getElementById("watch-msg");
+      if (!file) return;
+      file.text().then((text) => {
+        const data = JSON.parse(text);
+        const ids = (data.watchlist || []).filter((id) => byId[id]);
+        ids.forEach((id) => watchlist.add(id));
+        saveWatch(); updateWatchCount(); applyFilters();
+        msg.textContent = `Added ${ids.length} ${ids.length === 1 ? "entry" : "entries"} from the backup.`;
+      }).catch(() => { msg.textContent = "That file isn't a Paratiritirio watchlist backup."; })
+        .finally(() => { input.value = ""; });
+    });
+    updateWatchCount();
+  }
+
+  /* Copy text, or select it for copying where the clipboard is refused */
+  function copyText(text, btn) {
+    const done = () => { const old = btn.textContent; btn.textContent = "Copied"; setTimeout(() => { btn.textContent = old; }, 1400); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, btn, done));
+    } else fallbackCopy(text, btn, done);
+  }
+  function fallbackCopy(text, btn, done) {
+    const ta = document.createElement("textarea");
+    ta.value = text; ta.setAttribute("readonly", ""); ta.className = "visually-hidden";
+    btn.after(ta); ta.select();
+    try { document.execCommand("copy"); done(); } catch (e) { btn.textContent = "Select and copy"; ta.className = "cite-text"; }
+    setTimeout(() => { if (ta.className === "visually-hidden") ta.remove(); }, 0);
   }
 
   /* ---------- 6. LINKS INTO THE PAGE ---------- */
@@ -539,6 +694,8 @@
   buildMap();
   buildLedger();
   buildFunnel();
+  buildFilters();
+  buildWatchTools();
   fromHash();
   window.addEventListener("hashchange", fromHash);
 })();
