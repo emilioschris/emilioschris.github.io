@@ -4,7 +4,7 @@ PARATIRITIRIO · monthly data refresh
 ------------------------------------
 Fetches the Pulse indicators, the wealth distribution and the company
 structure from three free, official APIs and writes them to
-library/paratiritirio/pulse-data.js (never hand-edit that file).
+basecamp/paratiritirio/pulse-data.js (never hand-edit that file).
 
     Eurostat   https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/
     ECB        https://data-api.ecb.europa.eu/service/data/   (carries Central Bank of Cyprus series)
@@ -13,7 +13,7 @@ library/paratiritirio/pulse-data.js (never hand-edit that file).
 Run by .github/workflows/paratiritirio-pulse.yml on the 8th of every month,
 or by hand from the repository root:
 
-    python3 library/paratiritirio/tools/update_pulse.py
+    python3 basecamp/paratiritirio/tools/update_pulse.py
 
 Standard-library Python only. If a source fails, that series keeps its
 previous values (read back from the existing file), so one broken API never

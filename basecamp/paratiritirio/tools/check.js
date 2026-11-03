@@ -8,7 +8,7 @@
    sits inside its district (offshore pins outside them all),
    and that there are no em dashes.
 
-   Run it from the library/paratiritirio folder with the
+   Run it from the basecamp/paratiritirio folder with the
    JavaScript engine that comes with every Mac:
 
    /System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Helpers/jsc \

@@ -132,6 +132,23 @@ const PROJECTS = [
     },
   },
   {
+    title: "Παρατηρητήριο (Paratiritirio)",
+    meaning: "observatory",            // παρατηρητήριο, "observatory, observation post" (Wiktionary)
+    section: "base-camp",
+    status: "ongoing",
+    link: "basecamp/paratiritirio/index.html",
+    description: "Where Cyprus's economy is heading: the big projects, the money behind them and who benefits, district by district.",
+    coords: "34.94°N 32.86°E",          // Mount Olympus, Troodos: the island's highest point
+    date: "2026-11",
+    tended: "2026-11-02",
+    elevation: "ELEV 1,952 m · 31 ENTRIES",
+    image: {
+      src: "assets/cards/paratiritirio.webp",
+      alt: "Limassol's seafront at night: new high-rise towers lit up beside older apartment blocks, their lights reflected in the sea.",
+      tone: "terracotta",
+    },
+  },
+  {
     title: "The Atlas",
     section: "library",
     status: "ongoing",
@@ -203,18 +220,6 @@ const PROJECTS = [
       alt: "A drawing of the Greenhouse at golden hour: a tall glass conservatory with palms and a hanging fern, my plants on two cedar benches, and the hawk flying under the roof.",
       tone: "olive",
     },
-  },
-  {
-    title: "Παρατηρητήριο (Paratiritirio)",
-    meaning: "observatory",            // παρατηρητήριο, "observatory, observation post" (Wiktionary)
-    section: "library",
-    status: "ongoing",
-    link: "library/paratiritirio/index.html",
-    description: "Where Cyprus's economy is heading: the big projects, the money behind them and who benefits, district by district.",
-    coords: "34.94°N 32.86°E",          // Mount Olympus, Troodos: the island's highest point
-    date: "2026-11",
-    tended: "2026-11-02",
-    elevation: "ELEV 1,952 m · 31 ENTRIES",
   },
   {
     title: "The Deep End",
