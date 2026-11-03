@@ -146,6 +146,13 @@ const PROJECTS = [
       src: "assets/cards/paratiritirio.webp",
       alt: "Limassol's seafront at night: new high-rise towers lit up beside older apartment blocks, their lights reflected in the sea.",
       tone: "terracotta",
+      credit: {
+        title: "Limassol's seafront towers at night",
+        author: "Sotiris Evagorou",
+        source: "The photographer's own photo",
+        licence: "Used with the photographer's permission",
+        note: "Cropped to 5:4 for the card. Not under an open licence: please ask the photographer before reusing it.",
+      },
     },
   },
   {
