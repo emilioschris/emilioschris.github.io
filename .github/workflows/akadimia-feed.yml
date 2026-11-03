@@ -1,0 +1,52 @@
+# Akadimia daily feed
+# Once a day, GitHub runs basecamp/akadimia/tools/update_feed.py, which reads
+# the approved feeds and OpenAlex and rewrites basecamp/akadimia/feed-data.js.
+# It commits only when something changed. To check it ran: the repo's Actions
+# tab → "Akadimia daily feed" (green tick = ran fine). "Run workflow" there
+# runs it by hand.
+name: Akadimia daily feed
+
+on:
+  schedule:
+    - cron: "23 6 * * *"      # every day at 06:23 UTC
+  workflow_dispatch:           # the "Run workflow" button
+
+permissions:
+  contents: write              # needed to commit feed-data.js
+  pages: write                 # needed to ask GitHub Pages to rebuild
+
+concurrency:
+  group: akadimia-feed
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch feeds and research
+        run: python3 basecamp/akadimia/tools/update_feed.py
+
+      - name: Commit if anything changed
+        run: |
+          if git diff --quiet -- basecamp/akadimia/feed-data.js; then
+            echo "Nothing new today."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add basecamp/akadimia/feed-data.js
+          git commit -m "Akadimia: daily feed update"
+          git push
+          echo "changed=yes" >> "$GITHUB_OUTPUT"
+        id: commit
+
+      # Commits made by a workflow may not start a Pages build on their own,
+      # so ask for one (only when the feed changed).
+      - name: Rebuild the site
+        if: steps.commit.outputs.changed == 'yes'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds"

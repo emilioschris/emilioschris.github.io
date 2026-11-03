@@ -1,0 +1,45 @@
+# Frontier stock ticker
+# Every 30 minutes while US markets are open (Mon to Fri, roughly 13:30 to
+# 20:00 UTC), fetch the latest prices for the companies in
+# basecamp/frontier/data.js and commit ticker-data.js if they changed.
+# Needs a free Finnhub API key saved as the repository secret FINNHUB_KEY.
+name: Frontier stock ticker
+
+on:
+  schedule:
+    - cron: "*/30 13-20 * * 1-5"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: frontier-ticker
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch prices
+        env:
+          FINNHUB_KEY: ${{ secrets.FINNHUB_KEY }}
+        run: python3 basecamp/frontier/tools/update_ticker.py
+      - name: Commit if anything changed
+        id: commit
+        run: |
+          if git diff --quiet -- basecamp/frontier/ticker-data.js; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add basecamp/frontier/ticker-data.js
+          git commit -m "Frontier: ticker prices"
+          git pull --rebase -q && git push
+          echo "changed=yes" >> "$GITHUB_OUTPUT"
+      - name: Rebuild the site
+        if: steps.commit.outputs.changed == 'yes'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds"
