@@ -413,7 +413,150 @@
     el.innerHTML = cards.join("");
   }
 
+  /* ---------- 5. CAPITAL: where foreign investment comes from ---------- */
+  const fmtBn = (m) => "€" + num(m / 1000, m >= 10000 ? 0 : 1) + "bn";
+
+  function buildCapital() {
+    const el = document.getElementById("capital-grid");
+    const f = D.fdiCapital;
+    if (!el || !f) return;
+    const cards = [];
+    const share = (v) => num((v / f.total) * 100, 0) + "%";
+    cards.push(`
+      <article class="wcard wcard--wide">
+        <header><h3>Where it comes from</h3><p class="pcard-unit">foreign direct investment held in Cyprus, end of ${esc(f.year)}, top 10 countries</p></header>
+        <div class="wsplit">
+          <div><p class="wsub">Immediate: where the money arrives from</p>
+            ${bars(f.topImmediate.map(([, name, v]) => [name, v / 1000, "s1"]), { dp: 1, unit: "bn" })}</div>
+          <div><p class="wsub">Ultimate: who finally controls it</p>
+            ${bars(f.topUltimate.map(([, name, v]) => [name, v / 1000, "s2"]), { dp: 1, unit: "bn" })}</div>
+        </div>
+        <p class="pcard-extra">Total: ${fmtBn(f.total)}. Offshore centres such as the British Virgin Islands and Jersey shrink or vanish when you follow the money to its owner, while the United States grows. Cyprus itself appears among the ultimate investors: Cypriot money that left and came back through a company abroad.</p>
+        ${srcLine(f.source, f.year)}
+        <p class="card-snap">${esc(f.note)}</p>
+      </article>`);
+
+    cards.push(`
+      <article class="wcard wcard--wide">
+        <header><h3>How it has shifted</h3><p class="pcard-unit">the six largest immediate sources, € billion, end of each year</p></header>
+        <div class="multiples" id="cap-trend">${Object.keys(f.trend).map((code) => {
+          const name = (f.topImmediate.find((r) => r[0] === code) || [code, code])[1];
+          return `<div class="multiple"><p class="wsub">${esc(name)}</p><div class="wchart" data-trend="${esc(code)}"></div></div>`;
+        }).join("")}</div>
+        ${srcLine(f.source, f.year)}
+      </article>`);
+
+    cards.push(`
+      <article class="wcard">
+        <header><h3>Where it goes</h3><p class="pcard-unit">by activity of the Cypriot company, end of ${esc(f.sectorYear)}</p></header>
+        ${bars(f.sectors.filter(([k]) => ["K642", "K", "L", "J", "H50", "M", "G"].includes(k)).map(([k, label, v]) => [
+          label.replace("Activities of holding companies", "Holding companies").replace("Financial and insurance activities", "All finance and insurance").replace("Information and communication", "Information and communication (incl. tech)"),
+          v / 1000, k === "K642" ? "s2" : "s1"]), { dp: 1, unit: "bn" })}
+        <p class="pcard-extra">Holding companies alone hold ${share(f.sectors.find((r) => r[0] === "K642")[2])} of the total. Real estate, tech and shipping, the sectors most visible on the map, are each a small slice.</p>
+        ${srcLine(f.source, f.sectorYear)}
+      </article>`);
+
+    const L = P.listed;
+    if (L) {
+      cards.push(`
+        <article class="wcard">
+          <header><h3>The biggest listed companies</h3><p class="pcard-unit">by market value, ${esc(L.date.split("-").reverse().join("/"))}</p></header>
+          <div class="table-wrap"><table class="listed">
+            <thead><tr><th scope="col">#</th><th scope="col">Company</th><th scope="col">Sector <span class="ev ev--analysis">Analysis</span></th><th scope="col" class="num">Value</th></tr></thead>
+            <tbody>${L.companies.map((c, i) => `<tr>
+              <td class="num">${i + 1}</td>
+              <td>${c.entry ? `<a href="#/e/${esc(c.entry)}">${esc(c.name)}</a>` : esc(c.name)}</td>
+              <td>${esc(c.sector)}</td>
+              <td class="num">${c.cap >= 1e9 ? "€" + num(c.cap / 1e9, 2) + "bn" : "€" + num(c.cap / 1e6, 0) + "m"}</td></tr>`).join("")}</tbody>
+          </table></div>
+          <p class="pcard-extra">${esc(L.note)}</p>
+          ${srcLine(L.source, L.date.split("-").reverse().join("/"))}
+          <p class="card-src">Every listed company: <a href="${esc(L.source.home)}" rel="noopener">Cyprus Stock Exchange</a></p>
+        </article>`);
+    }
+    el.innerHTML = cards.join("");
+    el.querySelectorAll("[data-trend]").forEach((host) => {
+      const code = host.dataset.trend;
+      lineChart(host, [{ name: code, points: f.trend[code].map(([y, v]) => [y, v / 1000]), cls: "s1" }], { unit: "bn", dp: 1, height: 80 });
+    });
+  }
+
+  /* ---------- 6. SIGNALS: the daily news stream ---------- */
+  const FEED_KIND = { "Invest Cyprus": "official", "Cyprus Profile": "report" };
+  function buildSignals() {
+    const el = document.getElementById("signals-list");
+    const G = P.signals;
+    if (!el) return;
+    if (!G || !G.items) { el.innerHTML = `<p class="p-error">The news stream (signals-data.js) didn't load.</p>`; return; }
+    const sectorName = Object.fromEntries(P.sectors.map((x) => [x.id, x.label]));
+    const distName = Object.fromEntries(P.districts.map((x) => [x.id, x.name]));
+    const entryName = Object.fromEntries(P.entries.map((x) => [x.id, x.name]));
+    const opt = (pairs, all) => `<option value="">${all}</option>` + pairs.map(([v, t]) => `<option value="${esc(v)}">${esc(t)}</option>`).join("");
+    document.getElementById("signals-tools").innerHTML = `
+      <label class="f-field"><span>Sector</span><select id="sg-sector">${opt(P.sectors.map((x) => [x.id, x.label]), "All sectors")}</select></label>
+      <label class="f-field"><span>District</span><select id="sg-district">${opt(P.districts.map((x) => [x.id, x.name]), "All districts")}</select></label>
+      <button type="button" class="f-toggle" id="sg-map" aria-pressed="false">Only news about map entries</button>
+      <p class="timebar-note" role="status" id="sg-status"></p>`;
+    let limit = 30;
+    const state = { sector: "", district: "", map: false };
+    const draw = () => {
+      const list = G.items.filter((it) =>
+        (!state.sector || it.sectors.includes(state.sector)) &&
+        (!state.district || it.districts.includes(state.district)) &&
+        (!state.map || it.entries.length));
+      el.innerHTML = list.slice(0, limit).map((it) => `
+        <li class="signal">
+          <p class="signal-meta"><span class="signal-date">${esc(fmtPeriod(it.date.slice(0, 7)).replace(/^\w+/, (m) => it.date.slice(8, 10).replace(/^0/, "") + " " + m))}</span> ${evLabel(FEED_KIND[it.source] || "news")} ${esc(it.source)}</p>
+          <h3 class="signal-title"><a href="${esc(it.link)}" rel="noopener">${esc(it.title)}</a></h3>
+          ${it.summary ? `<p class="signal-sum">${esc(it.summary)}</p>` : ""}
+          <p class="signal-tags">${it.sectors.map((x) => `<span>${esc(sectorName[x] || x)}</span>`).join("")}${it.districts.map((x) => `<span class="tag-d">${esc(distName[x] || x)}</span>`).join("")}${it.entries.map((x) => `<a class="tag-e" href="#/e/${esc(x)}">◆ ${esc(entryName[x] || x)}</a>`).join("")}</p>
+        </li>`).join("") || `<li class="watch-empty">No headlines match.</li>`;
+      document.getElementById("sg-status").textContent = `${list.length} headlines${list.length > limit ? `, showing the newest ${limit}` : ""}. Updated ${G.updated.slice(0, 10).split("-").reverse().join("/")} from ${G.sources.filter((x) => x.ok).length} feeds.`;
+      document.getElementById("sg-more").hidden = list.length <= limit;
+    };
+    document.getElementById("sg-sector").addEventListener("change", (e) => { state.sector = e.target.value; limit = 30; draw(); });
+    document.getElementById("sg-district").addEventListener("change", (e) => { state.district = e.target.value; limit = 30; draw(); });
+    document.getElementById("sg-map").addEventListener("click", (e) => { state.map = !state.map; e.currentTarget.setAttribute("aria-pressed", String(state.map)); limit = 30; draw(); });
+    document.getElementById("sg-more").addEventListener("click", () => { limit += 30; draw(); });
+    draw();
+  }
+
+  /* ---------- 7. WHAT'S COMING: the debates ---------- */
+  function buildDebates() {
+    const el = document.getElementById("debates");
+    if (!el || !P.debates) return;
+    const side = { yes: "For", no: "Against", both: "Both sides" };
+    el.innerHTML = P.debates.map((d, i) => `
+      <article class="debate" id="debate-${esc(d.id)}">
+        <p class="sec-eyebrow">Debate ${String(i + 1).padStart(2, "0")}</p>
+        <h3 class="debate-q">${esc(d.question)}</h3>
+        <div class="argue">
+          <div><p class="wsub">The case for ${`<span class="ev ev--analysis">Analysis</span>`}</p><p>${esc(d.yes)}</p></div>
+          <div><p class="wsub">The case against ${`<span class="ev ev--analysis">Analysis</span>`}</p><p>${esc(d.no)}</p></div>
+        </div>
+        <details class="debate-ev">
+          <summary>Evidence (${d.evidence.length})</summary>
+          <ul>${d.evidence.map((e) => `
+            <li><span class="ev-side ev-side--${esc(e.side)}">${side[e.side]}</span>
+              <span>${esc(e.text)}</span>
+              <span class="card-src">${evLabel(e.kind)} <a href="${esc(e.source.url)}" rel="noopener">${esc(e.source.publisher)}: ${esc(e.source.title)}</a>${e.source.date ? " · " + esc(e.source.date) : ""}</span></li>`).join("")}
+          </ul>
+        </details>
+        <div class="debate-search"><p class="wsub">Search further</p>${d.search.map((q) => `<button type="button" class="cite-btn" data-copy="${esc(q)}">${esc(q)}</button>`).join("")}</div>
+      </article>`).join("");
+    el.addEventListener("click", (ev) => {
+      const b = ev.target.closest("[data-copy]");
+      if (!b) return;
+      const text = b.dataset.copy, old = b.textContent;
+      const done = () => { b.textContent = "Copied"; setTimeout(() => { b.textContent = old; }, 1300); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done).catch(() => { b.textContent = text; });
+    });
+  }
+
   buildPulse();
+  buildCapital();
   buildWho();
   buildCompanies();
+  buildSignals();
+  buildDebates();
 })();

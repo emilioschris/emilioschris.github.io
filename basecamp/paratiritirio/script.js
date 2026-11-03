@@ -73,6 +73,45 @@
   const glyph = (type, size = 16) =>
     `<svg class="glyph" viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true" focusable="false">${GLYPHS[type] || GLYPHS.project}</svg>`;
 
+  /* Logos and photos (media.js). A logo sits unaltered on a plain chip;
+     an entry with no usable logo gets a monogram tile instead. */
+  const M = P.media || { logos: {}, photos: {}, marks: {} };
+  function logoChip(key, size = "md") {
+    const l = M.logos[key];
+    if (!l) return "";
+    return `<span class="logo-chip logo-chip--${size}${l.bg === "dark" ? " logo-chip--dark" : ""}"><img src="${esc(l.src)}" alt="${esc(l.name)} logo" loading="lazy" decoding="async"></span>`;
+  }
+  function monogram(e) {
+    const m = M.marks[e.id] || {};
+    const letters = m.monogram || e.name.replace(/\(.*?\)/g, "").split(/\s+/).filter((w) => /^[A-Z0-9]/.test(w)).slice(0, 2).map((w) => w[0]).join("") || e.name[0];
+    return letters;
+  }
+  /* The entry's mark: its lead logo, or a monogram tile for a company or
+     investor without one. Projects and policies with neither get nothing. */
+  const hasMark = (e) => { const m = M.marks[e.id] || {}; return !!((m.logos && m.logos.length) || m.monogram || ["company", "investment", "tourism"].includes(e.type)); };
+  function mark(e, size = "md") {
+    const m = M.marks[e.id] || {};
+    if (m.logos && m.logos.length) return logoChip(m.logos[0], size);
+    if (!hasMark(e)) return size === "lg" ? "" : `<span class="mark-gap mark-gap--${size}" aria-hidden="true"></span>`;
+    const of = m.of ? ` title="${esc(m.of)}"` : "";
+    return `<span class="mono-tile mono-tile--${size} mono-tile--${esc(e.type)}" aria-hidden="true"${of}>${esc(monogram(e))}</span>`;
+  }
+  /* A logo for one name in an entry's "Who" list, if one matches */
+  function logoFor(name) {
+    const n = name.toLowerCase();
+    const key = Object.keys(M.logos).find((k) => M.logos[k].names.some((x) => n.startsWith(x.toLowerCase())));
+    return key ? logoChip(key, "sm") : "";
+  }
+  function photo(e) {
+    const ph = M.photos[e.id];
+    if (!ph) return "";
+    const c = ph.credit;
+    return `<figure class="o-photo">
+        <div class="o-photo-frame pebble--photo"><img src="${esc(ph.src)}" alt="${esc(ph.alt)}" style="object-position:${esc(ph.position || "50% 50%")}" loading="lazy" decoding="async"></div>
+        <figcaption>${esc(ph.caption)}. <span class="o-photo-credit">Photo: ${esc(c.author)}, <a href="${esc(c.url)}" rel="noopener">${esc(c.licence)}</a></span></figcaption>
+      </figure>`;
+  }
+
   /* ---------- 2. HEADER STRIP ---------- */
   const asOfText = "As of " + fmtDate(P.asOf);
   document.getElementById("asof-top").textContent = asOfText;
@@ -119,6 +158,16 @@
     </ol>`;
   }
 
+  /* The newest headlines from the Signals stream about an entry or district */
+  function newsList(items) {
+    if (!items.length) return "";
+    return `<section class="p-section"><p class="p-label">In the news</p>
+      <ul class="o-news">${items.slice(0, 5).map((it) => `
+        <li><a href="${esc(it.link)}" rel="noopener">${esc(it.title)}</a>
+          <span class="o-src-meta">${kindChip(it.source === "Invest Cyprus" ? "official" : it.source === "Cyprus Profile" ? "report" : "news")} ${esc(it.source)} · ${esc(fmtDate(it.date))}</span></li>`).join("")}
+      </ul></section>`;
+  }
+
   function stamp(status) {
     const s = statusById[status];
     return `<span class="stamp o-stamp o-stamp--${esc(status)}">${esc(s ? s.label : status)}</span>`;
@@ -130,10 +179,13 @@
     const dates = [["Announced", e.dates.announced], ["Approved", e.dates.approved], ["Expected", e.dates.expected], ["Completed", e.dates.completed]]
       .filter(([, v]) => v);
     const related = (e.related || []).map((id) => byId[id]).filter(Boolean);
+    const lead = M.marks[e.id] || {};
     return `
+      ${photo(e)}
       <p class="p-coords">${esc(fmtCoords(e.coords))} · ${esc(d.name)}${e.north ? " · north" : ""}</p>
       <p class="o-kind">${glyph(e.type, 14)} ${esc(t.label)} · ${e.sectors.map((s) => esc(sectorById[s].label)).join(", ")}</p>
-      <h2 class="p-title" id="panel-title">${esc(e.name)}</h2>
+      <div class="o-head"><span class="o-head-mark">${mark(e, "lg")}</span><h2 class="p-title" id="panel-title">${esc(e.name)}</h2></div>
+      ${lead.logos && lead.logos.length > 1 ? `<p class="o-logos">${lead.logos.slice(1).map((k) => logoChip(k, "md")).join("")}</p>` : ""}
       <div class="o-stamprow">${stamp(e.status)}
         <button type="button" class="star-btn" data-star="${esc(e.id)}" aria-pressed="${isWatched(e.id)}">${isWatched(e.id) ? "★ On your watchlist" : "☆ Add to watchlist"}</button>
         ${e.book ? `<span class="book-tag" title="Relevant to A Slice of the Sun">A Slice of the Sun</span>` : ""}
@@ -168,7 +220,7 @@
 
       <section class="p-section"><p class="p-label">Who</p>
         <p>${esc(e.developer)}</p>
-        ${e.investors.length ? `<ul class="o-investors">${e.investors.map((i) => `<li><span>${esc(i.name)}</span>${i.country ? `<span class="o-country">${esc(i.country)}</span>` : ""}</li>`).join("")}</ul>` : ""}
+        ${e.investors.length ? `<ul class="o-investors">${e.investors.map((i) => `<li><span class="o-inv-name">${logoFor(i.name)}${esc(i.name)}</span>${i.country ? `<span class="o-country">${esc(i.country)}</span>` : ""}</li>`).join("")}</ul>` : ""}
       </section>
 
       ${related.length ? `
@@ -180,6 +232,8 @@
       <section class="p-section o-flags"><p class="p-label">Unsure</p>
         <ul>${e.flags.map((f) => `<li>${esc(f)}</li>`).join("")}</ul>
       </section>` : ""}
+
+      ${newsList((P.signals && P.signals.items || []).filter((it) => it.entries.includes(e.id)))}
 
       <section class="p-section"><p class="p-label">Sources</p>${sourceList(e.sources, { cite: e.book || bookMode, asOf: e.asOf })}
         <p class="o-asof">As of ${esc(fmtDate(e.asOf))}</p>
@@ -210,12 +264,14 @@
 
       <section class="p-section"><p class="p-label">Entries</p>
         <ul class="o-related o-related--rows">${list.map((e) => `
-          <li><button type="button" data-entry="${esc(e.id)}">${glyph(e.type, 14)}
+          <li><button type="button" data-entry="${esc(e.id)}">${mark(e, "sm")}
             <span class="o-row-name">${esc(e.name)}</span>
             <span class="o-row-meta">${esc(statusById[e.status].label)}${e.value.eur !== null ? " · " + esc(fmtEur(e.value.eur)) : ""}</span>
           </button></li>`).join("")}
         </ul>
       </section>
+
+      ${newsList((P.signals && P.signals.items || []).filter((it) => it.districts.includes(d.id)))}
 
       ${d.north || d.partNorth ? `
       <section class="p-section o-legal"><p class="p-label">The north</p>
@@ -488,6 +544,7 @@
           <ul class="ledger-list">${list.map((e) => `
             <li><button type="button" class="ledger-row" data-entry="${esc(e.id)}">
               <span class="ledger-glyph pin pin--${e.type} pin--${e.status} pin--legend">${glyph(e.type, 12)}</span>
+              <span class="ledger-mark">${mark(e, "sm")}</span>
               <span class="ledger-name"><span class="ledger-star" data-star-mark="${esc(e.id)}" aria-hidden="true">${isWatched(e.id) ? "★" : ""}</span>${esc(e.name)}${e.north ? ' <span class="ledger-north">north</span>' : ""}${e.book ? ' <span class="ledger-book" title="A Slice of the Sun">book</span>' : ""}</span>
               <span class="ledger-meta"><span>${esc(statusById[e.status].label)}</span><span class="ledger-eur">${e.value.eur !== null ? esc(fmtEur(e.value.eur)) : "n/a"}</span></span>
             </button></li>`).join("")}
@@ -689,6 +746,10 @@
     if (m[1] === "e") openEntry(m[2]);
     else openDistrict(m[2]);
   }
+
+  /* Shared with moves.js (the "Money moves" pop-up) */
+  P.ui = { esc, fmtDate, fmtEur, kindChip, analysisChip, sourceList, mark, logoChip, copyText, openEntry,
+    byId, districtById, statusById, typeById, focusMap: (id) => { const m = markers[id]; if (m && map) map.setView(m.getLatLng(), Math.max(map.getZoom(), 9)); } };
 
   buildLegend();
   buildMap();

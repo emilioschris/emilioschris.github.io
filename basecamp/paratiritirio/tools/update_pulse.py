@@ -216,6 +216,47 @@ def build():
     except Exception as e:
         print("  --  arrivalsByCountry failed:", e, file=sys.stderr)
 
+    print("Capital: foreign direct investment by country and sector")
+    def fdi_table(**filters):
+        """{year: {code: value}} plus code labels, for one Eurostat query."""
+        q = urllib.parse.urlencode(filters)
+        d = json.loads(http(EUROSTAT + "bop_fdi6_pos?" + q))
+        times = {v: k for k, v in d["dimension"]["time"]["category"]["index"].items()}
+        var = next(k for k in d["id"] if k not in ("time",) and d["size"][d["id"].index(k)] > 1)
+        cat = d["dimension"][var]["category"]
+        inv = {v: k for k, v in cat["index"].items()}
+        nt, nv = d["size"][-1], d["size"][d["id"].index(var)]
+        out = {}
+        for i, v in d["value"].items():
+            i = int(i)
+            out.setdefault(times[i % nt], {})[inv[(i // nt) % nv]] = v
+        return out, cat["label"]
+    try:
+        base = dict(geo="CY", currency="MIO_EUR", stk_flow="NI", nace_r2="FDI", entity="TOTAL", fdi_item="DI__D__F")
+        groups = {"WRL_REST", "EU27_2020", "EXT_EU27_2020", "EA20", "EA19", "EFTA", "OFFSHO", "EUR_OTH", "AFR", "AME", "ASI", "OCE", "NAM", "CAM", "SAM", "EUR", "OTH", "NSA", "INT_ORG"}
+        country = lambda k: len(k) == 2 and k not in groups
+        imm, labels = fdi_table(counterp="IMM", **base)
+        ult, labels2 = fdi_table(counterp="ULT", **base)
+        labels.update(labels2)
+        year = max(y for y in imm if y in ult)
+        top = lambda tbl: [[k, labels.get(k, k), round(v, 1)] for k, v in sorted(((k, v) for k, v in tbl[year].items() if country(k)), key=lambda x: -x[1])[:10]]
+        topImm = top(imm)
+        trend_codes = [k for k, _, _ in topImm[:6]]
+        trend = {k: [[y, round(imm[y][k], 1)] for y in sorted(imm) if k in imm[y] and int(y) >= SINCE] for k in trend_codes}
+        sect, slabels = fdi_table(counterp="IMM", geo="CY", currency="MIO_EUR", stk_flow="NI", entity="TOTAL", fdi_item="DI__D__F", partner="WRL_REST")
+        sy = max(sect)
+        pick = ["K642", "K64", "K", "L", "J", "H50", "M", "G", "C", "I"]
+        sectors = [[k, slabels[k], round(sect[sy][k], 1)] for k in pick if k in sect[sy]]
+        out["fdiCapital"] = {
+            "year": year, "total": round(imm[year].get("WRL_REST", 0), 1),
+            "topImmediate": topImm, "topUltimate": top(ult), "trend": trend,
+            "sectorYear": sy, "sectorTotal": round(sect[sy].get("FDI", 0), 1), "sectors": sectors,
+            "source": es_src("bop_fdi6_pos", "Direct investment positions by partner and activity"),
+            "note": "Immediate counterpart: the country the money arrives from directly. Ultimate investor: the country of the investor who finally controls it."}
+        print("  ok  fdiCapital", year, topImm[:3])
+    except Exception as e:
+        print("  --  fdiCapital failed:", e, file=sys.stderr)
+
     print("Wealth distribution (ECB distributional wealth accounts)")
     dwa_src = lambda key, title: ecb_src("DWA", key, title, publisher="European Central Bank")
     for sid, key, label, unit in [

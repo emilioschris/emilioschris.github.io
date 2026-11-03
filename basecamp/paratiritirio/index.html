@@ -21,7 +21,7 @@
   <meta name="twitter:image:alt" content="A red-tailed hawk with a terracotta tail perched on a branch over faint contour lines, beside the words Field Notes and the coordinates 35.1°N 33.4°E.">
 
   <!-- Same Day/Dusk choice as the homepage, applied before the page draws -->
-  <script src="../../shared/theme-init.js?v=2026-11-02.4"></script>
+  <script src="../../shared/theme-init.js?v=2026-11-03.1"></script>
 
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
@@ -34,8 +34,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 
   <!-- The shared design system, then Paratiritirio's own styles -->
-  <link rel="stylesheet" href="../../shared/field-notes.css?v=2026-11-02.4">
-  <link rel="stylesheet" href="styles.css?v=2026-11-02.4">
+  <link rel="stylesheet" href="../../shared/field-notes.css?v=2026-11-03.1">
+  <link rel="stylesheet" href="styles.css?v=2026-11-03.1">
 </head>
 <body class="obs-page">
 
@@ -52,6 +52,9 @@
     </a>
 
     <div class="bar-tools">
+      <button class="moves-btn" id="moves-open" type="button" aria-haspopup="dialog">
+        <span class="moves-coin" aria-hidden="true">€</span><span class="moves-label">Money moves</span>
+      </button>
       <button class="theme-switch" id="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Dusk mode">
         <span class="theme-label" aria-hidden="true">Day</span>
         <span class="theme-track" aria-hidden="true"><span class="theme-dot"></span></span>
@@ -70,7 +73,7 @@
       <p class="obs-lede">Where Cyprus's economy is heading: the big projects, the companies and the money behind them, district by district. Pick a district or a pin. Every entry shows its sources and the date it was last checked.</p>
       <dl class="obs-strip" id="strip"></dl>
       <nav class="obs-nav" aria-label="Sections">
-        <a href="#atlas-title">Map</a><a href="#watch">Watchlist</a><a href="#pulse">The Pulse</a><a href="#who">Who benefits</a><a href="#companies">Companies</a><a href="#entries">Every entry</a>
+        <a href="#atlas-title">Map</a><a href="#watch">Watchlist</a><a href="#pulse">The Pulse</a><a href="#capital">Capital</a><a href="#who">Who benefits</a><a href="#companies">Companies</a><a href="#signals">Signals</a><a href="#coming">What's coming</a><a href="#entries">Every entry</a>
       </nav>
     </header>
 
@@ -131,6 +134,16 @@
       </aside>
     </section>
 
+    <!-- ================= CAPITAL ================= -->
+    <section class="capital" id="capital" aria-labelledby="capital-title" tabindex="-1">
+      <div class="sec-head">
+        <p class="sec-eyebrow">Foreign investment</p>
+        <h2 class="sec-title" id="capital-title">Capital</h2>
+        <p class="sec-lede">Where the money invested in Cyprus comes from, where it goes, and the largest companies on the island's stock exchange.</p>
+      </div>
+      <div class="who-grid" id="capital-grid"></div>
+    </section>
+
     <!-- ================= WHO BENEFITS ================= -->
     <section class="who" id="who" aria-labelledby="who-title" tabindex="-1">
       <div class="sec-head">
@@ -149,6 +162,28 @@
         <p class="sec-lede">The company landscape by district, sector, size and ownership, from free official sources only.</p>
       </div>
       <div class="who-grid" id="companies-grid"></div>
+    </section>
+
+    <!-- ================= SIGNALS ================= -->
+    <section class="signals" id="signals" aria-labelledby="signals-title" tabindex="-1">
+      <div class="sec-head">
+        <p class="sec-eyebrow">News stream</p>
+        <h2 class="sec-title" id="signals-title">Signals</h2>
+        <p class="sec-lede">Cyprus business headlines, gathered daily from public news feeds and sorted by sector and district. Only the headline and the feed's own short summary are kept; follow the link to read the article.</p>
+      </div>
+      <div class="filters filters--signals" id="signals-tools"></div>
+      <ol class="signal-list" id="signals-list"></ol>
+      <button type="button" class="btn" id="sg-more" hidden>Show more</button>
+    </section>
+
+    <!-- ================= WHAT'S COMING ================= -->
+    <section class="coming" id="coming" aria-labelledby="coming-title" tabindex="-1">
+      <div class="sec-head">
+        <p class="sec-eyebrow">Scenarios</p>
+        <h2 class="sec-title" id="coming-title">What's coming</h2>
+        <p class="sec-lede">Six open questions about the island's economic future. Each gives the strongest case on both sides, the evidence with its sources, and searches to take it further. Nothing here is a forecast.</p>
+      </div>
+      <div class="debates" id="debates"></div>
     </section>
 
     <!-- ================= DISTRICTS AND ENTRIES ================= -->
@@ -176,12 +211,15 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
   <!-- The shared script, the data, then the page itself -->
-  <script src="../../shared/field-notes.js?v=2026-11-02.4"></script>
-  <script src="geo.js?v=2026-11-02.4"></script>
-  <script src="data.js?v=2026-11-02.4"></script>
-  <script src="pulse-data.js?v=2026-11-02.4"></script>
-  <script src="pulse-snapshot.js?v=2026-11-02.4"></script>
-  <script src="script.js?v=2026-11-02.4"></script>
-  <script src="panels.js?v=2026-11-02.4"></script>
+  <script src="../../shared/field-notes.js?v=2026-11-03.1"></script>
+  <script src="geo.js?v=2026-11-03.1"></script>
+  <script src="data.js?v=2026-11-03.1"></script>
+  <script src="pulse-data.js?v=2026-11-03.1"></script>
+  <script src="pulse-snapshot.js?v=2026-11-03.1"></script>
+  <script src="signals-data.js?v=2026-11-03.1"></script>
+  <script src="media.js?v=2026-11-03.1"></script>
+  <script src="script.js?v=2026-11-03.1"></script>
+  <script src="panels.js?v=2026-11-03.1"></script>
+  <script src="moves.js?v=2026-11-03.1"></script>
 </body>
 </html>

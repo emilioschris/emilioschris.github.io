@@ -19,7 +19,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://emilioschris.github.io/og-image.png">
 
-  <script src="shared/theme-init.js?v=2026-11-02.4"></script>
+  <script src="shared/theme-init.js?v=2026-11-03.1"></script>
 
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..600&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Instrument+Sans:wght@400..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="shared/field-notes.css?v=2026-11-02.4">
+  <link rel="stylesheet" href="shared/field-notes.css?v=2026-11-03.1">
   <style>
     /* A small page, so its few styles live here */
     .credits-page { padding-top: var(--bar-h); }
@@ -91,9 +91,30 @@
     .credit-meta a, .credit-sources a { color: var(--link); }
     .credit-note { max-width: 60ch; margin-top: 18px; }
     .credit-sources { margin-top: 10px; font: 10.5px/1.6 var(--font-mono); color: var(--muted); }
+    .credits-sub { margin-top: 72px; font-family: var(--font-display); font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 340; letter-spacing: -0.02em; }
+    .credits-sub-lede { max-width: 62ch; margin-top: 10px; color: var(--muted); font-size: 0.95rem; }
+    .mini-list { margin: 28px 0 0; padding: 0; list-style: none; }
+    .mini {
+      display: grid;
+      grid-template-columns: 132px 1fr;
+      gap: 20px;
+      align-items: start;
+      padding: 18px 0;
+      border-top: 1px solid var(--rule);
+    }
+    .mini-thumb { width: 132px; height: 84px; border-radius: 10px; overflow: hidden; background: var(--bg-raised); }
+    .mini-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .mini-thumb--logo { display: grid; place-items: center; padding: 12px; background: #fff; border: 1px solid rgba(43, 42, 38, 0.12); }
+    .mini-thumb--logo.is-dark { background: #23272B; }
+    .mini-thumb--logo img { object-fit: contain; }
+    .mini .credit-title { margin-top: 4px; font-size: 1.1rem; }
+    .mini .credit-meta { margin-top: 8px; }
+    .mini .credit-note { margin-top: 8px; font-size: 0.9rem; color: var(--muted); }
     .credits-foot { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--rule); font-size: 0.92rem; color: var(--muted); max-width: 60ch; }
 
     @media (max-width: 640px) {
+      .mini { grid-template-columns: 96px 1fr; gap: 14px; }
+      .mini-thumb { width: 96px; height: 64px; }
       .credit { grid-template-columns: 1fr; gap: 18px; }
       .credit .pebble { max-width: 260px; }
     }
@@ -127,11 +148,16 @@
 
     <ol class="credit-list" id="credit-list"></ol>
 
+    <h2 class="credits-sub" id="paratiritirio">Παρατηρητήριο: logos and photos</h2>
+    <p class="credits-sub-lede">The logos and photos on Paratiritirio's entries, all from Wikimedia Commons. Logos are shown small and unaltered, only to identify who is behind an entry; they remain their owners' trademarks and the page isn't affiliated with any of them. Photos are resized to 960 px WebP and shown with the site's colour tint.</p>
+    <ol class="mini-list" id="paratiritirio-list"></ol>
+
     <p class="credits-foot">Changes made to every image: cropped and resized, converted to WebP, and shown on the homepage with a colour tint in the site's palette. Images under a CC BY-SA licence are shared here under the same licence.</p>
   </main>
 
-  <script src="shared/field-notes.js?v=2026-11-02.4"></script>
-  <script src="projects.js?v=2026-11-02.4"></script>
+  <script src="shared/field-notes.js?v=2026-11-03.1"></script>
+  <script src="projects.js?v=2026-11-03.1"></script>
+  <script src="basecamp/paratiritirio/media.js?v=2026-11-03.1"></script>
   <script>
     (() => {
       "use strict";
@@ -194,6 +220,38 @@
         item.append(pebble, text);
         list.append(item);
       });
+
+      // Paratiritirio's logos and photos (basecamp/paratiritirio/media.js)
+      const media = window.PARATIRITIRIO && PARATIRITIRIO.media;
+      const mlist = document.getElementById("paratiritirio-list");
+      if (media && mlist) {
+        const base = "basecamp/paratiritirio/";
+        const rows = [
+          ...Object.values(media.photos).map((p) => ({ kind: "Photo", label: p.caption, src: p.src, alt: p.alt, credit: p.credit })),
+          ...Object.values(media.logos).map((l) => ({ kind: "Logo", label: l.name, src: l.src, alt: l.name + " logo", credit: l.credit, dark: l.bg === "dark" })),
+        ];
+        rows.forEach((r) => {
+          const li = el("li", "mini");
+          const thumb = el("div", "mini-thumb" + (r.kind === "Logo" ? " mini-thumb--logo" + (r.dark ? " is-dark" : "") : ""));
+          const img = el("img");
+          img.src = base + r.src;
+          img.alt = r.alt;
+          img.loading = "lazy";
+          thumb.append(img);
+          const text = el("div");
+          text.append(el("p", "credit-for", r.kind + " · " + r.label));
+          text.append(el("h3", "credit-title", r.credit.title));
+          text.append(el("p", "credit-by", [r.credit.author, r.credit.date].filter(Boolean).join(", ")));
+          const meta = el("dl", "credit-meta");
+          const row = (label, value) => { const dd = el("dd"); dd.append(value); meta.append(el("dt", "", label), dd); };
+          row("Source", link(r.credit.url, "Wikimedia Commons"));
+          row("Licence", r.credit.licenceUrl ? link(r.credit.licenceUrl, r.credit.licence) : r.credit.licence);
+          text.append(meta);
+          if (r.credit.note) text.append(el("p", "credit-note", r.credit.note));
+          li.append(thumb, text);
+          mlist.append(li);
+        });
+      }
     })();
   </script>
 </body>

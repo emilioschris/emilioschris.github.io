@@ -1,0 +1,434 @@
+{
+  "_about": "Settings for Paratiritirio's daily Signals (tools/update_signals.py, run by .github/workflows/paratiritirio-signals.yml). Feeds were tested and their robots.txt checked on 2 Nov 2026. Only headline, source, date, link and a short summary are stored, never the article. A word ending in * matches any ending. 'requireCyprus': true keeps an item only if it mentions Cyprus or a Cypriot place (for feeds that also carry world news). A feed's 'skip' list drops headlines containing any of those words. 'sectors' decide what counts as relevant: an item must match at least one. 'districts' and 'entries' tag an item to the map.",
+  "feeds": [
+    {
+      "name": "Cyprus Mail: property",
+      "url": "https://cyprus-mail.com/category/business/property/feed/",
+      "publisher": "Cyprus Mail",
+      "requireCyprus": true
+    },
+    {
+      "name": "Cyprus Mail: energy",
+      "url": "https://cyprus-mail.com/category/business/energy/feed/",
+      "publisher": "Cyprus Mail",
+      "requireCyprus": true
+    },
+    {
+      "name": "Cyprus Mail: tourism",
+      "url": "https://cyprus-mail.com/category/business/tourism/feed/",
+      "publisher": "Cyprus Mail",
+      "requireCyprus": true
+    },
+    {
+      "name": "Cyprus Mail: banking and finance",
+      "url": "https://cyprus-mail.com/category/business/banking-and-finance/feed/",
+      "publisher": "Cyprus Mail",
+      "requireCyprus": true
+    },
+    {
+      "name": "Invest Cyprus",
+      "url": "https://www.investcyprus.org.cy/feed",
+      "publisher": "Invest Cyprus"
+    },
+    {
+      "name": "Financial Mirror: business",
+      "url": "https://www.financialmirror.com/category/business/feed/",
+      "publisher": "Financial Mirror",
+      "requireCyprus": true
+    },
+    {
+      "name": "Financial Mirror: property",
+      "url": "https://www.financialmirror.com/category/property/feed/",
+      "publisher": "Financial Mirror",
+      "requireCyprus": true
+    },
+    {
+      "name": "Financial Mirror: energy",
+      "url": "https://www.financialmirror.com/category/energy/feed/",
+      "publisher": "Financial Mirror",
+      "requireCyprus": true
+    },
+    {
+      "name": "Cyprus Profile",
+      "url": "https://www.cyprusprofile.com/rss",
+      "publisher": "Cyprus Profile"
+    },
+    {
+      "name": "Cyprus Shipping News",
+      "url": "https://cyprusshippingnews.com/feed/",
+      "publisher": "Cyprus Shipping News",
+      "requireCyprus": true
+    }
+  ],
+  "cyprusWords": [
+    "cyprus",
+    "cypriot*",
+    "nicosia",
+    "limassol",
+    "larnaca",
+    "paphos",
+    "famagusta",
+    "kyrenia",
+    "ayia napa",
+    "lefkosia",
+    "lemesos",
+    "larnaka",
+    "pafos",
+    "protaras",
+    "paralimni",
+    "polis",
+    "troodos"
+  ],
+  "sectors": [
+    {
+      "id": "tourism",
+      "keywords": [
+        "touris*",
+        "hotel*",
+        "arrivals",
+        "visitor*",
+        "resort*",
+        "casino*",
+        "airline*",
+        "flights",
+        "cruise*",
+        "holiday*"
+      ]
+    },
+    {
+      "id": "film",
+      "keywords": [
+        "film*",
+        "olivewood",
+        "studio*",
+        "production company",
+        "cinema",
+        "screen"
+      ]
+    },
+    {
+      "id": "tech",
+      "keywords": [
+        "tech",
+        "technology",
+        "start-up*",
+        "startup*",
+        "fintech",
+        "software",
+        "digital",
+        "ai",
+        "artificial intelligence",
+        "innovation",
+        "data cent*"
+      ]
+    },
+    {
+      "id": "shipping",
+      "keywords": [
+        "shipping",
+        "ship*",
+        "maritime",
+        "port",
+        "ports",
+        "vessel*",
+        "shipmanagement",
+        "tonnage"
+      ]
+    },
+    {
+      "id": "energy",
+      "keywords": [
+        "energy",
+        "gas",
+        "lng",
+        "electricity",
+        "power",
+        "renewable*",
+        "solar",
+        "interconnector",
+        "eac",
+        "vasilik*",
+        "aphrodite",
+        "cronos",
+        "chevron",
+        "eni",
+        "totalenergies"
+      ]
+    },
+    {
+      "id": "education",
+      "keywords": [
+        "universit*",
+        "students",
+        "education",
+        "college*",
+        "school*"
+      ]
+    },
+    {
+      "id": "real-estate",
+      "keywords": [
+        "property",
+        "properties",
+        "real estate",
+        "housing",
+        "home*",
+        "apartment*",
+        "rent*",
+        "construction",
+        "developer*",
+        "tower*",
+        "marina*",
+        "land",
+        "title deed*",
+        "building permit*",
+        "buyers"
+      ]
+    },
+    {
+      "id": "finance",
+      "keywords": [
+        "bank*",
+        "loan*",
+        "lending",
+        "npl*",
+        "investment*",
+        "investor*",
+        "fdi",
+        "economy",
+        "economic",
+        "gdp",
+        "inflation",
+        "budget",
+        "tax*",
+        "stock exchange",
+        "cse",
+        "credit",
+        "imf",
+        "ecb"
+      ]
+    },
+    {
+      "id": "infrastructure",
+      "keywords": [
+        "infrastructure",
+        "motorway",
+        "highway",
+        "road*",
+        "airport*",
+        "port",
+        "desalination",
+        "water",
+        "tender*",
+        "concession*"
+      ]
+    }
+  ],
+  "districts": {
+    "nicosia": [
+      "nicosia",
+      "lefkosia",
+      "strovolos",
+      "lakatamia",
+      "latsia",
+      "aglantzia",
+      "engomi"
+    ],
+    "limassol": [
+      "limassol",
+      "lemesos",
+      "germasogeia",
+      "zakaki",
+      "ypsonas",
+      "amathus"
+    ],
+    "larnaca": [
+      "larnaca",
+      "larnaka",
+      "vasilik*",
+      "kofinou",
+      "mazotos",
+      "zygi",
+      "aradippou",
+      "dhekelia"
+    ],
+    "paphos": [
+      "paphos",
+      "pafos",
+      "polis",
+      "peyia",
+      "kissonerga",
+      "potima",
+      "akamas",
+      "geroskipou",
+      "chloraka",
+      "coral bay"
+    ],
+    "famagusta": [
+      "famagusta",
+      "ayia napa",
+      "agia napa",
+      "protaras",
+      "paralimni",
+      "varosha",
+      "deryneia",
+      "ammochostos"
+    ],
+    "kyrenia": [
+      "kyrenia",
+      "girne",
+      "lapithos",
+      "lapta",
+      "karavas"
+    ],
+    "offshore": [
+      "offshore",
+      "block 6",
+      "block 12",
+      "aphrodite",
+      "cronos",
+      "glaucus",
+      "eez",
+      "exclusive economic zone"
+    ]
+  },
+  "entries": {
+    "city-of-dreams": [
+      "city of dreams",
+      "melco"
+    ],
+    "limassol-marina": [
+      "limassol marina"
+    ],
+    "one-limassol": [
+      "pafilia",
+      "one tower"
+    ],
+    "limassol-port": [
+      "limassol port",
+      "eurogate",
+      "dp world"
+    ],
+    "shipmanagement": [
+      "shipmanagement",
+      "ship management",
+      "shipping deputy ministry",
+      "deputy ministry of shipping"
+    ],
+    "exness": [
+      "exness"
+    ],
+    "copper-island": [
+      "copper island"
+    ],
+    "bank-of-cyprus": [
+      "bank of cyprus"
+    ],
+    "eurobank-hellenic": [
+      "hellenic bank",
+      "eurobank"
+    ],
+    "wargaming": [
+      "wargaming"
+    ],
+    "film-scheme": [
+      "film scheme",
+      "olivewood",
+      "cash rebate",
+      "film in cyprus"
+    ],
+    "cip": [
+      "golden passport*",
+      "citizenship by investment",
+      "investment programme",
+      "cyprus papers"
+    ],
+    "residence-6-2": [
+      "golden visa*",
+      "permanent residen*",
+      "residence permit*"
+    ],
+    "unic": [
+      "university of nicosia",
+      "unic"
+    ],
+    "ercan": [
+      "ercan"
+    ],
+    "vasilikos-lng": [
+      "vasilik*",
+      "lng terminal",
+      "prometheas",
+      "etyfa"
+    ],
+    "larnaca-port-marina": [
+      "larnaca port",
+      "larnaca marina",
+      "kition ocean"
+    ],
+    "hermes-airports": [
+      "hermes airports",
+      "larnaca airport",
+      "paphos airport"
+    ],
+    "great-sea-interconnector": [
+      "great sea interconnector",
+      "interconnector",
+      "gsi",
+      "euroasia"
+    ],
+    "paphos-marina": [
+      "paphos marina",
+      "potima"
+    ],
+    "paphos-polis-road": [
+      "paphos-polis",
+      "paphos polis",
+      "polis chrysochous"
+    ],
+    "paphos-foreign-buyers": [
+      "foreign buyers",
+      "property sales to foreign"
+    ],
+    "paphos-airport": [
+      "paphos airport"
+    ],
+    "paphos-stadium": [
+      "stelios kyriakides",
+      "stelios kyriakidis",
+      "pafiako"
+    ],
+    "ayia-napa-marina": [
+      "ayia napa marina",
+      "agia napa marina",
+      "sawiris"
+    ],
+    "varosha": [
+      "varosha",
+      "maras"
+    ],
+    "emu": [
+      "eastern mediterranean university"
+    ],
+    "water-pipeline": [
+      "water pipeline"
+    ],
+    "orams-case": [
+      "orams",
+      "immovable property commission"
+    ],
+    "aphrodite-field": [
+      "aphrodite"
+    ],
+    "cronos-field": [
+      "cronos"
+    ],
+    "non-eu-property-limits": [
+      "non-eu buyers",
+      "third-country nationals",
+      "foreign property purchases",
+      "foreign nationals buying",
+      "land acquisition"
+    ]
+  }
+}
