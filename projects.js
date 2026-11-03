@@ -205,6 +205,18 @@ const PROJECTS = [
     },
   },
   {
+    title: "Παρατηρητήριο (Paratiritirio)",
+    meaning: "observatory",            // παρατηρητήριο, "observatory, observation post" (Wiktionary)
+    section: "library",
+    status: "ongoing",
+    link: "library/paratiritirio/index.html",
+    description: "Where Cyprus's economy is heading: the big projects, the money behind them and who benefits, district by district.",
+    coords: "34.94°N 32.86°E",          // Mount Olympus, Troodos: the island's highest point
+    date: "2026-11",
+    tended: "2026-11-02",
+    elevation: "ELEV 1,952 m · 31 ENTRIES",
+  },
+  {
     title: "The Deep End",
     section: "training-ground",
     status: "ongoing",
