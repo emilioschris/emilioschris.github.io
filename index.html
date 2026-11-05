@@ -22,7 +22,7 @@
   <meta name="twitter:image:alt" content="A red-tailed hawk with a terracotta tail perched on a branch over faint contour lines, beside the words Field Notes and the coordinates 35.1°N 33.4°E.">
 
   <!-- Apply a saved Day/Dusk choice before the page draws, so it never flashes the wrong colours -->
-  <script src="shared/theme-init.js?v=2026-11-05.2"></script>
+  <script src="shared/theme-init.js?v=2026-11-05.3"></script>
 
   <!-- Fonts: Fraunces (headings), Instrument Sans (body), JetBrains Mono (labels), Caveat (margin notes) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,12 +30,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..600&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Instrument+Sans:wght@400..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2026-11-05.2">
-  <link rel="manifest" href="manifest.webmanifest?v=2026-11-05.2">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2026-11-05.3">
+  <link rel="manifest" href="manifest.webmanifest?v=2026-11-05.3">
 
   <!-- The shared design system first, then this page's own styles -->
-  <link rel="stylesheet" href="shared/field-notes.css?v=2026-11-05.2">
-  <link rel="stylesheet" href="styles.css?v=2026-11-05.2">
+  <link rel="stylesheet" href="shared/field-notes.css?v=2026-11-05.3">
+  <link rel="stylesheet" href="styles.css?v=2026-11-05.3">
 </head>
 <body>
 
@@ -193,7 +193,7 @@
       <ul>
         <li><a href="#base-camp" style="--tint: var(--terracotta)"><span>01</span> Base Camp</a></li>
         <li><a href="#library" style="--tint: var(--aegean)"><span>02</span> The Library</a></li>
-        <li><a href="#training-ground" style="--tint: var(--olive)"><span>03</span> Training Ground</a></li>
+        <li><a href="#training-ground" style="--tint: var(--text)"><span>03</span> Training Ground</a></li>
         <li><a href="#language-routes" style="--tint: var(--ochre)"><span>04</span> Language Routes</a></li>
         <li><a href="#the-wild" style="--tint: var(--olive)"><span>05</span> The Wild</a></li>
       </ul>
@@ -225,57 +225,61 @@
     </section>
 
     <!-- ---------- 02 · THE LIBRARY ---------- -->
-    <section class="leg reveal" id="library" data-bearing="76" style="--tint: var(--aegean)" aria-labelledby="library-title">
+    <section class="leg leg--tidy reveal" id="library" data-bearing="76" style="--tint: var(--aegean); --b: 76deg" aria-labelledby="library-title">
       <header class="leg-head">
-        <p class="leg-bearing"><span>02</span> N 076°</p>
-        <h2 class="leg-title" id="library-title">The Library</h2>
+        <p class="leg-bearing"><svg class="leg-needle" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="8.5"/><path d="M10 2.8 12 10h-4Z"/><path d="M10 17.2 8 10h4Z"/></svg><span>02</span> N 076°</p>
+        <h2 class="leg-title" id="library-title">
+          <svg class="leg-motif" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M4 8c4-1.5 8-1.5 12 1v17c-4-2.5-8-2.5-12-1ZM28 8c-4-1.5-8-1.5-12 1v17c4-2.5 8-2.5 12-1Z"/></svg>
+          The Library
+        </h2>
         <p class="leg-kicker">Knowledge</p>
         <p class="leg-desc">Notes, books and tools for exploring what we know, and how we came to know it.</p>
       </header>
-      <div class="cards">
-        <svg class="trail" aria-hidden="true"><path /></svg>
-      </div>
+      <div class="cards"></div>
     </section>
 
     <!-- ---------- 03 · TRAINING GROUND ---------- -->
-    <section class="leg reveal" id="training-ground" data-bearing="148" style="--tint: var(--olive)" aria-labelledby="training-title">
+    <section class="leg leg--tidy reveal" id="training-ground" data-bearing="148" style="--tint: var(--text); --motif: var(--accent); --b: 148deg" aria-labelledby="training-title">
       <header class="leg-head">
-        <p class="leg-bearing"><span>03</span> N 148°</p>
-        <h2 class="leg-title" id="training-title">Training Ground</h2>
+        <p class="leg-bearing"><svg class="leg-needle" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="8.5"/><path d="M10 2.8 12 10h-4Z"/><path d="M10 17.2 8 10h4Z"/></svg><span>03</span> N 148°</p>
+        <h2 class="leg-title" id="training-title">
+          <svg class="leg-motif" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="16" cy="16" r="12"/><circle cx="16" cy="16" r="7.5"/><circle cx="16" cy="16" r="3"/></svg>
+          Training Ground
+        </h2>
         <p class="leg-kicker">Games &amp; brain tools</p>
         <p class="leg-desc">Small games and tools that make you a little sharper every time you play.</p>
       </header>
-      <div class="cards">
-        <svg class="trail" aria-hidden="true"><path /></svg>
-      </div>
+      <div class="cards"></div>
     </section>
 
     <!-- ---------- 04 · LANGUAGE ROUTES ---------- -->
-    <section class="leg reveal" id="language-routes" data-bearing="213" style="--tint: var(--ochre)" aria-labelledby="language-title">
+    <section class="leg leg--tidy reveal" id="language-routes" data-bearing="213" style="--tint: var(--ochre); --b: 213deg" aria-labelledby="language-title">
       <header class="leg-head">
-        <p class="leg-bearing"><span>04</span> N 213°</p>
-        <h2 class="leg-title" id="language-title">Language Routes</h2>
+        <p class="leg-bearing"><svg class="leg-needle" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="8.5"/><path d="M10 2.8 12 10h-4Z"/><path d="M10 17.2 8 10h4Z"/></svg><span>04</span> N 213°</p>
+        <h2 class="leg-title" id="language-title">
+          <svg class="leg-motif" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M5 6h22v15H14l-6 5v-5H5Z"/><path d="M11 13.5h.01M16 13.5h.01M21 13.5h.01" stroke-width="2.6"/></svg>
+          Language Routes
+        </h2>
         <p class="leg-kicker">Mexican Spanish · <span class="in-progress">in progress</span></p>
         <p class="leg-desc">Learning Mexican Spanish one step at a time, with tools I build along the way.</p>
         <p class="margin-note" aria-hidden="true">¡poco a poco!</p>
       </header>
-      <div class="cards">
-        <svg class="trail" aria-hidden="true"><path /></svg>
-      </div>
+      <div class="cards"></div>
     </section>
 
     <!-- ---------- 05 · THE WILD ---------- -->
-    <section class="leg reveal" id="the-wild" data-bearing="297" style="--tint: var(--olive)" aria-labelledby="wild-title">
+    <section class="leg leg--tidy reveal" id="the-wild" data-bearing="297" style="--tint: var(--olive); --b: 297deg" aria-labelledby="wild-title">
       <header class="leg-head">
-        <p class="leg-bearing"><span>05</span> N 297°</p>
-        <h2 class="leg-title" id="wild-title">The Wild</h2>
+        <p class="leg-bearing"><svg class="leg-needle" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="8.5"/><path d="M10 2.8 12 10h-4Z"/><path d="M10 17.2 8 10h4Z"/></svg><span>05</span> N 297°</p>
+        <h2 class="leg-title" id="wild-title">
+          <svg class="leg-motif" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M2 27c6-5 10-7 14-6s8 3 14 6"/><path d="M16 4l-5 8h3l-4 6h4l-3 5h10l-3-5h4l-4-6h3Z"/><path d="M16 23v3"/></svg>
+          The Wild
+        </h2>
         <p class="leg-kicker">Climbing &amp; conservation</p>
         <p class="leg-desc">Climbing, time outdoors, and how technology can help protect the natural world.</p>
         <p class="margin-note" aria-hidden="true">the best map is still a walk</p>
       </header>
-      <div class="cards">
-        <svg class="trail" aria-hidden="true"><path /></svg>
-      </div>
+      <div class="cards"></div>
     </section>
 
   </main>
@@ -540,8 +544,8 @@
     </div>
   </dialog>
 
-  <script src="shared/field-notes.js?v=2026-11-05.2"></script>
-  <script src="projects.js?v=2026-11-05.2"></script>
-  <script src="script.js?v=2026-11-05.2"></script>
+  <script src="shared/field-notes.js?v=2026-11-05.3"></script>
+  <script src="projects.js?v=2026-11-05.3"></script>
+  <script src="script.js?v=2026-11-05.3"></script>
 </body>
 </html>

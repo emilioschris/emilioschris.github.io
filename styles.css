@@ -1025,7 +1025,7 @@ a.daily-tile:hover .daily-arrow { transform: translateX(3px); color: var(--accen
   flex: none;
   width: 0.8em; height: 0.8em;
   fill: none;
-  stroke: var(--tint);
+  stroke: var(--motif, var(--tint));
   stroke-width: 1.6;
   stroke-linecap: round;
   stroke-linejoin: round;
