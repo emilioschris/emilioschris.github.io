@@ -1,7 +1,536 @@
 /* Written by tools/update_feed.py once a day. Don't edit by hand: it will be overwritten. */
 window.AKADIMIA_FEED = {
- "updated": "2026-10-15T14:44Z",
+ "updated": "2026-11-05T07:42Z",
  "items": [
+  {
+   "id": "a2f1c3e1e175",
+   "title": "Q&A: What is the Brazil-led ‘deforestation roadmap’?",
+   "link": "https://www.carbonbrief.org/qa-what-is-the-brazil-led-deforestation-roadmap",
+   "source": "Carbon Brief",
+   "school": null,
+   "date": "2026-11-04",
+   "summary": "On 3 November, the Brazilian presidency of the COP30 climate talks released its long-awaited “roadmap” on ending deforestation. Ahead of…",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "ecf4e78583c9",
+   "title": "Q&A: What is in the global ‘roadmap’ for transitioning away from fossil fuels?",
+   "link": "https://www.carbonbrief.org/qa-what-is-in-the-global-roadmap-for-transitioning-away-from-fossil-fuels",
+   "source": "Carbon Brief",
+   "school": null,
+   "date": "2026-11-04",
+   "summary": "Transitioning away from fossil fuels is “urgent, inevitable and, yet, possible”, according to a first-of-its-kind global “roadmap” produced by Brazil.…",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "0399ca9fa9cb",
+   "title": "CB Live: Carbon Brief’s team at COP17 on the nature talks’ key outcomes",
+   "link": "https://www.carbonbrief.org/cb-live-carbon-briefs-team-at-cop17-on-the-nature-talks-key-outcomes",
+   "source": "Carbon Brief",
+   "school": null,
+   "date": "2026-11-04",
+   "summary": "Following this year’s UN COP17 biodiversity conference, Carbon Brief’s journalists hosted a livestream to explain what happened at the summit.…",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "eb2a8f257703",
+   "title": "UK climate minister Katie White: COP31 must respond to ‘really scary’ science",
+   "link": "https://www.carbonbrief.org/uk-climate-minister-katie-white-cop31-must-respond-to-really-scary-science",
+   "source": "Carbon Brief",
+   "school": null,
+   "date": "2026-11-03",
+   "summary": "The upcoming COP31 climate talks in Antalya, Turkey need to respond to the latest science on global warming, which is…",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "6d3ac5bf58c3",
+   "title": "State of the climate: 2026 likely to tie with 2024 as the warmest year on record",
+   "link": "https://www.carbonbrief.org/state-of-the-climate-2026-likely-to-tie-with-2024-as-the-warmest-year-on-record",
+   "source": "Carbon Brief",
+   "school": null,
+   "date": "2026-11-03",
+   "summary": "With three-quarters of the year now past, it is virtually certain that 2026 will be the warmest or second-warmest year…",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "b12ce0cca21b",
+   "title": "Regulators explore credit union reforms to support growth, innovation and better outcomes for members",
+   "link": "https://www.bankofengland.co.uk/news/2026/november/regulators-explore-credit-union-reforms-to-support-growth-innovation-and-better-outcomes-for-members",
+   "source": "Bank of England news",
+   "school": null,
+   "date": "2026-11-03",
+   "summary": "Credit unions could benefit from several ideas put forward today by the Prudential Regulation Authority and Financial Conduct Authority aimed at helping the sector grow, innovate and meet the changing needs of their…",
+   "kind": "news",
+   "topics": [
+    "finance-markets"
+   ]
+  },
+  {
+   "id": "df601d428669",
+   "title": "A Comparative Analysis of Volatility Predictions via EGARCH, Transformer and Hybrid EGARCH-Transformer Models: Changes in Forecasting Ability after Introducing Sentiment Factors",
+   "link": "https://doi.org/10.54254/2754-1169/2026.38470",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-11-03",
+   "summary": "Advances in Economics Management and Political Sciences · Yafei Wang, Qiujin Yu, Jiangchuan Peng et al.",
+   "kind": "research",
+   "topics": [
+    "finance-markets"
+   ]
+  },
+  {
+   "id": "d8bf50fecc3a",
+   "title": "Implementation Gap in Global Power Capacity Expansion to meet Paris Agreement Climate Targets",
+   "link": "https://doi.org/10.1021/acs.est.6c08309",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-11-03",
+   "summary": "Environmental Science & Technology · Peipei Chen, Jing Meng, David M. Reiner et al.",
+   "kind": "research",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "56cdb6b51906",
+   "title": "Early Climate Impact Assessments Targeted 2025—How Did They Perform for Global Water Resources?",
+   "link": "https://www.lse.ac.uk/granthaminstitute/publication/early-climate-impact-assessments-targeted-2025-how-did-they-perform-for-global-water-resources/",
+   "source": "Grantham Research Institute: publications",
+   "school": "lse",
+   "date": "2026-11-02",
+   "summary": "The authors of this paper evaluate the first two global water resource assessments and the IPCC's 2001 statements on future water resources against subsequent observations.",
+   "kind": "research",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "5dfee16c69b5",
+   "title": "Interactive: Who wants what at the COP31 climate change summit",
+   "link": "https://www.carbonbrief.org/interactive-who-wants-what-at-the-cop31-climate-change-summit",
+   "source": "Carbon Brief",
+   "school": null,
+   "date": "2026-11-02",
+   "summary": "Delegates will soon gather in the Turkish resort city of Antalya for UN climate negotiations, against a backdrop of war,…",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "0da3b420a612",
+   "title": "Behaviour, political inaction and the adaptation implementation gap: unlocking flood and drought preparedness in public finance through a beta application of the Multi-Actor Behaviour Journey methodology",
+   "link": "https://www.lse.ac.uk/granthaminstitute/publication/behaviour-political-inaction-and-the-adaptation-implementation-gap-unlocking-flood-and-drought-preparedness-in-public-finance-through-a-beta-application-of-the-multi-actor-behaviour-journey-methodol/",
+   "source": "Grantham Research Institute: publications",
+   "school": "lse",
+   "date": "2026-10-30",
+   "summary": "This paper presents the first real-world application of Multi-Actor Behaviour Journey (MABEJ), a new methodology for understanding why action can stall when many different people and institutions are involved in making…",
+   "kind": "research",
+   "topics": [
+    "finance-markets"
+   ]
+  },
+  {
+   "id": "862b1908196f",
+   "title": "Mapping the law of the sea: does ocean governance need its own legal database?",
+   "link": "https://www.lse.ac.uk/granthaminstitute/news/mapping-the-law-of-the-sea-does-ocean-governance-need-its-own-legal-database/",
+   "source": "Grantham Research Institute: news",
+   "school": "lse",
+   "date": "2026-10-29",
+   "summary": "Reflections from an LSE roundtable that discussed whether ocean governance needs a new compass akin to the ‘Climate Change Laws of the World’ database.",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "92321a84181d",
+   "title": "After the flood: Brazil’s case against Shell opens up a new route for polluter-pays litigation",
+   "link": "https://www.lse.ac.uk/granthaminstitute/news/after-the-flood-brazils-case-against-shell-opens-up-a-new-route-for-polluter-pays-litigation/",
+   "source": "Grantham Research Institute: news",
+   "school": "lse",
+   "date": "2026-10-29",
+   "summary": "An insight into the legal and evidentiary approach in a current case against Shell Brasil and the wider questions it raises for polluter-pays climate litigation.",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "ac25b1df6fd0",
+   "title": "Experts: What China wants from the COP31 climate talks",
+   "link": "https://www.carbonbrief.org/experts-what-china-wants-from-the-cop31-climate-talks",
+   "source": "Carbon Brief",
+   "school": null,
+   "date": "2026-10-29",
+   "summary": "With the COP31 climate summit in Turkey looming, all eyes are on China to see what the country will push…",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "7fd13d78b558",
+   "title": "Analysis: China’s clean-tech exports in 2026 to avoid as much CO2 as Brazil emits in a year",
+   "link": "https://www.carbonbrief.org/analysis-chinas-clean-tech-exports-in-2026-to-avoid-as-much-co2-as-brazil-emits-in-a-year",
+   "source": "Carbon Brief",
+   "school": null,
+   "date": "2026-10-29",
+   "summary": "China’s exports in 2026 of clean-energy technologies, such as solar panels, batteries and electric vehicles, are on track to cut…",
+   "kind": "news",
+   "topics": [
+    "energy-climate",
+    "climate-tech"
+   ]
+  },
+  {
+   "id": "c76d92a7ead6",
+   "title": "The ‘Great Frost’ of 1708–9 in Britain and the Condescensions of Posterity",
+   "link": "https://doi.org/10.1111/1468-229x.70173",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-10-29",
+   "summary": "History · Julian Hoppit",
+   "kind": "research",
+   "topics": [
+    "finance-markets"
+   ]
+  },
+  {
+   "id": "7534c97699b8",
+   "title": "The finance sector should capture the full range of climate change risks",
+   "link": "https://doi.org/10.1038/s43247-026-04160-0",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-10-29",
+   "summary": "Communications Earth & Environment · Ajay Gambhir, Erica Thompson, Luke Kemp et al.",
+   "kind": "research",
+   "topics": [
+    "energy-climate",
+    "finance-markets"
+   ]
+  },
+  {
+   "id": "6a059eb0584b",
+   "title": "Renewable energy investment strategies of National Oil Companies in Latin America: Rationales under divergent macroeconomic and regulatory contexts",
+   "link": "https://doi.org/10.1088/2515-7620/aebb87",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-10-29",
+   "summary": "Environmental Research Communications · Erika Baquero Jimenez, Roberto Cardinale, Khuzama Wardeh",
+   "kind": "research",
+   "topics": [
+    "energy-climate",
+    "finance-markets"
+   ]
+  },
+  {
+   "id": "2a22ddde1645",
+   "title": "The Jackdaw gasfield, net zero and climate adaptation",
+   "link": "https://www.lse.ac.uk/granthaminstitute/news/the-jackdaw-gasfield-net-zero-and-climate-adaptation/",
+   "source": "Grantham Research Institute: news",
+   "school": "lse",
+   "date": "2026-10-28",
+   "summary": "Emma Howard Boyd Chair of the National Heat Risk Commission responds to an Andy Burnham opinion piece about Jackdaw.",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "eea4957b153d",
+   "title": "Boiler Upgrade Scheme: Increase in heat pump grants drove 24 per cent rise in monthly installations",
+   "link": "https://www.lse.ac.uk/granthaminstitute/news/boiler-upgrade-scheme-increase-in-heat-pump-grants-drove-24-per-cent-rise-in-monthly-installations/",
+   "source": "Grantham Research Institute: news",
+   "school": "lse",
+   "date": "2026-10-28",
+   "summary": "Grantham Institute, CEP, Imperial College and UCL study found that 2023 increase to heat pump grant raised installations by 24% a month.",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "f1f5bea2afdc",
+   "title": "2023 increase to heat pump grant raised installations by 24% a month, study finds",
+   "link": "https://www.lse.ac.uk/granthaminstitute/news/2023-increase-to-heat-pump-grant-raised-installations-by-24-a-month-study-finds/",
+   "source": "Grantham Research Institute: news",
+   "school": "lse",
+   "date": "2026-10-28",
+   "summary": "2023 increase to heat pump grant raised installations by 24% a month a study by LSE, Imperial and UCL has confirmed.",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "529a6faa8f94",
+   "title": "UK budget 2026: Key climate and energy announcements",
+   "link": "https://www.carbonbrief.org/uk-budget-2026-key-climate-and-energy-announcements",
+   "source": "Carbon Brief",
+   "school": null,
+   "date": "2026-10-28",
+   "summary": "Chancellor John Healey has announced a “new course on energy” for the UK, focused on keeping bills low amid the…",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "88c7a9edfbd1",
+   "title": "Revealed: UK relied on £2bn of ‘questionable accounting’ to hit its climate-aid goal",
+   "link": "https://www.carbonbrief.org/revealed-uk-relied-on-2bn-of-questionable-accounting-to-hit-its-climate-aid-goal",
+   "source": "Carbon Brief",
+   "school": null,
+   "date": "2026-10-28",
+   "summary": "The UK has beaten its target to provide £11.6bn of climate aid to developing countries by 2026 – but only…",
+   "kind": "news",
+   "topics": [
+    "energy-climate",
+    "development-inequality"
+   ]
+  },
+  {
+   "id": "337776a3a2eb",
+   "title": "Analysis: How the UK spent more than £11.6bn on climate aid since 2021",
+   "link": "https://www.carbonbrief.org/analysis-how-the-uk-spent-more-than-11-6bn-on-climate-aid-since-2021",
+   "source": "Carbon Brief",
+   "school": null,
+   "date": "2026-10-28",
+   "summary": "The UK has spent £12.8bn on climate aid for developing countries since 2021, according to official figures obtained by Carbon…",
+   "kind": "news",
+   "topics": [
+    "energy-climate",
+    "development-inequality"
+   ]
+  },
+  {
+   "id": "366b13df0e71",
+   "title": "Remit for the Monetary Policy Committee - October 2026",
+   "link": "https://www.bankofengland.co.uk/letter/2026/mpc-remit-2026",
+   "source": "Bank of England news",
+   "school": null,
+   "date": "2026-10-28",
+   "summary": "Letter from the Chancellor to the Governor",
+   "kind": "news",
+   "topics": [
+    "finance-markets"
+   ]
+  },
+  {
+   "id": "f8b662d85438",
+   "title": "Is UK climate policy going in circles?",
+   "link": "https://www.lse.ac.uk/granthaminstitute/news/is-uk-climate-policy-going-in-circles/",
+   "source": "Grantham Research Institute: news",
+   "school": "lse",
+   "date": "2026-10-27",
+   "summary": "The rumoured cuts to the Boiler Upgrade Scheme for England and Wales risk repeating a process that cuts a burgeoning industry down at the knees just as it is getting underway, writes Leo Mercer.",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "787d0dddc270",
+   "title": "On the Singular Control of a Diffusion and Its Running Infimum or Supremum",
+   "link": "https://doi.org/10.1137/25m1729496",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-10-27",
+   "summary": "SIAM Journal on Control and Optimization · Giorgio Ferrari, Néofytos Rodosthenous",
+   "kind": "research",
+   "topics": [
+    "finance-markets"
+   ]
+  },
+  {
+   "id": "e81e6e411342",
+   "title": "Lula’s Win Rules Out U-Turn by Brazil on Climate, Deforestation",
+   "link": "https://www.lse.ac.uk/granthaminstitute/news/lulas-win-rules-out-u-turn-by-brazil-on-climate-deforestation/",
+   "source": "Grantham Research Institute: news",
+   "school": "lse",
+   "date": "2026-10-26",
+   "summary": "Joana Setzer is quoted in this article about how Lula's unexpected victory means the continuation of Brazil’s positive environmental policies.",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "8ed4d1c895ff",
+   "title": "Rebuilding Post-Crisis: An Evening with Amnesty International",
+   "link": "https://blogs.lse.ac.uk/internationaldevelopment/2026/10/26/rebuilding-post-crisis-an-evening-with-amnesty-international/",
+   "source": "LSE International Development",
+   "school": "lse",
+   "date": "2026-10-26",
+   "summary": "What does meaningful recovery look like after a humanitarian crisis? MSc Health and International Development student Trisha Purnaiya reflects on an event held in collaboration between LSE’s Department of International…",
+   "kind": "blog",
+   "topics": [
+    "development-inequality"
+   ]
+  },
+  {
+   "id": "19b7b4ab54e3",
+   "title": "How much development aid is spent on climate change?",
+   "link": "https://ourworldindata.org/how-much-development-aid-is-spent-on-climate-change",
+   "source": "Our World in Data",
+   "school": null,
+   "date": "2026-10-26",
+   "summary": "Around one-fifth of development aid is spent on climate-related projects. But what does climate-related mean, and does it crowd out other aid projects?",
+   "kind": "data",
+   "topics": [
+    "energy-climate",
+    "development-inequality"
+   ]
+  },
+  {
+   "id": "9f3791fd59c7",
+   "title": "From Power Shortages to Reliable Electricity: Grid Upgrading and Firm Performance in Nepal",
+   "link": "https://hdl.handle.net/1885/733816555",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-10-26",
+   "summary": "ANU Open Research (Australian National University) · Nirash Paija, Raja Timilsina, Rabindra Nepal et al.",
+   "kind": "research",
+   "topics": [
+    "energy-climate",
+    "development-inequality"
+   ]
+  },
+  {
+   "id": "4757d2a0f271",
+   "title": "The Future of the Euro as a Global Currency",
+   "link": "https://doi.org/10.1515/ev-2026-0056",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-10-24",
+   "summary": "The Economists Voice · Paul DE GRAUWE, Yuemei Ji",
+   "kind": "research",
+   "topics": [
+    "finance-markets"
+   ]
+  },
+  {
+   "id": "5b098a8a5145",
+   "title": "Regulators unveil plans to simplify Senior Manager and Certification Regime",
+   "link": "https://www.bankofengland.co.uk/news/2026/october/regulators-unveil-plans-to-simplify-senior-manager-and-certification-regime",
+   "source": "Bank of England news",
+   "school": null,
+   "date": "2026-10-22",
+   "summary": "The number of financial services roles required to face enhanced checks from regulators will fall significantly under proposals that will support growth.",
+   "kind": "news",
+   "topics": [
+    "finance-markets"
+   ]
+  },
+  {
+   "id": "b3a94c4c3d73",
+   "title": "Tracking climate policy in the COP31 host country: Türkiye",
+   "link": "https://www.lse.ac.uk/granthaminstitute/publication/tracking-climate-policy-in-the-cop31-host-country-turkiye/",
+   "source": "Grantham Research Institute: publications",
+   "school": "lse",
+   "date": "2026-10-21",
+   "summary": "This brief summarises Türkiye’s existing climate policies, notes areas of strength and recommends priority areas for improvement as the country prepares to host COP31.",
+   "kind": "research",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "27900524d8a5",
+   "title": "Conflict and climate change are driving food shortages",
+   "link": "https://www.lse.ac.uk/granthaminstitute/publication/conflict-and-climate-change-are-driving-food-shortages/",
+   "source": "Grantham Research Institute: publications",
+   "school": "lse",
+   "date": "2026-10-21",
+   "summary": "The article calls for systemic changes across the entire agri-food supply chain to address the global impact of conflict and climate change on food shortages.",
+   "kind": "research",
+   "topics": [
+    "energy-climate",
+    "food-agriculture"
+   ]
+  },
+  {
+   "id": "c69946bc3de4",
+   "title": "Hydrogen production techno-economic analysis similarities and differences identified in an international round-robin comparison",
+   "link": "https://doi.org/10.1016/j.esd.2026.102166",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-10-21",
+   "summary": "Energy Sustainable Development/Energy for sustainable development · Alex Badgett, Tara Hosseini, Thomas Roos et al.",
+   "kind": "research",
+   "topics": [
+    "energy-climate",
+    "climate-tech"
+   ]
+  },
+  {
+   "id": "11074022fcf5",
+   "title": "Policy roadmap for China’s growth through decarbonisation: how government bodies can seize the green growth opportunity",
+   "link": "https://www.lse.ac.uk/granthaminstitute/publication/policy-roadmap-for-chinas-growth-through-decarbonisation-how-government-bodies-can-seize-the-green-growth-opportunity/",
+   "source": "Grantham Research Institute: publications",
+   "school": "lse",
+   "date": "2026-10-20",
+   "summary": "This policy insight initiates the development of a roadmap for China’s green growth opportunity. The authors apply the conceptual and universal framework of the green growth opportunity to China’s context, translating…",
+   "kind": "research",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "a9db01e20544",
+   "title": "The energy transition as a development challenge in Latin America and the Caribbean",
+   "link": "https://www.lse.ac.uk/granthaminstitute/publication/the-energy-transition-as-a-development-challenge-in-latin-america-and-the-caribbean/",
+   "source": "Grantham Research Institute: publications",
+   "school": "lse",
+   "date": "2026-10-19",
+   "summary": "This report develops a typology of four transition contexts for understanding the key challenges and pathways associated with the energy transition in Latin America and the Caribbean.",
+   "kind": "research",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "a9768a56cfc5",
+   "title": "The role of artificial intelligence in energy systems development: A comparative analysis of national strategies and future directions",
+   "link": "https://doi.org/10.1016/j.erss.2026.105031",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-10-17",
+   "summary": "Energy Research & Social Science · Armin Razmjoo, Pedram Asef, Poul Alberg Østergaard",
+   "kind": "research",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "d42ae9f88d12",
+   "title": "Making hope normal again (and again, and again): Nine months working for a Green Party MP",
+   "link": "https://blogs.lse.ac.uk/internationaldevelopment/2026/10/16/making-hope-normal-again-and-again-and-again-nine-months-working-for-a-green-party-mp/",
+   "source": "LSE International Development",
+   "school": "lse",
+   "date": "2026-10-16",
+   "summary": "Bahrathi Keeping, MSc Economic Policy for International Development, reflects on her experience completing an LSE Parliamentary Internship in 2025/26. Nine months in Parliament as a Policy Assistant to Dr Ellie Chowns…",
+   "kind": "blog",
+   "topics": [
+    "development-inequality"
+   ]
+  },
   {
    "id": "6ffc17671fa9",
    "title": "Artificial intelligence meets business intelligence: the anatomy of inflation",
@@ -24,6 +553,19 @@ window.AKADIMIA_FEED = {
    "date": "2026-10-15",
    "summary": "Dragos Gorduza, Livia Silva Paranhos and Ivan Yotzov Monetary policy decisions reflect incoming data, forecasts, and policymaker preferences. In this post, we use large language models (LLMs) to analyse Bank of England…",
    "kind": "blog",
+   "topics": [
+    "finance-markets"
+   ]
+  },
+  {
+   "id": "5dca4c2374af",
+   "title": "Construction cost and traffic performance of transport infrastructure projects: Evidence from a multilateral lender",
+   "link": "https://doi.org/10.1016/j.tranpol.2026.104494",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-10-15",
+   "summary": "Transport Policy · Olga Collado Romero, Doramas Jorge-Calderón, Timo Välilä",
+   "kind": "research",
    "topics": [
     "finance-markets"
    ]
@@ -308,6 +850,19 @@ window.AKADIMIA_FEED = {
    ]
   },
   {
+   "id": "6d20d89ecf1e",
+   "title": "Essential levels of care, prevention, and inequality in private health spending",
+   "link": "https://doi.org/10.1093/eurpub/ckag169.545",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-10-01",
+   "summary": "European Journal of Public Health · Leonardo Becchetti, Francesco Salustri, Nazaria Solferino",
+   "kind": "research",
+   "topics": [
+    "development-inequality"
+   ]
+  },
+  {
    "id": "a6c467989a2f",
    "title": "Analysis: Wind and solar save UK from gas imports worth £5.9bn during Hormuz crisis",
    "link": "https://www.carbonbrief.org/analysis-wind-and-solar-save-uk-from-gas-imports-worth-5-9bn-during-hormuz-crisis",
@@ -470,6 +1025,19 @@ window.AKADIMIA_FEED = {
    ]
   },
   {
+   "id": "39ac3ab9192c",
+   "title": "The fiscal implications of parallel currencies",
+   "link": "https://doi.org/10.1016/j.jmacro.2026.103783",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-09-24",
+   "summary": "Journal of Macroeconomics · Saleem Bahaj, Ricardo A.M.R. Reis",
+   "kind": "research",
+   "topics": [
+    "finance-markets"
+   ]
+  },
+  {
    "id": "60dd14f1bb7f",
    "title": "The Role of Financial News Sentiment Bias in Stock Market Information Asymmetry",
    "link": "https://doi.org/10.54254/2755-2721/2026.ast37266",
@@ -542,7 +1110,7 @@ window.AKADIMIA_FEED = {
    "source": "UCL research (via OpenAlex)",
    "school": "ucl",
    "date": "2026-09-21",
-   "summary": "Fiscal Studies · Philippe Aghion, Philippe Aghion, Richard W. Blundell et al.",
+   "summary": "Fiscal Studies · Philippe Aghion, Antonin Bergeaud, Richard W. Blundell et al.",
    "kind": "research",
    "topics": [
     "development-inequality"
@@ -573,6 +1141,19 @@ window.AKADIMIA_FEED = {
    "topics": [
     "energy-climate",
     "food-agriculture"
+   ]
+  },
+  {
+   "id": "e5463640e53c",
+   "title": "Automation and employment over the technology life cycle: Evidence from European regions",
+   "link": "https://doi.org/10.1016/j.respol.2026.105611",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-09-18",
+   "summary": "Research Policy · Florencia Jaccoud, Fabien Petit, Tommaso Ciarli et al.",
+   "kind": "research",
+   "topics": [
+    "development-inequality"
    ]
   },
   {
@@ -975,6 +1556,19 @@ window.AKADIMIA_FEED = {
    "topics": [
     "finance-markets"
    ]
+  },
+  {
+   "id": "2bc6d3fc5803",
+   "title": "Timing of Opportunism: How Fiscal Rules Reshaped Political Cycles in Brazil",
+   "link": "https://doi.org/10.5281/zenodo.23484997",
+   "source": "Skidmore research (via OpenAlex)",
+   "school": "skidmore",
+   "date": "2026-02-25",
+   "summary": "Zenodo (CERN European Organization for Nuclear Research) · Débora Costa Ferreira, Rodrigo Schneider, Maurí­cio Soares Bugarin",
+   "kind": "research",
+   "topics": [
+    "finance-markets"
+   ]
   }
  ],
  "people": {
@@ -1139,6 +1733,19 @@ window.AKADIMIA_FEED = {
     "topics": []
    },
    {
+    "id": "2bc6d3fc5803",
+    "title": "Timing of Opportunism: How Fiscal Rules Reshaped Political Cycles in Brazil",
+    "link": "https://doi.org/10.5281/zenodo.23484997",
+    "source": "Rodrigo Schneider",
+    "school": "skidmore",
+    "date": "2026-02-25",
+    "summary": "Zenodo (CERN European Organization for Nuclear Research) · Débora Costa Ferreira, Rodrigo Schneider, Maurí­cio Soares Bugarin",
+    "kind": "research",
+    "topics": [
+     "finance-markets"
+    ]
+   },
+   {
     "id": "8e78e62e7542",
     "title": "Racial self-classification, group consciousness, and public employment representation",
     "link": "https://doi.org/10.1016/j.jdeveco.2026.103755",
@@ -1150,30 +1757,15 @@ window.AKADIMIA_FEED = {
     "topics": []
    },
    {
-    "id": "feb2d56fb940",
-    "title": "Politics and Public Banks: BNDES Loans to Local Governments in Brazil",
-    "link": "https://doi.org/10.31389/eco.519",
+    "id": "c8742bea72e2",
+    "title": "INFLUÊNCIA DO CAPITAL INTELECTUAL SOBRE A CAPACIDADE ABSORTIVA NA POLÍCIA RODOVIÁRIA FEDERAL BRASILEIRA",
+    "link": "https://doi.org/10.31060/rbsp.2026.v1.n1.2143",
     "source": "Rodrigo Schneider",
     "school": "skidmore",
-    "date": "2026-01-01",
-    "summary": "Economía · Guilherme Paiva Pinto, Maurí­cio Soares Bugarin, Rodrigo Schneider",
+    "date": "2026-02-03",
+    "summary": "Revista Brasileira de Segurança Pública · Rodrigo Schneider, Cleidson Nogueira Dias, Dusan Schreiber",
     "kind": "research",
-    "topics": [
-     "finance-markets"
-    ]
-   },
-   {
-    "id": "c122b3e8e8c2",
-    "title": "Does Exposure to Refugees Impact Political Support for Right‐Wing Parties? Empirical Evidence From Venezuelan Refugees in Brazil",
-    "link": "https://doi.org/10.1111/ecpo.12354",
-    "source": "Rodrigo Schneider",
-    "school": "skidmore",
-    "date": "2025-05-26",
-    "summary": "Economics and Politics · Rodrigo Schneider, Smriti Tiwari",
-    "kind": "research",
-    "topics": [
-     "development-inequality"
-    ]
+    "topics": []
    }
   ]
  },
@@ -1207,17 +1799,17 @@ window.AKADIMIA_FEED = {
   {
    "name": "Grantham Research Institute: news",
    "ok": true,
-   "count": 8
+   "count": 7
   },
   {
    "name": "Grantham Research Institute: publications",
    "ok": true,
-   "count": 8
+   "count": 7
   },
   {
    "name": "LSE Business Review",
    "ok": true,
-   "count": 2
+   "count": 0
   },
   {
    "name": "LSE International Development",
@@ -1227,7 +1819,7 @@ window.AKADIMIA_FEED = {
   {
    "name": "Carbon Brief",
    "ok": true,
-   "count": 5
+   "count": 11
   },
   {
    "name": "Bank Underground (Bank of England staff blog)",
@@ -1237,12 +1829,12 @@ window.AKADIMIA_FEED = {
   {
    "name": "Our World in Data",
    "ok": true,
-   "count": 5
+   "count": 4
   },
   {
    "name": "Bank of England news",
    "ok": true,
-   "count": 1
+   "count": 4
   },
   {
    "name": "UCL research (via OpenAlex)",
@@ -1252,7 +1844,7 @@ window.AKADIMIA_FEED = {
   {
    "name": "Skidmore research (via OpenAlex)",
    "ok": true,
-   "count": 5
+   "count": 6
   }
  ],
  "topics": [
