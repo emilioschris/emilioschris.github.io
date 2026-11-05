@@ -1,0 +1,52 @@
+# Paratiritirio daily Signals
+# Once a day, GitHub runs basecamp/paratiritirio/tools/update_signals.py, which
+# reads the approved Cyprus business feeds (signals-config.json) and rewrites
+# basecamp/paratiritirio/signals-data.js. Only headline, source, date, link and
+# a short summary are kept. It commits only when something changed. To check it
+# ran: the repo's Actions tab → "Paratiritirio daily Signals". "Run workflow"
+# there runs it by hand.
+name: Paratiritirio daily Signals
+
+on:
+  schedule:
+    - cron: "17 6 * * *"      # every day at 06:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: paratiritirio-signals
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch the feeds
+        run: python3 basecamp/paratiritirio/tools/update_signals.py
+
+      - name: Commit if anything changed
+        id: commit
+        run: |
+          if git diff --quiet -- basecamp/paratiritirio/signals-data.js; then
+            echo "Nothing new today."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase --autostash
+          git add basecamp/paratiritirio/signals-data.js
+          git commit -m "Paratiritirio: daily Signals"
+          git push
+          echo "changed=yes" >> "$GITHUB_OUTPUT"
+
+      - name: Rebuild the site
+        if: steps.commit.outputs.changed == 'yes'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds"
