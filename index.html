@@ -22,7 +22,7 @@
   <meta name="twitter:image:alt" content="A red-tailed hawk with a terracotta tail perched on a branch over faint contour lines, beside the words Field Notes and the coordinates 35.1°N 33.4°E.">
 
   <!-- Apply a saved Day/Dusk choice before the page draws, so it never flashes the wrong colours -->
-  <script src="shared/theme-init.js?v=2026-11-04.1"></script>
+  <script src="shared/theme-init.js?v=2026-11-05.2"></script>
 
   <!-- Fonts: Fraunces (headings), Instrument Sans (body), JetBrains Mono (labels), Caveat (margin notes) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,12 +30,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..600&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Instrument+Sans:wght@400..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2026-11-05.1">
-  <link rel="manifest" href="manifest.webmanifest?v=2026-11-05.1">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2026-11-05.2">
+  <link rel="manifest" href="manifest.webmanifest?v=2026-11-05.2">
 
   <!-- The shared design system first, then this page's own styles -->
-  <link rel="stylesheet" href="shared/field-notes.css?v=2026-11-04.1">
-  <link rel="stylesheet" href="styles.css?v=2026-11-04.1">
+  <link rel="stylesheet" href="shared/field-notes.css?v=2026-11-05.2">
+  <link rel="stylesheet" href="styles.css?v=2026-11-05.2">
 </head>
 <body>
 
@@ -134,6 +134,14 @@
         <span class="theme-label" aria-hidden="true">Dusk</span>
       </button>
 
+      <!-- Bonsai on/off: hides the floating bonsai and its watering can.
+           Remembered in localStorage (script.js, section 5d). -->
+      <button class="theme-switch bonsai-switch" id="bonsai-toggle" type="button" role="switch" aria-checked="true" aria-label="Bonsai">
+        <svg class="bonsai-switch-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 9.5c0-2 2-3 3.5-2.6C7 5 9.6 4.6 10.8 6c1.6-.3 3 1 2.6 2.6-.3 1.2-1.6 1.6-2.8 1.2-1 .9-2.6.9-3.6.1C5.6 10.6 3 10.8 3 9.5Z" fill="currentColor" opacity=".55"/><path d="M8 10v3M4.5 13.5h7" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <span class="theme-label" aria-hidden="true">Bonsai</span>
+        <span class="theme-track" aria-hidden="true"><span class="theme-dot"></span></span>
+      </button>
+
       <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
         <span class="menu-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Sections menu</span>
@@ -171,6 +179,26 @@
 
     </section>
 
+    <!-- ================= DAILY TOOLS =================
+         Shortcuts to the tools I use every day. The tiles come
+         from projects.js: give a project daily: 1, 2, 3 or 4. -->
+    <section class="daily" id="daily" aria-labelledby="daily-title">
+      <h2 class="daily-title" id="daily-title">Daily tools</h2>
+      <ul class="daily-tiles" id="daily-tiles"></ul>
+    </section>
+
+    <!-- Section buttons: slide in under the top bar once you're past
+         the hero, and light up the section on screen (script.js, 1b). -->
+    <nav class="jump" id="jump" aria-label="Jump to a section">
+      <ul>
+        <li><a href="#base-camp" style="--tint: var(--terracotta)"><span>01</span> Base Camp</a></li>
+        <li><a href="#library" style="--tint: var(--aegean)"><span>02</span> The Library</a></li>
+        <li><a href="#training-ground" style="--tint: var(--olive)"><span>03</span> Training Ground</a></li>
+        <li><a href="#language-routes" style="--tint: var(--ochre)"><span>04</span> Language Routes</a></li>
+        <li><a href="#the-wild" style="--tint: var(--olive)"><span>05</span> The Wild</a></li>
+      </ul>
+    </nav>
+
     <!-- =========================================================
          SECTIONS: five "legs" heading out from the origin.
          Each has a compass bearing (data-bearing) that turns the
@@ -184,15 +212,16 @@
     <noscript><p class="cards-noscript">The project cards need JavaScript turned on to appear.</p></noscript>
 
     <!-- ---------- 01 · BASE CAMP ---------- -->
-    <section class="leg reveal" id="base-camp" data-bearing="12" style="--tint: var(--terracotta)" aria-labelledby="base-camp-title">
+    <section class="leg leg--tidy reveal" id="base-camp" data-bearing="12" style="--tint: var(--terracotta); --b: 12deg" aria-labelledby="base-camp-title">
       <header class="leg-head">
-        <p class="leg-bearing"><span>01</span> N 012°</p>
-        <h2 class="leg-title" id="base-camp-title">Base Camp</h2>
+        <p class="leg-bearing"><svg class="leg-needle" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="8.5"/><path d="M10 2.8 12 10h-4Z"/><path d="M10 17.2 8 10h4Z"/></svg><span>01</span> N 012°</p>
+        <h2 class="leg-title" id="base-camp-title">
+          <svg class="leg-motif" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M3 26 16 6l13 20M16 6v20M11 26l5-8 5 8M2 26h28"/></svg>
+          Base Camp
+        </h2>
         <p class="margin-note" aria-hidden="true">start here, everything else follows</p>
       </header>
-      <div class="cards">
-        <svg class="trail" aria-hidden="true"><path /></svg>
-      </div>
+      <div class="cards"></div>
     </section>
 
     <!-- ---------- 02 · THE LIBRARY ---------- -->
@@ -511,8 +540,8 @@
     </div>
   </dialog>
 
-  <script src="shared/field-notes.js?v=2026-11-04.1"></script>
-  <script src="projects.js?v=2026-11-04.1"></script>
-  <script src="script.js?v=2026-11-04.1"></script>
+  <script src="shared/field-notes.js?v=2026-11-05.2"></script>
+  <script src="projects.js?v=2026-11-05.2"></script>
+  <script src="script.js?v=2026-11-05.2"></script>
 </body>
 </html>

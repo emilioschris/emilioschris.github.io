@@ -6,11 +6,13 @@
    This file only holds what's unique to the homepage:
 
    1. Project cards (from projects.js)
+      1a. Daily tools row   1b. Section buttons under the top bar
    2. Top bar + mobile menu
    3. Compass
    4. Contour map (the hero)
    5. The bonsai (easter egg that leads to The Greenhouse)
       and the watering can you can drag onto it
+      5d. The Bonsai on/off switch
    6. The field guide (the compass opens it)
    ========================================================= */
 (() => {
@@ -135,7 +137,118 @@
       elevation: "ELEV 0 m",
     }];
     list.forEach((project, i) => holder.append(buildCard(project, i)));
+
+    // Tidy sections: gather the field details into one quiet footer line
+    if (section.classList.contains("leg--tidy")) {
+      holder.querySelectorAll(".card").forEach((card) => {
+        const foot = el("div", "card-foot");
+        foot.append(...card.querySelectorAll(".card-meta, .card-elev, .card-tended"));
+        card.append(foot);
+      });
+    }
   });
+
+  /* ---------------------------------------------------------
+     1a. DAILY TOOLS
+     Four shortcut tiles under the hero, for every project in
+     projects.js with daily: 1, 2, 3 … (in that order). A project
+     with no link yet shows as a quiet "Coming soon" tile.
+     --------------------------------------------------------- */
+  (() => {
+    const list = document.getElementById("daily-tiles");
+    if (!list) return;
+    const pinned = (typeof PROJECTS !== "undefined" ? PROJECTS : [])
+      .filter((p) => p.daily)
+      .sort((a, b) => Number(a.daily) - Number(b.daily))
+      .slice(0, 4);
+    if (!pinned.length) { list.closest(".daily").hidden = true; return; }
+
+    pinned.forEach((project, i) => {
+      const section = project.section && document.getElementById(project.section);
+      const li = el("li");
+      const tile = el(project.link ? "a" : "div", "daily-tile");
+      if (project.link) tile.href = project.link;
+      else tile.classList.add("is-soon");
+      if (section) tile.style.setProperty("--tint", section.style.getPropertyValue("--tint"));
+
+      // A small tinted thumbnail (or an empty dashed pebble)
+      const thumb = el("span", "daily-thumb pebble");
+      thumb.dataset.shape = project.shape || (i % 4) + 1;
+      thumb.setAttribute("aria-hidden", "true");
+      if (project.image && typeof project.image === "object") {
+        thumb.classList.add("pebble--photo");
+        thumb.dataset.tone = project.image.tone || "terracotta";
+        const img = el("img");
+        img.src = project.image.src;
+        img.alt = "";
+        img.loading = "lazy";
+        img.decoding = "async";
+        thumb.append(img);
+      } else {
+        thumb.classList.add("pebble--uncharted");
+      }
+
+      const text = el("span", "daily-text");
+      text.append(el("span", "daily-name", project.title));
+      if (!project.link) {
+        text.append(el("span", "daily-where daily-soon", "Coming soon"));
+      } else if (section) {
+        const name = section.querySelector(".leg-title")?.textContent.trim() || "";
+        const bearing = section.querySelector(".leg-bearing")?.textContent.replace(/^\s*\d+\s*/, "").trim() || "";
+        text.append(el("span", "daily-where", `${name} · ${bearing}`));
+      }
+      tile.append(thumb, text);
+      if (project.link) {
+        const arrow = el("span", "daily-arrow", "→");
+        arrow.setAttribute("aria-hidden", "true");
+        tile.append(arrow);
+      }
+      if (!project.link) tile.setAttribute("aria-label", `${project.title}: coming soon`);
+      li.append(tile);
+      list.append(li);
+    });
+  })();
+
+  /* ---------------------------------------------------------
+     1b. SECTION BUTTONS
+     A row of buttons that slides in under the top bar once the
+     hero has scrolled away, and lights up the section on screen.
+     --------------------------------------------------------- */
+  (() => {
+    const jump = document.getElementById("jump");
+    const hero = document.querySelector(".hero");
+    if (!jump || !hero) return;
+    const row = jump.querySelector("ul");
+    const links = [...jump.querySelectorAll("a")];
+    const sections = links.map((a) => document.querySelector(a.hash)).filter(Boolean);
+    let current = null, queued = false;
+
+    function update() {
+      queued = false;
+      const barH = parseFloat(getComputedStyle(root).getPropertyValue("--bar-h")) || 64;
+      const shown = hero.getBoundingClientRect().bottom < barH;
+      jump.classList.toggle("is-shown", shown);
+      jump.inert = !shown;                     // no tabbing into it while it's hidden
+
+      // The section on screen: the last one whose top is above 40% of the window
+      let here = null;
+      for (const sec of sections) if (sec.getBoundingClientRect().top < innerHeight * 0.4) here = sec;
+      if (here === current) return;
+      current = here;
+      links.forEach((a) => {
+        const on = here && a.hash === `#${here.id}`;
+        if (on) {
+          a.setAttribute("aria-current", "true");
+          // Keep the lit button in view on narrow screens (sideways only)
+          row.scrollTo({ left: a.parentElement.offsetLeft - 16, behavior: reducedMotion.matches ? "auto" : "smooth" });
+        } else a.removeAttribute("aria-current");
+      });
+    }
+    const queue = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
+    addEventListener("scroll", queue, { passive: true });
+    addEventListener("resize", queue);
+    update();
+  })();
 
   /* ---------------------------------------------------------
      2. TOP BAR + MOBILE MENU
@@ -676,7 +789,8 @@
     }
 
     let held = false;
-    const paused = () => held || hovered || focused || document.hidden || (opts.paused && opts.paused());
+    const paused = () => held || hovered || focused || document.hidden ||
+      root.classList.contains("bonsai-off") || (opts.paused && opts.paused());
 
     function tick(now) {
       raf = requestAnimationFrame(tick);
@@ -858,6 +972,34 @@
     can.addEventListener("pointercancel", drop);
     can.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flyAndWater(); }
+    });
+  })();
+
+  /* ---------------------------------------------------------
+     5d. THE BONSAI SWITCH
+     The "Bonsai" switch in the top bar. Off hides the bonsai
+     and its watering can (and they stop drifting). On by
+     default; the choice is saved in this browser.
+     --------------------------------------------------------- */
+  (() => {
+    const toggle = document.getElementById("bonsai-toggle");
+    if (!toggle) return;
+    const KEY = "fieldnotes-bonsai";
+    let on = true;
+    try { on = localStorage.getItem(KEY) !== "off"; } catch (e) { /* private mode: stays on */ }
+
+    function apply() {
+      root.classList.toggle("bonsai-off", !on);
+      toggle.setAttribute("aria-checked", String(on));
+    }
+    apply();
+    toggle.addEventListener("click", () => {
+      on = !on;
+      try { localStorage.setItem(KEY, on ? "on" : "off"); } catch (e) { /* fine */ }
+      if (!on && bonsai) document.getElementById("bonsai-dialog")?.close();
+      apply();
+      // Switched back on: let both find a fresh clear spot
+      if (on) dispatchEvent(new Event("resize"));
     });
   })();
 

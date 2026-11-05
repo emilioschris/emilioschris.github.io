@@ -38,6 +38,10 @@
                   credits page: title, author, date, source, url, licence,
                   licenceUrl, and an optional note about what it is.
      shape        Optional pebble shape, 1 to 4. Picked for you if left out.
+     daily        Optional. Pins the project to the "Daily tools" row under
+                  the hero, e.g. daily: 1 (the number sets the order, 1 first).
+                  Delete the line to unpin it. Pinned projects still show in
+                  their own section too. The row has room for 4.
    ========================================================= */
 
 const PROJECTS = [
@@ -142,6 +146,7 @@ const PROJECTS = [
     date: "2026-11",
     tended: "2026-11-02",
     elevation: "ELEV 1,952 m · 31 ENTRIES",
+    daily: 3,
     image: {
       src: "assets/cards/paratiritirio.webp",
       alt: "Limassol's seafront at night: new high-rise towers lit up beside older apartment blocks, their lights reflected in the sea.",
@@ -221,6 +226,7 @@ const PROJECTS = [
     date: "2026-10",
     tended: "2026-10-14",
     elevation: "ELEV 3 TIERS · 13 PLANTS",
+    daily: 2,
     shape: 2,
     image: {
       src: "assets/cards/greenhouse.webp",
@@ -250,6 +256,7 @@ const PROJECTS = [
     date: "2026-10",
     tended: "2026-10-14",
     elevation: "ELEV 2,240 m",
+    daily: 1,
     shape: 4,
     image: {
       src: "assets/cards/spanish.webp",
@@ -317,5 +324,17 @@ const PROJECTS = [
         licenceUrl: "https://creativecommons.org/licenses/by-sa/2.0/",
       },
     },
+  },
+  {
+    // Not built yet: shows only as a "Coming soon" tile in Daily tools.
+    // To switch it on: add a link (the tile becomes clickable), set
+    // status to "ongoing", and add section: "the-wild" to give it a card
+    // in The Wild as well.
+    title: "Trip planner",
+    status: "planned",
+    daily: 4,
+    description: "A camping and climbing trip planner for the US.",
+    // link: "the-wild/trips/index.html",
+    // section: "the-wild",
   },
 ];
