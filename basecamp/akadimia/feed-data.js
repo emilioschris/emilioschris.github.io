@@ -1,7 +1,46 @@
 /* Written by tools/update_feed.py once a day. Don't edit by hand: it will be overwritten. */
 window.AKADIMIA_FEED = {
- "updated": "2026-11-05T07:42Z",
+ "updated": "2026-11-06T07:40Z",
  "items": [
+  {
+   "id": "e03bb00576b0",
+   "title": "Analysis: China’s quarterly CO2 falls 3% in largest drop since Covid",
+   "link": "https://www.carbonbrief.org/analysis-chinas-quarterly-co2-falls-3-in-largest-drop-since-covid",
+   "source": "Carbon Brief",
+   "school": null,
+   "date": "2026-11-06",
+   "summary": "China’s carbon dioxide (CO2) emissions fell by 3.1% in the third quarter of 2026, as the Hormuz crisis continued to…",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "3167fe8e62ce",
+   "title": "Fossil fuel subsidies after 2025: missed deadlines and new coalitions",
+   "link": "https://www.lse.ac.uk/granthaminstitute/news/fossil-fuel-subsidies-after-2025-missed-deadlines-and-new-coalitions/",
+   "source": "Grantham Research Institute: news",
+   "school": "lse",
+   "date": "2026-11-05",
+   "summary": "Energy crises have pushed governments back towards price caps and subsidies, but the Coalition of Phasing out Fossil Fuel Incentives including Subsidies (COFFIS) offers a way forward, writes Giorgia Monsignori.",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "959eec6b563f",
+   "title": "Interactive: Tracking negotiating texts at the COP31 climate summit",
+   "link": "https://www.carbonbrief.org/interactive-tracking-negotiating-texts-at-the-cop31-climate-summit",
+   "source": "Carbon Brief",
+   "school": null,
+   "date": "2026-11-05",
+   "summary": "The centrepiece of every UN climate summit is for countries to negotiate the wording of a large number of legal…",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
   {
    "id": "a2f1c3e1e175",
    "title": "Q&A: What is the Brazil-led ‘deforestation roadmap’?",
@@ -107,6 +146,19 @@ window.AKADIMIA_FEED = {
    ]
   },
   {
+   "id": "dba8e9f3bf0f",
+   "title": "C-REITs and infrastructure financialization in China: A conjunctural analysis of state capitalism and state entrepreneurialism",
+   "link": "https://doi.org/10.1177/27541223261501314",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-11-03",
+   "summary": "Transactions in Planning and Urban Research · Qiulin Ke, Zhen Ye",
+   "kind": "research",
+   "topics": [
+    "finance-markets"
+   ]
+  },
+  {
    "id": "56cdb6b51906",
    "title": "Early Climate Impact Assessments Targeted 2025—How Did They Perform for Global Water Resources?",
    "link": "https://www.lse.ac.uk/granthaminstitute/publication/early-climate-impact-assessments-targeted-2025-how-did-they-perform-for-global-water-resources/",
@@ -128,6 +180,19 @@ window.AKADIMIA_FEED = {
    "date": "2026-11-02",
    "summary": "Delegates will soon gather in the Turkish resort city of Antalya for UN climate negotiations, against a backdrop of war,…",
    "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "d91c4378a525",
+   "title": "Phase Transition‐Induced Engineering of Fe‐N‐C Catalysts for Dual Optimization of Active Sites and Mass Transfer in Oxygen Reduction Reaction",
+   "link": "https://doi.org/10.1002/rar2.70670",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-11-01",
+   "summary": "Rare Metals · Bingye Song, Jing Lv, Zexuan Du et al.",
+   "kind": "research",
    "topics": [
     "energy-climate"
    ]
