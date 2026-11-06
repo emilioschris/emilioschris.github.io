@@ -52,7 +52,7 @@
 
 window.PARATIRITIRIO = window.PARATIRITIRIO || {};
 
-PARATIRITIRIO.asOf = "2026-11-02";
+PARATIRITIRIO.asOf = "2026-11-06";
 
 PARATIRITIRIO.types = [
   { id: "project", label: "Project", plural: "Projects" },
@@ -591,6 +591,35 @@ PARATIRITIRIO.entries = [
     ],
     asOf: "2026-11-02",
     flags: ["The Republic of Cyprus's own position on the airport should be cited from an official source; for now only Wikipedia is used."],
+  },
+
+  {
+    id: "new-cyprus-museum",
+    name: "New Cyprus Museum (national archaeological museum)",
+    type: "project",
+    sectors: ["infrastructure", "tourism"],
+    district: "nicosia",
+    coords: [35.1736, 33.3578],
+    coordsNote: "Approximate: the old hospital site in Nicosia, across the street from the existing Cyprus Museum.",
+    status: "under-construction",
+    developer: "The state (Cyprus government); built by the Iacovou-Cyfield joint venture",
+    investors: [],
+    value: { eur: 143924216, text: "About €144m including VAT (contract value, January 2023)", source: 2, confidence: "strong" },
+    dates: { announced: "2023-01", expected: "2028" },
+    summary: "A new national archaeological museum on the site of Nicosia's old hospital, to hold more than 6,500 antiquities, with conservation workshops, a library and an amphitheatre. The foundation stone was laid in January 2023 and delivery was first set for 9 July 2026. In October 2025 the contractor had asked for about 500 more days, and about €30m of works were done. In September 2026 MPs were told the building will not be delivered before 2028, and the committee chairman said it looked unlikely to open to the public before 2030.",
+    why: "It is described as the state's biggest cultural investment in decades, and it shows how a large public project slips: design changes, ground conditions, the contractor's extension claims and a budget stuck at the finance ministry.",
+    whoGains: { text: "Visitors and researchers: a national home for the island's antiquities, with free admission planned. The state: a flagship for cultural tourism. Taxpayers: the cost of any extension is still being reviewed; the contractor had not asked for more money by October 2025.", sources: [1, 2] },
+    related: [],
+    tags: ["museum", "archaeology", "Nicosia", "Cyfield", "culture", "delay"],
+    book: false,
+    sources: [
+      { title: "New Cyprus museum in 2028 at the soonest", publisher: "Cyprus Mail", date: "2026-09-30", url: "https://cyprus-mail.com/2026/09/30/new-cyprus-museum-in-2028-at-the-soonest", kind: "news" },
+      { title: "MPs flag major delays to new Nicosia museum project", publisher: "Cyprus Mail", date: "2025-10-09", url: "https://www.cyprus-mail.com/2025/10/09/mps-flag-major-delays-to-new-nicosia-museum-project", kind: "news" },
+      { title: "Historic day as president lays foundation stone of new museum", publisher: "Cyprus Mail", date: "2023-01-23", url: "https://cyprus-mail.com/2023/01/23/historic-day-as-president-lays-foundation-stone-of-new-museum", kind: "news" },
+      { title: "Archaeological Museum: Contractor Seeks 500-Day Extension, Opening May Be Pushed to 2028", publisher: "FastForward", date: "2025-10-09", url: "https://fastforward.com.cy/real-estate/archaeological-museum-contractor-seeks-extension", kind: "news" },
+    ],
+    asOf: "2026-11-06",
+    flags: ["The September 2026 article says the museum is \"expected to be ready by February 3, 2027\" but not delivered before 2028; I haven't found what the 2027 date refers to. Whether the 500-day extension was approved is unknown. Funding sources (state or EU) are not stated in any source I read. The pin is approximate and the \"expected\" date is the earliest handover, not an opening date."],
   },
 
   /* ================= LARNACA ================= */
