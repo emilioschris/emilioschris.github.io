@@ -1,8 +1,297 @@
 /* Written by tools/update_signals.py once a day. Don't edit by hand: it will be overwritten. */
 window.PARATIRITIRIO = window.PARATIRITIRIO || {};
 PARATIRITIRIO.signals = {
- "updated": "2026-11-03T03:08Z",
+ "updated": "2026-11-06T07:34Z",
  "items": [
+  {
+   "id": "703af3c50927",
+   "title": "CISCO and Mega Equity dominate Cyprus Stock Exchange trading",
+   "link": "https://cyprus-mail.com/2026/11/06/cisco-and-mega-equity-dominate-cyprus-stock-exchange-trading",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-06",
+   "summary": "CISCO Ltd led trading on the Cyprus Stock Exchange (CSE) in October, accounting for 33.54 per cent of market activity including package transactions, according to the exchange’s official members’ market share report…",
+   "sectors": [
+    "finance"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "2864d394a062",
+   "title": "Chris Knight of FT Locations: Cyprus recorded explosive 118.4% growth in investment, leaving all its competitors behind – The findings",
+   "link": "https://www.investcyprus.org.cy/chris-knight-of-ft-locations-cyprus-recorded-explosive-118-4-growth-in-investment-leaving-all-its-competitors-behind-the-findings/",
+   "source": "Invest Cyprus",
+   "feed": "Invest Cyprus",
+   "date": "2026-11-06",
+   "summary": "",
+   "sectors": [
+    "finance"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "43f0f16f8d72",
+   "title": "Cyprus needs long-term energy strategy beyond political cycles, expert says",
+   "link": "https://cyprus-mail.com/2026/11/05/cyprus-needs-long-term-energy-strategy-beyond-political-cycles-expert-says",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: energy",
+   "date": "2026-11-05",
+   "summary": "Cyprus needs a comprehensive national energy strategy built around long-term planning, political consensus and a combination of technologies, rather than relying on individual solutions to address its energy challenges…",
+   "sectors": [
+    "energy"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "fbcea9a0eebb",
+   "title": "Bank of Cyprus raises 2026 profitability target after €383m nine-month profit",
+   "link": "https://cyprus-mail.com/2026/11/05/bank-of-cyprus-raises-2026-profitability-target-after-e383m-nine-month-profit",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-05",
+   "summary": "The Bank of Cyprus on Thursday reported profit after tax of €383 million for the first nine months of 2026, up 9 per cent year-on-year, as strong lending and deposit growth, robust fee income and disciplined cost…",
+   "sectors": [
+    "finance"
+   ],
+   "districts": [],
+   "entries": [
+    "bank-of-cyprus"
+   ]
+  },
+  {
+   "id": "6dfc9a59ed79",
+   "title": "National Bank of Greece reports €996m profit in first nine months of 2026",
+   "link": "https://cyprus-mail.com/2026/11/05/national-bank-of-greece-reports-e996m-profit-in-first-nine-months-of-2026",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-05",
+   "summary": "The National Bank of Greece (NBG), which operates in Cyprus through its local subsidiary, reported profits after tax of €996 million for the first nine months of 2026, supported by stronger lending income, rising fees…",
+   "sectors": [
+    "finance"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "a589f1bb99a4",
+   "title": "Property profession retains appeal among newcomers, Cyprus real estate council says",
+   "link": "https://cyprus-mail.com/2026/11/04/property-profession-retains-appeal-among-newcomers-cyprus-real-estate-council-says",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: property",
+   "date": "2026-11-04",
+   "summary": "The Cyprus Real Estate Agents Registration Council on Wednesday announced that 90 candidates sat its latest written examinations on October 30, reflecting what it described as strong interest among newcomers in entering…",
+   "sectors": [
+    "real-estate"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "b5c11ded40da",
+   "title": "Themis November auctions cover properties across all five districts",
+   "link": "https://cyprus-mail.com/2026/11/04/themis-november-auctions-cover-properties-across-all-five-districts",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: property",
+   "date": "2026-11-04",
+   "summary": "More than 100 properties across Cyprus, with reserve prices starting at just €1,000, are included in Themis’ November electronic auction programme, which will be held through the eauctions platform. The portfolio covers…",
+   "sectors": [
+    "real-estate"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "7869bac0191e",
+   "title": "Cyprus estate agents seek correction of reports over occupied property claims",
+   "link": "https://cyprus-mail.com/2026/11/04/cyprus-estate-agents-seek-correction-of-reports-over-occupied-property-claims",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: property",
+   "date": "2026-11-04",
+   "summary": "The Cyprus Real Estate Agents Association (Skek) has called on media organisations to publicise the closure of a police investigation into allegations linking estate agencies to illegal activities involving Greek…",
+   "sectors": [
+    "real-estate"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "fafb7a5f76ed",
+   "title": "Cyprus businesses face crippling electricity costs amid EU price drop",
+   "link": "https://cyprus-mail.com/2026/11/04/cyprus-businesses-face-crippling-electricity-costs-amid-eu-price-drop",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: energy",
+   "date": "2026-11-04",
+   "summary": "Cyprus recorded the joint second-highest electricity prices for non-household consumers in the European Union during the first half of 2026, with businesses paying an average of €0.23 per kilowatt-hour, according to…",
+   "sectors": [
+    "energy"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "9a2fec05dfe3",
+   "title": "British tourists set to power Cyprus tourism rebound in 2027",
+   "link": "https://cyprus-mail.com/2026/11/04/british-tourists-set-to-power-cyprus-tourism-rebound-in-2027",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-04",
+   "summary": "UK airlines plan seat boost to Cyprus for 2027 season Cyprus’ tourism sector has proved more resilient than expected during the 2026 season, despite regional developments that created uncertainty in the market, Deputy…",
+   "sectors": [
+    "tourism",
+    "energy"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "2f99c408f06e",
+   "title": "Airlines signal strong interest in extending Cyprus winter season",
+   "link": "https://cyprus-mail.com/2026/11/04/airlines-signal-strong-interest-in-extending-cyprus-winter-season",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-04",
+   "summary": "Hermes sees positive outlook for Cyprus flights in 2027 Cyprus is expected to maintain a positive outlook for air connectivity in 2027 despite rising fuel costs and growing uncertainty in the aviation industry, Hermes…",
+   "sectors": [
+    "tourism"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "89f428db273f",
+   "title": "Limassol tourism board joins Dasoudi beach clean-up campaign",
+   "link": "https://cyprus-mail.com/2026/11/04/limassol-tourism-board-joins-dasoudi-beach-clean-up-campaign",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-04",
+   "summary": "The Limassol regional tourism board (Etap Limassol) completed a beach clean-up campaign at Dasoudi on Tuesday, working with the Municipality of Amathounta and Oceanic to raise public awareness and encourage greater…",
+   "sectors": [
+    "tourism"
+   ],
+   "districts": [
+    "limassol"
+   ],
+   "entries": []
+  },
+  {
+   "id": "12790dc88e68",
+   "title": "Record aviation fuel prices threaten Cyprus’ winter tourism push",
+   "link": "https://cyprus-mail.com/2026/11/04/record-aviation-fuel-prices-threaten-cyprus-winter-tourism-push",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-04",
+   "summary": "Rising aviation fuel prices and expectations of significantly more expensive air fares in 2027 are raising fresh concerns for Cyprus’ tourism industry, as the country seeks to extend its tourist season into the winter…",
+   "sectors": [
+    "tourism"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "9f90941d4076",
+   "title": "Logicom selected for CFA Society Cyprus student research competition",
+   "link": "https://cyprus-mail.com/2026/11/04/logicom-selected-for-cfa-society-cyprus-student-research-competition",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-04",
+   "summary": "CFA Society Cyprus launched its 2026-27 Local Research Challenge on October 29, with listed technology group Logicom Public Ltd selected as the subject company for this year’s competition. The launch event was held at…",
+   "sectors": [
+    "tech"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "52b02913038c",
+   "title": "Cooperative bailout to cost Cyprus taxpayers €2 billion by 2030",
+   "link": "https://cyprus-mail.com/2026/11/04/cooperative-bailout-to-cost-cyprus-taxpayers-e2-billion-by-2030",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-04",
+   "summary": "The state’s support for Cyprus’ former cooperative banking sector is expected to cost taxpayers around €2 billion between 2014 and 2030, with the final bill depending heavily on how much of the outstanding assistance…",
+   "sectors": [
+    "finance"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "bd7d67083c52",
+   "title": "Motherwitch tops Cyprus box office over Halloween weekend",
+   "link": "https://www.financialmirror.com/2026/11/04/motherwitch-tops-cyprus-box-office-over-halloween-weekend/",
+   "source": "Financial Mirror",
+   "feed": "Financial Mirror: business",
+   "date": "2026-11-04",
+   "summary": "Motherwitch, the Cypriot gothic feature and the first horror film shot entirely on the island, topped the local box office over Halloween weekend, outperforming the Hollywood production Clayface. Encouraged by the…",
+   "sectors": [
+    "film"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "7052527a0a67",
+   "title": "Geopolitical turmoil highlights contrasting fates of Cyprus and Greece tourism sectors",
+   "link": "https://cyprus-mail.com/2026/11/03/geopolitical-turmoil-highlights-contrasting-fates-of-cyprus-and-greece-tourism-sectors",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-03",
+   "summary": "Cyprus’ tourism industry has suffered a sharper setback from the war in the Middle East than Greece’s, with revenues falling during the first eight months of 2026 while its larger neighbour recorded double-digit growth…",
+   "sectors": [
+    "tourism"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "5293ab0a317e",
+   "title": "Mountain of bank liquidity leaves Cyprus savers shortchanged",
+   "link": "https://cyprus-mail.com/2026/11/03/mountain-of-bank-liquidity-leaves-cyprus-savers-shortchanged",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-03",
+   "summary": "Cyprus residents continue to receive some of the lowest interest rates on their savings in the eurozone, while businesses and households taking out loans face borrowing costs broadly in line with European averages…",
+   "sectors": [
+    "finance"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "0ce36c5274bb",
+   "title": "Bank of Cyprus earnings forecast points to strong shareholder returns",
+   "link": "https://cyprus-mail.com/2026/11/03/bank-of-cyprus-earnings-forecast-points-to-strong-shareholder-returns",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-03",
+   "summary": "The Bank of Cyprus is expected to report net profits of €119 million for the third quarter of 2026, with higher interest income and continued lending growth helping offset rising operating costs, according to an…",
+   "sectors": [
+    "finance"
+   ],
+   "districts": [],
+   "entries": [
+    "bank-of-cyprus"
+   ]
+  },
+  {
+   "id": "d75bc60bbfed",
+   "title": "CBC moves to strengthen Cyprus banks against financial shocks",
+   "link": "https://cyprus-mail.com/2026/11/03/cbc-moves-to-strengthen-cyprus-banks-against-financial-shocks",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-03",
+   "summary": "The Central Bank of Cyprus (CBC) has introduced a 1 per cent systemic risk buffer for all authorised credit institutions in Cyprus, effective from December 31, 2026, in a move aimed at strengthening the banking sector’s…",
+   "sectors": [
+    "finance"
+   ],
+   "districts": [],
+   "entries": [
+    "bank-of-cyprus"
+   ]
+  },
   {
    "id": "f7ffa3609440",
    "title": "Average Cypriot families see homeownership dream slip away",
@@ -1010,22 +1299,22 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Mail: energy",
    "ok": true,
-   "count": 10
+   "count": 11
   },
   {
    "name": "Cyprus Mail: tourism",
    "ok": true,
-   "count": 16
+   "count": 17
   },
   {
    "name": "Cyprus Mail: banking and finance",
    "ok": true,
-   "count": 9
+   "count": 10
   },
   {
    "name": "Invest Cyprus",
    "ok": true,
-   "count": 5
+   "count": 4
   },
   {
    "name": "Financial Mirror: business",
@@ -1045,12 +1334,12 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Profile",
    "ok": true,
-   "count": 4
+   "count": 1
   },
   {
    "name": "Cyprus Shipping News",
    "ok": true,
-   "count": 1
+   "count": 0
   }
  ]
 };
