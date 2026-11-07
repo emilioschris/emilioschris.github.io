@@ -1,7 +1,7 @@
 /* Written by tools/update_signals.py once a day. Don't edit by hand: it will be overwritten. */
 window.PARATIRITIRIO = window.PARATIRITIRIO || {};
 PARATIRITIRIO.signals = {
- "updated": "2026-11-06T07:34Z",
+ "updated": "2026-11-07T07:21Z",
  "items": [
   {
    "id": "703af3c50927",
@@ -30,6 +30,68 @@ PARATIRITIRIO.signals = {
    ],
    "districts": [],
    "entries": []
+  },
+  {
+   "id": "19efcbf466e9",
+   "title": "Turkey says gas pipeline project with Turkish Cypriots can provide power to whole island",
+   "link": "https://cyprus-mail.com/2026/11/06/turkey-says-gas-pipeline-project-with-turkish-cypriots-can-provide-power-to-whole-island",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: energy",
+   "date": "2026-11-06",
+   "summary": "Turkish Energy Minister Alparslan Bayraktar said a planned natural gas pipeline linking Turkey and the breakaway Turkish Cypriot community could eventually provide power to the entire ethnically split island. Turkey…",
+   "sectors": [
+    "energy"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "64f3fa25766a",
+   "title": "CBC suspends sales of 2025 and 2026 Cyprus euro coins",
+   "link": "https://cyprus-mail.com/2026/11/06/cbc-suspends-sales-of-2025-and-2026-cyprus-euro-coins",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-06",
+   "summary": "The Central Bank of Cyprus (CBC) has suspended sales of Cyprus euro circulation coins minted in 2025 and 2026 due to a technical issue, the central bank announced on Friday. The suspension, which takes effect…",
+   "sectors": [
+    "finance"
+   ],
+   "districts": [],
+   "entries": [
+    "bank-of-cyprus"
+   ]
+  },
+  {
+   "id": "8ff4aadfebf8",
+   "title": "Cyprus banks among EU’s strongest for capital buffers",
+   "link": "https://cyprus-mail.com/2026/11/06/cyprus-banks-among-eus-strongest-for-capital-buffers",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-06",
+   "summary": "Cyprus’ banking sector continued to demonstrate strong capitalisation and asset quality in the second quarter of 2026, with local credit institutions maintaining capital buffers well above European Union averages…",
+   "sectors": [
+    "finance"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "3628582533c9",
+   "title": "CBC offers three graduate positions with salaries starting at €979",
+   "link": "https://cyprus-mail.com/2026/11/06/cbc-offers-three-graduate-positions-with-salaries-starting-at-e979",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-06",
+   "summary": "The Central Bank of Cyprus (CBC) on Friday announced three opportunities for recent graduates and postgraduate students through its internship and graduate programme, offering placements in its information technology…",
+   "sectors": [
+    "tech",
+    "education",
+    "finance"
+   ],
+   "districts": [],
+   "entries": [
+    "bank-of-cyprus"
+   ]
   },
   {
    "id": "43f0f16f8d72",
@@ -1299,7 +1361,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Mail: energy",
    "ok": true,
-   "count": 11
+   "count": 12
   },
   {
    "name": "Cyprus Mail: tourism",
@@ -1309,7 +1371,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Mail: banking and finance",
    "ok": true,
-   "count": 10
+   "count": 11
   },
   {
    "name": "Invest Cyprus",
