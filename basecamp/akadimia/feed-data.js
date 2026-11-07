@@ -1,6 +1,6 @@
 /* Written by tools/update_feed.py once a day. Don't edit by hand: it will be overwritten. */
 window.AKADIMIA_FEED = {
- "updated": "2026-11-06T07:40Z",
+ "updated": "2026-11-07T07:27Z",
  "items": [
   {
    "id": "e03bb00576b0",
@@ -11,6 +11,19 @@ window.AKADIMIA_FEED = {
    "date": "2026-11-06",
    "summary": "China’s carbon dioxide (CO2) emissions fell by 3.1% in the third quarter of 2026, as the Hormuz crisis continued to…",
    "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "601d359e996d",
+   "title": "The Carbon at Risk measure for managing carbon removal risk and guiding portfolio construction",
+   "link": "https://www.lse.ac.uk/granthaminstitute/publication/the-carbon-at-risk-measure-for-managing-carbon-removal-risk-and-guiding-portfolio-construction/",
+   "source": "Grantham Research Institute: publications",
+   "school": "lse",
+   "date": "2026-11-06",
+   "summary": "Carbon removal credits sell for anywhere between $1 and $1,000 per tonne. The gap largely reflects how long the carbon stays stored and how certain that storage is, but buyers cannot easily tell how much risk they avoid…",
+   "kind": "research",
    "topics": [
     "energy-climate"
    ]
@@ -39,6 +52,32 @@ window.AKADIMIA_FEED = {
    "kind": "news",
    "topics": [
     "energy-climate"
+   ]
+  },
+  {
+   "id": "e13ab3bda1bf",
+   "title": "Inclusive climate adaptation through intersectional co-production: gender- and disability-disaggregated evidence from southern Africa",
+   "link": "https://www.lse.ac.uk/granthaminstitute/publication/inclusive-climate-adaptation-through-intersectional-co-production-gender-and-disability-disaggregated-evidence-from-southern-africa/",
+   "source": "Grantham Research Institute: publications",
+   "school": "lse",
+   "date": "2026-11-05",
+   "summary": "This article examines an intersectional co-production process in urban and peri-urban southern Africa aimed at improving weather and climate information services, with particular attention to women and persons with…",
+   "kind": "research",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "a38653f12f97",
+   "title": "The art of predicting the Bank of England’s main policy rate",
+   "link": "https://blogs.lse.ac.uk/businessreview/2026/11/05/the-art-of-predicting-the-bank-of-englands-main-policy-rate/",
+   "source": "LSE Business Review",
+   "school": "lse",
+   "date": "2026-11-05",
+   "summary": "Ahead of the Bank of England’s latest Monetary Policy Report Costas Milas shows why UK interest rates peaking at 4.25 per cent in mid-2027 looks like a reasonable bet. But economic shocks, which now come more frequently…",
+   "kind": "blog",
+   "topics": [
+    "finance-markets"
    ]
   },
   {
@@ -159,6 +198,19 @@ window.AKADIMIA_FEED = {
    ]
   },
   {
+   "id": "b8ce71e0dcea",
+   "title": "Times letters: Climate change toll",
+   "link": "https://www.lse.ac.uk/granthaminstitute/news/times-letters-apologising-for-britains-role-in-the-slave-trade/",
+   "source": "Grantham Research Institute: news",
+   "school": "lse",
+   "date": "2026-11-03",
+   "summary": "Emma Howard Boyd, Chair of the National Heat Risk Commission, writes a letter to editor in The Times on the UK government’s failure on adaptation.",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
    "id": "56cdb6b51906",
    "title": "Early Climate Impact Assessments Targeted 2025—How Did They Perform for Global Water Resources?",
    "link": "https://www.lse.ac.uk/granthaminstitute/publication/early-climate-impact-assessments-targeted-2025-how-did-they-perform-for-global-water-resources/",
@@ -195,6 +247,19 @@ window.AKADIMIA_FEED = {
    "kind": "research",
    "topics": [
     "energy-climate"
+   ]
+  },
+  {
+   "id": "38b58aecca79",
+   "title": "Sticky Prices and Constraints to Produce",
+   "link": "https://doi.org/10.1016/j.jedc.2026.105457",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-11-01",
+   "summary": "Journal of Economic Dynamics and Control · Justinas Markauskas, Morten Overgaard Ravn, José-V́ıctor Ŕıos-Rull",
+   "kind": "research",
+   "topics": [
+    "finance-markets"
    ]
   },
   {
@@ -1116,6 +1181,19 @@ window.AKADIMIA_FEED = {
    ]
   },
   {
+   "id": "b0a7c5809e90",
+   "title": "Integrating menopausal neurocognitive and psychosocial dynamics into economic behavior: the Behavioral Finance–Menopausal Cognition (BF-MC) Model (MARiE WP2A study)",
+   "link": "https://doi.org/10.1097/gme.0000000000002881",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-09-22",
+   "summary": "Menopause The Journal of The North American Menopause Society · Gayathri Delanerolle, Maria Liliana Alva, Ieera Aggarwal et al.",
+   "kind": "research",
+   "topics": [
+    "finance-markets"
+   ]
+  },
+  {
    "id": "b84dc2d7462d",
    "title": "Rich Countries Don’t Have a Secret Trick for Cutting Carbon",
    "link": "https://blogs.lse.ac.uk/internationaldevelopment/2026/09/21/rich-countries-dont-have-a-secret-trick-for-cutting-carbon/",
@@ -1874,7 +1952,7 @@ window.AKADIMIA_FEED = {
   {
    "name": "LSE Business Review",
    "ok": true,
-   "count": 0
+   "count": 1
   },
   {
    "name": "LSE International Development",
@@ -1884,7 +1962,7 @@ window.AKADIMIA_FEED = {
   {
    "name": "Carbon Brief",
    "ok": true,
-   "count": 11
+   "count": 10
   },
   {
    "name": "Bank Underground (Bank of England staff blog)",
@@ -1904,7 +1982,7 @@ window.AKADIMIA_FEED = {
   {
    "name": "UCL research (via OpenAlex)",
    "ok": true,
-   "count": 28
+   "count": 26
   },
   {
    "name": "Skidmore research (via OpenAlex)",
