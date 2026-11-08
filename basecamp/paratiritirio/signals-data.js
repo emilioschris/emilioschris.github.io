@@ -1,7 +1,7 @@
 /* Written by tools/update_signals.py once a day. Don't edit by hand: it will be overwritten. */
 window.PARATIRITIRIO = window.PARATIRITIRIO || {};
 PARATIRITIRIO.signals = {
- "updated": "2026-11-07T07:21Z",
+ "updated": "2026-11-08T07:23Z",
  "items": [
   {
    "id": "703af3c50927",
@@ -1396,7 +1396,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Profile",
    "ok": true,
-   "count": 1
+   "count": 0
   },
   {
    "name": "Cyprus Shipping News",
