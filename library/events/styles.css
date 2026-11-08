@@ -1,0 +1,137 @@
+/* =========================================================
+   RECENTLY ATTENDED · styles
+   Colours, fonts, the top bar, stamps and the reveal come
+   from ../../shared/field-notes.css. This file adds the list.
+   ========================================================= */
+
+.ev-page { padding-top: var(--bar-h); }
+.ev-wrap {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: clamp(40px, 8vh, 96px) var(--gutter) 112px;
+}
+
+/* ---------- Heading ---------- */
+.ev-head { position: relative; margin-bottom: clamp(48px, 8vh, 80px); }
+.ev-contours {
+  position: absolute;
+  right: -40px; top: -60px;
+  width: min(600px, 90%);
+  height: auto;
+  pointer-events: none;
+}
+.ev-contours path { fill: none; stroke: var(--link); stroke-width: 1; opacity: 0.22; }
+.ev-title {
+  position: relative;
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 360;
+  font-style: italic;
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--accent);
+}
+.ev-lede { position: relative; max-width: 34em; margin-top: 20px; font-size: 1.1rem; color: var(--muted); }
+
+/* ---------- The route: entries joined by a dotted line ---------- */
+.ev-list { list-style: none; margin: 0; padding: 0 0 0 28px; position: relative; }
+.ev-list::before {
+  content: "";
+  position: absolute;
+  left: 4px; top: 8px; bottom: -40px;
+  border-left: 2px dotted color-mix(in srgb, var(--link) 55%, transparent);
+}
+.ev-entry { position: relative; }
+.ev-entry + .ev-entry { margin-top: 64px; }
+.ev-pin {
+  position: absolute;
+  left: -29px; top: 4px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1.5px solid var(--link);
+}
+
+/* ---------- One event ---------- */
+.ev-card { position: relative; }
+.ev-meta {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 12px;
+  font: 11px/1.3 var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.ev-meta span { color: var(--accent-text); }
+.ev-name-title {
+  max-width: 22em;
+  padding-right: 120px;               /* room for the stamp */
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  font-weight: 400;
+  font-variation-settings: "opsz" 72, "SOFT" 40;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+}
+.ev-name-title a {
+  color: inherit;
+  text-decoration: none;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: background-size 0.5s ease;
+}
+.ev-name-title a:hover { background-size: 100% 1px; }
+.ev-place {                         /* crosshair beside the place, coordinates underneath */
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  align-items: center;
+  gap: 4px 12px;
+  margin-top: 16px;
+}
+.ev-place .ev-coords { grid-column: 2; }
+.ev-cross { width: 16px; height: 16px; flex: none; }
+.ev-cross path { stroke: var(--text); stroke-width: 1.3; }
+.ev-cross circle { fill: var(--accent); }
+.ev-coords { font: 12px/1 var(--font-mono); letter-spacing: 0.06em; color: var(--muted); }
+.ev-host { margin-top: 10px; font-size: 0.95rem; color: var(--muted); }
+.ev-stamp { position: absolute; top: 0; right: 0; }
+
+/* ---------- Speakers ---------- */
+.ev-speakers {
+  margin-top: 32px;
+  padding: 24px clamp(18px, 3vw, 32px) 26px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-lg) var(--radius-md) var(--radius-lg) var(--radius-lg);
+  background: var(--bg-raised);
+}
+.ev-label {
+  margin-bottom: 18px;
+  font: 500 11px/1 var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+.ev-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  gap: 20px 28px;
+}
+.ev-speaker { min-width: 0; }
+.ev-name { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; font-weight: 500; }
+.ev-name a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.ev-hint { font: 10px/1 var(--font-mono); letter-spacing: 0.06em; color: var(--muted); }
+.ev-aff { margin-top: 3px; font-size: 0.9rem; line-height: 1.4; color: var(--muted); }
+.ev-role { margin-top: 4px; font: 10.5px/1.3 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-text); }
+.ev-note, .ev-source { margin-top: 22px; font: 11px/1.5 var(--font-mono); letter-spacing: 0.03em; color: var(--muted); }
+.ev-source { margin-top: 6px; }
+.ev-source a { color: inherit; }
+
+/* ---------- Phones ---------- */
+@media (max-width: 600px) {
+  .ev-name-title { padding-right: 0; }
+  .ev-stamp { position: static; display: inline-block; margin-top: 18px; }
+  .ev-list { padding-left: 22px; }
+  .ev-pin { left: -23px; }
+}

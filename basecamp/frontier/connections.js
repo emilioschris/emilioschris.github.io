@@ -24,6 +24,7 @@ window.CONNECTIONS = {
     spiti:      ["language", "cyprus", "history"],
     "deep-end": ["games", "trivia"],
     ascents:    ["climbing", "outdoors"],
+    events:     ["energy", "climate", "economics"],
     paratiritirio: ["economics", "cyprus", "energy", "finance", "real estate", "inequality"],
   },
 
@@ -46,6 +47,7 @@ window.CONNECTIONS = {
     "spiti":                  { label: "Σπίτι (Spíti)", href: "language/spiti/index.html" },
     "frontier:logs":          { label: "Frontier: Mission logs", href: "basecamp/frontier/logs/index.html" },
     "frontier:log-001":       { label: "Mission log 001: The metals of the frontier", href: "basecamp/frontier/logs/index.html#/001" },
+    "events":                 { label: "Recently attended", href: "library/events/index.html" },
     "paratiritirio":          { label: "Παρατηρητήριο (Paratiritirio)", href: "basecamp/paratiritirio/index.html" },
     "paratiritirio#who":      { label: "Paratiritirio: Who benefits", href: "basecamp/paratiritirio/index.html#who" },
     "paratiritirio#pulse":    { label: "Paratiritirio: The Pulse", href: "basecamp/paratiritirio/index.html#pulse" },
@@ -110,5 +112,9 @@ window.CONNECTIONS = {
       reason: "Grid links and gas are part of Frontier's energy and climate family." },
     { from: "paratiritirio", to: "atlas:CYP", status: "suggested",
       reason: "Cyprus in the Atlas." },
+    { from: "events", to: "frontier:fusion", status: "suggested",
+      reason: "The HBS Energy and Climate Conference had a keynote from Commonwealth Fusion Systems." },
+    { from: "events", to: "akadimia#stream", status: "suggested",
+      reason: "Both follow energy and climate economics." },
   ],
 };

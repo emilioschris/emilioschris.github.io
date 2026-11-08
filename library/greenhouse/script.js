@@ -1023,7 +1023,7 @@
         <span class="stamp stamp--large sheet-status sheet-status--${plant.status}">${STATUS[plant.status]}</span>
         ${plant.confirmed ? "" : `<span class="stamp stamp--large stamp--planned">To confirm</span>`}
       </p>
-      <button class="btn btn--hawk" type="button" data-hawk="${esc(plant.id)}"><img src="../../favicon.svg?v=2026-11-06.1" alt="" width="16" height="16"> Call the hawk</button>
+      <button class="btn btn--hawk" type="button" data-hawk="${esc(plant.id)}"><img src="../../favicon.svg?v=2026-11-08.1" alt="" width="16" height="16"> Call the hawk</button>
 
       <section class="p-section">
         <p class="p-label">Light</p>
@@ -1169,7 +1169,7 @@
     hawkNote.hidden = !list.length;
     if (!list.length) return;
     const words = list.length === 1 ? `${list[0].name} is struggling` : `${list.length} plants are struggling`;
-    hawkNote.innerHTML = `<img src="../../favicon.svg?v=2026-11-06.1" alt="" width="18" height="18"> Field notes from above · ${esc(words)}`;
+    hawkNote.innerHTML = `<img src="../../favicon.svg?v=2026-11-08.1" alt="" width="18" height="18"> Field notes from above · ${esc(words)}`;
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "hawk-fly";

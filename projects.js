@@ -235,6 +235,16 @@ const PROJECTS = [
     },
   },
   {
+    title: "Recently attended",
+    section: "library",
+    status: "ongoing",
+    link: "library/events/index.html",
+    description: "Conferences, talks and panels I've been to lately, with everyone who spoke.",
+    coords: "42.37°N 71.12°W",
+    date: "2026-11",
+    elevation: "1 EVENT · 10 SPEAKERS",
+  },
+  {
     title: "The Deep End",
     section: "training-ground",
     status: "ongoing",
