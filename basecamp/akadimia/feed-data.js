@@ -1,6 +1,6 @@
 /* Written by tools/update_feed.py once a day. Don't edit by hand: it will be overwritten. */
 window.AKADIMIA_FEED = {
- "updated": "2026-11-07T07:27Z",
+ "updated": "2026-11-08T07:28Z",
  "items": [
   {
    "id": "e03bb00576b0",
@@ -77,6 +77,20 @@ window.AKADIMIA_FEED = {
    "summary": "Ahead of the Bank of England’s latest Monetary Policy Report Costas Milas shows why UK interest rates peaking at 4.25 per cent in mid-2027 looks like a reasonable bet. But economic shocks, which now come more frequently…",
    "kind": "blog",
    "topics": [
+    "finance-markets"
+   ]
+  },
+  {
+   "id": "4963cdc72fe9",
+   "title": "Innovative finance in humanitarian settings: The potential for aggregator funds to expand access to modern energy services",
+   "link": "https://doi.org/10.1016/j.esd.2026.102175",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-11-05",
+   "summary": "Energy Sustainable Development/Energy for sustainable development · Tash Perros, Nazifa Rafa, Paul Quigley",
+   "kind": "research",
+   "topics": [
+    "energy-climate",
     "finance-markets"
    ]
   },
