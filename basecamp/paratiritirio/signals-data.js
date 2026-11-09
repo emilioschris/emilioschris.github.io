@@ -1,8 +1,23 @@
 /* Written by tools/update_signals.py once a day. Don't edit by hand: it will be overwritten. */
 window.PARATIRITIRIO = window.PARATIRITIRIO || {};
 PARATIRITIRIO.signals = {
- "updated": "2026-11-08T07:23Z",
+ "updated": "2026-11-09T07:46Z",
  "items": [
+  {
+   "id": "abb5baa21c8e",
+   "title": "Global study finds Cyprus ranks SEVENTH and set for $1.1 billion AI GDP boost",
+   "link": "https://cyprusshippingnews.com/2026/11/09/global-study-finds-cyprus-ranks-seventh-and-set-for-1-1-billion-ai-gdp-boost/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-09",
+   "summary": "Cyprus beats India and New Zealand to come SEVENTH in major AI study – with potential €1.1 billion GDP boost […]",
+   "sectors": [
+    "tech",
+    "finance"
+   ],
+   "districts": [],
+   "entries": []
+  },
   {
    "id": "703af3c50927",
    "title": "CISCO and Mega Equity dominate Cyprus Stock Exchange trading",
@@ -1361,7 +1376,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Mail: energy",
    "ok": true,
-   "count": 12
+   "count": 11
   },
   {
    "name": "Cyprus Mail: tourism",
@@ -1371,7 +1386,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Mail: banking and finance",
    "ok": true,
-   "count": 11
+   "count": 10
   },
   {
    "name": "Invest Cyprus",
@@ -1401,7 +1416,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Shipping News",
    "ok": true,
-   "count": 0
+   "count": 1
   }
  ]
 };
