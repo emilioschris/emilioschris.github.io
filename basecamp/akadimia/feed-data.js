@@ -1,7 +1,21 @@
 /* Written by tools/update_feed.py once a day. Don't edit by hand: it will be overwritten. */
 window.AKADIMIA_FEED = {
- "updated": "2026-11-08T07:28Z",
+ "updated": "2026-11-09T07:50Z",
  "items": [
+  {
+   "id": "8424f39ad060",
+   "title": "Financing a just transition through the bond market",
+   "link": "https://www.lse.ac.uk/granthaminstitute/publication/financing-a-just-transition-through-the-bond-market/",
+   "source": "Grantham Research Institute: publications",
+   "school": "lse",
+   "date": "2026-11-09",
+   "summary": "This paper sets out practical guidance for integrating just transition considerations into the labelled bond market, i.e. green, social, sustainability and climate transition (GSS+) use-of-proceeds bonds.",
+   "kind": "research",
+   "topics": [
+    "energy-climate",
+    "finance-markets"
+   ]
+  },
   {
    "id": "e03bb00576b0",
    "title": "Analysis: China’s quarterly CO2 falls 3% in largest drop since Covid",
@@ -624,6 +638,19 @@ window.AKADIMIA_FEED = {
    ]
   },
   {
+   "id": "aba87097e985",
+   "title": "Share Issues vs. Share Repurchases",
+   "link": "https://doi.org/10.1287/mnsc.2025.03301",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-10-21",
+   "summary": "Management Science · Philip Bond, Yue Yuan, Hongda Zhong",
+   "kind": "research",
+   "topics": [
+    "finance-markets"
+   ]
+  },
+  {
    "id": "11074022fcf5",
    "title": "Policy roadmap for China’s growth through decarbonisation: how government bodies can seize the green growth opportunity",
    "link": "https://www.lse.ac.uk/granthaminstitute/publication/policy-roadmap-for-chinas-growth-through-decarbonisation-how-government-bodies-can-seize-the-green-growth-opportunity/",
@@ -823,6 +850,19 @@ window.AKADIMIA_FEED = {
    ]
   },
   {
+   "id": "b003b58f0ca9",
+   "title": "Ownership, Diversity and the Effectiveness of Government‐backed Financial Support during a Systemic Crisis: Evidence from One Million UK SMEs",
+   "link": "https://doi.org/10.1111/1467-8551.70114",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-10-12",
+   "summary": "British Journal of Management · Ahmed Barakat, Meryem Duygun, Maurizio Fiaschetti et al.",
+   "kind": "research",
+   "topics": [
+    "finance-markets"
+   ]
+  },
+  {
    "id": "8812bdec4ea1",
    "title": "Linkage as Leverage: OECD Accession as an Informal and Indirect Graduation Mechanism in the International Climate Regime",
    "link": "https://doi.org/10.1111/rego.70214",
@@ -1001,6 +1041,19 @@ window.AKADIMIA_FEED = {
    "school": "ucl",
    "date": "2026-10-01",
    "summary": "European Journal of Public Health · Leonardo Becchetti, Francesco Salustri, Nazaria Solferino",
+   "kind": "research",
+   "topics": [
+    "development-inequality"
+   ]
+  },
+  {
+   "id": "66a88b38ccad",
+   "title": "Combining spatial and aspatial methods to identify European industrial leagues: Development perspectives",
+   "link": "https://doi.org/10.1016/j.heliyon.2026.e45501",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-10-01",
+   "summary": "Heliyon · Zsolt Tibor Kosztyán, Zsuzsanna Banász, Marcell T. Kurbucz et al.",
    "kind": "research",
    "topics": [
     "development-inequality"
@@ -1914,9 +1967,9 @@ window.AKADIMIA_FEED = {
     "topics": []
    },
    {
-    "id": "c8742bea72e2",
+    "id": "f3c05bdee54d",
     "title": "INFLUÊNCIA DO CAPITAL INTELECTUAL SOBRE A CAPACIDADE ABSORTIVA NA POLÍCIA RODOVIÁRIA FEDERAL BRASILEIRA",
-    "link": "https://doi.org/10.31060/rbsp.2026.v1.n1.2143",
+    "link": "https://doi.org/10.31060/rbsp.2026.v20.n1.2143",
     "source": "Rodrigo Schneider",
     "school": "skidmore",
     "date": "2026-02-03",
