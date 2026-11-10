@@ -1,7 +1,20 @@
 /* Written by tools/update_feed.py once a day. Don't edit by hand: it will be overwritten. */
 window.AKADIMIA_FEED = {
- "updated": "2026-11-09T07:50Z",
+ "updated": "2026-11-10T07:37Z",
  "items": [
+  {
+   "id": "e01a30f2facb",
+   "title": "Analysis: Fossil-fuel CO2 emissions set to dip in 2026 as Iran conflict hits oil use",
+   "link": "https://www.carbonbrief.org/analysis-fossil-fuel-co2-emissions-set-to-dip-in-2026-as-iran-conflict-hits-oil-use",
+   "source": "Carbon Brief",
+   "school": null,
+   "date": "2026-11-10",
+   "summary": "Carbon dioxide (CO2) emissions from fossil fuels and cement are projected to fall by around 0.4% in 2026 to 38.2bn…",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
   {
    "id": "8424f39ad060",
    "title": "Financing a just transition through the bond market",
@@ -14,6 +27,46 @@ window.AKADIMIA_FEED = {
    "topics": [
     "energy-climate",
     "finance-markets"
+   ]
+  },
+  {
+   "id": "c53c7316fadd",
+   "title": "New guidance aims to close just transition gap in $7 trillion sustainable bond market",
+   "link": "https://www.lse.ac.uk/granthaminstitute/news/new-guidance-aims-to-close-just-transition-gap-in-7-trillion-sustainable-bond-market/",
+   "source": "Grantham Research Institute: news",
+   "school": "lse",
+   "date": "2026-11-09",
+   "summary": "New market-tested guidance published today by the Just Transition in GSS+ Bonds Community of Practice aims to close the gap between issuers’ commitments to a just transition and what their sustainable bonds actually…",
+   "kind": "news",
+   "topics": [
+    "finance-markets"
+   ]
+  },
+  {
+   "id": "c8e58de56297",
+   "title": "Tracing the path from finance to food security",
+   "link": "https://blogs.lse.ac.uk/internationaldevelopment/2026/11/09/tracing-the-path-from-finance-to-food-security/",
+   "source": "LSE International Development",
+   "school": "lse",
+   "date": "2026-11-09",
+   "summary": "Andrea Rosas Guzmán, Nour Lyla Adra, Caspian Brock, Dahlia Yassine and Yumin Kim reflect on their LSE Consultancy Project with the World Food Programme which examined how financial inclusion and impact investing can…",
+   "kind": "blog",
+   "topics": [
+    "finance-markets",
+    "food-agriculture"
+   ]
+  },
+  {
+   "id": "15a70be7f88d",
+   "title": "Q&A: What is the Belém-Antalya mechanism for a ‘just transition’?",
+   "link": "https://www.carbonbrief.org/qa-what-is-the-belem-antalya-mechanism-for-a-just-transition",
+   "source": "Carbon Brief",
+   "school": null,
+   "date": "2026-11-09",
+   "summary": "One of the key expected outcomes from the upcoming COP31 climate summit in Antalya, Turkey, is the launch of a…",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
    ]
   },
   {
@@ -106,6 +159,20 @@ window.AKADIMIA_FEED = {
    "topics": [
     "energy-climate",
     "finance-markets"
+   ]
+  },
+  {
+   "id": "5c6a7687be0e",
+   "title": "LSE Sustainability Symposium: The Role of Behavioural Change Versus Systemic Change in Accelerating the Transition to a Net Zero Agri-Food Sector",
+   "link": "https://www.lse.ac.uk/granthaminstitute/publication/lse-sustainability-symposium-the-role-of-behavioural-change-versus-systemic-change-in-accelerating-the-transition-to-a-net-zero-agri-food-sector/",
+   "source": "Grantham Research Institute: publications",
+   "school": "lse",
+   "date": "2026-11-05",
+   "summary": "This paper, in the context of insights from the behavioural sciences and economics literatures, explores policies that have been put in place in higher-income countries to reduce food waste and livestock emissions, two…",
+   "kind": "research",
+   "topics": [
+    "energy-climate",
+    "food-agriculture"
    ]
   },
   {
@@ -2009,7 +2076,7 @@ window.AKADIMIA_FEED = {
   {
    "name": "Grantham Research Institute: news",
    "ok": true,
-   "count": 7
+   "count": 6
   },
   {
    "name": "Grantham Research Institute: publications",
