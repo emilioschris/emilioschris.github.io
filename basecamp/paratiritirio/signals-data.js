@@ -1,8 +1,22 @@
 /* Written by tools/update_signals.py once a day. Don't edit by hand: it will be overwritten. */
 window.PARATIRITIRIO = window.PARATIRITIRIO || {};
 PARATIRITIRIO.signals = {
- "updated": "2026-11-09T07:46Z",
+ "updated": "2026-11-10T07:30Z",
  "items": [
+  {
+   "id": "9517ff9a72db",
+   "title": "CySEC seeks expert support for financial firms’ licensing assessments",
+   "link": "https://cyprus-mail.com/2026/11/10/cysec-seeks-expert-support-for-financial-firms-licensing-assessments",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-10",
+   "summary": "The Cyprus Securities and Exchange Commission (CySEC) has issued a tender for specialist support in assessing applications from financial firms seeking regulatory approval, as well as monitoring changes at already…",
+   "sectors": [
+    "infrastructure"
+   ],
+   "districts": [],
+   "entries": []
+  },
   {
    "id": "abb5baa21c8e",
    "title": "Global study finds Cyprus ranks SEVENTH and set for $1.1 billion AI GDP boost",
@@ -17,6 +31,81 @@ PARATIRITIRIO.signals = {
    ],
    "districts": [],
    "entries": []
+  },
+  {
+   "id": "db3e3113e17e",
+   "title": "Cyprus real estate conundrum: stats say affordable, reality says no",
+   "link": "https://cyprus-mail.com/2026/11/09/cyprus-real-estate-conundrum-stats-say-affordable-reality-says-no",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: property",
+   "date": "2026-11-09",
+   "summary": "Cyprus’ house price-to-income ratio remained below its long-term average in 2025, according to Eurostat figures published on Monday. This suggests that the relationship between property prices and household incomes has…",
+   "sectors": [
+    "real-estate"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "da38f08abef5",
+   "title": "Fines of up to €100.000 for property sale violations",
+   "link": "https://cyprus-mail.com/2026/11/09/fines-of-up-to-e100-000-for-property-sale-violations",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: property",
+   "date": "2026-11-09",
+   "summary": "The activation of the procedure for imposing and collecting administrative fines by the Department of Lands and Surveys introduces new developments in property transactions in Cyprus. Amending Law 132(I)/2023, which…",
+   "sectors": [
+    "real-estate"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "f5db91e7a5db",
+   "title": "Christodoulides sees Cyprus as key link in new trade corridors",
+   "link": "https://cyprus-mail.com/2026/11/09/christodoulides-sees-cyprus-as-key-link-in-new-trade-corridors",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: energy",
+   "date": "2026-11-09",
+   "summary": "President Nikos Christodoulides on Monday called for greater regional economic cooperation, stronger trade corridors and investment in energy and transport infrastructure, saying Cyprus could play a significant role in…",
+   "sectors": [
+    "energy",
+    "finance",
+    "infrastructure"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "7ad9db190c37",
+   "title": "Demetra Holdings announces fresh share buyback",
+   "link": "https://cyprus-mail.com/2026/11/09/demetra-holdings-announces-fresh-share-buyback",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-09",
+   "summary": "Demetra Holdings Plc purchased 4,080 of its own shares on November 6, 2026, at a price of €1.32 per share, the company announced on Monday. The purchases were carried out through the Cyprus Investment & Securities…",
+   "sectors": [
+    "finance"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "2a80164cc9ce",
+   "title": "Bank of Cyprus launches island’s first AI banking assistant",
+   "link": "https://cyprus-mail.com/2026/11/09/bank-of-cyprus-launches-islands-first-ai-banking-assistant",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-09",
+   "summary": "The Bank of Cyprus on Monday announced the launch of DANAI, the island’s first AI banking assistant, giving customers access to instant answers to everyday banking questions through its mobile application. The new…",
+   "sectors": [
+    "tech",
+    "finance"
+   ],
+   "districts": [],
+   "entries": [
+    "bank-of-cyprus"
+   ]
   },
   {
    "id": "703af3c50927",
@@ -107,6 +196,20 @@ PARATIRITIRIO.signals = {
    "entries": [
     "bank-of-cyprus"
    ]
+  },
+  {
+   "id": "200d2f6ffd47",
+   "title": "President Christodoulides marks 20 years of Invest Cyprus and highlights its successful track record in attracting foreign investment",
+   "link": "https://www.investcyprus.org.cy/nikos-christodoulides-new-responsibilities-for-invest-cyprus-in-the-pipeline-with-the-prospect-of-taking-on-the-export-sector-specific-proposals-coming-soon/",
+   "source": "Invest Cyprus",
+   "feed": "Invest Cyprus",
+   "date": "2026-11-06",
+   "summary": "",
+   "sectors": [
+    "finance"
+   ],
+   "districts": [],
+   "entries": []
   },
   {
    "id": "43f0f16f8d72",
@@ -1376,7 +1479,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Mail: energy",
    "ok": true,
-   "count": 11
+   "count": 12
   },
   {
    "name": "Cyprus Mail: tourism",
@@ -1391,7 +1494,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Invest Cyprus",
    "ok": true,
-   "count": 4
+   "count": 5
   },
   {
    "name": "Financial Mirror: business",
