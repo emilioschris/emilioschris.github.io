@@ -1,7 +1,22 @@
 /* Written by tools/update_feed.py once a day. Don't edit by hand: it will be overwritten. */
 window.AKADIMIA_FEED = {
- "updated": "2026-11-10T07:37Z",
+ "updated": "2026-11-11T07:40Z",
  "items": [
+  {
+   "id": "a1115f297189",
+   "title": "Analysis: Climate-finance pledges fall 70% as countries meet at COP31",
+   "link": "https://www.carbonbrief.org/analysis-climate-finance-pledges-fall-70-as-countries-meet-at-cop31",
+   "source": "Carbon Brief",
+   "school": null,
+   "date": "2026-11-11",
+   "summary": "The amount of public funding pledged to help developing countries tackle climate change has dropped by more than 70% in…",
+   "kind": "news",
+   "topics": [
+    "energy-climate",
+    "finance-markets",
+    "development-inequality"
+   ]
+  },
   {
    "id": "e01a30f2facb",
    "title": "Analysis: Fossil-fuel CO2 emissions set to dip in 2026 as Iran conflict hits oil use",
@@ -10,6 +25,58 @@ window.AKADIMIA_FEED = {
    "school": null,
    "date": "2026-11-10",
    "summary": "Carbon dioxide (CO2) emissions from fossil fuels and cement are projected to fall by around 0.4% in 2026 to 38.2bn…",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "e8ddbe409835",
+   "title": "From Yerevan to Antalya: closing the gap between global ambition and action on nature and climate",
+   "link": "https://www.lse.ac.uk/granthaminstitute/news/from-yerevan-to-antalya-closing-the-gap-between-global-ambition-and-action-on-nature-and-climate/",
+   "source": "Grantham Research Institute: news",
+   "school": "lse",
+   "date": "2026-11-10",
+   "summary": "As the climate summit COP 31 gets underway, this commentary examines what the recent Biodiversity COP 17 achieved and the core actions necessary to jointly secure the goals of the global climate and biodiversity agendas.",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "374a82798ae4",
+   "title": "States’ obligation to conduct environmental impact assessment: Lessons from international advisory opinions on climate change, and legislation and regulation around the world",
+   "link": "https://www.lse.ac.uk/granthaminstitute/publication/states-obligation-to-conduct-environmental-impact-assessment-lessons-from-international-advisory-opinions-on-climate-change-and-legislation-and-regulation-around-the-world/",
+   "source": "Grantham Research Institute: publications",
+   "school": "lse",
+   "date": "2026-11-10",
+   "summary": "This policy insight analyses what the international legal obligation to conduct environmental impact assessment entails in the context of climate change.",
+   "kind": "research",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "52e6bd246e62",
+   "title": "Is artificial intelligence a threat or solution to climate change?",
+   "link": "https://blogs.lse.ac.uk/businessreview/2026/11/10/cop31-is-artificial-intelligence-a-threat-or-solution-to-climate-change/",
+   "source": "LSE Business Review",
+   "school": "lse",
+   "date": "2026-11-10",
+   "summary": "Does the potential of AI to tackle climate change outweigh its environmental footprint? During the 2026 United Nations Climate Change Conference (COP31), we asked five academics and experts for their views on technology…",
+   "kind": "blog",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "866628b9e09e",
+   "title": "Analysis: Which countries have sent the most delegates to COP31?",
+   "link": "https://www.carbonbrief.org/analysis-which-countries-have-sent-the-most-delegates-to-cop31",
+   "source": "Carbon Brief",
+   "school": null,
+   "date": "2026-11-10",
+   "summary": "More than 92,000 people have registered to attend the COP31 climate summit in Antalya, Turkey, potentially making it the largest…",
    "kind": "news",
    "topics": [
     "energy-climate"
@@ -67,6 +134,32 @@ window.AKADIMIA_FEED = {
    "kind": "news",
    "topics": [
     "energy-climate"
+   ]
+  },
+  {
+   "id": "f80a426b94d0",
+   "title": "A Renewed Mandate to Do Better",
+   "link": "https://www.lse.ac.uk/granthaminstitute/news/a-renewed-mandate-to-do-better/",
+   "source": "Grantham Research Institute: news",
+   "school": "lse",
+   "date": "2026-11-09",
+   "summary": "This commentary article considers the implications of Luiz Inácio Lula da Silva’s reelection as President of Brazil for climate policy and reversing deforestation.",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "9849a79bb35d",
+   "title": "Decision Support for Feasibility Evaluation of Ecology-Oriented Development Projects: Integrating Case-Based Reasoning and Machine Learning Approaches",
+   "link": "https://doi.org/10.3390/su182111380",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-11-07",
+   "summary": "Sustainability · Dewang Xu, Lingxiao Wang, Jianfeng Zhao et al.",
+   "kind": "research",
+   "topics": [
+    "finance-markets"
    ]
   },
   {
@@ -1773,7 +1866,7 @@ window.AKADIMIA_FEED = {
    "source": "Skidmore research (via OpenAlex)",
    "school": "skidmore",
    "date": "2026-06-16",
-   "summary": "Economics of Governance · Débora Costa Ferreira, Rodrigo Schneider, Maurí­cio Soares Bugarin",
+   "summary": "Economics of Governance · Débora Costa Ferreira, Rodrigo Schneider, Maurício Soares Bugarin",
    "kind": "research",
    "topics": [
     "finance-markets"
@@ -1841,7 +1934,7 @@ window.AKADIMIA_FEED = {
    "source": "Skidmore research (via OpenAlex)",
    "school": "skidmore",
    "date": "2026-02-25",
-   "summary": "Zenodo (CERN European Organization for Nuclear Research) · Débora Costa Ferreira, Rodrigo Schneider, Maurí­cio Soares Bugarin",
+   "summary": "Zenodo (CERN European Organization for Nuclear Research) · Débora Costa Ferreira, Rodrigo Schneider, Maurício Soares Bugarin",
    "kind": "research",
    "topics": [
     "finance-markets"
@@ -1992,7 +2085,7 @@ window.AKADIMIA_FEED = {
     "source": "Rodrigo Schneider",
     "school": "skidmore",
     "date": "2026-06-16",
-    "summary": "Economics of Governance · Débora Costa Ferreira, Rodrigo Schneider, Maurí­cio Soares Bugarin",
+    "summary": "Economics of Governance · Débora Costa Ferreira, Rodrigo Schneider, Maurício Soares Bugarin",
     "kind": "research",
     "topics": [
      "finance-markets"
@@ -2016,7 +2109,7 @@ window.AKADIMIA_FEED = {
     "source": "Rodrigo Schneider",
     "school": "skidmore",
     "date": "2026-02-25",
-    "summary": "Zenodo (CERN European Organization for Nuclear Research) · Débora Costa Ferreira, Rodrigo Schneider, Maurí­cio Soares Bugarin",
+    "summary": "Zenodo (CERN European Organization for Nuclear Research) · Débora Costa Ferreira, Rodrigo Schneider, Maurício Soares Bugarin",
     "kind": "research",
     "topics": [
      "finance-markets"
@@ -2086,17 +2179,17 @@ window.AKADIMIA_FEED = {
   {
    "name": "LSE Business Review",
    "ok": true,
-   "count": 1
+   "count": 2
   },
   {
    "name": "LSE International Development",
    "ok": true,
-   "count": 5
+   "count": 4
   },
   {
    "name": "Carbon Brief",
    "ok": true,
-   "count": 10
+   "count": 11
   },
   {
    "name": "Bank Underground (Bank of England staff blog)",
@@ -2111,7 +2204,7 @@ window.AKADIMIA_FEED = {
   {
    "name": "Bank of England news",
    "ok": true,
-   "count": 4
+   "count": 3
   },
   {
    "name": "UCL research (via OpenAlex)",
