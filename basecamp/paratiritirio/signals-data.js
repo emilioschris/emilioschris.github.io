@@ -1,7 +1,7 @@
 /* Written by tools/update_signals.py once a day. Don't edit by hand: it will be overwritten. */
 window.PARATIRITIRIO = window.PARATIRITIRIO || {};
 PARATIRITIRIO.signals = {
- "updated": "2026-11-10T07:30Z",
+ "updated": "2026-11-11T07:35Z",
  "items": [
   {
    "id": "9517ff9a72db",
@@ -13,6 +13,48 @@ PARATIRITIRIO.signals = {
    "summary": "The Cyprus Securities and Exchange Commission (CySEC) has issued a tender for specialist support in assessing applications from financial firms seeking regulatory approval, as well as monitoring changes at already…",
    "sectors": [
     "infrastructure"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "50ccec50c541",
+   "title": "Cyprus building permits near €3bn in value as apartment plans surge",
+   "link": "https://cyprus-mail.com/2026/11/10/cyprus-building-permits-near-e3bn-in-value-as-apartment-plans-surge",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: property",
+   "date": "2026-11-10",
+   "summary": "Cyprus recorded a 3 per cent decline in building permits in July 2026, although construction activity remained considerably stronger over the first seven months of the year, with the value of authorised projects…",
+   "sectors": [
+    "real-estate"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "66cefd3d3461",
+   "title": "Alpha Bank Cyprus completes integration of former AstroBank operations",
+   "link": "https://cyprus-mail.com/2026/11/10/alpha-bank-cyprus-completes-integration-of-former-astrobank-operations",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-10",
+   "summary": "Alpha Bank Cyprus announced on Tuesday that it completed the integration of former AstroBank operations over the weekend of November 7-8, bringing customers onto a single banking system within the original timetable and…",
+   "sectors": [
+    "finance"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "8078f6e006fa",
+   "title": "Only 14 per cent of Cypriot women meet financial literacy benchmark",
+   "link": "https://cyprus-mail.com/2026/11/10/only-14-per-cent-of-cypriot-women-meet-financial-literacy-benchmark",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-10",
+   "summary": "More than 90 women join CBC financial literacy initiative More than 90 women are taking part in financial empowerment activities organised by the Cyprus Central Bank (CBC) and the Cyprus Committee for Financial Literacy…",
+   "sectors": [
+    "finance"
    ],
    "districts": [],
    "entries": []
@@ -1484,7 +1526,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Mail: tourism",
    "ok": true,
-   "count": 17
+   "count": 15
   },
   {
    "name": "Cyprus Mail: banking and finance",
@@ -1519,7 +1561,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Shipping News",
    "ok": true,
-   "count": 1
+   "count": 0
   }
  ]
 };
