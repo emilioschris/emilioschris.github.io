@@ -5,9 +5,11 @@
 # Needs a free Finnhub API key saved as the repository secret FINNHUB_KEY.
 name: Frontier stock ticker
 
+# PAUSED (Nov 2026): the schedule is switched off so the runs stop failing.
+# To resume, remove the "#" from the two schedule lines below.
 on:
-  schedule:
-    - cron: "*/30 13-20 * * 1-5"
+  # schedule:
+  #   - cron: "*/30 13-20 * * 1-5"
   workflow_dispatch:
 
 permissions:
