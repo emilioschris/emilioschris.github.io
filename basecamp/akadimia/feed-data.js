@@ -1,6 +1,6 @@
 /* Written by tools/update_feed.py once a day. Don't edit by hand: it will be overwritten. */
 window.AKADIMIA_FEED = {
- "updated": "2026-11-11T07:40Z",
+ "updated": "2026-11-12T07:43Z",
  "items": [
   {
    "id": "a1115f297189",
@@ -15,6 +15,20 @@ window.AKADIMIA_FEED = {
     "energy-climate",
     "finance-markets",
     "development-inequality"
+   ]
+  },
+  {
+   "id": "f543aee1e8d9",
+   "title": "Navigating climate shocks and the energy transition: why Ministries of Finance need stronger analytical capabilities",
+   "link": "https://www.lse.ac.uk/granthaminstitute/news/navigating-climate-shocks-and-the-energy-transition-why-ministries-of-finance-need-stronger-analytical-capabilities/",
+   "source": "Grantham Research Institute: news",
+   "school": "lse",
+   "date": "2026-11-11",
+   "summary": "An examination of the climate and energy issues facing Ministries of Finance ahead of the launch of a new work programme at COP 31 – and what the programme will achieve.",
+   "kind": "news",
+   "topics": [
+    "energy-climate",
+    "finance-markets"
    ]
   },
   {
@@ -80,6 +94,19 @@ window.AKADIMIA_FEED = {
    "kind": "news",
    "topics": [
     "energy-climate"
+   ]
+  },
+  {
+   "id": "5d5bbb8d4cd0",
+   "title": "Risk-Adjusted Returns in S&P 500 with Long-Only Cross-Sectional Momentum Strategy",
+   "link": "https://doi.org/10.54254/2754-1169/2026.38737",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-11-10",
+   "summary": "Advances in Economics Management and Political Sciences · Junhan Wang",
+   "kind": "research",
+   "topics": [
+    "finance-markets"
    ]
   },
   {
@@ -2209,7 +2236,7 @@ window.AKADIMIA_FEED = {
   {
    "name": "UCL research (via OpenAlex)",
    "ok": true,
-   "count": 26
+   "count": 24
   },
   {
    "name": "Skidmore research (via OpenAlex)",
