@@ -1,8 +1,184 @@
 /* Written by tools/update_signals.py once a day. Don't edit by hand: it will be overwritten. */
 window.PARATIRITIRIO = window.PARATIRITIRIO || {};
 PARATIRITIRIO.signals = {
- "updated": "2026-11-11T07:35Z",
+ "updated": "2026-11-12T07:39Z",
  "items": [
+  {
+   "id": "63390928f390",
+   "title": "Build-to-Rent opens new doors for housing in Cyprus and Greece",
+   "link": "https://cyprus-mail.com/2026/11/12/build-to-rent-opens-new-doors-for-housing-in-cyprus-and-greece",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: property",
+   "date": "2026-11-12",
+   "summary": "For years, housing policy in Cyprus and Greece focused on homeownership, through subsidies for first-time buyers, favourable loans and tax relief. More recently, however, housing policy has begun to shift towards a…",
+   "sectors": [
+    "real-estate",
+    "finance"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "932f1d17ee1b",
+   "title": "Meet the Sponsors of the 5th CSN Greece ICT Conference – Research Promotion Foundation (RPF)",
+   "link": "https://cyprusshippingnews.com/2026/11/12/meet-the-sponsors-of-the-5th-csn-greece-ict-conference-research-promotion-foundation/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-12",
+   "summary": "Cyprus Shipping News announces that Research Promotion Foundation (RPF) joins as silver sponsor of the 5th CSN Greece ICT Conference. The event will take […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "f51925c90f50",
+   "title": "Meet the Sponsors of the 5th CSN Greece ICT Conference – Air France – KLM Group",
+   "link": "https://cyprusshippingnews.com/2026/11/12/meet-the-sponsors-of-the-5th-csn-greece-ict-conference-air-france-klm-group/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-12",
+   "summary": "Cyprus Shipping News announces that Air France-KLM Group joins as sponsor of the 5th CSN Greece ICT Conference. The event will take place on […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "467da0bebe9e",
+   "title": "Meet the Sponsors of the 5th CSN Greece ICT Conference – PULSAR",
+   "link": "https://cyprusshippingnews.com/2026/11/12/meet-the-sponsors-of-the-5th-csn-greece-ict-conference-pulsar/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-12",
+   "summary": "Cyprus Shipping News announces that PULSAR joins as Event sponsor of the 5th CSN Greece ICT Conference. The event will take place on 19th […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "e69d35c51858",
+   "title": "Meet the Sponsors of the 5th CSN Greece ICT Conference – Marpoint",
+   "link": "https://cyprusshippingnews.com/2026/11/12/meet-the-sponsors-of-the-5th-csn-greece-ict-conference-marpoint/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-12",
+   "summary": "Cyprus Shipping News announces that Marpoint joins as Welcome Coffee sponsor of the 5th CSN Greece ICT Conference. The event will take place on […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "26fe3c53d009",
+   "title": "Meet the Sponsors of the 5th CSN Greece ICT Conference – Dualog",
+   "link": "https://cyprusshippingnews.com/2026/11/12/meet-the-sponsors-of-the-5th-csn-greece-ict-conference-dualog/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-12",
+   "summary": "Cyprus Shipping News announces that Dualog joins as sponsor of the 5th CSN Greece ICT Conference. The event will take place on 19th November […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "7bb6162507cd",
+   "title": "Meet the Communication Partner of the 5th CSN Greece ICT Conference – MASO Public Affairs",
+   "link": "https://cyprusshippingnews.com/2026/11/12/meet-the-communication-partner-of-the-5th-csn-greece-ict-conferencee-maso-strategic/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-12",
+   "summary": "Cyprus Shipping News announces that MASO Public Affairs joins as Communication Partner of the 5th CSN Greece ICT Conference. The event will take place […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "3e03cffa3fbe",
+   "title": "Meet the Media Partner of the 5th CSN Greece ICT Conference – Container News",
+   "link": "https://cyprusshippingnews.com/2026/11/12/meet-the-media-partner-of-the-5th-csn-greece-ict-conference-container-news/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-12",
+   "summary": "Cyprus Shipping News announces that Container News joins as Media Partner of the 5th CSN Greece ICT Conference. The event will take place on 19th November […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "38e7a922a6c6",
+   "title": "Unchecked legal gaps threaten legitimate Cyprus estate agents, association warns",
+   "link": "https://cyprus-mail.com/2026/11/11/unchecked-legal-gaps-threaten-legitimate-cyprus-estate-agents-association-warns",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: property",
+   "date": "2026-11-11",
+   "summary": "The Cyprus Real Estate Agents Association (Skek) has called on the government and parliament to urgently reform the legal framework governing the property sector, warning that longstanding regulatory problems continue…",
+   "sectors": [
+    "real-estate"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "37a7e8c2b74d",
+   "title": "Cyprus tourism feels the squeeze as bookings fall and flight costs climb",
+   "link": "https://cyprus-mail.com/2026/11/11/cyprus-tourism-feels-the-squeeze-as-bookings-fall-and-flight-costs-climb",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-11",
+   "summary": "Cyprus tourism bookings for 2027 are running 8 to 12 per cent below comparable levels for this year, as rising energy costs, inflation and more expensive flights weigh on holiday demand, despite plans by major tour…",
+   "sectors": [
+    "tourism",
+    "energy",
+    "finance"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "e48a1c431957",
+   "title": "Which banks charge the lowest interest rates for new mortgages in Cyprus?",
+   "link": "https://cyprus-mail.com/2026/11/11/which-banks-charge-the-lowest-interest-rates-for-new-mortgages-in-cyprus",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-11",
+   "summary": "Cyprus banks continued to offer lower interest rates on deposits than their eurozone counterparts in September 2026, while charging less for housing loans and most business lending, according to detailed figures…",
+   "sectors": [
+    "real-estate",
+    "finance"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "cfd07b0bc217",
+   "title": "Energy shock and AI pose fresh challenges for monetary policy, says CBC governor",
+   "link": "https://cyprus-mail.com/2026/11/11/energy-shock-and-ai-pose-fresh-challenges-for-monetary-policy-says-cbc-governor",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-11",
+   "summary": "Central banks must look past headline inflation and examine how energy shocks and artificial intelligence are reshaping economic activity, financing conditions and financial stability, Central Bank of Cyprus governor…",
+   "sectors": [
+    "tech",
+    "energy",
+    "finance"
+   ],
+   "districts": [],
+   "entries": [
+    "bank-of-cyprus"
+   ]
+  },
   {
    "id": "9517ff9a72db",
    "title": "CySEC seeks expert support for financial firms’ licensing assessments",
@@ -1521,7 +1697,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Mail: energy",
    "ok": true,
-   "count": 12
+   "count": 11
   },
   {
    "name": "Cyprus Mail: tourism",
@@ -1531,7 +1707,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Mail: banking and finance",
    "ok": true,
-   "count": 10
+   "count": 11
   },
   {
    "name": "Invest Cyprus",
@@ -1561,7 +1737,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Shipping News",
    "ok": true,
-   "count": 0
+   "count": 7
   }
  ]
 };
