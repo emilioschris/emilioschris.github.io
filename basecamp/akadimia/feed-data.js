@@ -1,7 +1,88 @@
 /* Written by tools/update_feed.py once a day. Don't edit by hand: it will be overwritten. */
 window.AKADIMIA_FEED = {
- "updated": "2026-11-12T07:43Z",
+ "updated": "2026-11-13T07:42Z",
  "items": [
+  {
+   "id": "b20314d0cb79",
+   "title": "Burnham says climate consensus ‘gone’ but pledges ‘new era of leadership’",
+   "link": "https://www.lse.ac.uk/granthaminstitute/news/burnham-says-climate-consensus-gone-but-pledges-new-era-of-leadership/",
+   "source": "Grantham Research Institute: news",
+   "school": "lse",
+   "date": "2026-11-12",
+   "summary": "BBC cover Prime Minister Andy Burnham warning that the consensus on both science and climate change has \"gone\". Piece includes a quote from Lord Nicholas Stern.",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "fe8d351178a2",
+   "title": "Countries should be rewarded for investing in resilience and natural infrastructure – and El Niño shows why we must act now",
+   "link": "https://www.lse.ac.uk/granthaminstitute/news/countries-should-be-rewarded-for-investing-in-resilience-and-natural-infrastructure-and-el-nino-shows-why-we-must-act-now/",
+   "source": "Grantham Research Institute: news",
+   "school": "lse",
+   "date": "2026-11-12",
+   "summary": "With an exceptionally strong El Niño threatening lives and livelihoods, Nicola Ranger and Tom Tayler call for action now to protect vulnerable communities and turn an imminent climate shock into earlier action and…",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "c9b2faf96985",
+   "title": "Which ESG disclosures link words to action?",
+   "link": "https://blogs.lse.ac.uk/businessreview/2026/11/12/which-esg-disclosures-link-words-to-action/",
+   "source": "LSE Business Review",
+   "school": "lse",
+   "date": "2026-11-12",
+   "summary": "Companies spend time and money writing ESG reports, which are closely scrutinised by investors. But not all environmental narratives show whether companies are actually making environmental progress. Ivan Savin finds…",
+   "kind": "blog",
+   "topics": [
+    "finance-markets"
+   ]
+  },
+  {
+   "id": "8cc7d5d5eee5",
+   "title": "Climate risk influences the economy through the cost of capital",
+   "link": "https://blogs.lse.ac.uk/businessreview/2026/11/12/cop31-climate-risk-influences-the-economy-through-the-cost-of-capital/",
+   "source": "LSE Business Review",
+   "school": "lse",
+   "date": "2026-11-12",
+   "summary": "Climate risk is a powerful macroeconomic force which influences not only how much firms invest, but also where they invest, how investors allocate capital and even the level of risk-free interest rates that underpin…",
+   "kind": "blog",
+   "topics": [
+    "energy-climate",
+    "finance-markets"
+   ]
+  },
+  {
+   "id": "9785449897f5",
+   "title": "COP31: How Ed Miliband answered Carbon Brief readers’ questions",
+   "link": "https://www.carbonbrief.org/cop31-how-ed-miliband-answered-carbon-brief-readers-questions",
+   "source": "Carbon Brief",
+   "school": null,
+   "date": "2026-11-12",
+   "summary": "UK foreign secretary and COP veteran Ed Miliband spoke with Carbon Brief earlier today at COP31 in Antalya, Turkey, to…",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "792626dcd4c0",
+   "title": "Shock absorbers? Energy prices, labour market slack and monetary policy: a view through the lens of a structural model",
+   "link": "https://bankunderground.co.uk/2026/11/12/shock-absorbers-energy-prices-labour-market-slack-and-monetary-policy-a-view-through-the-lens-of-a-structural-model/",
+   "source": "Bank Underground (Bank of England staff blog)",
+   "school": null,
+   "date": "2026-11-12",
+   "summary": "Daniel Albuquerque, Jamie Lenney, Matthew McKernan, David Murakami, Peter Paz and Philip Schnattinger Wholesale energy prices surged in 2021 and again in 2022, but UK inflation remained high well beyond the direct…",
+   "kind": "blog",
+   "topics": [
+    "energy-climate",
+    "finance-markets",
+    "development-inequality"
+   ]
+  },
   {
    "id": "a1115f297189",
    "title": "Analysis: Climate-finance pledges fall 70% as countries meet at COP31",
@@ -472,6 +553,19 @@ window.AKADIMIA_FEED = {
    "school": "ucl",
    "date": "2026-11-01",
    "summary": "Journal of Economic Dynamics and Control · Justinas Markauskas, Morten Overgaard Ravn, José-V́ıctor Ŕıos-Rull",
+   "kind": "research",
+   "topics": [
+    "finance-markets"
+   ]
+  },
+  {
+   "id": "a69f79612d3e",
+   "title": "Measuring the Informal Economy at the Regional Level: New Benchmark-Consistent Methods and Estimates for European Regions",
+   "link": "https://doi.org/10.1016/j.pirs.2026.100178",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-11-01",
+   "summary": "Papers of the Regional Science Association · Roberto Dell’Anno, Nikolaos Tzivanakis, Alban Asllani et al.",
    "kind": "research",
    "topics": [
     "finance-markets"
@@ -2196,7 +2290,7 @@ window.AKADIMIA_FEED = {
   {
    "name": "Grantham Research Institute: news",
    "ok": true,
-   "count": 6
+   "count": 7
   },
   {
    "name": "Grantham Research Institute: publications",
@@ -2206,12 +2300,12 @@ window.AKADIMIA_FEED = {
   {
    "name": "LSE Business Review",
    "ok": true,
-   "count": 2
+   "count": 4
   },
   {
    "name": "LSE International Development",
    "ok": true,
-   "count": 4
+   "count": 3
   },
   {
    "name": "Carbon Brief",
@@ -2221,7 +2315,7 @@ window.AKADIMIA_FEED = {
   {
    "name": "Bank Underground (Bank of England staff blog)",
    "ok": true,
-   "count": 6
+   "count": 5
   },
   {
    "name": "Our World in Data",
@@ -2236,7 +2330,7 @@ window.AKADIMIA_FEED = {
   {
    "name": "UCL research (via OpenAlex)",
    "ok": true,
-   "count": 24
+   "count": 25
   },
   {
    "name": "Skidmore research (via OpenAlex)",
