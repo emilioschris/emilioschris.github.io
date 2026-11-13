@@ -1,8 +1,79 @@
 /* Written by tools/update_signals.py once a day. Don't edit by hand: it will be overwritten. */
 window.PARATIRITIRIO = window.PARATIRITIRIO || {};
 PARATIRITIRIO.signals = {
- "updated": "2026-11-12T07:39Z",
+ "updated": "2026-11-13T07:37Z",
  "items": [
+  {
+   "id": "5ec93619818a",
+   "title": "Meet the Speakers of the 5th CSN Greece ICT Conference – Dr. Matthew Maheras – Metrostar Management",
+   "link": "https://cyprusshippingnews.com/2026/11/13/meet-the-speakers-of-the-5th-csn-greece-ict-conference-dr-matthew-maheras/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-13",
+   "summary": "Cyprus Shipping News announces that D Dr. Matthew Maheras CIO of Metrostar Management / President – AMMITEC joins as speaker […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "f5bf89d79e05",
+   "title": "Meet the Speakers of the 5th CSN Greece ICT Conference – Demetris Skourides, Research Innovation Foundation Cyprus",
+   "link": "https://cyprusshippingnews.com/2026/11/13/meet-the-speakers-of-the-5th-csn-greece-ict-conference-demetris-skourides/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-13",
+   "summary": "Cyprus Shipping News announces that Demetris Skourides of Research Innovation Foundation Cyprus joins as speaker of the 5th CSN Greece […]",
+   "sectors": [
+    "tech",
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "146225896dcd",
+   "title": "Meet the Speakers of the 5th CSN Greece ICT Conference – Dimitris Pavlides – Stealth Maritime",
+   "link": "https://cyprusshippingnews.com/2026/11/13/meet-the-speakers-of-the-5th-csn-greece-ict-conference-dimitris-pavlides/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-13",
+   "summary": "Cyprus Shipping News announces that Dimitris Pavlides of Stealth Maritime joins as speaker of the 5th CSN Greece ICT Conference. […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "b5f768270fd5",
+   "title": "Meet the Speakers of the 5th CSN Greece ICT Conference – Apostolos Giannetsos – Cyprus Sea Lines",
+   "link": "https://cyprusshippingnews.com/2026/11/13/meet-the-speakers-of-the-5th-csn-greece-ict-conference-apostolos-giannetsos-cyprus-sea-lines/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-13",
+   "summary": "Cyprus Shipping News announces that Apostolos Giannetsos of Cyprus Sea Lines joins as speaker of the 5th CSN Greece ICT […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "3088b85e9b92",
+   "title": "Meet the Speakers of the 5th CSN Greece ICT Conference – Nikolas Sarantos – Seahawk Group",
+   "link": "https://cyprusshippingnews.com/2026/11/13/meet-the-speakers-of-the-5th-csn-greece-ict-conference-nikolas-sarantos-seahawk-group/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-13",
+   "summary": "Cyprus Shipping News announces that Nikolas Sarantos of Seahawk Group joins as speaker of the 5th CSN Greece ICT Conference. […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
   {
    "id": "63390928f390",
    "title": "Build-to-Rent opens new doors for housing in Cyprus and Greece",
@@ -112,6 +183,36 @@ PARATIRITIRIO.signals = {
    "summary": "Cyprus Shipping News announces that Container News joins as Media Partner of the 5th CSN Greece ICT Conference. The event will take place on 19th November […]",
    "sectors": [
     "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "e41c7795bf28",
+   "title": "Foreign buyers continue to reshape Cyprus’ property market",
+   "link": "https://cyprus-mail.com/2026/11/12/foreign-buyers-continue-to-reshape-cyprus-property-market",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: property",
+   "date": "2026-11-12",
+   "summary": "Foreign buyers continued to underpin demand in Cyprus’ property market during the first nine months of 2026, with transactions involving European Union citizens recording particularly strong growth, according to figures…",
+   "sectors": [
+    "real-estate"
+   ],
+   "districts": [],
+   "entries": [
+    "paphos-foreign-buyers"
+   ]
+  },
+  {
+   "id": "970ce1c55c8f",
+   "title": "Affordable homes cannot wait forever for permits, developers warn",
+   "link": "https://cyprus-mail.com/2026/11/12/affordable-homes-cannot-wait-forever-for-permits-developers-warn",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: property",
+   "date": "2026-11-12",
+   "summary": "Delays in issuing development permits are holding back efforts to bring more affordable homes onto the Cyprus property market, according to concerns raised during a meeting between the Cyprus Property Developers…",
+   "sectors": [
+    "real-estate"
    ],
    "districts": [],
    "entries": []
@@ -1707,7 +1808,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Mail: banking and finance",
    "ok": true,
-   "count": 11
+   "count": 10
   },
   {
    "name": "Invest Cyprus",
@@ -1737,7 +1838,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Shipping News",
    "ok": true,
-   "count": 7
+   "count": 5
   }
  ]
 };
