@@ -1,7 +1,33 @@
 /* Written by tools/update_feed.py once a day. Don't edit by hand: it will be overwritten. */
 window.AKADIMIA_FEED = {
- "updated": "2026-11-13T07:42Z",
+ "updated": "2026-11-14T13:40Z",
  "items": [
+  {
+   "id": "93614eceb56e",
+   "title": "Building for a 21st century climate: Fostering resilience through better regulation",
+   "link": "https://www.lse.ac.uk/granthaminstitute/publication/building-for-a-21st-century-climate-fostering-resilience-through-better-regulation/",
+   "source": "Grantham Research Institute: publications",
+   "school": "lse",
+   "date": "2026-11-13",
+   "summary": "This report examines building regulations as a crucial and cost-effective tool for adapting the built environment to climate change-related risks.",
+   "kind": "research",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "9d84fa0dc040",
+   "title": "The Bank of England, the Monetary Authority of Singapore, and the Bank of Thailand: Project Meridian FX APAC",
+   "link": "https://www.bankofengland.co.uk/news/2026/november/the-boe-monetary-authority-of-singapore-and-bank-of-thailand-media-release",
+   "source": "Bank of England news",
+   "school": null,
+   "date": "2026-11-13",
+   "summary": "Joint media release",
+   "kind": "news",
+   "topics": [
+    "finance-markets"
+   ]
+  },
   {
    "id": "b20314d0cb79",
    "title": "Burnham says climate consensus ‘gone’ but pledges ‘new era of leadership’",
@@ -2295,7 +2321,7 @@ window.AKADIMIA_FEED = {
   {
    "name": "Grantham Research Institute: publications",
    "ok": true,
-   "count": 7
+   "count": 8
   },
   {
    "name": "LSE Business Review",
@@ -2325,7 +2351,7 @@ window.AKADIMIA_FEED = {
   {
    "name": "Bank of England news",
    "ok": true,
-   "count": 3
+   "count": 4
   },
   {
    "name": "UCL research (via OpenAlex)",
