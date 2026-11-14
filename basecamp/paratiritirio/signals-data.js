@@ -1,7 +1,7 @@
 /* Written by tools/update_signals.py once a day. Don't edit by hand: it will be overwritten. */
 window.PARATIRITIRIO = window.PARATIRITIRIO || {};
 PARATIRITIRIO.signals = {
- "updated": "2026-11-13T07:37Z",
+ "updated": "2026-11-14T13:38Z",
  "items": [
   {
    "id": "5ec93619818a",
@@ -70,6 +70,52 @@ PARATIRITIRIO.signals = {
    "summary": "Cyprus Shipping News announces that Nikolas Sarantos of Seahawk Group joins as speaker of the 5th CSN Greece ICT Conference. […]",
    "sectors": [
     "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "1ca0293d4146",
+   "title": "1,772 Cyprus property sales in October, +8%: 10-month total at 16,741, €3.46bn changes hands",
+   "link": "https://cyprus-mail.com/2026/11/13/1772-cyprus-property-sales-in-october-8-10-month-total-at-16741-e3-46bn-changes-hands",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: property",
+   "date": "2026-11-13",
+   "summary": "Buyers deposited 1,772 contracts of sale at Land Registry offices across Cyprus in October 2026, +8% on the 1,638 of October 2025, according to analysis of Department of Lands and Surveys data by BuySell, Cyprus’s…",
+   "sectors": [
+    "real-estate"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "c799dccd07b4",
+   "title": "Paphos hotels report weaker profits amid tourism uncertainty",
+   "link": "https://cyprus-mail.com/2026/11/13/paphos-hotels-report-weaker-profits-amid-tourism-uncertainty",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-13",
+   "summary": "Several property and hotel companies linked to the Constantinou family have reported mixed business performance in 2026, with some Paphos hotels facing weaker occupancy and profitability while related businesses…",
+   "sectors": [
+    "tourism",
+    "real-estate"
+   ],
+   "districts": [
+    "paphos"
+   ],
+   "entries": []
+  },
+  {
+   "id": "c9477b1b8fa1",
+   "title": "Cyprus wants fintech’s jobs and investment, not just its company registrations",
+   "link": "https://cyprus-mail.com/2026/11/13/cyprus-wants-fintechs-jobs-and-investment-not-just-its-company-registrations",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-13",
+   "summary": "Attracting another international fintech company is no longer enough for Cyprus. The government wants the jobs, expertise and investment that come with it, as it looks to turn the island’s growing financial technology…",
+   "sectors": [
+    "tech",
+    "finance"
    ],
    "districts": [],
    "entries": []
@@ -1793,7 +1839,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Mail: property",
    "ok": true,
-   "count": 19
+   "count": 20
   },
   {
    "name": "Cyprus Mail: energy",
@@ -1808,7 +1854,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Mail: banking and finance",
    "ok": true,
-   "count": 10
+   "count": 11
   },
   {
    "name": "Invest Cyprus",
