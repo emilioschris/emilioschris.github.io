@@ -1,8 +1,52 @@
 /* Written by tools/update_signals.py once a day. Don't edit by hand: it will be overwritten. */
 window.PARATIRITIRIO = window.PARATIRITIRIO || {};
 PARATIRITIRIO.signals = {
- "updated": "2026-11-14T13:38Z",
+ "updated": "2026-11-15T14:02Z",
  "items": [
+  {
+   "id": "7fd98536e42f",
+   "title": "Champagne tastes, sensible budgets. Tourists are changing the rules",
+   "link": "https://cyprus-mail.com/2026/11/15/champagne-tastes-sensible-budgets-tourists-are-changing-the-rules",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-15",
+   "summary": "Cyprus tourism businesses may have to get used to a new kind of holidaymaker. One who watches the price of the hotel room but thinks nothing of spending extra on a memorable dinner, spa treatment or an experience worth…",
+   "sectors": [
+    "tourism"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "49aecf5db104",
+   "title": "Cyprus can move beyond forex into institutional asset management, says fintech CEO",
+   "link": "https://cyprus-mail.com/2026/11/15/cyprus-can-move-beyond-forex-into-institutional-asset-management-says-fintech-ceo",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-15",
+   "summary": "Needlestack Technologies, a Larnaca-based financial technology company providing systematic trading signals and proprietary financial data to some of the world’s largest institutional asset managers, is seeking to help…",
+   "sectors": [
+    "tech"
+   ],
+   "districts": [
+    "larnaca"
+   ],
+   "entries": []
+  },
+  {
+   "id": "34d9c8a3927f",
+   "title": "Meet the Speakers of the 5th CSN Greece ICT Conference – new2",
+   "link": "https://cyprusshippingnews.com/2026/11/15/meet-the-speakers-of-the-5th-csn-greece-ict-conference-new2/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-15",
+   "summary": "Cyprus Shipping News announces that George Karistinos of ABS Wavesight joins as speaker of the 5th CSN Greece ICT Conference. […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
   {
    "id": "5ec93619818a",
    "title": "Meet the Speakers of the 5th CSN Greece ICT Conference – Dr. Matthew Maheras – Metrostar Management",
@@ -1844,7 +1888,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Mail: energy",
    "ok": true,
-   "count": 11
+   "count": 10
   },
   {
    "name": "Cyprus Mail: tourism",
@@ -1854,7 +1898,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Mail: banking and finance",
    "ok": true,
-   "count": 11
+   "count": 10
   },
   {
    "name": "Invest Cyprus",
@@ -1884,7 +1928,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Shipping News",
    "ok": true,
-   "count": 5
+   "count": 6
   }
  ]
 };
