@@ -1,7 +1,48 @@
 /* Written by tools/update_feed.py once a day. Don't edit by hand: it will be overwritten. */
 window.AKADIMIA_FEED = {
- "updated": "2026-11-14T13:40Z",
+ "updated": "2026-11-16T16:07Z",
  "items": [
+  {
+   "id": "87018bea4bd3",
+   "title": "Grantham Institute: Watering down electric vehicle mandate a “capitulation”",
+   "link": "https://www.lse.ac.uk/granthaminstitute/news/grantham-institute-watering-down-electric-vehicle-mandate-a-capitulation/",
+   "source": "Grantham Research Institute: news",
+   "school": "lse",
+   "date": "2026-11-16",
+   "summary": "Leo Mercer, Policy Fellow at the Grantham Research Institute on Climate Change and the Environment at the London School of...",
+   "kind": "news",
+   "topics": [
+    "energy-climate",
+    "climate-tech"
+   ]
+  },
+  {
+   "id": "31883cf293fe",
+   "title": "Holding the line? How European climate advisory bodies are navigating political contestation",
+   "link": "https://www.lse.ac.uk/granthaminstitute/publication/holding-the-line-how-european-climate-advisory-bodies-are-navigating-political-contestation/",
+   "source": "Grantham Research Institute: publications",
+   "school": "lse",
+   "date": "2026-11-16",
+   "summary": "This report examines how four European climate advisory bodies – in the UK, Ireland, Sweden and Finland – are experiencing and responding to a changing political environment in relation to climate change.",
+   "kind": "research",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "401ac1bdabc0",
+   "title": "New business models could help deploy clean energy technologies at scale",
+   "link": "https://blogs.lse.ac.uk/businessreview/2026/11/16/new-business-models-could-help-deploy-clean-energy-technologies-at-scale/",
+   "source": "LSE Business Review",
+   "school": "lse",
+   "date": "2026-11-16",
+   "summary": "During COP31 Shefali Khanna looks at “energy-as-a-service”, a business model in which customers pay for an energy service without making upfront capital investment. Using examples from Britain, America and India she…",
+   "kind": "blog",
+   "topics": [
+    "energy-climate",
+    "finance-markets"
+   ]
+  },
   {
    "id": "93614eceb56e",
    "title": "Building for a 21st century climate: Fostering resilience through better regulation",
@@ -2091,6 +2132,19 @@ window.AKADIMIA_FEED = {
  "people": {
   "michael-grubb": [
    {
+    "id": "719f40e51ea5",
+    "title": "Electricity Market Imbalance, Cross-regional Trade, and Transmission in China",
+    "link": "https://doi.org/10.1162/asep.a.996",
+    "source": "Michael Grubb",
+    "school": "ucl",
+    "date": "2026-06-05",
+    "summary": "Asian Economic Papers · Guy S. Liu, Michael J. Grubb, Jinke Li",
+    "kind": "research",
+    "topics": [
+     "energy-climate"
+    ]
+   },
+   {
     "id": "0270b1df37f1",
     "title": "Maintaining security of power supply in the context of technological change driven by low-carbon transition",
     "link": "https://doi.org/10.26599/ecm.2026.9400033",
@@ -2124,19 +2178,6 @@ window.AKADIMIA_FEED = {
     "school": "ucl",
     "date": "2026-02-06",
     "summary": "Nature Reviews Clean Technology · Max Collett, Pete Barbrook-Johnson, Jan Rosenow et al.",
-    "kind": "research",
-    "topics": [
-     "energy-climate"
-    ]
-   },
-   {
-    "id": "719f40e51ea5",
-    "title": "Electricity Market Imbalance, Cross-regional Trade, and Transmission in China",
-    "link": "https://doi.org/10.1162/asep.a.996",
-    "source": "Michael Grubb",
-    "school": "ucl",
-    "date": "2026-01-01",
-    "summary": "Asian Economic Papers · Guy S. Liu, Michael J. Grubb, Jinke Li",
     "kind": "research",
     "topics": [
      "energy-climate"
@@ -2239,6 +2280,19 @@ window.AKADIMIA_FEED = {
     ]
    },
    {
+    "id": "feb2d56fb940",
+    "title": "Politics and Public Banks: BNDES Loans to Local Governments in Brazil",
+    "link": "https://doi.org/10.31389/eco.519",
+    "source": "Rodrigo Schneider",
+    "school": "skidmore",
+    "date": "2026-04-17",
+    "summary": "Economía · Guilherme Paiva Pinto, Maurício Soares Bugarin, Rodrigo Schneider",
+    "kind": "research",
+    "topics": [
+     "finance-markets"
+    ]
+   },
+   {
     "id": "7d131fd64492",
     "title": "Thieves Around the Stadium: Comparing the Effects of Football and Soccer on Crime",
     "link": "https://doi.org/10.1177/15270025261422473",
@@ -2270,17 +2324,6 @@ window.AKADIMIA_FEED = {
     "school": "skidmore",
     "date": "2026-02-19",
     "summary": "Journal of Development Economics · Diogo Baerlocher, Rodrigo Schneider",
-    "kind": "research",
-    "topics": []
-   },
-   {
-    "id": "f3c05bdee54d",
-    "title": "INFLUÊNCIA DO CAPITAL INTELECTUAL SOBRE A CAPACIDADE ABSORTIVA NA POLÍCIA RODOVIÁRIA FEDERAL BRASILEIRA",
-    "link": "https://doi.org/10.31060/rbsp.2026.v20.n1.2143",
-    "source": "Rodrigo Schneider",
-    "school": "skidmore",
-    "date": "2026-02-03",
-    "summary": "Revista Brasileira de Segurança Pública · Rodrigo Schneider, Cleidson Nogueira Dias, Dusan Schreiber",
     "kind": "research",
     "topics": []
    }
@@ -2316,17 +2359,17 @@ window.AKADIMIA_FEED = {
   {
    "name": "Grantham Research Institute: news",
    "ok": true,
-   "count": 7
+   "count": 6
   },
   {
    "name": "Grantham Research Institute: publications",
    "ok": true,
-   "count": 8
+   "count": 9
   },
   {
    "name": "LSE Business Review",
    "ok": true,
-   "count": 4
+   "count": 5
   },
   {
    "name": "LSE International Development",
