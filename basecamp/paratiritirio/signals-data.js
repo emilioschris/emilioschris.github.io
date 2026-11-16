@@ -1,8 +1,192 @@
 /* Written by tools/update_signals.py once a day. Don't edit by hand: it will be overwritten. */
 window.PARATIRITIRIO = window.PARATIRITIRIO || {};
 PARATIRITIRIO.signals = {
- "updated": "2026-11-15T14:02Z",
+ "updated": "2026-11-16T15:59Z",
  "items": [
+  {
+   "id": "817483820a00",
+   "title": "Five-star hotels among 17 new properties joining Pasyxe",
+   "link": "https://cyprus-mail.com/2026/11/16/five-star-hotels-among-17-new-properties-joining-pasyxe",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-16",
+   "summary": "The Cyprus Hotel Association (Pasyxe) has taken on 17 new members in its 90th anniversary year, bringing its membership to 235. The association on Monday said its members now account for 67.3 per cent of all hotel beds…",
+   "sectors": [
+    "tourism",
+    "real-estate"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "29786e7ef254",
+   "title": "Cyprus borrowers warn of growing pressure from loans, inflation and energy bills",
+   "link": "https://cyprus-mail.com/2026/11/16/cyprus-borrowers-warn-of-growing-pressure-from-loans-inflation-and-energy-bills",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-16",
+   "summary": "The Cyprus Borrowers Protection Association (Syprodat) on Monday called on the government to introduce targeted measures to ease the cost-of-living burden, warning that persistent inflation, pressure from bank interest…",
+   "sectors": [
+    "energy",
+    "finance"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "2649aeec8c4c",
+   "title": "Cyprus investment fund assets grow to €8.42bn despite decline in total number",
+   "link": "https://cyprus-mail.com/2026/11/16/cyprus-investment-fund-assets-grow-to-e8-42bn-despite-decline-in-total-number",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-16",
+   "summary": "Cyprus’ investment fund sector recorded a slight increase in assets under management in September, despite a decline in the number of funds operating in the country, according to the latest figures published by the…",
+   "sectors": [
+    "finance"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "01d48f61ca96",
+   "title": "Alpha Bank completes Altius Insurance acquisition ahead of Cyprus merger",
+   "link": "https://cyprus-mail.com/2026/11/16/alpha-bank-completes-altius-insurance-acquisition-ahead-of-cyprus-merger",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-16",
+   "summary": "Alpha Bank has completed its acquisition of 100 per cent of Altius Insurance Ltd, marking the first stage of a wider plan to combine its insurance operations in Cyprus with those of Universal Life Insurance Public…",
+   "sectors": [
+    "finance"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "a70b3134ccea",
+   "title": "Alpha Bank Cyprus steps up support for men’s healthcare",
+   "link": "https://cyprus-mail.com/2026/11/16/alpha-bank-cyprus-steps-up-support-for-mens-healthcare",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-16",
+   "summary": "Alpha Bank Cyprus marked its annual participation in the Movember campaign with an employee event aimed at raising awareness of men’s health, prevention and early diagnosis. The bank organised its traditional…",
+   "sectors": [
+    "finance"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "ad14b7e5a139",
+   "title": "Meet the Speakers of the 5th CSN Greece ICT Conference – Konstantinos Bachxevanis – BAX LAW",
+   "link": "https://cyprusshippingnews.com/2026/11/16/meet-the-speakers-of-the-5th-csn-greece-ict-conference-konstantinos-bachxevanis-bax-law/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-16",
+   "summary": "Cyprus Shipping News announces that George Karistinos of ABS Wavesight joins as speaker of the 5th CSN Greece ICT Conference. […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "d999429cd3bc",
+   "title": "Meet the Speakers of the 5th CSN Greece ICT Conference – Thanos Servos – Seaven",
+   "link": "https://cyprusshippingnews.com/2026/11/16/meet-the-speakers-of-the-5th-csn-greece-ict-conference-thanos-servos-seaven/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-16",
+   "summary": "Cyprus Shipping News announces that Thanos Servos of Seaven joins as speaker of the 5th CSN Greece ICT Conference. The event […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "3d01c4f976a3",
+   "title": "Meet the Speakers of the 5th CSN Greece ICT Conference – Yiannis Sofianidis – AM Nomikos TWMA SA.",
+   "link": "https://cyprusshippingnews.com/2026/11/16/meet-the-speakers-of-the-5th-csn-greece-ict-conference-yiannis-sofianidis-am-nomikos-twma-sa/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-16",
+   "summary": "Cyprus Shipping News announces that Yiannis Sofianidis of AM Nomikos TWMA SA joins as speaker of the 5th CSN Greece […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "fa59ab2a6016",
+   "title": "Meet the Speakers of the 5th CSN Greece ICT Conference – Ilias Vlachogiannis – Minerva Marine Inc.",
+   "link": "https://cyprusshippingnews.com/2026/11/16/meet-the-speakers-of-the-5th-csn-greece-ict-conference-ilias-vlachogiannis-minerva-marine/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-16",
+   "summary": "Cyprus Shipping News announces that Ilias Vlachogiannis of Minerva Marine joins as speaker of the 5th CSN Greece ICT Conference. […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "3b0a3d258fa2",
+   "title": "Meet the Speakers of the 5th CSN Greece ICT Conference – Dimitris Perdikaris – Plutofylax Shipping",
+   "link": "https://cyprusshippingnews.com/2026/11/16/meet-the-speakers-of-the-5th-csn-greece-ict-conference-dimitris-perdikaris-plutofylax-shipping/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-16",
+   "summary": "Cyprus Shipping News announces that Dimitris Perdikaris of Plutofylax Shipping joins as speaker of the 5th CSN Greece ICT Conference. […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "54dc7619f992",
+   "title": "Meet the Speakers of the 5th CSN Greece ICT Conference – Manolis Papadakis – Dynagas",
+   "link": "https://cyprusshippingnews.com/2026/11/16/meet-the-speakers-of-the-5th-csn-greece-ict-conference-manolis-papadakis-dynagas/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-16",
+   "summary": "Cyprus Shipping News announces that Manolis Papadakis of Dynagas joins as speaker of the 5th CSN Greece ICT Conference. The event […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "4d170ad73c61",
+   "title": "Meet the Speakers of the 5th CSN Greece ICT Conference – Konstantinos Stais – Pleiades Shipping Agents",
+   "link": "https://cyprusshippingnews.com/2026/11/16/meet-the-speakers-of-the-5th-csn-greece-ict-conference-konstantinos-stais-pleiades-shipping-agents/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-16",
+   "summary": "Cyprus Shipping News announces that Konstantinos Stais – Pleiades Shipping Agents joins as speaker of the 5th CSN Greece ICT Conference. […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "8cbd74d4a0ba",
+   "title": "Meet the Speakers of the 5th CSN Greece ICT Conference – George Karistinos – ABS Wavesight",
+   "link": "https://cyprusshippingnews.com/2026/11/16/meet-the-speakers-of-the-5th-csn-greece-ict-conference-george-karistinos-abs-wavesight/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-16",
+   "summary": "Cyprus Shipping News announces that George Karistinos of ABS Wavesight joins as speaker of the 5th CSN Greece ICT Conference. […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
   {
    "id": "7fd98536e42f",
    "title": "Champagne tastes, sensible budgets. Tourists are changing the rules",
@@ -427,6 +611,24 @@ PARATIRITIRIO.signals = {
    "entries": []
   },
   {
+   "id": "af84128f4e27",
+   "title": "Elias Neocleous: Limassol 2030 - Shaping the Eastern Mediterranean’s Economic Capital",
+   "link": "https://cyprusprofile.com/news/elias-neocleous-limassol-2030-shaping-the-eastern-mediterraneans-economic-capital",
+   "source": "Cyprus Profile",
+   "feed": "Cyprus Profile",
+   "date": "2026-11-10",
+   "summary": "Looking ahead to 2030, he emphasizes that Limassol’s sustained prosperity depends on modern transportation networks, accessible and affordable housing, expanded green spaces, and robust investment in education…",
+   "sectors": [
+    "education",
+    "real-estate",
+    "finance"
+   ],
+   "districts": [
+    "limassol"
+   ],
+   "entries": []
+  },
+  {
    "id": "abb5baa21c8e",
    "title": "Global study finds Cyprus ranks SEVENTH and set for $1.1 billion AI GDP boost",
    "link": "https://cyprusshippingnews.com/2026/11/09/global-study-finds-cyprus-ranks-seventh-and-set-for-1-1-billion-ai-gdp-boost/",
@@ -515,6 +717,48 @@ PARATIRITIRIO.signals = {
    "entries": [
     "bank-of-cyprus"
    ]
+  },
+  {
+   "id": "489bc0a48d2b",
+   "title": "Dorina Mastora to Lead Cross-Border Payments Panel at NextGen Payments & RegTech Forum",
+   "link": "https://cyprusprofile.com/news/dorina-mastora-lead-cross-border-payments-panel-nextgen-payments-regtech-forum",
+   "source": "Cyprus Profile",
+   "feed": "Cyprus Profile",
+   "date": "2026-11-09",
+   "summary": "Organised by QUBE Events, the forum brings together leading professionals from payments, financial services, and regulatory technology to discuss the latest industry developments and challenges. Dorina will moderate the…",
+   "sectors": [
+    "tech"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "bfe99dc61f4b",
+   "title": "Elias Neocleous: How AI is changing the way lawyers work in Cyprus",
+   "link": "https://cyprusprofile.com/news/elias-neocleous-how-ai-is-changing-the-way-lawyers-work-in-cyprus",
+   "source": "Cyprus Profile",
+   "feed": "Cyprus Profile",
+   "date": "2026-11-09",
+   "summary": "Built upon the firm’s processes and institutional knowledge, NeoLaw.ai streamlines legal research, document analysis, case preparation, and preliminary risk assessment. By automating routine tasks, it lets lawyers focus…",
+   "sectors": [
+    "tech"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "5f32825e6b71",
+   "title": "Stella Strati Speaks on Global Mobility at the Liechtenstein Tax Conference 2026",
+   "link": "https://cyprusprofile.com/news/stella-strati-speaks-on-global-mobility-at-the-liechtenstein-tax-conference-2026",
+   "source": "Cyprus Profile",
+   "feed": "Cyprus Profile",
+   "date": "2026-11-09",
+   "summary": "The conference brought together tax and trust professionals from Liechtenstein, Switzerland, Germany and many other jurisdictions. Over two days, the programme covered the latest developments in Liechtenstein tax law…",
+   "sectors": [
+    "finance"
+   ],
+   "districts": [],
+   "entries": []
   },
   {
    "id": "703af3c50927",
@@ -1883,7 +2127,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Mail: property",
    "ok": true,
-   "count": 20
+   "count": 19
   },
   {
    "name": "Cyprus Mail: energy",
@@ -1898,7 +2142,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Mail: banking and finance",
    "ok": true,
-   "count": 10
+   "count": 12
   },
   {
    "name": "Invest Cyprus",
@@ -1923,12 +2167,12 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Profile",
    "ok": true,
-   "count": 0
+   "count": 4
   },
   {
    "name": "Cyprus Shipping News",
    "ok": true,
-   "count": 6
+   "count": 8
   }
  ]
 };
