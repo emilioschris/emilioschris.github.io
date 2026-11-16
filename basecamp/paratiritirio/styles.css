@@ -1013,15 +1013,11 @@
   border: 0;
   cursor: pointer;
 }
-.mm-hawk { width: 82px; height: 144px; flex: none; filter: drop-shadow(0 6px 10px rgba(30, 20, 10, 0.25)); }
-.mm-h-s { fill: var(--hawk-body); }
-.mm-h-t { fill: var(--hawk-tail); }
-.mm-h-r { fill: var(--hawk-ring); }
-.mm-h-p { fill: #2B2A26; }
-.mm-h-claw { fill: none; stroke: var(--hawk-beak); stroke-width: 12; stroke-linecap: round; }
-.mm-coin-rim { fill: #8A6420; }
+/* The homepage hawk on its branch (colours from the shared .hk-* classes) */
+.mm-hawk { width: 84px; height: 158px; flex: none; overflow: visible; filter: drop-shadow(0 6px 10px rgba(30, 20, 10, 0.25)); }
+.mm-coin-rim { fill: #8A6420; stroke: var(--hawk-line); stroke-width: 3.5; }
 .mm-coin-face { fill: #E2B85A; }
-.mm-coin-sign { fill: #5A3E12; font: 600 78px/1 var(--font-mono); }
+.mm-coin-sign { fill: #5A3E12; font: 600 56px/1 var(--font-mono); }
 .mm-tag {
   margin-bottom: 14px;
   padding: 9px 13px;
@@ -1139,7 +1135,7 @@ html.mm-open { overflow: hidden; }
 @media (max-width: 640px) {
   .moves-label { display: none; }
   .moves-btn { padding: 5px; }
-  .mm-hawk { width: 52px; height: 92px; }
+  .mm-hawk { width: 62px; height: 116px; }
   .mm-tag { max-width: 200px; font-size: 0.8rem; }
   .mm-layer { padding: 0; place-items: end stretch; }
   .mm-card { width: 100%; max-height: 92vh; border-radius: 22px 22px 0 0; padding: 22px 18px calc(18px + env(safe-area-inset-bottom)); }

@@ -102,21 +102,44 @@
   let current = pickFor(dayNumber);
 
   /* ---------- 2. THE TOAST ---------- */
-  /* The hawk is the favicon's silhouette, with talons holding a coin */
+  /* The hawk is the homepage hawk on its branch: the same paths as the
+     <symbol id="hawk"> in index.html (and favicon.svg), coloured by the
+     shared .hk-* classes and --hawk-* variables, so dusk works too.
+     The gold coin rests on the branch at its feet. */
   const HAWK = `
-    <svg class="mm-hawk" viewBox="250 140 420 740" aria-hidden="true" focusable="false">
-      <path class="mm-h-t" d="M360,650 L406,676 L404,858 C401,882 386,890 373,885 C360,878 357,862 359,832 Z"/>
-      <path class="mm-h-t" d="M394,686 L470,686 C474,750 478,820 475,858 C472,882 453,890 434,886 C414,882 405,870 403,850 Z"/>
-      <path class="mm-h-s" d="M376,280 C350,300 318,330 300,375 C286,420 286,480 290,540 C296,630 312,720 328,797 C340,740 352,680 358,620 C362,520 364,420 376,280 Z"/>
-      <path class="mm-h-s" d="M468,153 C505,152 532,166 540,190 L535,228 C552,250 590,300 608,350 C622,410 615,480 585,550 C555,610 505,660 470,690 L392,690 C372,600 362,500 362,430 C364,360 372,300 380,250 C384,205 420,158 468,153 Z"/>
-      <path class="mm-h-s" d="M520,196 C536,191 549,200 549,216 C549,228 546,236 538,243 C538,232 534,224 526,222 L478,216 C490,206 505,198 520,196 Z"/>
-      <path class="mm-h-s" d="M470,688 C440,720 396,770 366,808 C360,762 356,700 354,640 L410,640 L410,688 Z"/>
-      <circle class="mm-h-r" cx="473" cy="190" r="22"/>
-      <circle class="mm-h-p" cx="476" cy="190" r="11"/>
-      <path class="mm-h-claw" d="M452,684 C470,712 500,724 528,722 M470,686 C494,700 520,700 540,692"/>
-      <g class="mm-coin" transform="translate(568 768)">
-        <circle r="92" class="mm-coin-rim"/><circle r="74" class="mm-coin-face"/>
-        <text y="32" text-anchor="middle" class="mm-coin-sign">€</text>
+    <svg class="mm-hawk" viewBox="250 140 405 760" aria-hidden="true" focusable="false">
+      <g class="hk-line" stroke-width="3.5">
+      <path class="hk-branch" d="M252,714 C380,672 520,624 648,574 L648,622 C520,668 380,716 252,766 Z"/>
+      <path class="hk-branch" d="M606,586 L626,534 L638,522 L635,542 L624,580 Z"/>
+      <path class="hk-far" d="M376,280 C350,300 318,330 300,375 C286,420 286,480 290,540 C296,630 312,720 328,797 C340,740 352,680 358,620 C362,520 364,420 376,280 Z"/>
+      <path class="hk-tail" d="M360,650 L406,676 L404,858 C401,882 386,890 373,885 C360,878 357,862 359,832 Z"/>
+      <path class="hk-tail" d="M394,686 L470,686 C474,750 478,820 475,858 C472,882 453,890 434,886 C414,882 405,870 403,850 Z"/>
+      </g>
+      <g class="hk-band" stroke-width="5">
+      <path d="M396,800 Q432,790 471,796"/><path d="M399,822 Q436,812 473,818"/><path d="M401,845 Q436,836 475,842"/>
+      <path d="M362,808 Q382,800 404,806"/><path d="M361,830 Q382,823 404,828"/><path d="M361,852 Q382,846 404,850"/>
+      </g>
+      <g class="hk-line" stroke-width="3.5">
+      <path class="hk-body" d="M468,153 C505,152 532,166 540,190 L535,228 C552,250 590,300 608,350 C622,410 615,480 585,550 C555,610 505,660 470,690 L392,690 C372,600 362,500 362,430 C364,360 372,300 380,250 C384,205 420,158 468,153 Z"/>
+      <path class="hk-shade" d="M455,282 C420,292 360,318 336,336 C348,372 356,410 362,440 C364,380 395,320 455,282 Z"/>
+      <path class="hk-shade" d="M608,350 C622,410 615,480 585,550 C555,610 505,660 470,690 C440,720 396,770 366,808 C392,730 432,630 488,540 C530,470 560,400 566,300 C580,312 598,328 608,350 Z"/>
+      <path class="hk-body" d="M455,282 C418,300 384,342 368,404 C356,470 358,620 366,808 C392,730 432,630 488,540 C530,470 560,400 566,300 C540,288 495,280 455,282 Z"/>
+      <path class="hk-shade" d="M484,264 L528,230 L538,248 C520,254 500,259 484,264 Z"/>
+      <path class="hk-beak" d="M520,196 C536,191 549,200 549,216 C549,228 546,236 538,243 C538,232 534,224 526,222 L478,216 C490,206 505,198 520,196 Z"/>
+      <path class="hk-dark" d="M537,203 C548,210 549,228 538,243 C540,229 538,216 531,208 Z"/>
+      <path d="M478,216 L528,219" fill="none"/>
+      <ellipse class="hk-ring" cx="472" cy="190" rx="17" ry="12"/>
+      </g>
+      <circle class="hk-iris" cx="474" cy="190" r="7"/>
+      <circle class="hk-dark" cx="474.5" cy="190" r="3.6"/>
+      <circle class="hk-light" cx="476.5" cy="187.5" r="1.8"/>
+      <ellipse class="hk-lid" cx="472" cy="190" rx="19" ry="14"/>
+      <g class="hk-band" stroke-width="2">
+      <path d="M500,178 l9,-7"/><path d="M510,180 l9,-8"/><path d="M520,182 l9,-7"/><path d="M529,186 l8,-6"/>
+      </g>
+      <g class="mm-coin" transform="translate(560 640)">
+        <circle r="62" class="mm-coin-rim"/><circle r="50" class="mm-coin-face"/>
+        <text y="22" text-anchor="middle" class="mm-coin-sign">€</text>
       </g>
     </svg>`;
 
