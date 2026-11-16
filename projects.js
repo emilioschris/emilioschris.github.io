@@ -317,7 +317,7 @@ const PROJECTS = [
     description: "A climbing journal: sessions, grades and projects, indoors and out.",
     coords: "42.44°N 71.10°W",
     date: "2026-10",
-    tended: "2026-10-14",
+    tended: "2026-11-16",
     elevation: "ELEV 90 m",
     shape: 2,
     image: {

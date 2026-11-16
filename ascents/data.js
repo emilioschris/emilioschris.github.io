@@ -117,7 +117,7 @@ const ASCENTS = {
           problems: [
             { name: "Free Period", grade: "V0", status: "" },
             { name: "Hop Scotch", grade: "V2+", status: "" },
-            { name: "Sunset Dual Arete", grade: "V3", status: "projecting" },
+            { name: "Sunset Dual Arete", grade: "V3", status: "sent" },
             { name: "Leap Frog", grade: "V0", status: "" },
             { name: "Undercling Cranker", grade: "V0", status: "" },
           ],
@@ -136,20 +136,30 @@ const ASCENTS = {
     },
   ],
 
-  sessions: [],
+  sessions: [
+    {
+      date: "2026-11-16",
+      place: "recess",
+      climbs: [
+        { problem: "Sunset Dual Arete", result: "send" },
+      ],
+      felt: "",
+      notes: [],
+    },
+  ],
 
   projects: [
     {
       problem: "Sunset Dual Arete",
       boulder: "recess",
       grade: "V3",
-      status: "projecting",
+      status: "sent",
       attempts: null,
       sessions: null,
       highPoint: "",
       beta: "",
       started: "",
-      sent: "",
+      sent: "2026-11-16",
     },
   ],
 

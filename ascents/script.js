@@ -104,6 +104,10 @@
     const rack = blankRack();
     const unplaced = [];
 
+    // Problems whose send is in the log: the log's tick stands in for the status
+    const loggedSends = new Set(ASCENTS.sessions.filter((s) => boulders.has(s.place))
+      .flatMap((s) => (s.climbs || []).filter((c) => c.result === "send" || c.result === "flash").map((c) => c.problem)));
+
     for (const p of problems.values()) {
       const g = gradeNum(p.grade);
       if (g == null) {
@@ -111,7 +115,7 @@
         continue;
       }
       if (p.status === "sent") {
-        rack[g].sends++;
+        if (!loggedSends.has(p.name)) rack[g].sends++;
         rack[g].items.push(`${p.name}, ${p.grade} · ${p.boulder.name} · sent`);
       }
       if (p.status === "projecting") {
