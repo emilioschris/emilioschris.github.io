@@ -1,8 +1,148 @@
 /* Written by tools/update_signals.py once a day. Don't edit by hand: it will be overwritten. */
 window.PARATIRITIRIO = window.PARATIRITIRIO || {};
 PARATIRITIRIO.signals = {
- "updated": "2026-11-16T15:59Z",
+ "updated": "2026-11-17T16:10Z",
  "items": [
+  {
+   "id": "6b34da29cc99",
+   "title": "What’s holding up new homes in Cyprus? Developers take the permit queue to the President",
+   "link": "https://cyprus-mail.com/2026/11/17/whats-holding-up-new-homes-in-cyprus-developers-take-the-permit-queue-to-the-president",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: property",
+   "date": "2026-11-17",
+   "summary": "Cyprus property developers association have asked President Nikos Christodoulides to back a 100-day plan to tackle a backlog of housing permit applications and get more homes built. The association presented the plan at…",
+   "sectors": [
+    "real-estate"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "6d97ca7e2536",
+   "title": "‘Only one quarter of Cyprus hotels fully licensed’",
+   "link": "https://cyprus-mail.com/2026/11/17/only-one-quarter-of-cyprus-hotels-fully-licensed",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-17",
+   "summary": "Only a quarter of operating hotels are fully licenced, deputy tourism minister Costas Koumis told MPs on Tuesday, warning that hotels still missing certificates would be reported. Koumis presented the proposal to the…",
+   "sectors": [
+    "tourism"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "95865b86c96b",
+   "title": "Cyprus had almost as many Polish tourists as German ones. Then there’s France",
+   "link": "https://cyprus-mail.com/2026/11/17/cyprus-had-almost-as-many-polish-tourists-as-german-ones-then-theres-france",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-17",
+   "summary": "Arrivals fell 5.5 per cent as Israel and France accounted for more than half the month’s net decline Tourist arrivals to Cyprus fell by 5.5 per cent in October, reversing September’s return to growth as fewer visitors…",
+   "sectors": [
+    "tourism"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "a7792ae08c03",
+   "title": "Cyprus Shipping Chamber announces inaugural Global Shipping Minds Summit",
+   "link": "https://cyprusshippingnews.com/2026/11/17/cyprus-shipping-chamber-announces-inaugural-global-shipping-minds-summit/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-17",
+   "summary": "The Cyprus Shipping Chamber (CSC) is pleased to announce the inaugural Global Shipping Minds Summit, which will take place on […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "91abd36e679c",
+   "title": "Meet the Speakers of the 5th CSN Greece ICT Conference – Ioannis Pantazopoulos – Air France KLM",
+   "link": "https://cyprusshippingnews.com/2026/11/17/meet-the-speakers-of-the-5th-csn-greece-ict-conference-ioannis-pantazopoulos-air-france-klm/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-17",
+   "summary": "Cyprus Shipping News announces that Ioannis Pantazopoulos – Air France KLM joins as speaker of the 5th CSN Greece ICT […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "350a1aa37ad5",
+   "title": "Meet the Speakers of the 5th CSN Greece ICT Conference – Kyriakos Mahos – Levante Ferries",
+   "link": "https://cyprusshippingnews.com/2026/11/17/meet-the-speakers-of-the-5th-csn-greece-ict-conference-kyriakos-mahos-levante-ferries/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-17",
+   "summary": "Cyprus Shipping News announces that Kyriakos Mahos of Levante Ferries joins as speaker of the 5th CSN Greece ICT Conference. The […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "ee6c5ceda030",
+   "title": "Meet the Speakers of the 5th CSN Greece ICT Conference – Fotis Tsitsirigkos – FTTCS",
+   "link": "https://cyprusshippingnews.com/2026/11/17/meet-the-speakers-of-the-5th-csn-greece-ict-conference-fotis-tsitsirigkos-fttcs/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-17",
+   "summary": "Cyprus Shipping News announces that Fotis Tsitsirigkos of FTTCS joins as speaker of the 5th CSN Greece ICT Conference. The […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "269003bf75c4",
+   "title": "Meet the Speakers of the 5th CSN Greece ICT Conference – John N. Faraclas – All About Shipping",
+   "link": "https://cyprusshippingnews.com/2026/11/17/meet-the-speakers-of-the-5th-csn-greece-ict-conference-john-n-faraclas-all-about-shipping/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-17",
+   "summary": "Cyprus Shipping News announces that John N. Faraclas of All About Shipping joins as speaker of the 5th CSN Greece ICT […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "738468f43a2a",
+   "title": "Meet the Speakers of the 5th CSN Greece ICT Conference – Capt. Athanasios Skiadas – Calypso Marine",
+   "link": "https://cyprusshippingnews.com/2026/11/17/meet-the-speakers-of-the-5th-csn-greece-ict-conference-capt-athanasios-skiadas-calypso-marine/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-17",
+   "summary": "Cyprus Shipping News announces that Capt. Athanasios Skiadas of Calypso Marine joins as speaker of the 5th CSN Greece ICT Conference. […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "056cc1acaf8d",
+   "title": "Meet the Speakers of the 5th CSN Greece ICT Conference – Capt. George Papanelopoulos – Cyprus Sea Lines Co Ltd",
+   "link": "https://cyprusshippingnews.com/2026/11/17/meet-the-speakers-of-the-5th-csn-greece-ict-conference-capt-george-papanelopoulos-cyprus-sea-lines/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-17",
+   "summary": "Cyprus Shipping News announces that Capt. George Papanelopoulos of Cyprus Sea Lines joins as speaker of the 5th CSN Greece […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
   {
    "id": "817483820a00",
    "title": "Five-star hotels among 17 new properties joining Pasyxe",
@@ -2142,7 +2282,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Mail: banking and finance",
    "ok": true,
-   "count": 12
+   "count": 11
   },
   {
    "name": "Invest Cyprus",
@@ -2172,7 +2312,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Shipping News",
    "ok": true,
-   "count": 8
+   "count": 7
   }
  ]
 };
