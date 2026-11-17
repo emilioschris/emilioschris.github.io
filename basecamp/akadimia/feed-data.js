@@ -1,7 +1,34 @@
 /* Written by tools/update_feed.py once a day. Don't edit by hand: it will be overwritten. */
 window.AKADIMIA_FEED = {
- "updated": "2026-11-16T16:07Z",
+ "updated": "2026-11-17T16:16Z",
  "items": [
+  {
+   "id": "dd5d2e48de35",
+   "title": "Biodiversity loss changes how tourism firms manage their finances",
+   "link": "https://blogs.lse.ac.uk/businessreview/2026/11/17/cop31-biodiversity-loss-changes-how-tourism-firms-manage-their-finances/",
+   "source": "LSE Business Review",
+   "school": "lse",
+   "date": "2026-11-17",
+   "summary": "Much of the world’s tourism relies on nature that climate change is damaging. Ecosystems themselves defend against risk. But this connection also has a financial dimension. Giray Gozgor, Jing Li, Mahdi Mousavi and…",
+   "kind": "blog",
+   "topics": [
+    "energy-climate",
+    "finance-markets"
+   ]
+  },
+  {
+   "id": "ec8dbf931a68",
+   "title": "Revealed: Russia, Saudi Arabia and Australia are largest CO2 exporters of all time",
+   "link": "https://www.carbonbrief.org/revealed-russia-saudi-arabia-and-australia-are-largest-co2-exporters-of-all-time",
+   "source": "Carbon Brief",
+   "school": null,
+   "date": "2026-11-17",
+   "summary": "Russia, Saudi Arabia and COP31 co-president Australia are the largest exporters of carbon dioxide (CO2) emissions in history, reveals Carbon…",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
   {
    "id": "87018bea4bd3",
    "title": "Grantham Institute: Watering down electric vehicle mandate a “capitulation”",
@@ -255,6 +282,32 @@ window.AKADIMIA_FEED = {
    "kind": "research",
    "topics": [
     "finance-markets"
+   ]
+  },
+  {
+   "id": "a69f79612d3e",
+   "title": "Measuring the informal economy at the regional level: New benchmark-consistent methods and estimates for European regions",
+   "link": "https://doi.org/10.1016/j.pirs.2026.100178",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-11-10",
+   "summary": "Papers of the Regional Science Association · Roberto Dell’Anno, Nikolaos Tzivanakis, Alban Asllani et al.",
+   "kind": "research",
+   "topics": [
+    "finance-markets"
+   ]
+  },
+  {
+   "id": "b9b6646ad95f",
+   "title": "Labor Market Tightness and the Reversal of Inequality Trends in Germany",
+   "link": "https://doi.org/10.1093/qje/qjag057",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-11-10",
+   "summary": "The Quarterly Journal of Economics · Christian Dustmann, Martin Friedrich, Carl Gergs et al.",
+   "kind": "research",
+   "topics": [
+    "development-inequality"
    ]
   },
   {
@@ -626,16 +679,17 @@ window.AKADIMIA_FEED = {
    ]
   },
   {
-   "id": "a69f79612d3e",
-   "title": "Measuring the Informal Economy at the Regional Level: New Benchmark-Consistent Methods and Estimates for European Regions",
-   "link": "https://doi.org/10.1016/j.pirs.2026.100178",
+   "id": "dc432f623c6e",
+   "title": "Electricity infrastructure and artificial intelligence innovation: Evidence from China’s ultra-high-voltage grid expansion",
+   "link": "https://doi.org/10.1016/j.iref.2026.106072",
    "source": "UCL research (via OpenAlex)",
    "school": "ucl",
    "date": "2026-11-01",
-   "summary": "Papers of the Regional Science Association · Roberto Dell’Anno, Nikolaos Tzivanakis, Alban Asllani et al.",
+   "summary": "International Review of Economics & Finance · Xinmiao Liu, Yew Yoong Ding, Jiachen Wang et al.",
    "kind": "research",
    "topics": [
-    "finance-markets"
+    "energy-climate",
+    "development-inequality"
    ]
   },
   {
@@ -2369,7 +2423,7 @@ window.AKADIMIA_FEED = {
   {
    "name": "LSE Business Review",
    "ok": true,
-   "count": 5
+   "count": 6
   },
   {
    "name": "LSE International Development",
@@ -2399,7 +2453,7 @@ window.AKADIMIA_FEED = {
   {
    "name": "UCL research (via OpenAlex)",
    "ok": true,
-   "count": 25
+   "count": 24
   },
   {
    "name": "Skidmore research (via OpenAlex)",
