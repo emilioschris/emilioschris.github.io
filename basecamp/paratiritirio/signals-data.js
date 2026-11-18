@@ -1,8 +1,120 @@
 /* Written by tools/update_signals.py once a day. Don't edit by hand: it will be overwritten. */
 window.PARATIRITIRIO = window.PARATIRITIRIO || {};
 PARATIRITIRIO.signals = {
- "updated": "2026-11-17T16:10Z",
+ "updated": "2026-11-18T15:46Z",
  "items": [
+  {
+   "id": "c0fa68c37616",
+   "title": "Cyprus builders are paying more again. What’s gone up most?",
+   "link": "https://cyprus-mail.com/2026/11/18/cyprus-builders-are-paying-more-again-whats-gone-up-most",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: property",
+   "date": "2026-11-18",
+   "summary": "Construction material prices in Cyprus rose 4.09 per cent year on year in October, with electrical fixtures nearly a tenth more expensive than a year earlier, according to figures released on Wednesday by the…",
+   "sectors": [
+    "real-estate"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "9098cf3ee047",
+   "title": "Cyprus estate agents say watchdog’s own words back intimidation claims",
+   "link": "https://cyprus-mail.com/2026/11/18/cyprus-estate-agents-say-watchdogs-own-words-back-intimidation-claims",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: property",
+   "date": "2026-11-18",
+   "summary": "The Cyprus Real Estate Agents Association (Skek) has called for an urgent change to the law, accusing the industry’s watchdog of abusing its powers by using the threat of disciplinary proceedings to intimidate estate…",
+   "sectors": [
+    "real-estate"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "d89da7ee72ef",
+   "title": "Cyprus traders weigh funded account programs as EU scrutiny grows",
+   "link": "https://cyprus-mail.com/2026/11/18/cyprus-traders-weigh-funded-account-programs-as-eu-scrutiny-grows",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-18",
+   "summary": "Cyprus is known as one of Europe’s largest online trading hubs, as it hosts many forex brokers and financial technology companies. However, the regulatory environment in the region is gradually tightening as the island…",
+   "sectors": [
+    "tech"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "822c3033c964",
+   "title": "Meet the Supporters of the 5th CSN Greece ICT Conference – AMMITEC",
+   "link": "https://cyprusshippingnews.com/2026/11/18/meet-the-supporters-of-the-5th-csn-greece-ict-conference-ammitec/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-18",
+   "summary": "Cyprus Shipping News is pleased to announce that AMMITEC has joined as a supporter of the 5th CSN Greece ICT […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "619034139dc5",
+   "title": "Meet the Supporters of the 5th CSN Greece ICT Conference – The Propeller Club",
+   "link": "https://cyprusshippingnews.com/2026/11/18/meet-the-supporters-of-the-5th-csn-greece-ict-conference-propeller-club/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-18",
+   "summary": "Cyprus Shipping News announces that the Propeller Club joins as Supporter of the 5th CSN Greece ICT Conference. The event will take place on 19th November […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "8f3b6ef2fc93",
+   "title": "Meet the Supporters of the 5th CSN Greece ICT Conference – Hellenic Chamber of Shipping",
+   "link": "https://cyprusshippingnews.com/2026/11/18/meet-the-supporters-of-the-5th-csn-greece-ict-conference-hellenic-chamber-of-shipping/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-18",
+   "summary": "Cyprus Shipping News is pleased to announce that Hellenic Chamber of Shipping has joined as a supporter of the 5th […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "f14b82d6d991",
+   "title": "Meet the Supporters of the 5th CSN Greece ICT Conference – HELMEPA",
+   "link": "https://cyprusshippingnews.com/2026/11/18/meet-the-supporters-of-the-5th-csn-greece-ict-conference-helmepa/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-18",
+   "summary": "Cyprus Shipping News announces that HELMEPA joins as supporter of the 5th CSN Greece ICT Conference. The event will take place on 19th November 2026 […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "b29fa4ff4b52",
+   "title": "Meet the Supporters of the 5th CSN Greece ICT Conference – WIMA",
+   "link": "https://cyprusshippingnews.com/2026/11/18/meet-the-supporters-of-the-5th-csn-greece-ict-conference-wima/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-18",
+   "summary": "Cyprus Shipping News announces that WIMA joins as supporter of the 5th CSN Greece ICT Conference. The event will take place on 19th November 2026 […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
   {
    "id": "6b34da29cc99",
    "title": "What’s holding up new homes in Cyprus? Developers take the permit queue to the President",
@@ -2312,7 +2424,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Shipping News",
    "ok": true,
-   "count": 7
+   "count": 6
   }
  ]
 };
