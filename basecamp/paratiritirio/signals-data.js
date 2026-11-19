@@ -1,8 +1,52 @@
 /* Written by tools/update_signals.py once a day. Don't edit by hand: it will be overwritten. */
 window.PARATIRITIRIO = window.PARATIRITIRIO || {};
 PARATIRITIRIO.signals = {
- "updated": "2026-11-18T15:46Z",
+ "updated": "2026-11-19T15:52Z",
  "items": [
+  {
+   "id": "b377581405e8",
+   "title": "EAC insists battery storage is moving forward",
+   "link": "https://cyprus-mail.com/2026/11/19/eac-insists-battery-storage-is-moving-forward",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: energy",
+   "date": "2026-11-19",
+   "summary": "The Electricity Authority of Cyprus (EAC) is pressing ahead with battery storage projects and the rollout of smart meters, as its new leadership seeks to improve the reliability of electricity supply and, ultimately…",
+   "sectors": [
+    "energy"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "ec3cdfcf78eb",
+   "title": "Greek energy firm keeps door open to potential Cyprus gas exploration partnership",
+   "link": "https://cyprus-mail.com/2026/11/19/helleniq-energy-keeps-door-open-to-potential-cyprus-gas-exploration-partnership",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: energy",
+   "date": "2026-11-19",
+   "summary": "HELLENiQ ENERGY has not ruled out participating in Cyprus’ offshore natural gas exploration programme through a partnership with another energy company, although the Greek group is currently prioritising the development…",
+   "sectors": [
+    "energy"
+   ],
+   "districts": [
+    "offshore"
+   ],
+   "entries": []
+  },
+  {
+   "id": "fdc87d52c11f",
+   "title": "Could Cyprus tourism benefit from proposed UK-EU youth deal?",
+   "link": "https://cyprus-mail.com/2026/11/19/could-cyprus-tourism-benefit-from-proposed-uk-eu-youth-deal",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-19",
+   "summary": "A proposed youth mobility agreement between the United Kingdom and European Union has the support of 75 per cent of British adults, according to new research commissioned by travel industry association ABTA, as…",
+   "sectors": [
+    "tourism"
+   ],
+   "districts": [],
+   "entries": []
+  },
   {
    "id": "c0fa68c37616",
    "title": "Cyprus builders are paying more again. What’s gone up most?",
@@ -114,6 +158,22 @@ PARATIRITIRIO.signals = {
    ],
    "districts": [],
    "entries": []
+  },
+  {
+   "id": "ba3ced609f2f",
+   "title": "Interconnector ‘progressing smoothly, without hindrance’, Mitsotakis says",
+   "link": "https://cyprus-mail.com/2026/11/18/interconnector-progressing-smoothly-without-hindrance-mitsotakis-says",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: energy",
+   "date": "2026-11-18",
+   "summary": "The Great Sea Interconnector project, which, if completed, will link the energy grids of Cyprus, Greece, and Israel, is “progressing smoothly, without hindrance, and in accordance with the original plan”, Greek Prime…",
+   "sectors": [
+    "energy"
+   ],
+   "districts": [],
+   "entries": [
+    "great-sea-interconnector"
+   ]
   },
   {
    "id": "6b34da29cc99",
@@ -2384,12 +2444,12 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Mail: energy",
    "ok": true,
-   "count": 10
+   "count": 12
   },
   {
    "name": "Cyprus Mail: tourism",
    "ok": true,
-   "count": 15
+   "count": 14
   },
   {
    "name": "Cyprus Mail: banking and finance",
@@ -2419,12 +2479,12 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Profile",
    "ok": true,
-   "count": 4
+   "count": 1
   },
   {
    "name": "Cyprus Shipping News",
    "ok": true,
-   "count": 6
+   "count": 0
   }
  ]
 };
