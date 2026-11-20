@@ -1,6 +1,6 @@
 /* Written by tools/update_feed.py once a day. Don't edit by hand: it will be overwritten. */
 window.AKADIMIA_FEED = {
- "updated": "2026-11-19T15:55Z",
+ "updated": "2026-11-20T15:37Z",
  "items": [
   {
    "id": "4e82b4cc0edf",
@@ -825,6 +825,20 @@ window.AKADIMIA_FEED = {
    ]
   },
   {
+   "id": "6a059eb0584b",
+   "title": "Renewable energy investment strategies of national oil companies in Latin America: rationales under divergent macroeconomic and regulatory contexts",
+   "link": "https://doi.org/10.1088/2515-7620/aebb87",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-11-01",
+   "summary": "Environmental Research Communications · Erika Baquero Jimenez, Roberto Cardinale, Khuzama Wardeh",
+   "kind": "research",
+   "topics": [
+    "energy-climate",
+    "finance-markets"
+   ]
+  },
+  {
    "id": "0da3b420a612",
    "title": "Behaviour, political inaction and the adaptation implementation gap: unlocking flood and drought preparedness in public finance through a beta application of the Multi-Actor Behaviour Journey methodology",
    "link": "https://www.lse.ac.uk/granthaminstitute/publication/behaviour-political-inaction-and-the-adaptation-implementation-gap-unlocking-flood-and-drought-preparedness-in-public-finance-through-a-beta-application-of-the-multi-actor-behaviour-journey-methodol/",
@@ -911,20 +925,6 @@ window.AKADIMIA_FEED = {
    "school": "ucl",
    "date": "2026-10-29",
    "summary": "Communications Earth & Environment · Ajay Gambhir, Erica Thompson, Luke Kemp et al.",
-   "kind": "research",
-   "topics": [
-    "energy-climate",
-    "finance-markets"
-   ]
-  },
-  {
-   "id": "6a059eb0584b",
-   "title": "Renewable energy investment strategies of National Oil Companies in Latin America: Rationales under divergent macroeconomic and regulatory contexts",
-   "link": "https://doi.org/10.1088/2515-7620/aebb87",
-   "source": "UCL research (via OpenAlex)",
-   "school": "ucl",
-   "date": "2026-10-29",
-   "summary": "Environmental Research Communications · Erika Baquero Jimenez, Roberto Cardinale, Khuzama Wardeh",
    "kind": "research",
    "topics": [
     "energy-climate",
@@ -1110,7 +1110,7 @@ window.AKADIMIA_FEED = {
    "link": "https://doi.org/10.1515/ev-2026-0056",
    "source": "UCL research (via OpenAlex)",
    "school": "ucl",
-   "date": "2026-10-24",
+   "date": "2026-10-26",
    "summary": "The Economists Voice · Paul DE GRAUWE, Yuemei Ji",
    "kind": "research",
    "topics": [
@@ -1394,6 +1394,20 @@ window.AKADIMIA_FEED = {
    "kind": "research",
    "topics": [
     "finance-markets"
+   ]
+  },
+  {
+   "id": "c9b98a024f1d",
+   "title": "Will China Avoid Japanification? An Empirical Analysis of China’s Total Factor Productivity Growth Determinants at the National and Provincial Level",
+   "link": "https://doi.org/10.14324/111.444.2755-0877.2240",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-10-12",
+   "summary": "UCL Journal of Economics · Javier Torre de Silva",
+   "kind": "research",
+   "topics": [
+    "finance-markets",
+    "development-inequality"
    ]
   },
   {
@@ -1687,20 +1701,6 @@ window.AKADIMIA_FEED = {
    "topics": [
     "energy-climate",
     "finance-markets"
-   ]
-  },
-  {
-   "id": "c9b98a024f1d",
-   "title": "Will China Avoid Japanification? An Empirical Analysis of China’s Total Factor Productivity Growth Determinants at the National and Provincial Level",
-   "link": "https://doi.org/10.14324/111.444.2755-0877.2240",
-   "source": "UCL research (via OpenAlex)",
-   "school": "ucl",
-   "date": "2026-09-27",
-   "summary": "UCL Journal of Economics · Javier Torre de Silva",
-   "kind": "research",
-   "topics": [
-    "finance-markets",
-    "development-inequality"
    ]
   },
   {
@@ -2323,7 +2323,7 @@ window.AKADIMIA_FEED = {
     "link": "https://doi.org/10.1162/asep.a.996",
     "source": "Michael Grubb",
     "school": "ucl",
-    "date": "2026-06-05",
+    "date": "2026-07-02",
     "summary": "Asian Economic Papers · Guy S. Liu, Michael J. Grubb, Jinke Li",
     "kind": "research",
     "topics": [
@@ -2405,7 +2405,7 @@ window.AKADIMIA_FEED = {
     "link": "https://doi.org/10.1108/bfj-08-2025-1054",
     "source": "Silvia Ferrini",
     "school": "ucl",
-    "date": "2026-06-22",
+    "date": "2026-06-23",
     "summary": "British Food Journal · Ellen McHarg, Gaetano Grilli, Tiziana Luisetti et al.",
     "kind": "research",
     "topics": [
@@ -2585,7 +2585,7 @@ window.AKADIMIA_FEED = {
   {
    "name": "UCL research (via OpenAlex)",
    "ok": true,
-   "count": 25
+   "count": 26
   },
   {
    "name": "Skidmore research (via OpenAlex)",
