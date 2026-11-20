@@ -1,8 +1,38 @@
 /* Written by tools/update_signals.py once a day. Don't edit by hand: it will be overwritten. */
 window.PARATIRITIRIO = window.PARATIRITIRIO || {};
 PARATIRITIRIO.signals = {
- "updated": "2026-11-19T15:52Z",
+ "updated": "2026-11-20T15:34Z",
  "items": [
+  {
+   "id": "a04ee4dfbcf9",
+   "title": "Wellington raises Bank of Cyprus stake to 5 per cent",
+   "link": "https://cyprus-mail.com/2026/11/20/wellington-raises-bank-of-cyprus-stake-to-5-per-cent",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-20",
+   "summary": "Wellington Management Group LLP has increased its holding in Bank of Cyprus Holdings to 5 per cent, crossing the disclosure threshold on November 19, 2026, according to a regulatory notification submitted to the company…",
+   "sectors": [
+    "finance"
+   ],
+   "districts": [],
+   "entries": [
+    "bank-of-cyprus"
+   ]
+  },
+  {
+   "id": "ad8d40da9cd8",
+   "title": "Alarm raised after Turkish Cypriot banks’ transfers curtailed",
+   "link": "https://cyprus-mail.com/2026/11/20/alarm-raised-after-turkish-cypriot-banks-transfers-curtailed",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-20",
+   "summary": "Concerns have been raised in recent days after it emerged that Turkish Cypriot banks’ ability to conduct transfers in euros and pounds sterling has been curtailed, with political leaders calling for action to protect…",
+   "sectors": [
+    "finance"
+   ],
+   "districts": [],
+   "entries": []
+  },
   {
    "id": "b377581405e8",
    "title": "EAC insists battery storage is moving forward",
@@ -2444,7 +2474,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Mail: energy",
    "ok": true,
-   "count": 12
+   "count": 11
   },
   {
    "name": "Cyprus Mail: tourism",
@@ -2454,7 +2484,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Mail: banking and finance",
    "ok": true,
-   "count": 11
+   "count": 9
   },
   {
    "name": "Invest Cyprus",
@@ -2479,7 +2509,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Profile",
    "ok": true,
-   "count": 1
+   "count": 0
   },
   {
    "name": "Cyprus Shipping News",
