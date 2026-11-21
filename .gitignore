@@ -6,3 +6,8 @@ inspiration/
 
 # Local reference tile for Frontier (not published)
 basecamp/frontier/styletile.html
+
+# Private tool: readable source, secrets, build tools (never commit)
+.env
+_private/
+node_modules/

@@ -1,0 +1,11 @@
+{
+  "name": "field-notes",
+  "private": true,
+  "description": "Field Notes. Only used for the one encrypted tool; the rest of the site has no build step.",
+  "scripts": {
+    "encrypt-terry": "node _private/terry-look-here/build.mjs"
+  },
+  "devDependencies": {
+    "staticrypt": "^3.5.4"
+  }
+}

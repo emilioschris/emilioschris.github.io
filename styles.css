@@ -816,8 +816,30 @@
   margin: 0 auto;
   padding: 40px var(--gutter) 8px;
 }
+.daily-head { display: flex; align-items: baseline; margin-bottom: 14px; }
+/* The full stop after "Daily tools": a hidden way in (no label on purpose) */
+.daily-dot {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin: -10px 0 -10px -9px;
+  align-self: center;
+  border-radius: 50%;
+}
+.daily-dot::before {
+  content: "";
+  position: absolute;
+  left: 9px;
+  bottom: 8px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--terracotta);
+}
+.daily-dot:focus-visible { outline: 2px solid var(--terracotta); outline-offset: 0; }
 .daily-title {
-  margin-bottom: 14px;
+  margin-bottom: 0;
   font: 500 11px/1 var(--font-mono);
   letter-spacing: 0.12em;
   text-transform: uppercase;
