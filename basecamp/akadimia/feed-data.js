@@ -1,7 +1,20 @@
 /* Written by tools/update_feed.py once a day. Don't edit by hand: it will be overwritten. */
 window.AKADIMIA_FEED = {
- "updated": "2026-11-20T15:37Z",
+ "updated": "2026-11-21T14:48Z",
  "items": [
+  {
+   "id": "3645502b5787",
+   "title": "Healthcare real estate and urban infrastructure: between public good and financial asset",
+   "link": "https://doi.org/10.1177/00420980261497185",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-11-20",
+   "summary": "Urban Studies · Zhenyi Huang, Sotiris Tsolacos",
+   "kind": "research",
+   "topics": [
+    "finance-markets"
+   ]
+  },
   {
    "id": "4e82b4cc0edf",
    "title": "COP31 declaration dropping language for tackling misinformation a threat to democratic processes",
@@ -339,6 +352,19 @@ window.AKADIMIA_FEED = {
    ]
   },
   {
+   "id": "b9b6646ad95f",
+   "title": "Labor Market Tightness and the Reversal of Inequality Trends in Germany",
+   "link": "https://doi.org/10.1093/qje/qjag057",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-11-11",
+   "summary": "The Quarterly Journal of Economics · Christian Dustmann, Martin Friedrich, Carl Gergs et al.",
+   "kind": "research",
+   "topics": [
+    "development-inequality"
+   ]
+  },
+  {
    "id": "e01a30f2facb",
    "title": "Analysis: Fossil-fuel CO2 emissions set to dip in 2026 as Iran conflict hits oil use",
    "link": "https://www.carbonbrief.org/analysis-fossil-fuel-co2-emissions-set-to-dip-in-2026-as-iran-conflict-hits-oil-use",
@@ -427,19 +453,6 @@ window.AKADIMIA_FEED = {
    "kind": "research",
    "topics": [
     "finance-markets"
-   ]
-  },
-  {
-   "id": "b9b6646ad95f",
-   "title": "Labor Market Tightness and the Reversal of Inequality Trends in Germany",
-   "link": "https://doi.org/10.1093/qje/qjag057",
-   "source": "UCL research (via OpenAlex)",
-   "school": "ucl",
-   "date": "2026-11-10",
-   "summary": "The Quarterly Journal of Economics · Christian Dustmann, Martin Friedrich, Carl Gergs et al.",
-   "kind": "research",
-   "topics": [
-    "development-inequality"
    ]
   },
   {
@@ -2585,7 +2598,7 @@ window.AKADIMIA_FEED = {
   {
    "name": "UCL research (via OpenAlex)",
    "ok": true,
-   "count": 26
+   "count": 27
   },
   {
    "name": "Skidmore research (via OpenAlex)",
