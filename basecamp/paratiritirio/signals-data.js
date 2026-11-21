@@ -1,8 +1,37 @@
 /* Written by tools/update_signals.py once a day. Don't edit by hand: it will be overwritten. */
 window.PARATIRITIRIO = window.PARATIRITIRIO || {};
 PARATIRITIRIO.signals = {
- "updated": "2026-11-20T15:34Z",
+ "updated": "2026-11-21T14:45Z",
  "items": [
+  {
+   "id": "fc699b068db2",
+   "title": "Reselling property in Cyprus? The new 18-month VAT rule you need to know",
+   "link": "https://cyprus-mail.com/2026/11/21/reselling-property-in-cyprus-the-new-18-month-vat-rule-you-need-to-know",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: property",
+   "date": "2026-11-21",
+   "summary": "By Evi Cherouvim The VAT treatment of immovable property in Cyprus is governed by the Value Added Tax Law 95(I)/2000, as amended, and the relevant provisions of EU VAT Directive 2006/112/EC. Under the traditional VAT…",
+   "sectors": [
+    "real-estate",
+    "finance"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "9841c7a280f3",
+   "title": "Cyprus Christmas villages aim to boost rural economies and winter tourism",
+   "link": "https://cyprus-mail.com/2026/11/21/cyprus-christmas-villages-aim-to-boost-rural-economies-and-winter-tourism",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-21",
+   "summary": "Cyprus’ nine Christmas villages will open to visitors today, with government officials highlighting their role in supporting rural communities, strengthening local economies and extending the island’s tourism season…",
+   "sectors": [
+    "tourism"
+   ],
+   "districts": [],
+   "entries": []
+  },
   {
    "id": "a04ee4dfbcf9",
    "title": "Wellington raises Bank of Cyprus stake to 5 per cent",
@@ -32,6 +61,23 @@ PARATIRITIRIO.signals = {
    ],
    "districts": [],
    "entries": []
+  },
+  {
+   "id": "3863cc660cfc",
+   "title": "Eurobank promotes digital access to loans and banking services",
+   "link": "https://cyprus-mail.com/2026/11/20/eurobank-promotes-digital-access-to-loans-and-banking-services",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-20",
+   "summary": "Eurobank is promoting a range of lending products and banking services that customers can access through its Eurobank Cyprus mobile application, allowing them to apply for financing and manage their accounts without…",
+   "sectors": [
+    "tech",
+    "finance"
+   ],
+   "districts": [],
+   "entries": [
+    "eurobank-hellenic"
+   ]
   },
   {
    "id": "b377581405e8",
@@ -2479,12 +2525,12 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Mail: tourism",
    "ok": true,
-   "count": 14
+   "count": 15
   },
   {
    "name": "Cyprus Mail: banking and finance",
    "ok": true,
-   "count": 9
+   "count": 10
   },
   {
    "name": "Invest Cyprus",
