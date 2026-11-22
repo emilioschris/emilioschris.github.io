@@ -1,8 +1,37 @@
 /* Written by tools/update_signals.py once a day. Don't edit by hand: it will be overwritten. */
 window.PARATIRITIRIO = window.PARATIRITIRIO || {};
 PARATIRITIRIO.signals = {
- "updated": "2026-11-21T14:45Z",
+ "updated": "2026-11-22T14:41Z",
  "items": [
+  {
+   "id": "b7d35e24e646",
+   "title": "Cyprus’ gas plans face new questions as battery storage expands",
+   "link": "https://cyprus-mail.com/2026/11/22/cyprus-gas-plans-face-new-questions-as-battery-storage-expands",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: energy",
+   "date": "2026-11-22",
+   "summary": "Renewables and batteries could reduce Cyprus’ future gas demand Cyprus’ plans to introduce natural gas for electricity generation could face fresh economic challenges as the rapid expansion of renewable energy and…",
+   "sectors": [
+    "energy",
+    "finance"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "2e0e5fef9f2e",
+   "title": "Cyprus paying for years of inaction",
+   "link": "https://cyprus-mail.com/2026/11/22/cyprus-paying-for-years-of-inaction",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: energy",
+   "date": "2026-11-22",
+   "summary": "The outlook isn’t good: even in the most optimistic of scenarios, steep energy prices are set to persist for some time, keeping the cost of living high and chipping away at people’s standard of living. And the band-aids…",
+   "sectors": [
+    "energy"
+   ],
+   "districts": [],
+   "entries": []
+  },
   {
    "id": "fc699b068db2",
    "title": "Reselling property in Cyprus? The new 18-month VAT rule you need to know",
