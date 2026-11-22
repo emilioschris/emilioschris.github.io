@@ -1,7 +1,20 @@
 /* Written by tools/update_feed.py once a day. Don't edit by hand: it will be overwritten. */
 window.AKADIMIA_FEED = {
- "updated": "2026-11-21T14:48Z",
+ "updated": "2026-11-22T14:44Z",
  "items": [
+  {
+   "id": "65b8c434892b",
+   "title": "Public transport investments, firm relocations and spatial rebalancing of economic activity: Evidence from business registers in Great Britain",
+   "link": "https://doi.org/10.1016/j.retrec.2026.101871",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-11-21",
+   "summary": "Research in Transportation Economics · Jens Kandt, Iven Stead",
+   "kind": "research",
+   "topics": [
+    "finance-markets"
+   ]
+  },
   {
    "id": "3645502b5787",
    "title": "Healthcare real estate and urban infrastructure: between public good and financial asset",
@@ -2598,7 +2611,7 @@ window.AKADIMIA_FEED = {
   {
    "name": "UCL research (via OpenAlex)",
    "ok": true,
-   "count": 27
+   "count": 28
   },
   {
    "name": "Skidmore research (via OpenAlex)",
