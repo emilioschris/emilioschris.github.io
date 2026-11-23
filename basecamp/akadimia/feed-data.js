@@ -1,7 +1,33 @@
 /* Written by tools/update_feed.py once a day. Don't edit by hand: it will be overwritten. */
 window.AKADIMIA_FEED = {
- "updated": "2026-11-22T14:44Z",
+ "updated": "2026-11-23T18:29Z",
  "items": [
+  {
+   "id": "4567649cec90",
+   "title": "Beyond the Amazon: Latin America’s forgotten forest and the people protecting it",
+   "link": "https://blogs.lse.ac.uk/internationaldevelopment/2026/11/23/beyond-the-amazon-latin-americas-forgotten-forest-and-the-people-protecting-it/",
+   "source": "LSE International Development",
+   "school": "lse",
+   "date": "2026-11-23",
+   "summary": "Juano Chalbaud, founder of Monte Adentro, joined our International Development students to speak about their work in 34 rural Criollo and Indigenous millenary communities in Chaco Forest. MSc Development Management…",
+   "kind": "blog",
+   "topics": [
+    "development-inequality"
+   ]
+  },
+  {
+   "id": "9cf7dcf00ddd",
+   "title": "COP31: Key outcomes agreed at the UN climate talks in Antalya",
+   "link": "https://www.carbonbrief.org/cop31-key-outcomes-agreed-at-the-un-climate-talks-in-antalya",
+   "source": "Carbon Brief",
+   "school": null,
+   "date": "2026-11-23",
+   "summary": "The COP31 climate talks in Antalya, Turkey, have failed to reach agreement on a “pact” that lacked clear references to…",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
   {
    "id": "65b8c434892b",
    "title": "Public transport investments, firm relocations and spatial rebalancing of economic activity: Evidence from business registers in Great Britain",
@@ -25,6 +51,20 @@ window.AKADIMIA_FEED = {
    "summary": "Urban Studies · Zhenyi Huang, Sotiris Tsolacos",
    "kind": "research",
    "topics": [
+    "finance-markets"
+   ]
+  },
+  {
+   "id": "f3705c61d30f",
+   "title": "Tipping the frontier of climate and nature investment",
+   "link": "https://doi.org/10.1038/s43017-026-00862-3",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-11-20",
+   "summary": "Nature Reviews Earth & Environment · Nadia Ameli, Simone Cenci, Papa Orgen et al.",
+   "kind": "research",
+   "topics": [
+    "energy-climate",
     "finance-markets"
    ]
   },
@@ -61,7 +101,7 @@ window.AKADIMIA_FEED = {
    "source": "LSE International Development",
    "school": "lse",
    "date": "2026-11-19",
-   "summary": "Guest author, John Groak argues that international development funding is not charity, but must balance development objectives, political priorities, accountability and financial risk. The Renaissance Center at the…",
+   "summary": "Guest author, John Groarke argues that international development funding is not charity, but must balance development objectives, political priorities, accountability and financial risk. The Renaissance Center at the…",
    "kind": "blog",
    "topics": [
     "finance-markets",
@@ -226,6 +266,20 @@ window.AKADIMIA_FEED = {
    "kind": "research",
    "topics": [
     "energy-climate"
+   ]
+  },
+  {
+   "id": "dc432f623c6e",
+   "title": "Electricity infrastructure and artificial intelligence innovation: Evidence from China's ultra-high-voltage grid expansion",
+   "link": "https://doi.org/10.1016/j.iref.2026.106072",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-11-16",
+   "summary": "International Review of Economics & Finance · Xinmiao Liu, Yew Yoong Ding, Jiachen Wang et al.",
+   "kind": "research",
+   "topics": [
+    "energy-climate",
+    "development-inequality"
    ]
   },
   {
@@ -837,20 +891,6 @@ window.AKADIMIA_FEED = {
    ]
   },
   {
-   "id": "dc432f623c6e",
-   "title": "Electricity infrastructure and artificial intelligence innovation: Evidence from China’s ultra-high-voltage grid expansion",
-   "link": "https://doi.org/10.1016/j.iref.2026.106072",
-   "source": "UCL research (via OpenAlex)",
-   "school": "ucl",
-   "date": "2026-11-01",
-   "summary": "International Review of Economics & Finance · Xinmiao Liu, Yew Yoong Ding, Jiachen Wang et al.",
-   "kind": "research",
-   "topics": [
-    "energy-climate",
-    "development-inequality"
-   ]
-  },
-  {
    "id": "6a059eb0584b",
    "title": "Renewable energy investment strategies of national oil companies in Latin America: rationales under divergent macroeconomic and regulatory contexts",
    "link": "https://doi.org/10.1088/2515-7620/aebb87",
@@ -862,6 +902,20 @@ window.AKADIMIA_FEED = {
    "topics": [
     "energy-climate",
     "finance-markets"
+   ]
+  },
+  {
+   "id": "a27187a56006",
+   "title": "The carbon damage of services-led growth: Structure-aware baselines for the social cost of carbon",
+   "link": "https://doi.org/10.1016/j.eneco.2026.109718",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-11-01",
+   "summary": "Energy Economics · Marcell T. Kurbucz, Bo Pieter Johannes Andrée",
+   "kind": "research",
+   "topics": [
+    "energy-climate",
+    "development-inequality"
    ]
   },
   {
