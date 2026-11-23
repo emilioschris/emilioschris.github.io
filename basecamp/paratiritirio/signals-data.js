@@ -1,8 +1,179 @@
 /* Written by tools/update_signals.py once a day. Don't edit by hand: it will be overwritten. */
 window.PARATIRITIRIO = window.PARATIRITIRIO || {};
 PARATIRITIRIO.signals = {
- "updated": "2026-11-22T14:41Z",
+ "updated": "2026-11-23T18:23Z",
  "items": [
+  {
+   "id": "c7147bff8458",
+   "title": "East Tower: an iconic project for an exceptional living experience at Ayia Napa Marina",
+   "link": "https://cyprus-mail.com/2026/11/23/east-tower-an-iconic-project-for-an-exceptional-living-experience-at-ayia-napa-marina",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: property",
+   "date": "2026-11-23",
+   "summary": "Since its completion, the iconic East Tower at the heart of Ayia Napa Marina has become one of the area’s defining landmarks, recognised for its distinctive architecture and high-end approach to contemporary waterfront…",
+   "sectors": [
+    "real-estate"
+   ],
+   "districts": [
+    "famagusta"
+   ],
+   "entries": [
+    "ayia-napa-marina"
+   ]
+  },
+  {
+   "id": "41b73c61962e",
+   "title": "Cyprus unlocks Portuguese tourism market with new weekly Porto flights",
+   "link": "https://cyprus-mail.com/2026/11/23/cyprus-unlocks-portuguese-tourism-market-with-new-weekly-porto-flights",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-23",
+   "summary": "Cyprus will receive its first direct flights from Portugal from June 2027, with Portuguese tour operator Solférias adding the island to its summer programme through a new charter service connecting Porto with Larnaca…",
+   "sectors": [
+    "tourism"
+   ],
+   "districts": [
+    "larnaca"
+   ],
+   "entries": []
+  },
+  {
+   "id": "830192384ca6",
+   "title": "Sotira heritage trail aims to boost Cyprus tourism appeal",
+   "link": "https://cyprus-mail.com/2026/11/23/sotira-heritage-trail-aims-to-boost-cyprus-tourism-appeal",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-23",
+   "summary": "A new Byzantine heritage trail in Sotira aims to strengthen Cyprus’ religious tourism offering by combining historic churches and monuments with digital technology. Deputy Tourism Minister Kostas Koumis, who inaugurated…",
+   "sectors": [
+    "tourism",
+    "tech"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "c02841a1718e",
+   "title": "Cyprus hotel summit to focus on future of hospitality",
+   "link": "https://cyprus-mail.com/2026/11/23/cyprus-hotel-summit-to-focus-on-future-of-hospitality",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-23",
+   "summary": "The Cyprus Chamber of Commerce and Industry (Keve) has announced that the 47th Cyprus Hotel Summit & HoReCa Expo will take place on December 2, 2026, bringing together senior tourism officials and industry executives to…",
+   "sectors": [
+    "tourism"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "27b71e53eff0",
+   "title": "Cyprus-led research project uses AI to track Europe’s changing coastlines",
+   "link": "https://cyprus-mail.com/2026/11/23/cyprus-led-research-project-uses-ai-to-track-europes-changing-coastlines",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-23",
+   "summary": "As erosion and pollution threaten Europe’s coastal areas, researchers are combining satellite images, drone data and field surveys to help authorities understand coastal change and plan for the future. By Helen…",
+   "sectors": [
+    "tech"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "6e70b633754c",
+   "title": "US ratings agency KBRA to acquire Cyprus-based Capital Intelligence",
+   "link": "https://cyprus-mail.com/2026/11/23/us-ratings-agency-kbra-to-acquire-cyprus-based-capital-intelligence",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-23",
+   "summary": "US-based credit rating agency KBRA has agreed to acquire Limassol-headquartered Capital Intelligence Ratings (CI Ratings), in a deal that will expand its presence across the Middle East and North Africa (MENA) and bring…",
+   "sectors": [
+    "finance"
+   ],
+   "districts": [
+    "limassol"
+   ],
+   "entries": []
+  },
+  {
+   "id": "3fbf03ed3763",
+   "title": "CBC governor warns that cyberattacks threaten global financial stability",
+   "link": "https://cyprus-mail.com/2026/11/23/cbc-governor-warns-that-cyberattacks-threaten-global-financial-stability",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-23",
+   "summary": "AI-driven cyber threats put financial stability under pressure The growing frequency and sophistication of cyberattacks are becoming a significant threat to global financial stability, Central Bank of Cyprus (CBC)…",
+   "sectors": [
+    "tech",
+    "finance"
+   ],
+   "districts": [],
+   "entries": [
+    "bank-of-cyprus"
+   ]
+  },
+  {
+   "id": "1ad4e0661e6b",
+   "title": "Bank of Cyprus advances plans to turn former Orphanides site into new headquarters",
+   "link": "https://cyprus-mail.com/2026/11/23/bank-of-cyprus-advances-plans-to-turn-former-orphanides-site-into-new-headquarters",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-23",
+   "summary": "Contractors have reportedly begun inspecting the former Orphanides commercial centre in Strovolos as the Bank of Cyprus moves forward with plans to convert the property into a central administrative complex. According…",
+   "sectors": [
+    "real-estate",
+    "finance"
+   ],
+   "districts": [
+    "nicosia"
+   ],
+   "entries": [
+    "bank-of-cyprus"
+   ]
+  },
+  {
+   "id": "04d58f968aa1",
+   "title": "CySEC warns financial firms over reliance on Microsoft and cloud services",
+   "link": "https://cyprus-mail.com/2026/11/23/cysec-warns-financial-firms-over-reliance-on-microsoft-and-cloud-services",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-23",
+   "summary": "The Cyprus Securities and Exchange Commission (CySEC) has urged financial services firms to review their reliance on Microsoft and other technology providers following a recent disruption to Microsoft 365, warning that…",
+   "sectors": [
+    "tech"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "d8fa7a1c34ae",
+   "title": "Cyprus Shipping Chamber supports joint shipping industry statement ahead of IMO MEPC 85",
+   "link": "https://cyprusshippingnews.com/2026/11/23/cyprus-shipping-chamber-supports-joint-shipping-industry-statement-ahead-of-imo-mepc-85/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-23",
+   "summary": "The Cyprus Shipping Chamber (CSC) expresses its support to the joint statement issued by BIMCO, CLIA, IBIA, ICS, INTERCARGO, INTERFERRY, […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "c808e968ece5",
+   "title": "Redefining success at Sea: WISTA Cyprus and YoungShip Cyprus discuss the future of maritimecareers",
+   "link": "https://cyprusshippingnews.com/2026/11/23/redefining-success-at-sea-wista-cyprus-and-youngship-cyprus-discuss-the-future-of-maritimecareers/",
+   "source": "Cyprus Shipping News",
+   "feed": "Cyprus Shipping News",
+   "date": "2026-11-23",
+   "summary": "Bringing together maritime professionals at different career stages to discuss evolving expectations, career opportunities and the future of the industry. […]",
+   "sectors": [
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
   {
    "id": "b7d35e24e646",
    "title": "Cyprus’ gas plans face new questions as battery storage expands",
@@ -2544,17 +2715,17 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Mail: property",
    "ok": true,
-   "count": 19
+   "count": 17
   },
   {
    "name": "Cyprus Mail: energy",
    "ok": true,
-   "count": 11
+   "count": 10
   },
   {
    "name": "Cyprus Mail: tourism",
    "ok": true,
-   "count": 15
+   "count": 16
   },
   {
    "name": "Cyprus Mail: banking and finance",
@@ -2589,7 +2760,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Shipping News",
    "ok": true,
-   "count": 0
+   "count": 2
   }
  ]
 };
