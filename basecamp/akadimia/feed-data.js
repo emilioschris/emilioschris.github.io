@@ -1,7 +1,73 @@
 /* Written by tools/update_feed.py once a day. Don't edit by hand: it will be overwritten. */
 window.AKADIMIA_FEED = {
- "updated": "2026-11-23T18:29Z",
+ "updated": "2026-11-24T17:58Z",
  "items": [
+  {
+   "id": "42aeaf9f6f75",
+   "title": "Counting the ‘drops’: Brazil’s first climate liability case against an oil major",
+   "link": "https://www.lse.ac.uk/granthaminstitute/news/counting-the-drops-brazils-first-climate-liability-case-against-an-oil-major/",
+   "source": "Grantham Research Institute: news",
+   "school": "lse",
+   "date": "2026-11-24",
+   "summary": "Why the ‘drop in the ocean’ defence – that individual companies’ contributions to climate change are negligible – is losing force.",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "e6b5fc7eae16",
+   "title": "The AI transition must be designed to provide decent jobs",
+   "link": "https://blogs.lse.ac.uk/businessreview/2026/11/24/the-ai-transition-must-be-designed-to-provide-decent-jobs/",
+   "source": "LSE Business Review",
+   "school": "lse",
+   "date": "2026-11-24",
+   "summary": "The labour-market effects of AI are not simply something that happens to us. They are shaped by choices about institutions, rights, investment, skills and worker voice. Caroline Fredrickson of the International Labor…",
+   "kind": "blog",
+   "topics": [
+    "finance-markets"
+   ]
+  },
+  {
+   "id": "cad1bf8bb14a",
+   "title": "CB Live: Carbon Brief journalists discuss key COP31 outcomes",
+   "link": "https://www.carbonbrief.org/cb-live-carbon-brief-journalists-discuss-key-cop31-outcomes",
+   "source": "Carbon Brief",
+   "school": null,
+   "date": "2026-11-24",
+   "summary": "Following the close of COP31 in Antalya, Turkey, Carbon Brief’s journalists answered a range of questions in a CB Live…",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "7855a7b6de8f",
+   "title": "COP31: Key outcomes for food, forests, oceans and nature at the UN climate talks in Antalya",
+   "link": "https://www.carbonbrief.org/cop31-key-outcomes-for-food-forests-oceans-and-nature-at-the-un-climate-talks-in-antalya",
+   "source": "Carbon Brief",
+   "school": null,
+   "date": "2026-11-24",
+   "summary": "The COP31 climate talks in Antalya, Turkey, failed to agree on a “pact” that – despite making no clear reference…",
+   "kind": "news",
+   "topics": [
+    "energy-climate",
+    "food-agriculture"
+   ]
+  },
+  {
+   "id": "79075bc7d3bd",
+   "title": "Daniel E. Pinto appointed to the Bank of England’s Financial Policy Committee",
+   "link": "https://www.bankofengland.co.uk/news/2026/november/daniel-pinto-appointment-fpc",
+   "source": "Bank of England news",
+   "school": null,
+   "date": "2026-11-24",
+   "summary": "Daniel E. Pinto has been appointed as an external member of the Financial Policy Committee.",
+   "kind": "news",
+   "topics": [
+    "finance-markets"
+   ]
+  },
   {
    "id": "4567649cec90",
    "title": "Beyond the Amazon: Latin America’s forgotten forest and the people protecting it",
@@ -23,6 +89,19 @@ window.AKADIMIA_FEED = {
    "school": null,
    "date": "2026-11-23",
    "summary": "The COP31 climate talks in Antalya, Turkey, have failed to reach agreement on a “pact” that lacked clear references to…",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "92c9c612b259",
+   "title": "Cop31 failure will not stop move away from fossil fuels, climate analysts say",
+   "link": "https://www.lse.ac.uk/granthaminstitute/news/cop31-failure-will-not-stop-move-away-from-fossil-fuels-climate-analysts-say/",
+   "source": "Grantham Research Institute: news",
+   "school": "lse",
+   "date": "2026-11-23",
+   "summary": "The National argues that cuts in costs of renewables are generating 'unstoppable' momentum despite lack of agreement in Turkey. Bob Ward, Policy and Communications Director, is quoted in the piece.",
    "kind": "news",
    "topics": [
     "energy-climate"
@@ -2502,8 +2581,7 @@ window.AKADIMIA_FEED = {
     "summary": "Ecosystem Services · R. Kerry Turner, Valentina Di Gennaro, Alice Bartolini et al.",
     "kind": "research",
     "topics": [
-     "food-agriculture",
-     "development-inequality"
+     "food-agriculture"
     ]
    },
    {
@@ -2625,7 +2703,7 @@ window.AKADIMIA_FEED = {
   {
    "name": "Grantham Research Institute: news",
    "ok": true,
-   "count": 6
+   "count": 5
   },
   {
    "name": "Grantham Research Institute: publications",
@@ -2660,12 +2738,12 @@ window.AKADIMIA_FEED = {
   {
    "name": "Bank of England news",
    "ok": true,
-   "count": 5
+   "count": 6
   },
   {
    "name": "UCL research (via OpenAlex)",
    "ok": true,
-   "count": 28
+   "count": 27
   },
   {
    "name": "Skidmore research (via OpenAlex)",
