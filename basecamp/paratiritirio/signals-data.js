@@ -1,8 +1,86 @@
 /* Written by tools/update_signals.py once a day. Don't edit by hand: it will be overwritten. */
 window.PARATIRITIRIO = window.PARATIRITIRIO || {};
 PARATIRITIRIO.signals = {
- "updated": "2026-11-23T18:23Z",
+ "updated": "2026-11-24T17:54Z",
  "items": [
+  {
+   "id": "031a482c6bda",
+   "title": "A tourist is for life, not just for the summer, says Cyprus chief scientist",
+   "link": "https://cyprus-mail.com/2026/11/24/a-tourist-is-for-life-not-just-for-the-summer-says-cyprus-chief-scientist",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-24",
+   "summary": "Getting tourists to Cyprus is one thing. Getting them to spend more, explore beyond their hotels and return for another holiday is quite another. Artificial intelligence could help the island do all three, according to…",
+   "sectors": [
+    "tourism",
+    "tech"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "4e6df50f0050",
+   "title": "More than 18,000 hotels pursue compensation claim against Booking.com",
+   "link": "https://cyprus-mail.com/2026/11/24/more-than-18000-hotels-pursue-compensation-claim-against-booking-com",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-24",
+   "summary": "More than 18,100 European hotels are pursuing collective legal action against Booking.com over alleged competition breaches, with Cyprus’ hoteliers having been encouraged to join the claim through their national…",
+   "sectors": [
+    "tourism"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "3039d9fd4602",
+   "title": "Stek conference to examine future of tourism beyond 2030",
+   "link": "https://cyprus-mail.com/2026/11/24/stek-conference-to-examine-future-of-tourism-beyond-2030",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-24",
+   "summary": "The Association of Cyprus Tourist Enterprises (Stek) will hold its 2026 annual tourism conference in Nicosia later today, bringing together discussions on the challenges and opportunities facing the tourism industry as…",
+   "sectors": [
+    "tourism"
+   ],
+   "districts": [
+    "nicosia"
+   ],
+   "entries": []
+  },
+  {
+   "id": "9867d878c060",
+   "title": "S&P upgrades the Bank of Cyprus to BBB on stronger performance",
+   "link": "https://cyprus-mail.com/2026/11/24/sp-upgrades-the-bank-of-cyprus-to-bbb-on-stronger-performance",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-24",
+   "summary": "The Bank of Cyprus has received an upgrade to its credit ratings from S&P Global Ratings, which cited the lender’s improving asset quality, strong profitability and robust capital position, while maintaining a stable…",
+   "sectors": [
+    "finance"
+   ],
+   "districts": [],
+   "entries": [
+    "bank-of-cyprus"
+   ]
+  },
+  {
+   "id": "3c5eb60dbd9f",
+   "title": "Cyprus startup programme offers €20,000 seed capital and mentoring to new teams",
+   "link": "https://cyprus-mail.com/2026/11/24/cyprus-startup-programme-offers-e20000-seed-capital-and-mentoring-to-new-teams",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-24",
+   "summary": "The Bank of Cyprus’ IDEA Innovation Centre has opened applications for its 12th startup programme, offering selected teams €20,000 in seed funding and nine months of business support to help turn innovative ideas into…",
+   "sectors": [
+    "tech",
+    "finance"
+   ],
+   "districts": [],
+   "entries": [
+    "bank-of-cyprus"
+   ]
+  },
   {
    "id": "c7147bff8458",
    "title": "East Tower: an iconic project for an exceptional living experience at Ayia Napa Marina",
