@@ -1,7 +1,48 @@
 /* Written by tools/update_feed.py once a day. Don't edit by hand: it will be overwritten. */
 window.AKADIMIA_FEED = {
- "updated": "2026-11-24T17:58Z",
+ "updated": "2026-11-25T17:27Z",
  "items": [
+  {
+   "id": "585cf1a8532c",
+   "title": "Why Economic Growth And Energy Decarbonisation Can Go Hand-In-Hand",
+   "link": "https://www.lse.ac.uk/granthaminstitute/news/why-economic-growth-and-energy-decarbonisation-can-go-hand-in-hand/",
+   "source": "Grantham Research Institute: news",
+   "school": "lse",
+   "date": "2026-11-25",
+   "summary": "Forbes article argues that economic growth and the climate transition can work together. Aurelien Saussay is quouted in the piece.",
+   "kind": "news",
+   "topics": [
+    "energy-climate",
+    "development-inequality"
+   ]
+  },
+  {
+   "id": "b17537594c7b",
+   "title": "Ofgem increase: “The only way to protect ourselves from high gas prices is to accelerate the climate transition.”",
+   "link": "https://www.lse.ac.uk/granthaminstitute/news/ofgem-increase-the-only-way-to-protect-ourselves-from-high-gas-prices-is-to-accelerate-the-climate-transition/",
+   "source": "Grantham Research Institute: news",
+   "school": "lse",
+   "date": "2026-11-25",
+   "summary": "Bob Ward, Policy and Communications Director, responds to the announcement by Ofgem that the energy price cap will rise by 26%.",
+   "kind": "news",
+   "topics": [
+    "energy-climate"
+   ]
+  },
+  {
+   "id": "ec323e447ca2",
+   "title": "Regulators implement growth-friendly securitisation reforms",
+   "link": "https://www.bankofengland.co.uk/news/2026/november/regulators-implement-growth-friendly-securitisation-reforms",
+   "source": "Bank of England news",
+   "school": null,
+   "date": "2026-11-25",
+   "summary": "The Prudential Regulation Authority and Financial Conduct Authority have today published revised rules designed to support securitisation’s contribution to economic growth.",
+   "kind": "news",
+   "topics": [
+    "finance-markets",
+    "development-inequality"
+   ]
+  },
   {
    "id": "42aeaf9f6f75",
    "title": "Counting the ‘drops’: Brazil’s first climate liability case against an oil major",
@@ -2703,7 +2744,7 @@ window.AKADIMIA_FEED = {
   {
    "name": "Grantham Research Institute: news",
    "ok": true,
-   "count": 5
+   "count": 6
   },
   {
    "name": "Grantham Research Institute: publications",
@@ -2713,7 +2754,7 @@ window.AKADIMIA_FEED = {
   {
    "name": "LSE Business Review",
    "ok": true,
-   "count": 5
+   "count": 4
   },
   {
    "name": "LSE International Development",
@@ -2723,7 +2764,7 @@ window.AKADIMIA_FEED = {
   {
    "name": "Carbon Brief",
    "ok": true,
-   "count": 11
+   "count": 10
   },
   {
    "name": "Bank Underground (Bank of England staff blog)",
@@ -2738,7 +2779,7 @@ window.AKADIMIA_FEED = {
   {
    "name": "Bank of England news",
    "ok": true,
-   "count": 6
+   "count": 7
   },
   {
    "name": "UCL research (via OpenAlex)",
