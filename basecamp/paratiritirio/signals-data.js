@@ -1,8 +1,116 @@
 /* Written by tools/update_signals.py once a day. Don't edit by hand: it will be overwritten. */
 window.PARATIRITIRIO = window.PARATIRITIRIO || {};
 PARATIRITIRIO.signals = {
- "updated": "2026-11-24T17:54Z",
+ "updated": "2026-11-25T17:21Z",
  "items": [
+  {
+   "id": "c9d418c20ac8",
+   "title": "Cyprus takes housing crisis to EU talks as Ioannou seeks more support",
+   "link": "https://cyprus-mail.com/2026/11/25/cyprus-takes-housing-crisis-to-eu-talks-as-ioannou-seeks-more-support",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: property",
+   "date": "2026-11-25",
+   "summary": "Cyprus will seek greater EU support for affordable housing and faster construction, as Interior Minister Constantinos Ioannou joins European counterparts in Dublin on Wednesday and Thursday to discuss ways to increase…",
+   "sectors": [
+    "real-estate"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "bb1b928ecf81",
+   "title": "Eurobank pledges support for Cyprus’ energy transition",
+   "link": "https://cyprus-mail.com/2026/11/25/eurobank-pledges-support-for-cyprus-energy-transition",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-25",
+   "summary": "Eurobank has reaffirmed its commitment to financing projects supporting Cyprus’ energy transition and economic development, highlighting the importance of strategic infrastructure and regional partnerships at the 14th…",
+   "sectors": [
+    "energy",
+    "finance",
+    "infrastructure"
+   ],
+   "districts": [],
+   "entries": [
+    "eurobank-hellenic"
+   ]
+  },
+  {
+   "id": "eceb769bb7ad",
+   "title": "Paphos hotels lift winter capacity to 12,500 beds, call for airline incentives despite 150 weekly flights",
+   "link": "https://cyprus-mail.com/2026/11/25/paphos-hotels-lift-winter-capacity-to-12500-beds-call-for-airline-incentives-despite-150-weekly-flights",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-25",
+   "summary": "Paphos will have approximately 12,500 licensed hotel beds operating during the winter season from December 2026 to March 2027, an increase of 2,000 compared with last year, the Paphos regional tourism board (Etap) has…",
+   "sectors": [
+    "tourism"
+   ],
+   "districts": [
+    "paphos"
+   ],
+   "entries": []
+  },
+  {
+   "id": "d25a2dcc6da8",
+   "title": "Cyprus must diversify tourism to remain competitive beyond 2030",
+   "link": "https://cyprus-mail.com/2026/11/25/cyprus-must-diversify-tourism-to-remain-competitive-beyond-2030",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-25",
+   "summary": "Cyprus must diversify its tourism offering, invest in technology and improve visitor experiences if it is to remain competitive beyond 2030, according to Eurobank, highlighting the need to develop the island into a…",
+   "sectors": [
+    "tourism",
+    "tech"
+   ],
+   "districts": [],
+   "entries": [
+    "eurobank-hellenic"
+   ]
+  },
+  {
+   "id": "786eb80e092b",
+   "title": "EasyJet profits fall 96 per cent as Middle East war drives up fuel costs",
+   "link": "https://cyprus-mail.com/2026/11/25/easyjet-profits-fall-96-per-cent-as-middle-east-war-drives-up-fuel-costs",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-25",
+   "summary": "EasyJet, which operates flights connecting Cyprus with several European destinations, reported a 96 per cent collapse in annual pre-tax profit on Wednesday, as the Middle East conflict drove up fuel costs and weakened…",
+   "sectors": [
+    "tourism",
+    "finance"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "7eb0f70f4363",
+   "title": "Cyprus tourism set for decline in 2026 despite recovery from crisis, Koumis says",
+   "link": "https://cyprus-mail.com/2026/11/25/cyprus-tourism-set-for-decline-in-2026-despite-recovery-from-crisis-koumis-says",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-25",
+   "summary": "Cyprus is expected to end 2026 with a single-digit decline in tourist arrivals and revenue, although both are forecast to remain above 2024 levels, Deputy Tourism Minister Kostas Koumis said this week, describing this…",
+   "sectors": [
+    "tourism"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "6565d9bd7be1",
+   "title": "Cyprus Stock Exchange approves €50m treasury bill listing",
+   "link": "https://cyprus-mail.com/2026/11/25/cyprus-stock-exchange-approves-e50m-treasury-bill-listing",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-25",
+   "summary": "The Cyprus Stock Exchange (CSE) on Wednesday announced that it approved the listing of €50 million in 13-week government treasury bills issued by the Republic of Cyprus, with trading scheduled to begin on November 27…",
+   "sectors": [
+    "finance"
+   ],
+   "districts": [],
+   "entries": []
+  },
   {
    "id": "031a482c6bda",
    "title": "A tourist is for life, not just for the summer, says Cyprus chief scientist",
@@ -356,6 +464,22 @@ PARATIRITIRIO.signals = {
    "entries": [
     "eurobank-hellenic"
    ]
+  },
+  {
+   "id": "f98939b57f85",
+   "title": "GT Chords win Gold at the Cyprus Responsible Business Awards",
+   "link": "https://cyprusprofile.com/news/gt-chords-win-gold-cyprus-responsible-business-awards",
+   "source": "Cyprus Profile",
+   "feed": "Cyprus Profile",
+   "date": "2026-11-20",
+   "summary": "Grant Thornton Cyprus has won the Gold award in the Volunteering Programme category at the Cyprus Responsible Business Awards 2025, held on 11 November 2026 at the 360 Tower in Nicosia. The award recognises GT Chords…",
+   "sectors": [
+    "real-estate"
+   ],
+   "districts": [
+    "nicosia"
+   ],
+   "entries": []
   },
   {
    "id": "b377581405e8",
@@ -2803,12 +2927,12 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Mail: tourism",
    "ok": true,
-   "count": 16
+   "count": 18
   },
   {
    "name": "Cyprus Mail: banking and finance",
    "ok": true,
-   "count": 10
+   "count": 11
   },
   {
    "name": "Invest Cyprus",
@@ -2833,12 +2957,12 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Profile",
    "ok": true,
-   "count": 0
+   "count": 1
   },
   {
    "name": "Cyprus Shipping News",
    "ok": true,
-   "count": 2
+   "count": 0
   }
  ]
 };
