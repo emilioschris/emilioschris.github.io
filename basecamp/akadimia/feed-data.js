@@ -1,7 +1,47 @@
 /* Written by tools/update_feed.py once a day. Don't edit by hand: it will be overwritten. */
 window.AKADIMIA_FEED = {
- "updated": "2026-11-25T17:27Z",
+ "updated": "2026-11-26T17:07Z",
  "items": [
+  {
+   "id": "8e265c0cb10f",
+   "title": "Is Burnham changing direction on climate policy?",
+   "link": "https://www.lse.ac.uk/granthaminstitute/news/is-burnham-changing-direction-on-climate-policy/",
+   "source": "Grantham Research Institute: news",
+   "school": "lse",
+   "date": "2026-11-26",
+   "summary": "Edward De Quay and Leo Mercer argue that if the UK Government weakens climate policies already in place, it will risk deterring investors and increase the cost of financing the UK’s net zero economy.",
+   "kind": "news",
+   "topics": [
+    "energy-climate",
+    "finance-markets"
+   ]
+  },
+  {
+   "id": "9eeda9767f5b",
+   "title": "Opportunities and challenges for mainstreaming just transition in bank transition plans: a proposed assessment framework and its application to 10 banks’ transition plans",
+   "link": "https://www.lse.ac.uk/granthaminstitute/publication/opportunities-and-challenges-for-mainstreaming-just-transition-in-bank-transition-plans-a-proposed-assessment-framework-and-its-application-to-10-banks-transition-plans/",
+   "source": "Grantham Research Institute: publications",
+   "school": "lse",
+   "date": "2026-11-26",
+   "summary": "This report from the Just Transition Finance Lab examines how just transition considerations are reflected in bank transition plans and related disclosures, and proposes a framework for assessing the risks and…",
+   "kind": "research",
+   "topics": [
+    "finance-markets"
+   ]
+  },
+  {
+   "id": "e1ba026f2618",
+   "title": "Beyond banks: what non-banks do (and don’t do) to monetary policy",
+   "link": "https://bankunderground.co.uk/2026/11/26/beyond-banks-what-non-banks-do-and-dont-do-to-monetary-policy/",
+   "source": "Bank Underground (Bank of England staff blog)",
+   "school": null,
+   "date": "2026-11-26",
+   "summary": "Nicolò Bandera, Kristina Bluwstein, Michael Kumhof, Mauricio Salgado-Moreno and Jacob Stevens Monetary policy has traditionally operated through a financial system dominated by banks. But that system is evolving, as…",
+   "kind": "blog",
+   "topics": [
+    "finance-markets"
+   ]
+  },
   {
    "id": "585cf1a8532c",
    "title": "Why Economic Growth And Energy Decarbonisation Can Go Hand-In-Hand",
@@ -41,6 +81,19 @@ window.AKADIMIA_FEED = {
    "topics": [
     "finance-markets",
     "development-inequality"
+   ]
+  },
+  {
+   "id": "789093bfe279",
+   "title": "Market Structure and the Erosion of Informed Trade: A Grossman–Stiglitz Perspective",
+   "link": "https://doi.org/10.3905/jpm.2026.096",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-11-25",
+   "summary": "The Journal of Portfolio Management · Eugene Nivorozhkin",
+   "kind": "research",
+   "topics": [
+    "finance-markets"
    ]
   },
   {
@@ -1297,7 +1350,7 @@ window.AKADIMIA_FEED = {
    "source": "UCL research (via OpenAlex)",
    "school": "ucl",
    "date": "2026-10-26",
-   "summary": "ANU Open Research (Australian National University) · Nirash Paija, Raja Timilsina, Rabindra Nepal et al.",
+   "summary": "ANU Open Research (Australian National University) · Nirash Paija, Raja Rajendra Timilsina, Rabindra Nepal et al.",
    "kind": "research",
    "topics": [
     "energy-climate",
@@ -1364,7 +1417,7 @@ window.AKADIMIA_FEED = {
    "source": "UCL research (via OpenAlex)",
    "school": "ucl",
    "date": "2026-10-21",
-   "summary": "Energy Sustainable Development/Energy for sustainable development · Alex Badgett, Tara Hosseini, Thomas Roos et al.",
+   "summary": "Energy Sustainable Development/Energy for sustainable development · Alex Badgett, Tara Hosseini, Thomas H. Roos et al.",
    "kind": "research",
    "topics": [
     "energy-climate",
