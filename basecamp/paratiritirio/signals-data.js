@@ -1,8 +1,143 @@
 /* Written by tools/update_signals.py once a day. Don't edit by hand: it will be overwritten. */
 window.PARATIRITIRIO = window.PARATIRITIRIO || {};
 PARATIRITIRIO.signals = {
- "updated": "2026-11-25T17:21Z",
+ "updated": "2026-11-26T17:01Z",
  "items": [
+  {
+   "id": "ec99bc1b35f0",
+   "title": "Cyprus tops EU for low housing costs—but renters tell a very different story",
+   "link": "https://cyprus-mail.com/2026/11/26/cyprus-tops-eu-for-low-housing-costs-but-renters-tell-a-very-different-story",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: property",
+   "date": "2026-11-26",
+   "summary": "Cyprus households spent the smallest proportion of their disposable income on housing across the European Union in 2025, at 10.9 per cent, although the figure does not necessarily reflect the affordability pressures…",
+   "sectors": [
+    "real-estate"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "27e8d9a31cf6",
+   "title": "What €3.38bn in building permits tells us about the future of housing in Cyprus",
+   "link": "https://cyprus-mail.com/2026/11/26/what-e3-38bn-in-building-permits-tells-us-about-the-future-of-housing-in-cyprus",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: property",
+   "date": "2026-11-26",
+   "summary": "Cyprus recorded a 13.8 per cent decline in building permits in August 2026, although construction activity remained considerably stronger over the first eight months of the year, with the value of authorised projects…",
+   "sectors": [
+    "real-estate"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "2b3ed0c6a412",
+   "title": "Cyprus property sales reach highest October level since 2007",
+   "link": "https://cyprus-mail.com/2026/11/26/cyprus-property-sales-reach-highest-october-level-since-2007",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: property",
+   "date": "2026-11-26",
+   "summary": "Cyprus recorded 1,772 property sale contracts in October 2026, an 8.2 per cent annual increase and the busiest October since 2007, according to figures from the Department of Lands and Surveys (DLS), with the market…",
+   "sectors": [
+    "real-estate"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "255657e16713",
+   "title": "Annita warns Cyprus risks electricity shortages within three years",
+   "link": "https://cyprus-mail.com/2026/11/26/annita-warns-cyprus-risks-electricity-shortages-within-three-years",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: energy",
+   "date": "2026-11-26",
+   "summary": "Disy leader Annita Demetriou warned that Cyprus risks being left without electricity within three years, criticising the government over shortcomings, omissions and inefficiency in its handling of the country’s energy…",
+   "sectors": [
+    "energy"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "5c82135c9fb6",
+   "title": "Paphos looks to smarter travel and better services in EU tourism project",
+   "link": "https://cyprus-mail.com/2026/11/26/paphos-looks-to-smarter-travel-and-better-services-in-eu-tourism-project",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-26",
+   "summary": "Making it easier for tourists to get around, improving access to attractions and developing services that benefit residents as well as visitors are among the priorities being examined by Paphos tourism officials through…",
+   "sectors": [
+    "tourism"
+   ],
+   "districts": [
+    "paphos"
+   ],
+   "entries": []
+  },
+  {
+   "id": "0cb3c99fbaad",
+   "title": "Cyprus tourism looks beyond 2030 as AI changes how holidays are booked",
+   "link": "https://cyprus-mail.com/2026/11/26/cyprus-tourism-looks-beyond-2030-as-ai-changes-how-holidays-are-booked",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-26",
+   "summary": "For Cyprus’ tourism industry, attracting the holidaymaker of 2030 will involve more than sunshine, beaches and a comfortable hotel room. How travellers discover destinations, choose where to stay and decide what to do…",
+   "sectors": [
+    "tourism",
+    "tech"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "a335fde57e87",
+   "title": "Cyprus bank deposits rise to €60.6 billion",
+   "link": "https://cyprus-mail.com/2026/11/26/cyprus-bank-deposits-rise-to-e60-6-billion",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-26",
+   "summary": "Bank deposits in Cyprus increased by €373.4 million in October 2026, while total loans recorded a net decline of €15.5 million, according to figures released by the Central Bank of Cyprus (CBC) on Thursday. The CBC’s…",
+   "sectors": [
+    "finance"
+   ],
+   "districts": [],
+   "entries": [
+    "bank-of-cyprus"
+   ]
+  },
+  {
+   "id": "abe440b88494",
+   "title": "National Bank of Greece expands Cyprus presence with new Larnaca branch",
+   "link": "https://cyprus-mail.com/2026/11/26/national-bank-of-greece-expands-cyprus-presence-with-new-larnaca-branch",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-26",
+   "summary": "The National Bank of Greece (Cyprus) officially opened a new branch in Larnaca this week, strengthening its presence in a city it sees as having significant business and investment potential. The branch, located at 23…",
+   "sectors": [
+    "finance"
+   ],
+   "districts": [
+    "larnaca"
+   ],
+   "entries": []
+  },
+  {
+   "id": "eaa2c367f2bb",
+   "title": "Restructured loans reach €700m as Cyprus NPL ratio stays flat",
+   "link": "https://cyprus-mail.com/2026/11/26/restructured-loans-reach-e700m-as-cyprus-npl-ratio-stays-flat",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-26",
+   "summary": "The non-performing loan (NPL) ratio of Cyprus’ banking sector remained unchanged at 1.5 per cent at the end of August 2026, according to updated figures published by the Central Bank of Cyprus (CBC). The ratio was the…",
+   "sectors": [
+    "finance"
+   ],
+   "districts": [],
+   "entries": [
+    "bank-of-cyprus"
+   ]
+  },
   {
    "id": "c9d418c20ac8",
    "title": "Cyprus takes housing crisis to EU talks as Ioannou seeks more support",
@@ -2922,12 +3057,12 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Mail: energy",
    "ok": true,
-   "count": 10
+   "count": 11
   },
   {
    "name": "Cyprus Mail: tourism",
    "ok": true,
-   "count": 18
+   "count": 19
   },
   {
    "name": "Cyprus Mail: banking and finance",
