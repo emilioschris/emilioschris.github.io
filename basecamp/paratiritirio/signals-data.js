@@ -1,8 +1,118 @@
 /* Written by tools/update_signals.py once a day. Don't edit by hand: it will be overwritten. */
 window.PARATIRITIRIO = window.PARATIRITIRIO || {};
 PARATIRITIRIO.signals = {
- "updated": "2026-11-26T17:01Z",
+ "updated": "2026-11-27T16:46Z",
  "items": [
+  {
+   "id": "463b4e98d342",
+   "title": "Cyprus property prices continue rising, with apartments leading growth",
+   "link": "https://cyprus-mail.com/2026/11/27/cyprus-property-prices-continue-rising-with-apartments-leading-growth",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: property",
+   "date": "2026-11-27",
+   "summary": "Cyprus property prices continued to increase during the third quarter of 2026, with apartments recording the strongest annual performance across the main real estate categories, according to the latest RICS Cyprus…",
+   "sectors": [
+    "real-estate"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "173aada10c53",
+   "title": "Interconnector research ship reaches Cypriot waters, minister says",
+   "link": "https://cyprus-mail.com/2026/11/27/interconnector-research-ship-reaches-cypriot-waters-minister-says",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: energy",
+   "date": "2026-11-27",
+   "summary": "The French research ship which is carrying out seabed surveys ahead of the laying of cables as part of the planned Great Sea Interconnector project has reached Cyprus’ maritime exclusive economic zone, Defence Minister…",
+   "sectors": [
+    "shipping",
+    "energy",
+    "finance"
+   ],
+   "districts": [
+    "offshore"
+   ],
+   "entries": [
+    "great-sea-interconnector"
+   ]
+  },
+  {
+   "id": "2458537b0297",
+   "title": "Jet2 chief executive among speakers at Cyprus hotel summit",
+   "link": "https://cyprus-mail.com/2026/11/27/jet2-chief-executive-among-speakers-at-cyprus-hotel-summit",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-27",
+   "summary": "Cyprus’ hotel industry will gather in Nicosia on December 2, 2026, for the 47th Cyprus Hotel Summit and HoReCa Expo, organised by the Cyprus Hotel Association (Pasyxe) to examine the international trends, investment…",
+   "sectors": [
+    "tourism",
+    "finance"
+   ],
+   "districts": [
+    "nicosia"
+   ],
+   "entries": []
+  },
+  {
+   "id": "f9ef40fe46c3",
+   "title": "Wizz Air workforce surpasses 10,000, including employees in Cyprus",
+   "link": "https://cyprus-mail.com/2026/11/27/wizz-air-workforce-surpasses-10000-including-employees-in-cyprus",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: tourism",
+   "date": "2026-11-27",
+   "summary": "Wizz Air has surpassed 10,000 employees across more than 100 nationalities, with its international workforce spread across 50 countries, including Cyprus, as the low-cost airline continues to expand its operations. The…",
+   "sectors": [
+    "tourism"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "79bb39844507",
+   "title": "The fintech sector in Cyprus: uncomfortable truths and the road to redemption",
+   "link": "https://cyprus-mail.com/2026/11/27/the-fintech-sector-in-cyprus-uncomfortable-truths-and-the-road-to-redemption",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-27",
+   "summary": "Cyprus hosts one of Europe’s most concentrated financial technology clusters. Its international reputation has yet to catch up with that reality, and the sector itself is partly to blame. Ask a compliance officer in…",
+   "sectors": [
+    "tech",
+    "infrastructure"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "a98cdc94a7ba",
+   "title": "Cyprus National AI Strategy: What will change by 2032?",
+   "link": "https://www.investcyprus.org.cy/cyprus-national-ai-strategy-what-will-change-by-2032/",
+   "source": "Invest Cyprus",
+   "feed": "Invest Cyprus",
+   "date": "2026-11-27",
+   "summary": "",
+   "sectors": [
+    "tech"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "f935c945bca0",
+   "title": "Satoshi Iwasaki: There is room to further expand Japan and Cyprus’ bilateral relations in maritime, R&D, startups, tourism, and more",
+   "link": "https://www.investcyprus.org.cy/satoshi-iwasaki-there-is-room-to-further-expand-japan-and-cyprus-039-bilateral-relations-in-maritime-r-amp-d-startups-tourism-and-more/",
+   "source": "Invest Cyprus",
+   "feed": "Invest Cyprus",
+   "date": "2026-11-27",
+   "summary": "",
+   "sectors": [
+    "tourism",
+    "tech",
+    "shipping"
+   ],
+   "districts": [],
+   "entries": []
+  },
   {
    "id": "ec99bc1b35f0",
    "title": "Cyprus tops EU for low housing costs—but renters tell a very different story",
@@ -3057,7 +3167,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Mail: energy",
    "ok": true,
-   "count": 11
+   "count": 10
   },
   {
    "name": "Cyprus Mail: tourism",
@@ -3067,7 +3177,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Mail: banking and finance",
    "ok": true,
-   "count": 11
+   "count": 9
   },
   {
    "name": "Invest Cyprus",
