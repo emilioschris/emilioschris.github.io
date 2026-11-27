@@ -1,7 +1,20 @@
 /* Written by tools/update_feed.py once a day. Don't edit by hand: it will be overwritten. */
 window.AKADIMIA_FEED = {
- "updated": "2026-11-26T17:07Z",
+ "updated": "2026-11-27T16:50Z",
  "items": [
+  {
+   "id": "799ee34c2dbf",
+   "title": "Why time poverty is a business problem",
+   "link": "https://blogs.lse.ac.uk/businessreview/2026/11/27/why-time-poverty-is-a-business-problem/",
+   "source": "LSE Business Review",
+   "school": "lse",
+   "date": "2026-11-27",
+   "summary": "Time poverty is not only a social issue but a source of lost productivity, avoidable health costs and talent risk for businesses. And by eating into people’s time to rest technology may erode the gains it promises. Joan…",
+   "kind": "blog",
+   "topics": [
+    "development-inequality"
+   ]
+  },
   {
    "id": "8e265c0cb10f",
    "title": "Is Burnham changing direction on climate policy?",
@@ -39,6 +52,33 @@ window.AKADIMIA_FEED = {
    "summary": "Nicolò Bandera, Kristina Bluwstein, Michael Kumhof, Mauricio Salgado-Moreno and Jacob Stevens Monetary policy has traditionally operated through a financial system dominated by banks. But that system is evolving, as…",
    "kind": "blog",
    "topics": [
+    "finance-markets"
+   ]
+  },
+  {
+   "id": "f8ee5354a009",
+   "title": "Financial crises often trigger financial regulation – but whose interests do they serve?",
+   "link": "https://blogs.lse.ac.uk/businessreview/2026/11/26/financial-crises-often-trigger-financial-regulation-but-whose-interests-do-they-serve/",
+   "source": "LSE Business Review",
+   "school": "lse",
+   "date": "2026-11-26",
+   "summary": "Political leaders facing a binding term limit roll back financial liberalisation roughly three times more than leaders who can run again – but only in the wake of a financial crisis. Orkun Saka, Yuemei Ji and Clement…",
+   "kind": "blog",
+   "topics": [
+    "finance-markets"
+   ]
+  },
+  {
+   "id": "74c8bfe15b14",
+   "title": "What SS5/25 Means for Insurers: Lessons From Climate Adaptation for Managing Deep Uncertainty",
+   "link": "https://doi.org/10.1002/cli2.70075",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-11-26",
+   "summary": "Climate Resilience and Sustainability · Marie Ekström, Marina Baldissera‐Pacchetti, Nicky Grigg et al.",
+   "kind": "research",
+   "topics": [
+    "energy-climate",
     "finance-markets"
    ]
   },
@@ -202,6 +242,20 @@ window.AKADIMIA_FEED = {
    ]
   },
   {
+   "id": "a27187a56006",
+   "title": "The carbon damage of services-led growth: Structure-aware baselines for the social cost of carbon",
+   "link": "https://doi.org/10.1016/j.eneco.2026.109718",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-11-22",
+   "summary": "Energy Economics · Marcell T. Kurbucz, Bo Pieter Johannes Andrée",
+   "kind": "research",
+   "topics": [
+    "energy-climate",
+    "development-inequality"
+   ]
+  },
+  {
    "id": "65b8c434892b",
    "title": "Public transport investments, firm relocations and spatial rebalancing of economic activity: Evidence from business registers in Great Britain",
    "link": "https://doi.org/10.1016/j.retrec.2026.101871",
@@ -212,6 +266,19 @@ window.AKADIMIA_FEED = {
    "kind": "research",
    "topics": [
     "finance-markets"
+   ]
+  },
+  {
+   "id": "9e46a9c38704",
+   "title": "Accounting for Firms in the Ethnic Wage Gaps Across the Earnings Distribution",
+   "link": "https://openaccess.city.ac.uk/id/eprint/38733/",
+   "source": "UCL research (via OpenAlex)",
+   "school": "ucl",
+   "date": "2026-11-21",
+   "summary": "City Research Online (City University London) · Alex Bryson, Van Phan, Carl Singleton et al.",
+   "kind": "research",
+   "topics": [
+    "development-inequality"
    ]
   },
   {
@@ -1075,20 +1142,6 @@ window.AKADIMIA_FEED = {
    "topics": [
     "energy-climate",
     "finance-markets"
-   ]
-  },
-  {
-   "id": "a27187a56006",
-   "title": "The carbon damage of services-led growth: Structure-aware baselines for the social cost of carbon",
-   "link": "https://doi.org/10.1016/j.eneco.2026.109718",
-   "source": "UCL research (via OpenAlex)",
-   "school": "ucl",
-   "date": "2026-11-01",
-   "summary": "Energy Economics · Marcell T. Kurbucz, Bo Pieter Johannes Andrée",
-   "kind": "research",
-   "topics": [
-    "energy-climate",
-    "development-inequality"
    ]
   },
   {
@@ -2807,7 +2860,7 @@ window.AKADIMIA_FEED = {
   {
    "name": "LSE Business Review",
    "ok": true,
-   "count": 4
+   "count": 6
   },
   {
    "name": "LSE International Development",
@@ -2837,7 +2890,7 @@ window.AKADIMIA_FEED = {
   {
    "name": "UCL research (via OpenAlex)",
    "ok": true,
-   "count": 27
+   "count": 28
   },
   {
    "name": "Skidmore research (via OpenAlex)",
