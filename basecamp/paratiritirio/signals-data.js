@@ -1,8 +1,38 @@
 /* Written by tools/update_signals.py once a day. Don't edit by hand: it will be overwritten. */
 window.PARATIRITIRIO = window.PARATIRITIRIO || {};
 PARATIRITIRIO.signals = {
- "updated": "2026-11-27T16:46Z",
+ "updated": "2026-11-28T15:38Z",
  "items": [
+  {
+   "id": "1df2908f551e",
+   "title": "Cyprus energy: what we need to do",
+   "link": "https://cyprus-mail.com/2026/11/28/cyprus-energy-what-we-need-to-do",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: energy",
+   "date": "2026-11-28",
+   "summary": "Cyprus is approaching a critical turning point in its energy development. The original assumptions underpinning the decision to import natural gas have changed fundamentally. Renewable electricity is expanding, battery…",
+   "sectors": [
+    "energy"
+   ],
+   "districts": [],
+   "entries": []
+  },
+  {
+   "id": "54c7d067349e",
+   "title": "Capital Intelligence affirms Bank of Cyprus at BBB with stable outlook",
+   "link": "https://cyprus-mail.com/2026/11/28/capital-intelligence-affirms-bank-of-cyprus-at-bbb-with-stable-outlook",
+   "source": "Cyprus Mail",
+   "feed": "Cyprus Mail: banking and finance",
+   "date": "2026-11-28",
+   "summary": "Agency sees strong capital and liquidity at Bank of Cyprus Capital Intelligence Ratings has affirmed the Bank of Cyprus’ long-term and short-term foreign currency ratings at BBB and A3, respectively, maintaining a…",
+   "sectors": [
+    "finance"
+   ],
+   "districts": [],
+   "entries": [
+    "bank-of-cyprus"
+   ]
+  },
   {
    "id": "463b4e98d342",
    "title": "Cyprus property prices continue rising, with apartments leading growth",
@@ -3177,7 +3207,7 @@ PARATIRITIRIO.signals = {
   {
    "name": "Cyprus Mail: banking and finance",
    "ok": true,
-   "count": 9
+   "count": 10
   },
   {
    "name": "Invest Cyprus",
