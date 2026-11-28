@@ -1,6 +1,6 @@
 /* Written by tools/update_feed.py once a day. Don't edit by hand: it will be overwritten. */
 window.AKADIMIA_FEED = {
- "updated": "2026-11-27T16:50Z",
+ "updated": "2026-11-28T15:42Z",
  "items": [
   {
    "id": "799ee34c2dbf",
@@ -2859,18 +2859,18 @@ window.AKADIMIA_FEED = {
   },
   {
    "name": "LSE Business Review",
-   "ok": true,
-   "count": 6
+   "ok": false,
+   "error": "The read operation timed out"
   },
   {
    "name": "LSE International Development",
-   "ok": true,
-   "count": 3
+   "ok": false,
+   "error": "The read operation timed out"
   },
   {
    "name": "Carbon Brief",
    "ok": true,
-   "count": 10
+   "count": 9
   },
   {
    "name": "Bank Underground (Bank of England staff blog)",
@@ -2890,7 +2890,7 @@ window.AKADIMIA_FEED = {
   {
    "name": "UCL research (via OpenAlex)",
    "ok": true,
-   "count": 28
+   "count": 27
   },
   {
    "name": "Skidmore research (via OpenAlex)",
